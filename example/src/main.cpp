@@ -17,6 +17,10 @@ int main(int argc, char *argv[])
     QTElementUI::FontManager::instance().loadFont(":/resources/fonts/NotoSans-Regular.ttf", "NotoSans-Regular");
 
     MainWindow w;
+
+    w.setWindowIcon(QIcon(":/resources/icons/qt-logo.png").pixmap(16, 16));
+    w.setWindowTitle("QT Element UI 效果展示    -- 目前已完成 color text button scrollbar container");
+
     w.show();
 
     return app.exec();

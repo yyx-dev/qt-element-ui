@@ -78,6 +78,20 @@ void MainWindow::setupTab2()
 
     ui->pushButton_28->setType(Button::Type::primary).setText("Search").setIcon("search", Button::IconPosition::left);
     ui->pushButton_29->setType(Button::Type::primary).setText("Upload").setIcon("upload", Button::IconPosition::right);
+
+    ui->pushButton_30->setStyle(Button::Style::link).setType(Button::Type::default_);
+    ui->pushButton_31->setStyle(Button::Style::link).setType(Button::Type::primary);
+    ui->pushButton_32->setStyle(Button::Style::link).setType(Button::Type::success);
+    ui->pushButton_33->setStyle(Button::Style::link).setType(Button::Type::info);
+    ui->pushButton_34->setStyle(Button::Style::link).setType(Button::Type::warning);
+    ui->pushButton_35->setStyle(Button::Style::link).setType(Button::Type::danger);
+
+    ui->pushButton_36->setStyle(Button::Style::text).setType(Button::Type::default_);
+    ui->pushButton_37->setStyle(Button::Style::text).setType(Button::Type::primary);
+    ui->pushButton_38->setStyle(Button::Style::text).setType(Button::Type::success);
+    ui->pushButton_39->setStyle(Button::Style::text).setType(Button::Type::info);
+    ui->pushButton_40->setStyle(Button::Style::text).setType(Button::Type::warning);
+    ui->pushButton_41->setStyle(Button::Style::text).setType(Button::Type::danger);
 }
 
 void MainWindow::setupTab3()

@@ -1,6 +1,9 @@
 #include "../include/button.h"
 #include "../../tools/include/commvar.h"
 #include "../../tools/include/iconmanager.h"
+#include "../../tools/include/logger.h"
+
+#include <QDebug>
 
 namespace QTElementUI
 {
@@ -49,27 +52,43 @@ namespace QTElementUI
     Button& Button::setStyle(Style style)
     {
         _style = style;
-        if (_style == Style::default_)
+
+        if (style == Style::default_)
         {
             _qsshelper.setProperty("QPushButton", "border-radius", "4px");
             _qsshelper.setProperty("QPushButton", "border", "1px solid");
             _qsshelper.setProperty("QPushButton", "color", Color::regularText());
         }
-        else if (_style == Style::plain)
+        else if (style == Style::plain)
         {
             ;
         }
-        else if (_style == Style::round)
+        else if (style == Style::round)
         {
             _qsshelper.setProperty("QPushButton", "border-radius", "20px");
         }
-        else if (_style == Style::circle)
+        else if (style == Style::circle)
         {
             _qsshelper.setProperty("QPushButton", "border-radius", "20px");
             _qsshelper.setProperty("QPushButton", "padding", "8px");
 
             setMinimumSize(40, 40);
             setMaximumSize(40, 40);
+        }
+        else if (style == Style::link)
+        {
+            _qsshelper.setProperty("QPushButton", "padding", "0px");
+            _qsshelper.setProperty("QPushButton", "border", "none");
+            _qsshelper.setProperty("QPushButton", "background", "transparent");
+            _qsshelper.setProperty("QPushButton:hover", "border", "none");
+            _qsshelper.setProperty("QPushButton:hover", "background", "transparent");
+            _qsshelper.setProperty("QPushButton:hover", "text-decoration", "underline");
+        }
+        else if (style == Style::text)
+        {
+            _qsshelper.setProperty("QPushButton", "border", "none");
+            _qsshelper.setProperty("QPushButton:hover", "background", Color::lightFill());
+            _qsshelper.setProperty("QPushButton:pressed", "background", Color::pageBackground());
         }
 
         QPushButton::setStyleSheet(_qsshelper.generate());
@@ -360,6 +379,101 @@ namespace QTElementUI
                 _qsshelper.setProperty("QPushButton:disabled", "background-color", Color::dangerL2());
                 _qsshelper.setProperty("QPushButton:disabled", "border", "1px solid " + Color::dangerL2());
                 _qsshelper.setProperty("QPushButton:disabled", "color", Color::blankFill());
+            }
+        }
+        else if (_style == Style::link)
+        {
+            _qsshelper.clearGroup("QPushButton:pressed");
+
+            if (_type == Type::default_)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::regularText());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::secondaryText());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::primaryText());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::placeholderText());
+            }
+            else if (_type == Type::primary)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::primary());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::primaryL1());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::primaryD1());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::primaryL2());
+            }
+            else if (_type == Type::success)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::success());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::successL1());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::successD1());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::successL2());
+            }
+            else if (_type == Type::info)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::info());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::infoL1());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::infoD1());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::infoL2());
+            }
+            else if (_type == Type::warning)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::warning());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::warningL1());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::warningD1());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::warningL2());
+            }
+            else if (_type == Type::danger)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::danger());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::dangerL1());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::dangerD1());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::dangerL2());
+            }
+        }
+        else if (_style == Style::text)
+        {
+            _qsshelper.setProperty("QPushButton:hover", "border", "none");
+            _qsshelper.setProperty("QPushButton:pressed", "border", "none");
+
+            if (_type == Type::default_)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::regularText());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::regularText());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::regularText());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::placeholderText());
+            }
+            else if (_type == Type::primary)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::primary());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::primary());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::primary());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::primaryL2());
+            }
+            else if (_type == Type::success)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::success());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::success());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::success());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::successL2());
+            }
+            else if (_type == Type::info)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::info());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::info());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::info());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::infoL2());
+            }
+            else if (_type == Type::warning)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::warning());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::warning());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::warning());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::warningL2());
+            }
+            else if (_type == Type::danger)
+            {
+                _qsshelper.setProperty("QPushButton", "color", Color::danger());
+                _qsshelper.setProperty("QPushButton:hover", "color", Color::danger());
+                _qsshelper.setProperty("QPushButton:pressed", "color", Color::danger());
+                _qsshelper.setProperty("QPushButton:disabled", "color", Color::dangerL2());
             }
         }
 

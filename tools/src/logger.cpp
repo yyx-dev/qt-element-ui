@@ -24,6 +24,7 @@ namespace QTElementUI
             case Level::Error: return "\033[31merror\033[0m";              // Red
             case Level::Fatal: return "\033[41;97mfatal\033[0m";           // Red background, white text
         }
+        return "";
     }
 
     void Log::log(Level level, const QString& msg)

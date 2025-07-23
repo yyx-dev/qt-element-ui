@@ -11,26 +11,28 @@ HEADERS += \
     components/include/button.h \
     components/include/text.h \
     components/include/scrollbar.h \
+    components/include/link.h \
     tools/include/fontmanager.h \
     tools/include/commvar.h \
     tools/include/qsshelper.h \
     tools/include/iconmanager.h \
-    example/include/mainwindow.h \
-    tools/include/logger.h
+    tools/include/logger.h \
+    example/include/mainwindow.h
 
 
 SOURCES += \
+    components//src/link.cpp \
     components/src/container.cpp \
     components/src/scrollbar.cpp \
     components/src/button.cpp \
     components/src/text.cpp \
-    tools/src/logger.cpp \
     tools/src/fontmanager.cpp \
     tools/src/commvar.cpp \
     tools/src/qsshelper.cpp \
     tools/src/iconmanager.cpp \
+    tools/src/logger.cpp \
     example/src/main.cpp \
-    example/src/mainwindow.cpp \
+    example/src/mainwindow.cpp
 
 
 FORMS += \

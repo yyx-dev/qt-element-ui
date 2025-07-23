@@ -28,6 +28,9 @@ namespace QTElementUI
         // 从指定组移除属性
         void removeProperty(const QString &groupName, const QString &property);
 
+        // 清空指定组的所有属性并移除该组
+        void clearGroup(const QString &groupName);
+
         // 生成QSS字符串
         QString generate() const;
 

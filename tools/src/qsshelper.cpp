@@ -94,6 +94,12 @@ namespace QTElementUI
         }
     }
 
+    // 清空指定组的所有属性并移除该组
+    void QSSHelper::clearGroup(const QString &groupName)
+    {
+        _styleGroups.remove(groupName);
+    }
+
     // 生成QSS字符串
     QString QSSHelper::generate() const
     {
