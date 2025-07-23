@@ -8,4 +8,4 @@
 
 示例如下：
 
-<img src="D:\qt-element-ui\images\example-button.png" />
+<img src="./images/example-button.png" />
