@@ -8,4 +8,4 @@
 
 示例如下：
 
-![](D:\qt-element-ui\images\example-button.png)
+<img src="D:\qt-element-ui\images\example-button.png" />
