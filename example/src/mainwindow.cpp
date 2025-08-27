@@ -1,12 +1,20 @@
-#include "../include/mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "../../components/include/text.h"
-#include "../../components/include/button.h"
-#include "../../tools/include/iconmanager.h"
+#include "text.h"
+#include "button.h"
+#include "iconmanager.h"
 
 #include <QDebug>
 
+#define TEXT 0
+#define BUTTON 1
+#define SCROLLBAR 2
+#define CONTAINER 3
+#define LINK 4
+#define INPUT 5
+#define NUMBER 6
+#define TAG 7
 
 using namespace QTElementUI;
 
@@ -21,16 +29,20 @@ MainWindow::MainWindow(QWidget *parent)
     this->setPalette(palette);
     this->setAutoFillBackground(true);
 
+    setupTab0();
     setupTab1();
     setupTab2();
     setupTab3();
     setupTab4();
+    setupTab5();
+    setupTab6();
+    setupTab7();
 
-    ui->tabWidget->setCurrentIndex(3);
+    ui->tabWidget->setCurrentIndex(INPUT);
 }
 
 
-void MainWindow::setupTab1()
+void MainWindow::setupTab0()
 {
     ui->defaultText->setType(Text::Type::default_);
     ui->primaryText->setType(Text::Type::primary);
@@ -42,59 +54,59 @@ void MainWindow::setupTab1()
     ui->defaultText->setSize(Text::Size::large);
 }
 
-void MainWindow::setupTab2()
+void MainWindow::setupTab1()
 {
-    ui->pushButton_1->setStyle(Button::Style::default_).setType(Button::Type::default_).setDisabled(false);
-    ui->pushButton_2->setStyle(Button::Style::default_).setType(Button::Type::primary).setDisabled(false);
-    ui->pushButton_3->setStyle(Button::Style::default_).setType(Button::Type::success);
-    ui->pushButton_4->setStyle(Button::Style::default_).setType(Button::Type::info);
-    ui->pushButton_5->setStyle(Button::Style::default_).setType(Button::Type::warning);
-    ui->pushButton_6->setStyle(Button::Style::default_).setType(Button::Type::danger);
+    ui->button_1->setStyle(Button::Style::default_).setType(Button::Type::default_).setDisabled(false);
+    ui->button_2->setStyle(Button::Style::default_).setType(Button::Type::primary).setDisabled(false);
+    ui->button_3->setStyle(Button::Style::default_).setType(Button::Type::success);
+    ui->button_4->setStyle(Button::Style::default_).setType(Button::Type::info);
+    ui->button_5->setStyle(Button::Style::default_).setType(Button::Type::warning);
+    ui->button_6->setStyle(Button::Style::default_).setType(Button::Type::danger);
 
-    ui->pushButton_7 ->setStyle(Button::Style::plain).setType(Button::Type::default_).setDisabled(false);
-    ui->pushButton_8 ->setStyle(Button::Style::plain).setType(Button::Type::primary).setDisabled(false);
-    ui->pushButton_9 ->setStyle(Button::Style::plain).setType(Button::Type::success);
-    ui->pushButton_10->setStyle(Button::Style::plain).setType(Button::Type::info);
-    ui->pushButton_11->setStyle(Button::Style::plain).setType(Button::Type::warning);
-    ui->pushButton_12->setStyle(Button::Style::plain).setType(Button::Type::danger);
+    ui->button_7 ->setStyle(Button::Style::plain).setType(Button::Type::default_).setDisabled(false);
+    ui->button_8 ->setStyle(Button::Style::plain).setType(Button::Type::primary).setDisabled(false);
+    ui->button_9 ->setStyle(Button::Style::plain).setType(Button::Type::success);
+    ui->button_10->setStyle(Button::Style::plain).setType(Button::Type::info);
+    ui->button_11->setStyle(Button::Style::plain).setType(Button::Type::warning);
+    ui->button_12->setStyle(Button::Style::plain).setType(Button::Type::danger);
 
-    ui->pushButton_13->setStyle(Button::Style::round).setType(Button::Type::default_).setDisabled(true);
-    ui->pushButton_14->setStyle(Button::Style::round).setType(Button::Type::primary).setDisabled(true);
-    ui->pushButton_15->setStyle(Button::Style::round).setType(Button::Type::success);
-    ui->pushButton_16->setStyle(Button::Style::round).setType(Button::Type::info);
-    ui->pushButton_17->setStyle(Button::Style::round).setType(Button::Type::warning);
-    ui->pushButton_18->setStyle(Button::Style::round).setType(Button::Type::danger);
+    ui->button_13->setStyle(Button::Style::round).setType(Button::Type::default_).setDisabled(true);
+    ui->button_14->setStyle(Button::Style::round).setType(Button::Type::primary).setDisabled(true);
+    ui->button_15->setStyle(Button::Style::round).setType(Button::Type::success);
+    ui->button_16->setStyle(Button::Style::round).setType(Button::Type::info);
+    ui->button_17->setStyle(Button::Style::round).setType(Button::Type::warning);
+    ui->button_18->setStyle(Button::Style::round).setType(Button::Type::danger);
 
-    ui->pushButton_19->setStyle(Button::Style::circle).setType(Button::Type::default_).setIcon("search");
-    ui->pushButton_20->setStyle(Button::Style::circle).setType(Button::Type::primary).setIcon("edit");
-    ui->pushButton_21->setStyle(Button::Style::circle).setType(Button::Type::success).setIcon("check");
-    ui->pushButton_22->setStyle(Button::Style::circle).setType(Button::Type::info).setIcon("message");
-    ui->pushButton_23->setStyle(Button::Style::circle).setType(Button::Type::warning).setIcon("star");
-    ui->pushButton_24->setStyle(Button::Style::circle).setType(Button::Type::danger).setIcon("delete");
+    ui->button_19->setStyle(Button::Style::circle).setType(Button::Type::default_).setIcon(Icon::Search);
+    ui->button_20->setStyle(Button::Style::circle).setType(Button::Type::primary).setIcon(Icon::Edit);
+    ui->button_21->setStyle(Button::Style::circle).setType(Button::Type::success).setIcon(Icon::Check);
+    ui->button_22->setStyle(Button::Style::circle).setType(Button::Type::info).setIcon(Icon::Message);
+    ui->button_23->setStyle(Button::Style::circle).setType(Button::Type::warning).setIcon(Icon::Star);
+    ui->button_24->setStyle(Button::Style::circle).setType(Button::Type::danger).setIcon(Icon::Delete);
 
-    ui->pushButton_25->setType(Button::Type::primary).setIcon("edit", Button::IconPosition::only);
-    ui->pushButton_26->setType(Button::Type::primary).setIcon("share", Button::IconPosition::only);
-    ui->pushButton_27->setType(Button::Type::primary).setIcon("delete", Button::IconPosition::only);
+    ui->button_25->setType(Button::Type::primary).setIcon(Icon::Edit, Button::IconPosition::only);
+    ui->button_26->setType(Button::Type::primary).setIcon(Icon::Share, Button::IconPosition::only);
+    ui->button_27->setType(Button::Type::primary).setIcon(Icon::Delete, Button::IconPosition::only);
 
-    ui->pushButton_28->setType(Button::Type::primary).setText("Search").setIcon("search", Button::IconPosition::left);
-    ui->pushButton_29->setType(Button::Type::primary).setText("Upload").setIcon("upload", Button::IconPosition::right);
+    ui->button_28->setType(Button::Type::primary).setText("Search").setIcon(Icon::Search, Button::IconPosition::left);
+    ui->button_29->setType(Button::Type::primary).setText("Upload").setIcon(Icon::Upload, Button::IconPosition::right);
 
-    ui->pushButton_30->setStyle(Button::Style::link).setType(Button::Type::default_);
-    ui->pushButton_31->setStyle(Button::Style::link).setType(Button::Type::primary);
-    ui->pushButton_32->setStyle(Button::Style::link).setType(Button::Type::success);
-    ui->pushButton_33->setStyle(Button::Style::link).setType(Button::Type::info);
-    ui->pushButton_34->setStyle(Button::Style::link).setType(Button::Type::warning);
-    ui->pushButton_35->setStyle(Button::Style::link).setType(Button::Type::danger);
+    ui->button_30->setStyle(Button::Style::link).setType(Button::Type::default_);
+    ui->button_31->setStyle(Button::Style::link).setType(Button::Type::primary);
+    ui->button_32->setStyle(Button::Style::link).setType(Button::Type::success);
+    ui->button_33->setStyle(Button::Style::link).setType(Button::Type::info);
+    ui->button_34->setStyle(Button::Style::link).setType(Button::Type::warning);
+    ui->button_35->setStyle(Button::Style::link).setType(Button::Type::danger);
 
-    ui->pushButton_36->setStyle(Button::Style::text).setType(Button::Type::default_);
-    ui->pushButton_37->setStyle(Button::Style::text).setType(Button::Type::primary);
-    ui->pushButton_38->setStyle(Button::Style::text).setType(Button::Type::success);
-    ui->pushButton_39->setStyle(Button::Style::text).setType(Button::Type::info);
-    ui->pushButton_40->setStyle(Button::Style::text).setType(Button::Type::warning);
-    ui->pushButton_41->setStyle(Button::Style::text).setType(Button::Type::danger);
+    ui->button_36->setStyle(Button::Style::text).setType(Button::Type::default_);
+    ui->button_37->setStyle(Button::Style::text).setType(Button::Type::primary);
+    ui->button_38->setStyle(Button::Style::text).setType(Button::Type::success);
+    ui->button_39->setStyle(Button::Style::text).setType(Button::Type::info);
+    ui->button_40->setStyle(Button::Style::text).setType(Button::Type::warning);
+    ui->button_41->setStyle(Button::Style::text).setType(Button::Type::danger);
 }
 
-void MainWindow::setupTab3()
+void MainWindow::setupTab2()
 {
     QVBoxLayout *contentLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
     ui->scrollAreaWidgetContents->setBackgroundRole(QPalette::Light);
@@ -106,7 +118,50 @@ void MainWindow::setupTab3()
     }
 }
 
+void MainWindow::setupTab3()
+{
+
+}
+
 void MainWindow::setupTab4()
+{
+    ui->link_1 ->setType(Link::Type::default_);
+    ui->link_2 ->setType(Link::Type::primary);
+    ui->link_3 ->setType(Link::Type::success);
+    ui->link_4 ->setType(Link::Type::warning);
+    ui->link_5 ->setType(Link::Type::danger);
+    ui->link_6 ->setType(Link::Type::info);
+    ui->link_7 ->setType(Link::Type::default_).setDisabled(true);
+    ui->link_8 ->setType(Link::Type::primary).setDisabled(true);
+    ui->link_9 ->setType(Link::Type::success).setDisabled(true);
+    ui->link_10->setType(Link::Type::warning).setDisabled(true);
+    ui->link_11->setType(Link::Type::danger).setDisabled(true);
+    ui->link_12->setType(Link::Type::info).setDisabled(true);
+    ui->link_13->setUnderline(Link::Underline::default_);
+    ui->link_14->setUnderline(Link::Underline::always);
+    ui->link_15->setUnderline(Link::Underline::hover);
+    ui->link_16->setUnderline(Link::Underline::never);
+}
+
+void MainWindow::setupTab5()
+{
+    ui->input_1->setClearable(true);
+    ui->input_2->setDisabled(true);
+    ui->input_3->setPrefixIcon(Icon::Star);
+    ui->input_4->setSuffixIcon(Icon::Unlock);
+    ui->input_5->setShowPassword(true);
+    ui->input_6->setSize(Input::Size::large);
+    ui->input_7->setSize(Input::Size::small);
+    ui->input_8->setMaxLength(30);
+    ui->input_9->setReadOnly(true);
+}
+
+void MainWindow::setupTab6()
+{
+
+}
+
+void MainWindow::setupTab7()
 {
 
 }

@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -15,12 +14,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void setupTab0();
     void setupTab1();
     void setupTab2();
     void setupTab3();
     void setupTab4();
+    void setupTab5();
+    void setupTab6();
+    void setupTab7();
+
 
 private:
     Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H

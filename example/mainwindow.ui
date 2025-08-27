@@ -24,9 +24,9 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>5</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="tab_1">
      <attribute name="title">
       <string>文本</string>
      </attribute>
@@ -100,42 +100,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_1">
+        <widget class="QTElementUI::Button" name="button_1">
          <property name="text">
           <string>Default</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_2">
+        <widget class="QTElementUI::Button" name="button_2">
          <property name="text">
           <string>Primary</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_3">
+        <widget class="QTElementUI::Button" name="button_3">
          <property name="text">
           <string>Success</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_4">
+        <widget class="QTElementUI::Button" name="button_4">
          <property name="text">
           <string>Info</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_5">
+        <widget class="QTElementUI::Button" name="button_5">
          <property name="text">
           <string>Warning</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_6">
+        <widget class="QTElementUI::Button" name="button_6">
          <property name="text">
           <string>Danger</string>
          </property>
@@ -154,42 +154,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_7">
+        <widget class="QTElementUI::Button" name="button_7">
          <property name="text">
           <string>Plain</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_8">
+        <widget class="QTElementUI::Button" name="button_8">
          <property name="text">
           <string>Primary</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_9">
+        <widget class="QTElementUI::Button" name="button_9">
          <property name="text">
           <string>Success</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_10">
+        <widget class="QTElementUI::Button" name="button_10">
          <property name="text">
           <string>Info</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_11">
+        <widget class="QTElementUI::Button" name="button_11">
          <property name="text">
           <string>Warning</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_12">
+        <widget class="QTElementUI::Button" name="button_12">
          <property name="text">
           <string>Danger</string>
          </property>
@@ -208,42 +208,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_13">
+        <widget class="QTElementUI::Button" name="button_13">
          <property name="text">
           <string>Round</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_14">
+        <widget class="QTElementUI::Button" name="button_14">
          <property name="text">
           <string>Primary</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_15">
+        <widget class="QTElementUI::Button" name="button_15">
          <property name="text">
           <string>Success</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_16">
+        <widget class="QTElementUI::Button" name="button_16">
          <property name="text">
           <string>Info</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_17">
+        <widget class="QTElementUI::Button" name="button_17">
          <property name="text">
           <string>Warning</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_18">
+        <widget class="QTElementUI::Button" name="button_18">
          <property name="text">
           <string>Danger</string>
          </property>
@@ -262,42 +262,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_19">
+        <widget class="QTElementUI::Button" name="button_19">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_20">
+        <widget class="QTElementUI::Button" name="button_20">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_21">
+        <widget class="QTElementUI::Button" name="button_21">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_22">
+        <widget class="QTElementUI::Button" name="button_22">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_23">
+        <widget class="QTElementUI::Button" name="button_23">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_24">
+        <widget class="QTElementUI::Button" name="button_24">
          <property name="text">
           <string/>
          </property>
@@ -305,7 +305,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTElementUI::Button" name="pushButton_28">
+     <widget class="QTElementUI::Button" name="button_28">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -318,7 +318,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QTElementUI::Button" name="pushButton_25">
+     <widget class="QTElementUI::Button" name="button_25">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -331,7 +331,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QTElementUI::Button" name="pushButton_26">
+     <widget class="QTElementUI::Button" name="button_26">
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -344,7 +344,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QTElementUI::Button" name="pushButton_27">
+     <widget class="QTElementUI::Button" name="button_27">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -357,7 +357,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QTElementUI::Button" name="pushButton_29">
+     <widget class="QTElementUI::Button" name="button_29">
       <property name="geometry">
        <rect>
         <x>360</x>
@@ -381,42 +381,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_30">
+        <widget class="QTElementUI::Button" name="button_30">
          <property name="text">
           <string>Link</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_31">
+        <widget class="QTElementUI::Button" name="button_31">
          <property name="text">
           <string>Primary</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_32">
+        <widget class="QTElementUI::Button" name="button_32">
          <property name="text">
           <string>Success</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_33">
+        <widget class="QTElementUI::Button" name="button_33">
          <property name="text">
           <string>Info</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_34">
+        <widget class="QTElementUI::Button" name="button_34">
          <property name="text">
           <string>Warning</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_35">
+        <widget class="QTElementUI::Button" name="button_35">
          <property name="text">
           <string>Danger</string>
          </property>
@@ -435,42 +435,42 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_36">
+        <widget class="QTElementUI::Button" name="button_36">
          <property name="text">
           <string>Text</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_37">
+        <widget class="QTElementUI::Button" name="button_37">
          <property name="text">
           <string>Primary</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_38">
+        <widget class="QTElementUI::Button" name="button_38">
          <property name="text">
           <string>Success</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_39">
+        <widget class="QTElementUI::Button" name="button_39">
          <property name="text">
           <string>Info</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_40">
+        <widget class="QTElementUI::Button" name="button_40">
          <property name="text">
           <string>Warning</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTElementUI::Button" name="pushButton_41">
+        <widget class="QTElementUI::Button" name="button_41">
          <property name="text">
           <string>Danger</string>
          </property>
@@ -512,6 +512,324 @@
       <string>布局</string>
      </attribute>
     </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>链接</string>
+     </attribute>
+     <widget class="QTElementUI::Link" name="link_1">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>default</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_2">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>primary</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_3">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>success</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_4">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>warning</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_5">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>danger</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_6">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>190</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>info</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_7">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>default</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_8">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>primary</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_9">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>success</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_10">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>warning</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_11">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>danger</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_12">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>230</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>info</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_13">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>280</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>default</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_14">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>280</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>always</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_15">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>280</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>hover</string>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Link" name="link_16">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>280</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>never</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>输入</string>
+     </attribute>
+     <widget class="QTElementUI::Input" name="input_1">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>60</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_2">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>120</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_3">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>180</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_4">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>240</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_5">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>300</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_6">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>360</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_7">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>430</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_8">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>490</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTElementUI::Input" name="input_9">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>550</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_7">
+     <attribute name="title">
+      <string>数字</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_8">
+     <attribute name="title">
+      <string>标签</string>
+     </attribute>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -520,12 +838,22 @@
   <customwidget>
    <class>QTElementUI::Text</class>
    <extends>QLabel</extends>
-   <header>components/include/text.h</header>
+   <header>text.h</header>
   </customwidget>
   <customwidget>
    <class>QTElementUI::Button</class>
    <extends>QPushButton</extends>
-   <header>components/include/button.h</header>
+   <header>button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QTElementUI::Link</class>
+   <extends>QLabel</extends>
+   <header>link.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QTElementUI::Input</class>
+   <extends>QLineEdit</extends>
+   <header>input.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

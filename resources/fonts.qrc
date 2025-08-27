@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fonts/Inter-Bold.ttf</file>
+        <file>fonts/Inter-Italic.ttf</file>
+        <file>fonts/Inter-Regular.ttf</file>
+        <file>fonts/Inter-Thin.ttf</file>
+        <file>fonts/NotoSans-Bold.ttf</file>
+        <file>fonts/NotoSans-Italic.ttf</file>
+        <file>fonts/NotoSans-Regular.ttf</file>
+        <file>fonts/NotoSans-Thin.ttf</file>
+    </qresource>
+</RCC>
