@@ -1,10 +1,10 @@
-#include "logger.h"
+#include "tools/logger.h"
 
 #include <QDateTime>
 #include <QDebug>
 #include <QString>
 
-namespace QTElementUI
+namespace Element
 {
 
     void Log::debug(const QString& msg) { log(Level::Debug, msg); }

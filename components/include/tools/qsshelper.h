@@ -3,7 +3,7 @@
 #include <QHash>
 #include <QStringList>
 
-namespace QTElementUI
+namespace Element
 {
 
     class QSSHelper

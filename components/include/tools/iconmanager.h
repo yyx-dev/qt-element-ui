@@ -8,7 +8,7 @@
 #include <tuple>
 
 
-namespace QTElementUI
+namespace Element
 {
     enum class Icon
     {

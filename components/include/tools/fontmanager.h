@@ -4,7 +4,7 @@
 #include <QHash>
 #include <QString>
 
-namespace QTElementUI
+namespace Element
 {
 
     class FontManager

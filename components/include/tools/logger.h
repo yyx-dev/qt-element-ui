@@ -2,7 +2,7 @@
 
 #include <QString>
 
-namespace QTElementUI
+namespace Element
 {
 
     class Log

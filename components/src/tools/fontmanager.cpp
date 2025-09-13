@@ -1,11 +1,11 @@
-#include "fontmanager.h"
-#include "logger.h"
+#include "tools/fontmanager.h"
+#include "tools/logger.h"
 
 #include <QApplication>
 #include <QFile>
 #include <QDebug>
 
-namespace QTElementUI
+namespace Element
 {
     FontManager& FontManager::instance()
     {

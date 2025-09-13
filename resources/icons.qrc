@@ -189,7 +189,6 @@
         <file>icons/operation.svg</file>
         <file>icons/opportunity.svg</file>
         <file>icons/orange.svg</file>
-        <file>icons/package.json</file>
         <file>icons/paperclip.svg</file>
         <file>icons/partly-cloudy.svg</file>
         <file>icons/pear.svg</file>
@@ -210,7 +209,6 @@
         <file>icons/price-tag.svg</file>
         <file>icons/printer.svg</file>
         <file>icons/promotion.svg</file>
-        <file>icons/qt-logo.png</file>
         <file>icons/quartz-watch.svg</file>
         <file>icons/question-filled.svg</file>
         <file>icons/rank.svg</file>
@@ -295,5 +293,18 @@
         <file>icons/wind-power.svg</file>
         <file>icons/zoom-in.svg</file>
         <file>icons/zoom-out.svg</file>
+        <file>icons/special/minus-primary-16.png</file>
+        <file>icons/special/minus-primary-20.png</file>
+        <file>icons/special/minus-regular-text-16.png</file>
+        <file>icons/special/minus-regular-text-20.png</file>
+        <file>icons/special/plus-primary-16.png</file>
+        <file>icons/special/plus-primary-20.png</file>
+        <file>icons/special/plus-regular-text-16.png</file>
+        <file>icons/special/plus-regular-text-20.png</file>
+        <file>icons/special/minus-light-border-20.png</file>
+        <file>icons/special/plus-light-border-20.png</file>
+        <file>icons/special/minus-light-border-16.png</file>
+        <file>icons/special/plus-light-border-16.png</file>
+        <file>icons/special/qt-logo.png</file>
     </qresource>
 </RCC>

@@ -1,4 +1,4 @@
-#include "dpiscaler.h"
+#include "tools/dpiscaler.h"
 
 #include <QApplication>
 #include <QtMath>
@@ -6,7 +6,7 @@
 #include <windows.h>
 #endif
 
-namespace QTElementUI
+namespace Element
 {
 
     int DPIScaler::w(int width)

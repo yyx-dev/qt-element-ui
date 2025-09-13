@@ -1,6 +1,6 @@
-#include "commvar.h"
+#include "tools/commvar.h"
 
-namespace QTElementUI
+namespace Element
 {
 
     QString CommonVar::baseFontFmaily = "'Noto Sans', 'Microsoft YaHei', 微软雅黑";

@@ -1,8 +1,8 @@
-#include "qsshelper.h"
+#include "tools/qsshelper.h"
 
 #include <QRegularExpression>
 
-namespace QTElementUI
+namespace Element
 {
 
 

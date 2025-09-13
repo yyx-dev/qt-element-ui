@@ -3,7 +3,7 @@
 #include <QString>
 #include <QStringList>
 
-namespace QTElementUI
+namespace Element
 {
     struct CommonVar
     {

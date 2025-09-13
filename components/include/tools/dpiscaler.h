@@ -2,7 +2,7 @@
 
 #include <QSize>
 
-namespace QTElementUI
+namespace Element
 {
     class DPIScaler
     {

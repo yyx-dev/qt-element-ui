@@ -1,7 +1,7 @@
-#include "iconmanager.h"
-#include "commvar.h"
+#include "tools/iconmanager.h"
+#include "tools/commvar.h"
+#include "tools/logger.h"
 #include "color.h"
-#include "logger.h"
 
 #include <QSvgRenderer>
 #include <QFile>
@@ -11,7 +11,7 @@
 #include <QDir>
 #include <QDebug>
 
-namespace QTElementUI
+namespace Element
 {
 
     IconManager& IconManager::instance()
