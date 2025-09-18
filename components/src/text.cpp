@@ -8,24 +8,25 @@
 namespace Element
 {
     Text::Text(QWidget* parent)
+        : Text("", parent)
+    {}
+
+    Text::Text(const QString& text, QWidget* parent)
         : QLabel(parent)
-        , _type(Type::Default)
-        , _size(Size::Default)
-        , _tag(Tag::Default)
-        , _truncated(false)
     {
         QFont font = QLabel::font();
         font.setFamilies(CommonVar::baseFontFmailies);
-        font.setPointSize(CommonVar::defaultFontSize);
         font.setWeight(CommonVar::regularFontWeight);
         QLabel::setFont(font);
-    }
 
-    Text::Text(const QString &text, QWidget* parent)
-        : Text(parent)
-    {
         QLabel::setText(text);
+        QLabel::setWordWrap(true);
         QLabel::adjustSize();
+
+
+
+        setType(_type);
+        setSize(_size);
     }
 
     Text::Type Text::getType()
@@ -50,6 +51,8 @@ namespace Element
         else if (type == Type::Danger)
             setFontColor(Color::danger());
 
+        setSize(_size);
+
         return *this;
     }
 
@@ -62,11 +65,11 @@ namespace Element
     {
         _size = size;
         if (size == Size::Default)
-            setFontSize(CommonVar::defaultFontSize);
+            setFontSize(10);
         else if (size == Size::Large)
-            setFontSize(CommonVar::largeFontSize);
+            setFontSize(12);
         else if (size == Size::Small)
-            setFontSize(CommonVar::smallFontSize);
+            setFontSize(8);
 
         QLabel::adjustSize();
         return *this;
@@ -84,7 +87,7 @@ namespace Element
 
         if (tag == Tag::Paragraph)
         {
-            QLabel::setWordWrap(true); // 启用自动换行
+            QLabel::setWordWrap(true);
             QLabel::setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         }
         else if (tag == Tag::Bold)
@@ -117,21 +120,27 @@ namespace Element
         return *this;
     }
 
+    void Text::setColor(const QString& color)
+    {
+        setFontColor(color);
+    }
+
 
     void Text::setFontColor(const QString& color)
     {
         QPalette palette = QLabel::palette();
         palette.setColor(QPalette::WindowText, color);
-        palette.setColor(QPalette::Background, Color::baseBackground());
-        QLabel::setAutoFillBackground(true); // 必须启用背景填充
+        palette.setColor(QPalette::Window, Color::baseBackground());
+        QLabel::setAutoFillBackground(true);
         QLabel::setPalette(palette);
     }
-
 
     void Text::setFontColor(int color)
     {
         QPalette palette = QLabel::palette();
         palette.setColor(QPalette::WindowText, color);
+        palette.setColor(QPalette::Window, Color::baseBackground());
+        QLabel::setAutoFillBackground(true);
         QLabel::setPalette(palette);
     }
 
@@ -140,11 +149,11 @@ namespace Element
         QFont font = QLabel::font();
         font.setPointSize(size);
         QLabel::setFont(font);
+        QLabel::adjustSize();
     }
 
     void Text::setSubscript()
     {
-
         QLabel::setTextFormat(Qt::RichText);
         QLabel::setText("<sup>" + QLabel::text() + "</sup>");
     }

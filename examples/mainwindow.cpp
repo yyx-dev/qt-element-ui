@@ -1,24 +1,26 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "tools/iconmanager.h"
 #include "text.h"
 #include "button.h"
-#include "tools/iconmanager.h"
+#include "dialog.h"
+#include "message.h"
+#include "notification.h"
 
 #include <QDebug>
 
 #define TEXT 0
 #define BUTTON 1
 #define SCROLLBAR 2
-#define CONTAINER 3
-#define LINK 4
-#define INPUT 5
-#define NUMBER 6
-#define TAG 7
+#define LINK 3
+#define INPUT 4
+#define FEEDBACK 5
+#define TAG 6
 
 using namespace Element;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -37,9 +39,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupTab4();
     setupTab5();
     setupTab6();
-    setupTab7();
 
-    ui->tabWidget->setCurrentIndex(INPUT);
+    ui->tabWidget->setCurrentIndex(FEEDBACK);
 }
 
 void MainWindow::setupTabs()
@@ -47,25 +48,20 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(0, Element::Icon::CirclePlus);
     ui->tabWidget->setTabIcon(1, Element::Icon::Open);
     ui->tabWidget->setTabIcon(2, Element::Icon::Operation);
-    ui->tabWidget->setTabIcon(3, Element::Icon::Grid);
-    ui->tabWidget->setTabIcon(4, Element::Icon::Link);
-    ui->tabWidget->setTabIcon(5, Element::Icon::EditPen);
-    ui->tabWidget->setTabIcon(6, Element::Icon::MagicStick);
-    ui->tabWidget->setTabIcon(7, Element::Icon::CollectionTag);
-
+    ui->tabWidget->setTabIcon(3, Element::Icon::Link);
+    ui->tabWidget->setTabIcon(4, Element::Icon::EditPen);
+    ui->tabWidget->setTabIcon(5, Element::Icon::Connection);
 }
 
 
 void MainWindow::setupTab0()
 {
-    ui->defaultText->setType(Text::Type::Default);
-    ui->primaryText->setType(Text::Type::Primary);
+    ui->defaultText->setType(Text::Type::Default).setSize(Text::Size::Large);
+    ui->primaryText->setType(Text::Type::Primary).setSize(Text::Size::Default);
     ui->successText->setType(Text::Type::Success);
     ui->infoText->setType(Text::Type::Info);
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
-
-    ui->defaultText->setSize(Text::Size::Large);
 }
 
 void MainWindow::setupTab1()
@@ -134,11 +130,6 @@ void MainWindow::setupTab2()
 
 void MainWindow::setupTab3()
 {
-
-}
-
-void MainWindow::setupTab4()
-{
     ui->link_1 ->setType(Link::Type::Default);
     ui->link_2 ->setType(Link::Type::Primary);
     ui->link_3 ->setType(Link::Type::Success);
@@ -157,7 +148,7 @@ void MainWindow::setupTab4()
     ui->link_16->setUnderline(Link::Underline::Never);
 }
 
-void MainWindow::setupTab5()
+void MainWindow::setupTab4()
 {
     ui->input_01->setClearable(true);
     ui->input_02->setDisabled(true);
@@ -180,12 +171,104 @@ void MainWindow::setupTab5()
     ui->spinBox_4->setDisabled(true);
 }
 
-void MainWindow::setupTab6()
+void MainWindow::setupTab5()
 {
-
+    connect(ui->button_42, &Element::Button::clicked, this, [&]() {
+        Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
+        dialog->show();
+    });
+    connect(ui->button_43, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message.", " VNode", this);
+        message->setType(Message::Type::Info);
+        message->show();
+    });
+    connect(ui->button_44, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message on top left.", this);
+        message->setPlacement(Message::Place::TopLeft);
+        message->show();
+    });
+    connect(ui->button_45, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message on top right.", this);
+        message->setPlacement(Message::Place::TopRight);
+        message->show();
+    });
+    connect(ui->button_46, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message on bottom.", this);
+        message->setPlacement(Message::Place::Bottom);
+        message->show();
+    });
+    connect(ui->button_47, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message on bottom left.", this);
+        message->setPlacement(Message::Place::BottomLeft);
+        message->show();
+    });
+    connect(ui->button_48, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a message on bottom right.", this);
+        message->setPlacement(Message::Place::BottomRight);
+        message->show();
+    });
+    connect(ui->button_49, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a primary message.", Message::Type::Primary, this);
+        message->show();
+    });
+    connect(ui->button_50, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a success message.", Message::Type::Success, this);
+        message->show();
+    });
+    connect(ui->button_51, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a warning message.", Message::Type::Warning, this);
+        message->show();
+    });
+    connect(ui->button_52, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a info message.", Message::Type::Info, this);
+        message->show();
+    });
+    connect(ui->button_53, &Element::Button::clicked, this, [&]() {
+        Message* message = new Message("This is a error message.", Message::Type::Error, this);
+        message->show();
+    });
+    connect(ui->button_54, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a reminder.", this);
+        noti->show();
+    });
+    connect(ui->button_55, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a reminder on top left.", this);
+        noti->setPosition(Notification::Position::TopLeft);
+        noti->show();
+    });
+    connect(ui->button_56, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a reminder on bottom right.", this);
+        noti->setPosition(Notification::Position::BottomLeft);
+        noti->show();
+    });
+    connect(ui->button_57, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a reminder on bottom right.", this);
+        noti->setPosition(Notification::Position::BottomRight);
+        noti->show();
+    });
+    connect(ui->button_58, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a primary reminder.", Notification::Type::Primary, this);
+        noti->show();
+    });
+    connect(ui->button_59, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a success reminder.", Notification::Type::Success, this);
+        noti->show();
+    });
+    connect(ui->button_60, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a warning reminder.", Notification::Type::Warning, this);
+        noti->show();
+    });
+    connect(ui->button_61, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a info reminder.", Notification::Type::Info, this);
+        noti->show();
+    });
+    connect(ui->button_62, &Element::Button::clicked, this, [&]() {
+        Notification* noti = new Notification("Title", "This is a error reminder.", Notification::Type::Error, this);
+        noti->show();
+    });
 }
 
-void MainWindow::setupTab7()
+void MainWindow::setupTab6()
 {
 
 }

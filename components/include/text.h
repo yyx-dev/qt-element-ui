@@ -62,11 +62,13 @@ namespace Element
         bool getTruncated();
         Text& setTruncated(bool truncated);
 
+        void setColor(const QString& color);
+
     private:
-        Type _type;
-        Size _size;
-        Tag _tag;
-        bool _truncated;
+        Type _type = Type::Default;
+        Size _size = Size::Default;
+        Tag _tag = Tag::Default;
+        bool _truncated = false;
 
     private:
         void setFontColor(const QString& color);

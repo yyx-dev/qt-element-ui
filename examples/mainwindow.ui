@@ -23,14 +23,14 @@
       <height>780</height>
      </rect>
     </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::West</enum>
-    </property>
     <property name="tabShape">
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>5</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
     </property>
     <property name="documentMode">
      <bool>false</bool>
@@ -48,59 +48,83 @@
      <attribute name="title">
       <string>文本</string>
      </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget">
+     <widget class="Element::Text" name="defaultText">
       <property name="geometry">
        <rect>
-        <x>380</x>
-        <y>180</y>
-        <width>421</width>
-        <height>91</height>
+        <x>60</x>
+        <y>80</y>
+        <width>65</width>
+        <height>21</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="Element::Text" name="defaultText">
-         <property name="text">
-          <string>Default</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Element::Text" name="primaryText">
-         <property name="text">
-          <string>Primary</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Element::Text" name="successText">
-         <property name="text">
-          <string>Success</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Element::Text" name="infoText">
-         <property name="text">
-          <string>Info</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Element::Text" name="warningText">
-         <property name="text">
-          <string>Warning</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Element::Text" name="dangerText">
-         <property name="text">
-          <string>Danger</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <property name="text">
+       <string>Default</string>
+      </property>
+     </widget>
+     <widget class="Element::Text" name="primaryText">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>88</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primary</string>
+      </property>
+     </widget>
+     <widget class="Element::Text" name="successText">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>90</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Success</string>
+      </property>
+     </widget>
+     <widget class="Element::Text" name="infoText">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>90</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Info</string>
+      </property>
+     </widget>
+     <widget class="Element::Text" name="warningText">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>90</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Warning</string>
+      </property>
+     </widget>
+     <widget class="Element::Text" name="dangerText">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>90</y>
+        <width>61</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Danger</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -525,11 +549,6 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>布局</string>
-     </attribute>
-    </widget>
     <widget class="QWidget" name="tab_5">
      <attribute name="title">
       <string>链接</string>
@@ -938,15 +957,283 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_7">
+    <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>数字</string>
+      <string>反馈</string>
      </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_8">
-     <attribute name="title">
-      <string>标签</string>
-     </attribute>
+     <widget class="Element::Button" name="button_42">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Open Dialog</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_43">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show message</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_44">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>90</y>
+        <width>91</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Top Left</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_45">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>90</y>
+        <width>91</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Top Right</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_46">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>90</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bottom</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_47">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>90</y>
+        <width>101</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bottom Left</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_48">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>90</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bottom Right</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_49">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>150</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primary</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_50">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>150</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Success</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_51">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>150</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Warning</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_52">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>150</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Info</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_53">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>150</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Error</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_54">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>230</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Notification</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_55">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>230</y>
+        <width>91</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Top Left</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_56">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>230</y>
+        <width>101</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bottom Left</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_57">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>230</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bottom Right</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_58">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>290</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primary</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_59">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>290</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Success</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_60">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>290</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Warning</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_61">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>290</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Info</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_62">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>290</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Error</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

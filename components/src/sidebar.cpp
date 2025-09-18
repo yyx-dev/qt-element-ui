@@ -83,43 +83,6 @@ namespace Element
         connect(this, &QTabWidget::currentChanged, this, &TabWidget::handleTabClicked);
     }
 
-    QAction* TabWidget::addTopMenu(const QString& text, Icon icon, bool hasSub)
-    {
-        QAction* action = new QAction(text, this);
-        action->setCheckable(!hasSub);
-
-        QWidget* page = new QWidget(this);
-        QTabWidget::addTab(page, text);
-
-        MenuItem item(action, page, hasSub, icon);
-
-        if (hasSub)
-        {
-            item.subMenuBar = new SideBar(this, true);
-            item.subMenuBar->setShape(QTabBar::RoundedWest);
-
-            QSSHelper qsshelper;
-            qsshelper.setProperty("QTabWidget:pane", "border", "none");
-            qsshelper.setProperty("QTabBar:tab", "padding", "10px 10px");
-            qsshelper.setProperty("QTabBar:tab", "width", "120px");
-            qsshelper.setProperty("QTabBar:tab", "height", "30px");
-
-            item.subMenuBar->setFixedWidth(150);
-            item.subMenuBar->setStyleSheet(qsshelper.generate());
-
-            connect(item.subMenuBar, &QTabBar::currentChanged, this, [this, &item](int index) {
-                if (index >= 0 && index < item.subActions.size())
-                {
-                    handleSubActionTriggered(item.subActions[index]);
-                }
-            });
-
-            item.subMenuBar->hide();
-        }
-
-        _menus.push_back(item);
-        return action;
-    }
 
     QAction* TabWidget::addSubMenu(QAction* parentMenu, const QString& text)
     {

@@ -1,6 +1,6 @@
 QT += core widgets gui svg
 
-CONFIG += c++14
+CONFIG += c++17
 
 
 INC = components/include
