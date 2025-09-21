@@ -1275,7 +1275,7 @@
        <string>avatar</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="label_2">
+     <widget class="Element::Tag" name="tag_1">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -1288,7 +1288,7 @@
        <string>Tag 1</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="label_3">
+     <widget class="Element::Tag" name="tag_3">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -1301,7 +1301,7 @@
        <string>Tag 2</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="label_4">
+     <widget class="Element::Tag" name="tag_2">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -1312,6 +1312,32 @@
       </property>
       <property name="text">
        <string>Tag 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_4">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_5">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 5</string>
       </property>
      </widget>
     </widget>

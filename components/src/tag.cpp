@@ -43,6 +43,10 @@ namespace Element
     void Tag::setType(Type type)
     {
         _type = type;
+        _qsshelper.setProperty("QLabel", "color", getColor())
+                  .setProperty("QLabel", "background-color", getBackgroundColor())
+                  .setProperty("QLabel", "border", "1px solid " + getBorderColor());
+        setStyleSheet(_qsshelper.generate());
     }
 
     void Tag::setSize(Size size)

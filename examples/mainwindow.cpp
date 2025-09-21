@@ -291,6 +291,12 @@ void MainWindow::setupTab6()
 
     Badge* badge = new Badge(ui->avatar);
     badge->setValue(1);
+
+    ui->tag_1->setType(Tag::Type::Primary);
+    ui->tag_2->setType(Tag::Type::Success);
+    ui->tag_3->setType(Tag::Type::Info);
+    ui->tag_4->setType(Tag::Type::Warning);
+    ui->tag_5->setType(Tag::Type::Danger);
 }
 
 MainWindow::~MainWindow()

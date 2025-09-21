@@ -6,4 +6,18 @@
 
 示例如下：
 
-<img src="./images/example-button.png" style="zoom:60%;" />
+---
+
+<img src="./images/button-example.png"  />
+
+---
+
+<img src="./images/input-example.png"  />
+
+---
+
+<img src="./images/message-example.png"  />
+
+---
+
+<img src="./images/data-example.png"  />
