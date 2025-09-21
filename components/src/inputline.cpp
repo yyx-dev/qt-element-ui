@@ -115,24 +115,24 @@ namespace Element
         return *this;
     }
 
-    Icon InputLine::getSuffixIcon()
+    Icon::Name InputLine::getSuffixIcon()
     {
         return _suffixIcon;
     }
 
-    InputLine& InputLine::setSuffixIcon(Icon icon)
+    InputLine& InputLine::setSuffixIcon(Icon::Name icon)
     {
         if (!_suffixAction)
             return setSuffixIcon(icon, []{});
 
         _suffixAction->setIcon(
-            IconManager::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
+            Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
         _suffixIcon = icon;
 
         return *this;
     }
 
-    InputLine& InputLine::setSuffixIcon(Icon icon, const std::function<void()>& callback)
+    InputLine& InputLine::setSuffixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
         if (icon == Icon::None)
         {
@@ -149,7 +149,7 @@ namespace Element
                 setSuffixIcon(Icon::None);
 
             _suffixAction = new QAction(
-                IconManager::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
+                Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
                 "", this);
             connect(_suffixAction, &QAction::triggered, callback);
             addAction(_suffixAction, QLineEdit::TrailingPosition);
@@ -159,24 +159,24 @@ namespace Element
         return *this;
     }
 
-    Icon InputLine::getPrefixIcon()
+    Icon::Name InputLine::getPrefixIcon()
     {
         return _prefixIcon;
     }
 
-    InputLine& InputLine::setPrefixIcon(Icon icon)
+    InputLine& InputLine::setPrefixIcon(Icon::Name icon)
     {
         if (!_prefixAction)
             return setPrefixIcon(icon, []{});
 
         _prefixAction->setIcon(
-            IconManager::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
+            Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
         _prefixIcon = icon;
 
         return *this;
     }
 
-    InputLine& InputLine::setPrefixIcon(Icon icon, const std::function<void()>& callback)
+    InputLine& InputLine::setPrefixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
         if (icon == Icon::None)
         {
@@ -193,7 +193,7 @@ namespace Element
                 setPrefixIcon(Icon::None);
 
             _prefixAction = new QAction(
-                        IconManager::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
+                        Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
                         "", this);
             connect(_prefixAction, &QAction::triggered, callback);
             addAction(_prefixAction, QLineEdit::LeadingPosition);
@@ -417,7 +417,7 @@ namespace Element
         if (isPrefixVisible && isPrefixHovered != _isPrefixHovered)
         {
             _isPrefixHovered = isPrefixHovered;
-            _prefixAction->setIcon(IconManager::instance().getIcon(
+            _prefixAction->setIcon(Icon::instance().getIcon(
                 _prefixIcon,
                 isPrefixHovered ? Color::secondaryText() : Color::placeholderText(),
                 CommonVar::inputIconSize));
@@ -431,7 +431,7 @@ namespace Element
         if (isSuffixVisible && isSuffixHovered != _isSuffixHovered)
         {
             _isSuffixHovered = isSuffixHovered;
-            _suffixAction->setIcon(IconManager::instance().getIcon(
+            _suffixAction->setIcon(Icon::instance().getIcon(
                 _suffixIcon,
                 isSuffixHovered ? Color::secondaryText() : Color::placeholderText(),
                 CommonVar::inputIconSize));

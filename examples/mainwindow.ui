@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -124,6 +124,19 @@
       </property>
       <property name="text">
        <string>Danger</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>360</y>
+        <width>81</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
       </property>
      </widget>
     </widget>
@@ -528,7 +541,7 @@
      <widget class="QScrollArea" name="scrollArea">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>140</x>
         <y>10</y>
         <width>721</width>
         <height>551</height>
@@ -1234,6 +1247,73 @@
        <string>Error</string>
       </property>
      </widget>
+     <widget class="Element::Dropdown" name="dropdown" native="true">
+      <property name="geometry">
+       <rect>
+        <x>910</x>
+        <y>30</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>数据</string>
+     </attribute>
+     <widget class="Element::Avatar" name="avatar">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>80</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>avatar</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 3</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1280,6 +1360,22 @@
    <extends>QTabWidget</extends>
    <header location="global">sidebar.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Dropdown</class>
+   <extends>QWidget</extends>
+   <header location="global">dropdown.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Avatar</class>
+   <extends>QLabel</extends>
+   <header location="global">avatar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Tag</class>
+   <extends>QLabel</extends>
+   <header location="global">tag.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

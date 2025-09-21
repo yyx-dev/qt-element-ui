@@ -1,7 +1,7 @@
 #pragma once
 
-#include "tools/iconmanager.h"
 #include "tools/qsshelper.h"
+#include "icon.h"
 
 #include <QLineEdit>
 #include <QLabel>
@@ -35,13 +35,13 @@ namespace Element
         Size getSize();
         InputLine& setSize(Size size);
 
-        Icon getSuffixIcon();
-        InputLine& setSuffixIcon(Icon icon);
-        InputLine& setSuffixIcon(Icon icon, const std::function<void()>& callback);
+        Icon::Name getSuffixIcon();
+        InputLine& setSuffixIcon(Icon::Name icon);
+        InputLine& setSuffixIcon(Icon::Name icon, const std::function<void()>& callback);
 
-        Icon getPrefixIcon();
-        InputLine& setPrefixIcon(Icon icon);
-        InputLine& setPrefixIcon(Icon icon, const std::function<void()>& callback);
+        Icon::Name getPrefixIcon();
+        InputLine& setPrefixIcon(Icon::Name icon);
+        InputLine& setPrefixIcon(Icon::Name icon, const std::function<void()>& callback);
 
         int getMaxLength();
         InputLine& setMaxLength(int maxLength);
@@ -66,8 +66,8 @@ namespace Element
     private:
         Size _size = Size::Default;
 
-        Icon _suffixIcon = Icon::None;
-        Icon _prefixIcon = Icon::None;
+        Icon::Name _suffixIcon = Icon::None;
+        Icon::Name _prefixIcon = Icon::None;
 
         bool _clearable = false;
         bool _showPassword = false;

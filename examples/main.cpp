@@ -1,12 +1,13 @@
 #include "mainwindow.h"
 #include "scrollbar.h"
 #include "color.h"
+#include "icon.h"
 #include "tools/fontmanager.h"
 #include "tools/logger.h"
-#include "tools/iconmanager.h"
 #include "tools/dpiscaler.h"
 
 #include <QApplication>
+#include <QDebug>
 
 int main(int argc, char* argv[])
 {
@@ -25,8 +26,8 @@ int main(int argc, char* argv[])
 
     MainWindow w;
 
-    w.setWindowIcon(Element::IconManager::instance().getIcon(
-        Element::Icon::ElementPlus, Element::Color::primary(), 32));
+    w.setWindowIcon(Element::Icon::instance().getIcon(
+        Element::Icon::Name::ElementPlus, Element::Color::primary(), 32));
     w.setWindowTitle("QT Element UI 效果展示");
 
     w.show();

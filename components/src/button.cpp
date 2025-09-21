@@ -1,7 +1,7 @@
 #include "button.h"
 #include "color.h"
+#include "icon.h"
 #include "tools/commvar.h"
-#include "tools/iconmanager.h"
 #include "tools/logger.h"
 
 #include <QDebug>
@@ -499,7 +499,7 @@ namespace Element
             _qsshelper.setProperty("QPushButton", "padding", "5px 11px");
             _qsshelper.setProperty("QPushButton", "font-size", "14px");
 
-            if (_icon != Icon::None)
+            if (_icon != Icon::Name::None)
                 QPushButton::setIconSize(QSize(_smallIconSize, _smallIconSize));
 
             setMinimumHeight(30);
@@ -532,25 +532,25 @@ namespace Element
         return *this;
     }
 
-    QPair<Icon, Button::IconPosition> Button::getIcon()
+    QPair<Icon::Name, Button::IconPosition> Button::getIcon()
     {
-        return QPair<Icon, Button::IconPosition>(_icon, _iconPostion);
+        return QPair<Icon::Name, Button::IconPosition>(_icon, _iconPostion);
     }
 
-    Button& Button::setIcon(Icon name, IconPosition pos)
+    Button& Button::setIcon(Icon::Name name, IconPosition pos)
     {
         _icon = name;
         _iconPostion = pos;
 
         if (_type == Type::Default)
         {
-            QIcon icon = IconManager::instance().getIcon(name, Color::regularText(), CommonVar::buttonIconSize);
+            QIcon icon = Icon::instance().getIcon(name, Color::regularText(), CommonVar::buttonIconSize);
             QPushButton::setIcon(icon);
             QPushButton::setIconSize(QSize(_iconSize, _iconSize));
         }
         else
         {
-            QIcon icon = IconManager::instance().getIcon(name, Color::blankFill(), CommonVar::buttonIconSize);
+            QIcon icon = Icon::instance().getIcon(name, Color::blankFill(), CommonVar::buttonIconSize);
             QPushButton::setIcon(icon);
             QPushButton::setIconSize(QSize(_iconSize, _iconSize));
         }

@@ -8,22 +8,24 @@
 namespace Element
 {
     Text::Text(QWidget* parent)
-        : Text("", parent)
+        : Text("", Type::Default, parent)
     {}
 
     Text::Text(const QString& text, QWidget* parent)
-        : QLabel(parent)
+        : Text(text, Type::Default, parent)
+    {}
+
+    Text::Text(const QString& text, Text::Type type, QWidget* parent)
+        : QLabel(text, parent)
+        , _type(type)
     {
         QFont font = QLabel::font();
         font.setFamilies(CommonVar::baseFontFmailies);
         font.setWeight(CommonVar::regularFontWeight);
         QLabel::setFont(font);
 
-        QLabel::setText(text);
         QLabel::setWordWrap(true);
         QLabel::adjustSize();
-
-
 
         setType(_type);
         setSize(_size);
@@ -128,11 +130,8 @@ namespace Element
 
     void Text::setFontColor(const QString& color)
     {
-        QPalette palette = QLabel::palette();
-        palette.setColor(QPalette::WindowText, color);
-        palette.setColor(QPalette::Window, Color::baseBackground());
-        QLabel::setAutoFillBackground(true);
-        QLabel::setPalette(palette);
+       _qsshelper.setProperty("QLabel", "color", color);
+        setStyleSheet(_qsshelper.generate());
     }
 
     void Text::setFontColor(int color)
@@ -162,5 +161,35 @@ namespace Element
     {
         QLabel::setTextFormat(Qt::RichText);
         QLabel::setText("<sub>" + QLabel::text() + "</sub>");
+    }
+
+    void Text::enterEvent(QEvent* event)
+    {
+        QLabel::enterEvent(event);
+        emit hovered(true);
+    }
+
+    void Text::leaveEvent(QEvent* event)
+    {
+        QLabel::leaveEvent(event);
+        emit hovered(false);
+    }
+
+    void Text::mousePressEvent(QMouseEvent* event)
+    {
+        QLabel::mousePressEvent(event);
+    }
+
+    void Text::mouseReleaseEvent(QMouseEvent* event)
+    {
+        QLabel::mouseReleaseEvent(event);
+
+        if (rect().contains(event->pos()))
+        {
+            if (event->button() == Qt::LeftButton)
+                emit clicked();
+            else if (event->button() == Qt::RightButton)
+                emit rightClicked();
+        }
     }
 }

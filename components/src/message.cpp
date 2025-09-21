@@ -1,6 +1,6 @@
 #include "message.h"
 #include "tools/commvar.h"
-#include "tools/iconmanager.h"
+#include "icon.h"
 
 #include <QBoxLayout>
 #include <QPainter>
@@ -121,7 +121,7 @@ namespace Element
 
         _text->setText(coloredMessage + coloredParameter);
 
-        _icon->setPixmap(getIcon().pixmap(20, 20));
+        _icon->setPixmap(getIcon());
     }
 
     void Message::updatePosition()
@@ -198,17 +198,17 @@ namespace Element
         return "#000000";
     }
 
-    QIcon Message::getIcon()
+    QPixmap Message::getIcon()
     {
         switch (_type)
         {
-        case Type::Primary: return IconManager::instance().getIcon(Icon::InfoFilled, Color::primary(), 20);
-        case Type::Success: return IconManager::instance().getIcon(Icon::SuccessFilled, Color::success(), 20);
-        case Type::Warning: return IconManager::instance().getIcon(Icon::WarningFilled, Color::warning(), 20);
-        case Type::Info:    return IconManager::instance().getIcon(Icon::InfoFilled, Color::info(), 20);
-        case Type::Error:   return IconManager::instance().getIcon(Icon::CircleCloseFilled, Color::danger(), 20);
+        case Type::Primary: return Icon::instance().getPixmap(Icon::InfoFilled, Color::primary(), 20);
+        case Type::Success: return Icon::instance().getPixmap(Icon::SuccessFilled, Color::success(), 20);
+        case Type::Warning: return Icon::instance().getPixmap(Icon::WarningFilled, Color::warning(), 20);
+        case Type::Info:    return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 20);
+        case Type::Error:   return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 20);
         }
-        return QIcon();
+        return QPixmap();
     }
 
     void Message::onTimeout()

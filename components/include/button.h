@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "tools/iconmanager.h"
+#include "icon.h"
 #include "tools/qsshelper.h"
 
 #include <QString>
@@ -75,8 +75,8 @@ namespace Element
         bool getLoading();
         Button& setLoading(bool loading);
 
-        QPair<Icon, IconPosition> getIcon();
-        Button& setIcon(Icon name, IconPosition pos = IconPosition::Only);
+        QPair<Icon::Name, IconPosition> getIcon();
+        Button& setIcon(Icon::Name name, IconPosition pos = IconPosition::Only);
 
         Button& setText(const QString& text);
 
@@ -91,7 +91,7 @@ namespace Element
 
         bool _loading = false;
 
-        Icon _icon;
+        Icon::Name _icon;
         IconPosition _iconPostion = IconPosition::Left;
 
         QString _color; // TODO

@@ -305,6 +305,9 @@
         <file>icons/special/plus-light-border-20.png</file>
         <file>icons/special/minus-light-border-16.png</file>
         <file>icons/special/plus-light-border-16.png</file>
-        <file>icons/special/qt-logo.png</file>
+        <file>icons/other/avatar-load-failed.png</file>
+        <file>icons/other/circle-default-avatar.png</file>
+        <file>icons/other/example-avatar.png</file>
+        <file>icons/other/square-default-avatar.png</file>
     </qresource>
 </RCC>

@@ -47,9 +47,9 @@ namespace Element
             // 绘制图标
             if (!_isSubMenu)
             {
-                if (menuItem.iconName != Element::Icon::None)
+                if (menuItem.iconName != Icon::None)
                 {
-                    QIcon icon = IconManager::instance().getIcon(menuItem.iconName,
+                    QIcon icon = Icon::instance().getIcon(menuItem.iconName,
                                                                  selected ? Color::primary() : Color::primaryText(), 20);
                     icon.paint(&painter, rect.adjusted(30, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, QIcon::Normal);
                 }
@@ -57,7 +57,7 @@ namespace Element
 
             // 绘制文本
             painter.setPen(selected ? Color::primary() : Color::primaryText());
-            painter.drawText(rect.adjusted(_isSubMenu ? 30 : menuItem.iconName == Element::Icon::None ? 60 : 70, 0, -20, 0), Qt::AlignLeft | Qt::AlignVCenter, opt.text);
+            painter.drawText(rect.adjusted(_isSubMenu ? 30 : menuItem.iconName == Icon::None ? 60 : 70, 0, -20, 0), Qt::AlignLeft | Qt::AlignVCenter, opt.text);
         }
     }
 
@@ -102,7 +102,7 @@ namespace Element
         return action;
     }
 
-    TabWidget& TabWidget::setTabIcon(int index, Icon icon)
+    TabWidget& TabWidget::setTabIcon(int index, Icon::Name icon)
     {
         if (index < 0 || index >= _menus.size())
             return *this;

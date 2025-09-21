@@ -5,8 +5,11 @@
  * */
 #pragma once
 
+#include "tools/qsshelper.h"
+
 #include <QString>
 #include <QLabel>
+#include <QEnterEvent>
 
 namespace Element
 {
@@ -49,6 +52,7 @@ namespace Element
     public:
         Text(QWidget* parent = nullptr);
         Text(const QString &text, QWidget* parent = nullptr);
+        Text(const QString &text, Type type, QWidget* parent = nullptr);
 
         Type getType();
         Text& setType(Type type);
@@ -64,11 +68,25 @@ namespace Element
 
         void setColor(const QString& color);
 
+    signals:
+        void clicked();
+        void rightClicked();
+        void hovered(bool isHovered);
+
+    protected:
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseReleaseEvent(QMouseEvent* event) override;
+        void enterEvent(QEvent *event) override;
+        void leaveEvent(QEvent *event) override;
+
     private:
         Type _type = Type::Default;
         Size _size = Size::Default;
         Tag _tag = Tag::Default;
         bool _truncated = false;
+
+    private:
+        QSSHelper _qsshelper;
 
     private:
         void setFontColor(const QString& color);

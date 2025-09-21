@@ -58,7 +58,7 @@ namespace Element
         QString getColor();
         QString getBorderColor();
         QString getBackgroundColor();
-        QIcon getIcon();
+        QPixmap getIcon();
 
         void onTimeout();
 

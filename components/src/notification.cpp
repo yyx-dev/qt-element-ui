@@ -1,6 +1,6 @@
 #include "notification.h"
 #include "tools/commvar.h"
-#include "tools/iconmanager.h"
+#include "icon.h"
 
 #include <QBoxLayout>
 #include <QPainter>
@@ -72,9 +72,7 @@ namespace Element
         _content->setWordWrap(true);
         _content->adjustSize();
 
-        _close->setPixmap(IconManager::instance()
-                .getIcon(Icon::Close, Color::secondaryText(), 16)
-                .pixmap(16));
+        _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
 
         _close->setAttribute(Qt::WA_Hover);
         _close->installEventFilter(this);
@@ -119,7 +117,7 @@ namespace Element
     Notification& Notification::setType(Notification::Type type)
     {
         _type = type;
-        _icon->setPixmap(getIcon().pixmap(24));
+        _icon->setPixmap(getIcon());
         adjustSize();
         return *this;
     }
@@ -171,18 +169,18 @@ namespace Element
         move(x, y);
     }
 
-    QIcon Notification::getIcon()
+    QPixmap Notification::getIcon()
     {
         switch (_type)
         {
-        case Type::Defualt: return QIcon();
-        case Type::Primary: return IconManager::instance().getIcon(Icon::InfoFilled, Color::primary(), 24);
-        case Type::Success: return IconManager::instance().getIcon(Icon::SuccessFilled, Color::success(), 24);
-        case Type::Warning: return IconManager::instance().getIcon(Icon::WarningFilled, Color::warning(), 24);
-        case Type::Info:    return IconManager::instance().getIcon(Icon::InfoFilled, Color::info(), 24);
-        case Type::Error:   return IconManager::instance().getIcon(Icon::CircleCloseFilled, Color::danger(), 24);
+        case Type::Defualt: return QPixmap();
+        case Type::Primary: return Icon::instance().getPixmap(Icon::InfoFilled, Color::primary(), 24);
+        case Type::Success: return Icon::instance().getPixmap(Icon::SuccessFilled, Color::success(), 24);
+        case Type::Warning: return Icon::instance().getPixmap(Icon::WarningFilled, Color::warning(), 24);
+        case Type::Info:    return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 24);
+        case Type::Error:   return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 24);
         }
-        return QIcon();
+        return QPixmap();
     }
 
     void Notification::onTimeout()
@@ -213,17 +211,13 @@ namespace Element
         {
             if (event->type() == QEvent::HoverEnter)
             {
-                _close->setPixmap(IconManager::instance()
-                    .getIcon(Icon::Close, Color::regularText(), 16)
-                    .pixmap(16));
+                _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::regularText(), 16));
                 _close->setCursor(Qt::PointingHandCursor);
                 return true;
             }
             else if (event->type() == QEvent::HoverLeave)
             {
-                _close->setPixmap(IconManager::instance()
-                    .getIcon(Icon::Close, Color::secondaryText(), 16)
-                    .pixmap(16));
+                _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
                 _close->setCursor(Qt::ArrowCursor);
                 return true;
             }

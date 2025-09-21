@@ -1,7 +1,7 @@
 #pragma once
 
-#include "tools/iconmanager.h"
 #include "tools/qsshelper.h"
+#include "icon.h"
 
 #include <QTextEdit>
 #include <QLabel>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "tools/qsshelper.h"
-#include "tools/iconmanager.h"
+#include "icon.h"
 
 #include <QTabWidget>
 #include <QTabBar>
@@ -26,11 +26,11 @@ namespace Element
         QAction* action;
         QWidget* page;
         bool hasSubMenu;
-        Element::Icon iconName = Element::Icon::None;
+        Icon::Name iconName = Icon::None;
 
         QVector<QAction*> subActions;
         SideBar* subMenuBar;
-        MenuItem(QAction* a, QWidget* p, bool sub, Element::Icon icon = Element::Icon::None)
+        MenuItem(QAction* a, QWidget* p, bool sub, Icon::Name icon = Icon::None)
             : action(a), page(p), hasSubMenu(sub), iconName(icon), subMenuBar(nullptr)
         {}
     };
@@ -41,9 +41,9 @@ namespace Element
     public:
         TabWidget(QWidget* parent = nullptr);
     public:
-        QAction* addTopMenu(const QString& text, Icon icon = Icon::None, bool hasSub = false);
+        QAction* addTopMenu(const QString& text, Icon::Name icon = Icon::None, bool hasSub = false);
         QAction* addSubMenu(QAction* parentMenu, const QString& text);
-        TabWidget& setTabIcon(int index, Icon icon);
+        TabWidget& setTabIcon(int index, Icon::Name icon);
 
         QVector<MenuItem>& menus();
         QAction* checkedAction();

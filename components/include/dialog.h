@@ -1,6 +1,5 @@
 #pragma once
 
-#include "tools/qsshelper.h"
 #include "text.h"
 #include "button.h"
 

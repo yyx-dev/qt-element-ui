@@ -50,9 +50,9 @@ namespace Element
 
     private:
         void updatePosition();
-        QIcon getIcon();
         void onTimeout();
         void setupUI();
+        QPixmap getIcon();
 
     protected:
         void paintEvent(QPaintEvent *event) override;

@@ -20,7 +20,6 @@ SOURCES += \
     $$files($$SRC/*.cpp) \
     $$files($$SRC/tools/*.cpp) \
 
-
 FORMS += \
     $$files($$EXM/*.ui)
 
