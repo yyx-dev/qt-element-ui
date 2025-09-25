@@ -3,6 +3,7 @@
 #include "tools/qsshelper.h"
 
 #include <QLabel>
+#include <QBoxLayout>
 
 namespace Element
 {
@@ -35,14 +36,14 @@ namespace Element
         };
 
     public:
-        void setEffect(Effect effect);
-        void setType(Type type);
-        void setSize(Size size);
+        Tag& setEffect(Effect effect);
+        Tag& setType(Type type);
+        Tag& setSize(Size size);
 
-        void setCloseable(bool closeable);
-        void setRound(bool round);
+        Tag& setCloseable(bool closeable);
+        Tag& setRound(bool round);
 
-        void setText(const QString& text);
+        Tag& setText(const QString& text);
 
     public:
         Tag(QWidget* parent = nullptr);
@@ -54,9 +55,9 @@ namespace Element
         QString getBorderColor();
         QString getBackgroundColor();
 
-    private:
-        QString _text;
+        bool eventFilter(QObject* obj, QEvent* event);
 
+    private:
         Effect _effect = Effect::Light;
         Type _type = Type::Info;
         Size _size = Size::Default;
@@ -64,9 +65,12 @@ namespace Element
         bool _closeable;
         bool _round;
 
-        QLabel* _icon;
+        QLabel* _textLabel = nullptr;
+        QLabel* _closeIcon = nullptr;
+        QHBoxLayout* _layout = nullptr;
 
     private:
         QSSHelper _qsshelper;
+        QSSHelper _internalQsshelper;
     };
 }

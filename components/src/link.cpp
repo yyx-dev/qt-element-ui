@@ -14,7 +14,7 @@ namespace Element
         , _underline(Underline::Default)
     {
         QFont font;
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setPointSize(CommonVar::defaultFontSize);
         font.setBold(true);
         QLabel::setFont(font);

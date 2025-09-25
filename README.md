@@ -4,8 +4,6 @@
 
 > 为软件生态做出属于自己的一份贡献是我一直以来的目标，奈何本人实力实在有限，如有大佬愿提点一二，本人不胜感激。
 
-示例如下：
-
 ---
 
 <img src="./images/button-example.png"  />
@@ -21,3 +19,11 @@
 ---
 
 <img src="./images/data-example.png"  />
+
+---
+
+<img src="./images/panel-example.png"  />
+
+---
+
+<img src="./images/progress-example.png"  />

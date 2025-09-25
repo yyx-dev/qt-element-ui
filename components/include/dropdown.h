@@ -26,9 +26,9 @@ namespace Element
     Q_OBJECT
 
     public:
-        void setText(const QString& text);
-        void addItem(const QString& name);
-        void addSeparator();
+        Dropdown& setText(const QString& text);
+        Dropdown& addItem(const QString& name);
+        Dropdown& addSeparator();
 
     public:
         Dropdown(QWidget* parent);

@@ -7,8 +7,8 @@ namespace Element
 {
     struct CommonVar
     {
-        static QString baseFontFmaily;
-        static QStringList baseFontFmailies;
+        static QString fontFmaily;
+        static QStringList fontFmailies;
 
         static int defaultFontSize;
         static int largeFontSize;

@@ -36,7 +36,7 @@ namespace Element
         setAttribute(Qt::WA_DeleteOnClose);
 
         QFont font = _text->font();
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setPointSize(10);
         _text->setFont(font);
 

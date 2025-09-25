@@ -22,11 +22,11 @@ namespace Element
         };
 
     public:
-        void setType(Type type);
-        void setIsDot(bool isdot);
-        void setValue(int value);
-        void setValue(const QString& value);
-        void setMax(int max);
+        Badge& setType(Type type);
+        Badge& setIsDot(bool isdot);
+        Badge& setValue(int value);
+        Badge& setValue(const QString& value);
+        Badge& setMax(int max);
 
     public:
         Badge(QWidget* parent = nullptr);

@@ -5,11 +5,11 @@
 namespace Element
 {
 
-    class SetScrollBar
+    class ScrollBar
     {
     public:
-        SetScrollBar();
-        void operator()(QApplication* app);
+        ScrollBar();
+        static void setScrollBar(QApplication* app);
     };
 
 }

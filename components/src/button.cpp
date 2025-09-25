@@ -25,7 +25,7 @@ namespace Element
                  font-weight: bold;
              }
          )");
-        _qsshelper.setProperty("QPushButton", "font-family", CommonVar::baseFontFmaily);
+        _qsshelper.setProperty("QPushButton", "font-family", CommonVar::fontFmaily);
         QPushButton::setStyleSheet(_qsshelper.generate());
 
         setStyle(Button::Style::Default);

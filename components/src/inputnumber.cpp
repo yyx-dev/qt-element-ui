@@ -57,7 +57,7 @@ namespace Element
             buttonWidth = "32px", buttonHeight = "30px";
         }
 
-        _qssHelper.setProperty("QSpinBox", "font-family", CommonVar::baseFontFmaily)
+        _qssHelper.setProperty("QSpinBox", "font-family", CommonVar::fontFmaily)
             .setProperty("QSpinBox", "font-size", fontSize)
             .setProperty("QSpinBox", "color", Color::regularText())
             .setProperty("QSpinBox", "background", Color::baseBackground())

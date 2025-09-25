@@ -13,7 +13,7 @@ namespace Element
         : QTabBar(parent), _isSubMenu(isSubMenu)
     {
         QFont font;
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setPointSize(9);
         setFont(font);
         setMouseTracking(true);

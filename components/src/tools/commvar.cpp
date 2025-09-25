@@ -3,9 +3,9 @@
 namespace Element
 {
 
-    QString CommonVar::baseFontFmaily = "'Noto Sans', 'Microsoft YaHei', 微软雅黑";
+    QString CommonVar::fontFmaily = "'Noto Sans', 'Microsoft YaHei', 微软雅黑";
 
-    QStringList CommonVar::baseFontFmailies = {"Noto Sans", "Microsoft YaHei", "微软雅黑"};
+    QStringList CommonVar::fontFmailies = {"Noto Sans", "Microsoft YaHei", "微软雅黑"};
 
     int CommonVar::defaultFontSize = 10;
     int CommonVar::largeFontSize = 12;

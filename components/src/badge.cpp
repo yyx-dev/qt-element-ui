@@ -20,7 +20,7 @@ namespace Element
         setAlignment(Qt::AlignCenter);
 
         QFont font = QLabel::font();
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setBold(true);
         font.setPointSize(7);
 
@@ -55,19 +55,21 @@ namespace Element
         setValue(value);
     }
 
-    void Badge::setType(Type type)
+    Badge& Badge::setType(Type type)
     {
         _type = type;
         _qsshelper.setProperty("QLabel", "background-color", getColor());
         setStyleSheet(_qsshelper.generate());
+        return *this;
     }
 
-    void Badge::setIsDot(bool isdot)
+    Badge& Badge::setIsDot(bool isdot)
     {
         _isDot = isdot;
+        return *this;
     }
 
-    void Badge::setValue(int value)
+    Badge& Badge::setValue(int value)
     {
         _numValue = value;
 
@@ -83,9 +85,10 @@ namespace Element
                 setValue(QString::number(_numValue));
             show();
         }
+        return *this;
     }
 
-    void Badge::setValue(const QString& value)
+    Badge& Badge::setValue(const QString& value)
     {
         _strValue = value;
 
@@ -99,11 +102,13 @@ namespace Element
             adjustSize();
             show();
         }
+        return *this;
     }
 
-    void Badge::setMax(int max)
+    Badge& Badge::setMax(int max)
     {
          _max = max;
+         return *this;
     }
 
     void Badge::resizeEvent(QResizeEvent* event)

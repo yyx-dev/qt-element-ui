@@ -8,6 +8,7 @@
 #include "message.h"
 #include "notification.h"
 #include "badge.h"
+#include "shadow.h"
 
 #include <QGraphicsDropShadowEffect>
 #include <QDebug>
@@ -19,6 +20,10 @@
 #define INPUT 4
 #define FEEDBACK 5
 #define DATA 6
+#define PANEL 7
+#define PROGRESS 8
+
+#define CURRENT_INDEX PROGRESS
 
 using namespace Element;
 
@@ -41,8 +46,9 @@ MainWindow::MainWindow(QWidget* parent)
     setupTab4();
     setupTab5();
     setupTab6();
+    setupTab7();
 
-    ui->tabWidget->setCurrentIndex(DATA);
+    ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
 }
 
 void MainWindow::setupTabs()
@@ -54,6 +60,8 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(4, Icon::EditPen);
     ui->tabWidget->setTabIcon(5, Icon::Connection);
     ui->tabWidget->setTabIcon(6, Icon::DataBoard);
+    ui->tabWidget->setTabIcon(7, Icon::Postcard);
+    ui->tabWidget->setTabIcon(8, Icon::Operation);
 }
 
 
@@ -66,13 +74,25 @@ void MainWindow::setupTab0()
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
 
+    ui->shadow_1->setStyleSheet("border: none; ");
+    ui->shadow_2->setStyleSheet("border: none; ");
+    ui->shadow_3->setStyleSheet("border: none; ");
+    ui->shadow_4->setStyleSheet("border: none; ");
 
-    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect;
-    shadow->setBlurRadius(20);       // 20px 模糊
-    shadow->setOffset(0, 8);         // y 偏移 8px
-    shadow->setColor(QColor(0, 0, 0, 20)); // rgba(0,0,0,0.08)
+    ui->shadow_1->setReadOnly(true);
+    ui->shadow_2->setReadOnly(true);
+    ui->shadow_3->setReadOnly(true);
+    ui->shadow_4->setReadOnly(true);
 
-    ui->label->setGraphicsEffect(shadow);
+    ui->shadow_1->appendPlainText("\n\n\n      Shadow Basic");
+    ui->shadow_2->appendPlainText("\n\n\n      Shadow Light");
+    ui->shadow_3->appendPlainText("\n\n\n     Shadow Lighter");
+    ui->shadow_4->appendPlainText("\n\n\n      Shadow Dark");
+
+    Shadow::setShadow(ui->shadow_1, Shadow::Type::Basic);
+    Shadow::setShadow(ui->shadow_2, Shadow::Type::Light);
+    Shadow::setShadow(ui->shadow_3, Shadow::Type::Lighter);
+    Shadow::setShadow(ui->shadow_4, Shadow::Type::Dark);
 }
 
 void MainWindow::setupTab1()
@@ -137,6 +157,9 @@ void MainWindow::setupTab2()
         button->setMinimumSize(500, 50);
         contentLayout->addWidget(button);
     }
+
+    ui->backtop->setSize(Backtop::Size::Default);
+    ui->backtop->setTarget(ui->scrollArea);
 }
 
 void MainWindow::setupTab3()
@@ -292,11 +315,89 @@ void MainWindow::setupTab6()
     Badge* badge = new Badge(ui->avatar);
     badge->setValue(1);
 
-    ui->tag_1->setType(Tag::Type::Primary);
-    ui->tag_2->setType(Tag::Type::Success);
-    ui->tag_3->setType(Tag::Type::Info);
-    ui->tag_4->setType(Tag::Type::Warning);
-    ui->tag_5->setType(Tag::Type::Danger);
+    ui->tag_01->setType(Tag::Type::Primary);
+    ui->tag_02->setType(Tag::Type::Success);
+    ui->tag_03->setType(Tag::Type::Info);
+    ui->tag_04->setType(Tag::Type::Warning);
+    ui->tag_05->setType(Tag::Type::Danger);
+
+    ui->tag_06->setType(Tag::Type::Primary).setEffect(Tag::Effect::Dark);
+    ui->tag_07->setType(Tag::Type::Success).setEffect(Tag::Effect::Dark);
+    ui->tag_08->setType(Tag::Type::Info).setEffect(Tag::Effect::Dark);
+    ui->tag_09->setType(Tag::Type::Warning).setEffect(Tag::Effect::Dark);
+    ui->tag_10->setType(Tag::Type::Danger).setEffect(Tag::Effect::Dark);
+
+    ui->tag_11->setType(Tag::Type::Primary).setEffect(Tag::Effect::Plain);
+    ui->tag_12->setType(Tag::Type::Success).setEffect(Tag::Effect::Plain);
+    ui->tag_13->setType(Tag::Type::Info).setEffect(Tag::Effect::Plain);
+    ui->tag_14->setType(Tag::Type::Warning).setEffect(Tag::Effect::Plain);
+    ui->tag_15->setType(Tag::Type::Danger).setEffect(Tag::Effect::Plain);
+
+    ui->tag_16->setType(Tag::Type::Primary).setRound(true);
+    ui->tag_17->setType(Tag::Type::Success).setRound(true);
+    ui->tag_18->setType(Tag::Type::Info).setRound(true);
+    ui->tag_19->setType(Tag::Type::Warning).setRound(true);
+    ui->tag_20->setType(Tag::Type::Danger).setRound(true);
+
+    ui->tag_21->setType(Tag::Type::Primary);
+    ui->tag_22->setType(Tag::Type::Success);
+    ui->tag_23->setType(Tag::Type::Info);
+    ui->tag_24->setType(Tag::Type::Warning);
+    ui->tag_25->setType(Tag::Type::Danger);
+
+    ui->tag_21->setCloseable(true);
+    ui->tag_22->setCloseable(true);
+    ui->tag_23->setCloseable(true);
+    ui->tag_24->setCloseable(true);
+    ui->tag_25->setCloseable(true);
+
+    ui->table->setWidth({200, 200});
+
+    ui->table->setHightlight(0, Table::Highlight::Primary)
+              .setHightlight(2, Table::Highlight::Success);
+}
+
+void MainWindow::setupTab7()
+{
+    ui->card_1->setHeader("Card name")
+               .setBody({"List item 1", "List item 2", "List item 3", "List item 4"})
+               .setFooter("Footer content")
+               .setShadow(Card::Shadow::Always);
+
+    ui->card_2->setHeader("Yummy hamburger")
+               .setBody(QImage(":/icons/other/hamburger.png"));
+
+    ui->collapseItem->setTitle("Consistency")
+        .setContent("Consistent with real life: in line with the process and logic of real life, "
+                    "and comply with languages and habits that the users are used to;\n"
+                    "Consistent within interface: all elements should be consistent, "
+                    "such as: design style, icons and texts, position of elements, etc.");
+    ui->collapseItem->setCollapse();
+
+    CollapseItem* item_1 = new CollapseItem("Consistency", "Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;\nConsistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.", ui->collapse);
+    CollapseItem* item_2 = new CollapseItem("Feedback", "Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;\nVisual feedback: reflect current state by updating or rearranging elements of the page.", ui->collapse);
+    CollapseItem* item_3 = new CollapseItem("Efficiency", "Simplify the process: keep operating process simple and intuitive;\nDefinite and clear: enunciate your intentions clearly so that the users can quickly understand and make decisions;\nEasy to identify: the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.", ui->collapse);
+    CollapseItem* item_4 = new CollapseItem("Controllability", "Decision making: giving advices about operations is acceptable, but do not make decisions for the users;\nControlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.", ui->collapse);
+
+    ui->collapse->addItem(item_1).addItem(item_2).addItem(item_3).addItem(item_4);
+
+    ui->upload_1->setTip("jpg/png files with a size less than 500kb.")
+                 .setDrag(true);
+    ui->upload_2->setTip("jpg/png files with a size less than 500kb.");
+
+    connect(ui->upload_1, &Upload::uploadRequested, this, [](const QStringList& paths) {
+        qDebug() << "received uploadRequest:" << paths;
+    });
+    connect(ui->upload_1, &Upload::removeRequested, this, [](const QString& path) {
+        qDebug() << "received removeRequest:" << path;
+    });
+
+    connect(ui->upload_2, &Upload::uploadRequested, this, [](const QStringList& paths) {
+        qDebug() << "received uploadRequest:" << paths;
+    });
+    connect(ui->upload_2, &Upload::removeRequested, this, [](const QString& path) {
+        qDebug() << "received removeRequest:" << path;
+    });
 }
 
 MainWindow::~MainWindow()

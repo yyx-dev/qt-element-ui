@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>8</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -126,17 +126,44 @@
        <string>Danger</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QPlainTextEdit" name="shadow_1">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>360</y>
-        <width>81</width>
-        <height>81</height>
+        <x>50</x>
+        <y>390</y>
+        <width>160</width>
+        <height>160</height>
        </rect>
       </property>
-      <property name="text">
-       <string>TextLabel</string>
+     </widget>
+     <widget class="QPlainTextEdit" name="shadow_2">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>390</y>
+        <width>160</width>
+        <height>160</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="shadow_3">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>390</y>
+        <width>160</width>
+        <height>160</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="shadow_4">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>390</y>
+        <width>160</width>
+        <height>160</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -542,7 +569,7 @@
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>10</y>
+        <y>30</y>
         <width>721</width>
         <height>551</height>
        </rect>
@@ -560,6 +587,19 @@
         </rect>
        </property>
       </widget>
+     </widget>
+     <widget class="Element::Backtop" name="backtop">
+      <property name="geometry">
+       <rect>
+        <x>920</x>
+        <y>620</y>
+        <width>60</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>backtop</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_5">
@@ -1275,11 +1315,11 @@
        <string>avatar</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="tag_1">
+     <widget class="Element::Tag" name="tag_01">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>140</y>
+        <x>160</x>
+        <y>30</y>
         <width>51</width>
         <height>21</height>
        </rect>
@@ -1288,11 +1328,11 @@
        <string>Tag 1</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="tag_3">
+     <widget class="Element::Tag" name="tag_02">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>140</y>
+        <x>230</x>
+        <y>30</y>
         <width>51</width>
         <height>21</height>
        </rect>
@@ -1301,11 +1341,11 @@
        <string>Tag 2</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="tag_2">
+     <widget class="Element::Tag" name="tag_03">
       <property name="geometry">
        <rect>
-        <x>200</x>
-        <y>140</y>
+        <x>300</x>
+        <y>30</y>
         <width>51</width>
         <height>21</height>
        </rect>
@@ -1314,11 +1354,11 @@
        <string>Tag 3</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="tag_4">
+     <widget class="Element::Tag" name="tag_04">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>140</y>
+        <x>370</x>
+        <y>30</y>
         <width>51</width>
         <height>21</height>
        </rect>
@@ -1327,17 +1367,439 @@
        <string>Tag 4</string>
       </property>
      </widget>
-     <widget class="Element::Tag" name="tag_5">
+     <widget class="Element::Tag" name="tag_05">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>140</y>
+        <x>440</x>
+        <y>30</y>
         <width>51</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
        <string>Tag 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_21">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>130</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_22">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>130</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_23">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>130</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_24">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>130</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_25">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>130</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_06">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_07">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_08">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_09">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_10">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_11">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_12">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_13">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_14">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_15">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_16">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_17">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_18">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_19">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Tag" name="tag_20">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>80</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Table" name="table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>190</y>
+        <width>851</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>4</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Address</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>2016-05-03</string>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>Tom</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>No. 189, Grove St, Los Angeles</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>2016-05-02</string>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string>Tom</string>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string>No. 189, Grove St, Los Angeles</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>2016-05-04</string>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string>Tom</string>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string>No. 189, Grove St, Los Angeles</string>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>2016-05-01</string>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string>Tom</string>
+       </property>
+      </item>
+      <item row="3" column="2">
+       <property name="text">
+        <string>No. 189, Grove St, Los Angeles</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_7">
+     <attribute name="title">
+      <string>面板</string>
+     </attribute>
+     <widget class="Element::Card" name="card_1" native="true">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>361</width>
+        <height>370</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Card" name="card_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>30</y>
+        <width>361</width>
+        <height>370</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::CollapseItem" name="collapseItem" native="true">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>440</y>
+        <width>900</width>
+        <height>180</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_8">
+     <attribute name="title">
+      <string>进度</string>
+     </attribute>
+     <widget class="Element::Collapse" name="collapse" native="true">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>900</width>
+        <height>250</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Upload" name="upload_1" native="true">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>320</y>
+        <width>450</width>
+        <height>420</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Upload" name="upload_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>320</y>
+        <width>450</width>
+        <height>300</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -1402,6 +1864,40 @@
    <class>Element::Tag</class>
    <extends>QLabel</extends>
    <header location="global">tag.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Table</class>
+   <extends>QTableWidget</extends>
+   <header location="global">table.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Backtop</class>
+   <extends>QLabel</extends>
+   <header location="global">backtop.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Card</class>
+   <extends>QWidget</extends>
+   <header location="global">card.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::CollapseItem</class>
+   <extends>QWidget</extends>
+   <header location="global">collapse.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Collapse</class>
+   <extends>QWidget</extends>
+   <header location="global">collapse.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Upload</class>
+   <extends>QWidget</extends>
+   <header location="global">upload.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

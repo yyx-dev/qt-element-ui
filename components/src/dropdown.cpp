@@ -33,22 +33,25 @@ namespace Element
         setMouseTracking(true);
     }
 
-    void Dropdown::setText(const QString& text)
+    Dropdown& Dropdown::setText(const QString& text)
     {
         _text->setText(text);
         adjustSize();
+        return *this;
     }
 
-    void Dropdown::addItem(const QString& name)
+    Dropdown& Dropdown::addItem(const QString& name)
     {
         if (_actions->contains(name))
-            return;
+            return *this;
         _actions->insert(name, _menu->addAction(name));
+        return *this;
     }
 
-    void Dropdown::addSeparator()
+    Dropdown& Dropdown::addSeparator()
     {
         _menu->addSeparator();
+        return *this;
     }
 
     void Dropdown::enterEvent(QEvent* event)
@@ -95,7 +98,7 @@ namespace Element
             })");
 
         QFont menuFont;
-        menuFont.setFamilies(CommonVar::baseFontFmailies);
+        menuFont.setFamilies(CommonVar::fontFmailies);
         menuFont.setPointSize(10);
         setFont(menuFont);
 

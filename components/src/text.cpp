@@ -20,7 +20,7 @@ namespace Element
         , _type(type)
     {
         QFont font = QLabel::font();
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setWeight(CommonVar::regularFontWeight);
         QLabel::setFont(font);
 
@@ -71,7 +71,7 @@ namespace Element
         else if (size == Size::Large)
             setFontSize(12);
         else if (size == Size::Small)
-            setFontSize(8);
+            setFontSize(9);
 
         QLabel::adjustSize();
         return *this;

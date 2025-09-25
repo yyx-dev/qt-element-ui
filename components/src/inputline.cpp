@@ -95,7 +95,7 @@ namespace Element
             height = 30;
         }
 
-        _qssHelper.setProperty("QLineEdit", "font-family", CommonVar::baseFontFmaily)
+        _qssHelper.setProperty("QLineEdit", "font-family", CommonVar::fontFmaily)
                 .setProperty("QLineEdit", "font-size", fontSize)
                 .setProperty("QLineEdit", "color", Color::regularText())
                 .setProperty("QLineEdit", "background", Color::baseBackground())
@@ -224,7 +224,7 @@ namespace Element
             {
                 _maxLengthLabel = new QLabel(this);
                 QSSHelper qssHelper;
-                qssHelper.setProperty("QLabel", "font-family", CommonVar::baseFontFmaily)
+                qssHelper.setProperty("QLabel", "font-family", CommonVar::fontFmaily)
                         .setProperty("QLabel", "font-size", "14px")
                         .setProperty("QLabel", "color", Color::secondaryText())
                         .setProperty("QLabel", "background", Color::baseBackground());

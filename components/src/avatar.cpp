@@ -42,13 +42,14 @@ namespace Element
         _shape = shape, _size = size;
     }
 
-    void Avatar::setIcon(Icon::Name icon)
+    Avatar& Avatar::setIcon(Icon::Name icon)
     {
         _type = Type::Icon;
         _svgRenderer = Icon::instance().getRenderer(icon, Color::basicWhite(), this);
+        return *this;
     }
 
-    void Avatar::setImage(const QImage& image)
+    Avatar& Avatar::setImage(const QImage& image)
     {
         _type = Type::Image;
 
@@ -56,23 +57,28 @@ namespace Element
             _image.load(":/icons/other/avatar-load-failed.png");
         else
             _image = image;
+
+        return *this;
     }
 
-    void Avatar::setText(const QString& text)
+    Avatar& Avatar::setText(const QString& text)
     {
         _type = Type::Text;
         _text = text;
+        return *this;
     }
 
-    void Avatar::setSize(Avatar::Size size)
+    Avatar& Avatar::setSize(Avatar::Size size)
     {
         _size = size;
         setFixedSize(calcSize(), calcSize());
+        return *this;
     }
 
-    void Avatar::setShape(Avatar::Shape shape)
+    Avatar& Avatar::setShape(Avatar::Shape shape)
     {
         _shape = shape;
+        return *this;
     }
 
     void Avatar::paintEvent(QPaintEvent* event)
@@ -105,7 +111,7 @@ namespace Element
         else if (_type == Type::Text)
         {
             QFont font = QLabel::font();
-            font.setFamilies(CommonVar::baseFontFmailies);
+            font.setFamilies(CommonVar::fontFmailies);
             font.setBold(true);
             if (_size == Size::Default || _size == Size::Large) font.setPointSize(10);
             else if (_size == Size::Small) font.setPointSize(8);

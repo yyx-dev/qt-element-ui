@@ -3,9 +3,9 @@
 
 namespace Element
 {
-    SetScrollBar::SetScrollBar() {}
+    ScrollBar::ScrollBar() {}
 
-    void SetScrollBar::operator()(QApplication* app)
+    void ScrollBar::setScrollBar(QApplication* app)
     {
         if (!app)
             return;

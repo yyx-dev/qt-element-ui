@@ -309,5 +309,6 @@
         <file>icons/other/circle-default-avatar.png</file>
         <file>icons/other/example-avatar.png</file>
         <file>icons/other/square-default-avatar.png</file>
+        <file>icons/other/hamburger.png</file>
     </qresource>
 </RCC>

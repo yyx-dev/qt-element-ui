@@ -14,28 +14,17 @@ namespace Element
     Q_OBJECT
 
     public:
-        enum class Shape
-        {
-            Circle,
-            Square
-        };
-
-        enum class Size
-        {
-            Default,
-            Small,
-            Large,
-        };
-
-         enum Type { Icon, Image, Text };
+        enum class Shape { Circle, Square };
+        enum class Size { Default, Small, Large };
+        enum class Type { Icon, Image, Text };
 
     public:
-        void setIcon(Icon::Name icon = Icon::UserFilled);
-        void setImage(const QImage& file = QImage(":/icons/other/example-avatar.png"));
-        void setText(const QString& text = "user");
+        Avatar& setIcon(Icon::Name icon = Icon::UserFilled);
+        Avatar& setImage(const QImage& file = QImage(":/icons/other/example-avatar.png"));
+        Avatar& setText(const QString& text = "user");
 
-        void setSize(Size size);
-        void setShape(Shape shape);
+        Avatar& setSize(Size size);
+        Avatar& setShape(Shape shape);
 
     public:
         Avatar(QWidget* parent = nullptr);

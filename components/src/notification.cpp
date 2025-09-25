@@ -59,14 +59,14 @@ namespace Element
     void Notification::setupUI()
     {
         QFont font = _title->font();
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setBold(true);
         font.setPointSize(12);
         _title->setFont(font);
         _title->adjustSize();
 
         font = _content->font();
-        font.setFamilies(CommonVar::baseFontFmailies);
+        font.setFamilies(CommonVar::fontFmailies);
         font.setPointSize(10);
         _content->setFont(font);
         _content->setWordWrap(true);

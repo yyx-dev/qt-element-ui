@@ -17,7 +17,7 @@ namespace Element
     {
         setPlaceholderText(placeholder);
 
-        _qssHelper.setProperty("QTextEdit", "font-family", CommonVar::baseFontFmaily)
+        _qssHelper.setProperty("QTextEdit", "font-family", CommonVar::fontFmaily)
                 .setProperty("QTextEdit", "font-size", "16px")
                 .setProperty("QTextEdit", "color", Color::regularText())
                 .setProperty("QTextEdit", "background", Color::baseBackground())
@@ -95,7 +95,7 @@ namespace Element
             {
                 _maxLengthLabel = new QLabel(this);
                 QSSHelper qssHelper;
-                qssHelper.setProperty("QLabel", "font-family", CommonVar::baseFontFmaily)
+                qssHelper.setProperty("QLabel", "font-family", CommonVar::fontFmaily)
                         .setProperty("QLabel", "font-size", "14px")
                         .setProperty("QLabel", "color", Color::secondaryText())
                         .setProperty("QLabel", "background", Color::baseBackground());
