@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     QApplication app(argc, argv);
 
-    Element::ScrollBar::setScrollBar(&app);
+    Element::ScrollBar::setAppScrollBar(&app);
 
     Element::Log::setLevel(Element::Log::Level::Debug);
 

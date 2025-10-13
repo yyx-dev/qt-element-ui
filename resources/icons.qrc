@@ -310,5 +310,16 @@
         <file>icons/other/example-avatar.png</file>
         <file>icons/other/square-default-avatar.png</file>
         <file>icons/other/hamburger.png</file>
+        <file>icons/special/select-basic-white-12.png</file>
+        <file>icons/special/select-placeholder-text-12.png</file>
+        <file>icons/special/semi-select-basic-white-12.png</file>
+        <file>icons/special/semi-select-placeholder-text-12.png</file>
+        <file>icons/special/select-basic-white-10.png</file>
+        <file>icons/special/select-placeholder-text-10.png</file>
+        <file>icons/special/semi-select-basic-white-10.png</file>
+        <file>icons/special/semi-select-placeholder-text-10.png</file>
+        <file>icons/special/radio-basic-white-6.png</file>
+        <file>icons/special/radio-placeholder-text-6.png</file>
+        <file>icons/special/circle-filled.svg</file>
     </qresource>
 </RCC>

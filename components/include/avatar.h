@@ -15,7 +15,7 @@ namespace Element
 
     public:
         enum class Shape { Circle, Square };
-        enum class Size { Default, Small, Large };
+        enum class Size { Large, Default, Small  };
         enum class Type { Icon, Image, Text };
 
     public:

@@ -194,7 +194,7 @@ namespace Element
 
 
 
-    ItemWidget::ItemWidget(QListWidgetItem* item, const QString& path)
+    FileListItemWidget::FileListItemWidget(QListWidgetItem* item, const QString& path)
         : _icon(new QLabel(this))
         , _name(new QLabel(QFileInfo(path).fileName(), this))
         , _state(new QLabel(this))
@@ -228,7 +228,7 @@ namespace Element
         _state->installEventFilter(this);
     }
 
-    bool ItemWidget::eventFilter(QObject* obj, QEvent* event)
+    bool FileListItemWidget::eventFilter(QObject* obj, QEvent* event)
     {
         if (obj == _state)
         {
@@ -246,14 +246,14 @@ namespace Element
         return QWidget::eventFilter(obj, event);
     }
 
-    void ItemWidget::enterEvent(QEvent* event)
+    void FileListItemWidget::enterEvent(QEvent* event)
     {
         _name->setStyleSheet("QLabel { color: #409EFF; }");
         _state->setPixmap(Icon::instance().getPixmap(Icon::Close, "#85878B", 18));
         QWidget::enterEvent(event);
     }
 
-    void ItemWidget::leaveEvent(QEvent* event)
+    void FileListItemWidget::leaveEvent(QEvent* event)
     {
         _name->setStyleSheet("QLabel { color: #606266; }");
         _state->setPixmap(Icon::instance().getPixmap(Icon::CircleCheck, Color::success(), 18));
@@ -269,8 +269,8 @@ namespace Element
         setMouseTracking(true);
         setSelectionMode(QAbstractItemView::SingleSelection);
         setFrameStyle(QFrame::NoFrame);
-        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         setStyleSheet(R"(
             show-decoration-selected: 0;
@@ -287,10 +287,10 @@ namespace Element
         item->setSizeHint(QSize(width(), 30 + 5));
         QListWidget::addItem(item);
 
-        ItemWidget* widget = new ItemWidget(item, path);
+        FileListItemWidget* widget = new FileListItemWidget(item, path);
         setItemWidget(item, widget);
 
-        connect(widget, &ItemWidget::removeRequested, this, [&](QListWidgetItem* item, const QString& path) {
+        connect(widget, &FileListItemWidget::removeRequested, this, [&](QListWidgetItem* item, const QString& path) {
             delete item;
             emit removeRequested(path);
         });

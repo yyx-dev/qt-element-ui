@@ -30,8 +30,8 @@ namespace Element
 
         enum class Size
         {
-            Default,
             Large,
+            Default,
             Small,
         };
 

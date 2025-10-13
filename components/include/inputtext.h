@@ -77,6 +77,7 @@ namespace Element
 
         QLabel* _maxLengthLabel = nullptr;
         ResizeHandler* _resizeHandler = nullptr;
+
     private:
         void maxLengthChecker();
 

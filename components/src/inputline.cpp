@@ -20,6 +20,10 @@
 namespace Element
 {
 
+    InputLine::InputLine(QWidget* parent)
+        : InputLine("Please input", parent)
+    {}
+
     InputLine::InputLine(const QString& placeholder, QWidget* parent)
         : QLineEdit(parent)
     {
@@ -28,10 +32,6 @@ namespace Element
 
         connect(this, &QLineEdit::textChanged, this, &InputLine::onTextChanged);
     }
-
-    InputLine::InputLine(QWidget* parent)
-        : InputLine("Please input", parent)
-    {}
 
     QString InputLine::getPlaceholder()
     {

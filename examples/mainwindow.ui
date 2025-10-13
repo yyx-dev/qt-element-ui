@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>9</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -44,7 +44,7 @@
     <property name="tabBarAutoHide">
      <bool>false</bool>
     </property>
-    <widget class="QWidget" name="tab_1">
+    <widget class="QWidget" name="tab_0">
      <attribute name="title">
       <string>文本</string>
      </attribute>
@@ -167,7 +167,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="tab_1">
      <attribute name="title">
       <string>按钮</string>
      </attribute>
@@ -561,7 +561,7 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
+    <widget class="QWidget" name="tab_2">
      <attribute name="title">
       <string>滚动条</string>
      </attribute>
@@ -602,7 +602,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_5">
+    <widget class="QWidget" name="tab_3">
      <attribute name="title">
       <string>链接</string>
      </attribute>
@@ -815,7 +815,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_6">
+    <widget class="QWidget" name="tab_4">
      <attribute name="title">
       <string>输入</string>
      </attribute>
@@ -1009,8 +1009,28 @@
        </rect>
       </property>
      </widget>
+     <widget class="Element::PopList" name="popList">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>20</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::AutoComplete" name="autoComplete">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>260</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="tab_5">
      <attribute name="title">
       <string>反馈</string>
      </attribute>
@@ -1298,7 +1318,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_4">
+    <widget class="QWidget" name="tab_6">
      <attribute name="title">
       <string>数据</string>
      </attribute>
@@ -1803,6 +1823,284 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_9">
+     <attribute name="title">
+      <string>表单</string>
+     </attribute>
+     <widget class="Element::Checkbox" name="checkbox_1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_5">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>130</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>80</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_6">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>130</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 6</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_4">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>80</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Checkbox" name="checkbox_7">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>190</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Check All</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>340</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 1</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>340</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 2</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>400</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 3</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_4">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>400</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 4</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_5">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>460</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 5</string>
+      </property>
+     </widget>
+     <widget class="Element::Radio" name="radio_6">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>460</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Option 6</string>
+      </property>
+     </widget>
+     <widget class="Element::RadioGroup" name="radioGroup">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>520</y>
+        <width>331</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>GroupBox</string>
+      </property>
+      <widget class="Element::Radio" name="radio_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Option 7</string>
+       </property>
+      </widget>
+      <widget class="Element::Radio" name="radio_8">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>20</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Option 8</string>
+       </property>
+      </widget>
+      <widget class="Element::Radio" name="radio_9">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Option 9</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="Element::CheckboxGroup" name="checkboxGroup">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>230</y>
+        <width>331</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>GroupBox</string>
+      </property>
+      <widget class="Element::Checkbox" name="checkbox_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Beijing</string>
+       </property>
+      </widget>
+      <widget class="Element::Checkbox" name="checkbox_9">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>20</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Shanghai</string>
+       </property>
+      </widget>
+      <widget class="Element::Checkbox" name="checkbox_10">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>20</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Guangzhou</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1897,6 +2195,38 @@
    <class>Element::Upload</class>
    <extends>QWidget</extends>
    <header location="global">upload.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::PopList</class>
+   <extends>QListWidget</extends>
+   <header location="global">autocomplete.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::AutoComplete</class>
+   <extends>QLineEdit</extends>
+   <header location="global">autocomplete.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::CheckboxGroup</class>
+   <extends>QGroupBox</extends>
+   <header location="global">checkbox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Checkbox</class>
+   <extends>QCheckBox</extends>
+   <header location="global">checkbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Radio</class>
+   <extends>QRadioButton</extends>
+   <header location="global">radio.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::RadioGroup</class>
+   <extends>QGroupBox</extends>
+   <header location="global">radio.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

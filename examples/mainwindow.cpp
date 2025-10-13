@@ -22,8 +22,9 @@
 #define DATA 6
 #define PANEL 7
 #define PROGRESS 8
+#define FORM 9
 
-#define CURRENT_INDEX PROGRESS
+#define CURRENT_INDEX FORM
 
 using namespace Element;
 
@@ -47,8 +48,15 @@ MainWindow::MainWindow(QWidget* parent)
     setupTab5();
     setupTab6();
     setupTab7();
+    setupTab8();
+    setupTab9();
 
     ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
+
+    // Important!
+    // Enable to let the focus widget loses focus,
+    // when you clicked the application's background.
+    setFocusPolicy(Qt::ClickFocus);
 }
 
 void MainWindow::setupTabs()
@@ -62,6 +70,7 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(6, Icon::DataBoard);
     ui->tabWidget->setTabIcon(7, Icon::Postcard);
     ui->tabWidget->setTabIcon(8, Icon::Operation);
+    ui->tabWidget->setTabIcon(9, Icon::Odometer);
 }
 
 
@@ -203,6 +212,15 @@ void MainWindow::setupTab4()
     ui->spinBox_2->setSize(InputNumber::Size::Default);
     ui->spinBox_3->setSize(InputNumber::Size::Small);
     ui->spinBox_4->setDisabled(true);
+
+    ui->popList->addItem("Item 1");
+    ui->popList->addItem("Item 2");
+    ui->popList->addItem("Item 3");
+    ui->popList->addItem("Item 4");
+    ui->popList->addItem("Item 5");
+
+    ui->autoComplete->setData({"qt", "vue", "element", "cooking",
+                               "mint-ui", "vuex", "vue-router", "babel"});
 }
 
 void MainWindow::setupTab5()
@@ -373,7 +391,10 @@ void MainWindow::setupTab7()
                     "Consistent within interface: all elements should be consistent, "
                     "such as: design style, icons and texts, position of elements, etc.");
     ui->collapseItem->setCollapse();
+}
 
+void MainWindow::setupTab8()
+{
     CollapseItem* item_1 = new CollapseItem("Consistency", "Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;\nConsistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.", ui->collapse);
     CollapseItem* item_2 = new CollapseItem("Feedback", "Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;\nVisual feedback: reflect current state by updating or rearranging elements of the page.", ui->collapse);
     CollapseItem* item_3 = new CollapseItem("Efficiency", "Simplify the process: keep operating process simple and intuitive;\nDefinite and clear: enunciate your intentions clearly so that the users can quickly understand and make decisions;\nEasy to identify: the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.", ui->collapse);
@@ -398,6 +419,34 @@ void MainWindow::setupTab7()
     connect(ui->upload_2, &Upload::removeRequested, this, [](const QString& path) {
         qDebug() << "received removeRequest:" << path;
     });
+}
+
+void MainWindow::setupTab9()
+{
+    ui->checkbox_1->setSize(Checkbox::Size::Large).setBorder(true);
+    ui->checkbox_2->setSize(Checkbox::Size::Large);
+    ui->checkbox_3->setSize(Checkbox::Size::Default).setBorder(true);
+    ui->checkbox_4->setSize(Checkbox::Size::Default).setChecked(true).setDisabled(true);
+    ui->checkbox_5->setSize(Checkbox::Size::Small).setBorder(true);
+    ui->checkbox_6->setSize(Checkbox::Size::Small);
+
+    ui->checkboxGroup->addCheckbox(ui->checkbox_8)
+                      .addCheckbox(ui->checkbox_9)
+                      .addCheckbox(ui->checkbox_10);
+
+    ui->checkbox_7->setIndeterminate(true).setDisabled(true);
+    ui->checkboxGroup->setMin(1).setMax(2);
+
+    ui->radio_1->setSize(Radio::Size::Large).setBorder(true);
+    ui->radio_2->setSize(Radio::Size::Large);
+    ui->radio_3->setSize(Radio::Size::Default).setBorder(true);
+    ui->radio_4->setSize(Radio::Size::Default).setChecked(true).setDisabled(true);
+    ui->radio_5->setSize(Radio::Size::Small).setBorder(true);
+    ui->radio_6->setSize(Radio::Size::Small);
+
+    ui->radioGroup->addRadio(ui->radio_7)
+                   .addRadio(ui->radio_8)
+                   .addRadio(ui->radio_9);
 }
 
 MainWindow::~MainWindow()

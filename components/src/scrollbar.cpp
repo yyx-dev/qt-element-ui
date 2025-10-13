@@ -1,15 +1,10 @@
 #include "scrollbar.h"
 
-
 namespace Element
 {
-    ScrollBar::ScrollBar() {}
 
-    void ScrollBar::setScrollBar(QApplication* app)
+    void ScrollBar::setAppScrollBar(QApplication* app)
     {
-        if (!app)
-            return;
-
         app->setStyleSheet(R"(
             QScrollBar {
                 background-color: transparent;
@@ -66,6 +61,11 @@ namespace Element
                 height: 0px;
             }
         )");
+    }
+
+    void ScrollBar::setInputTextScrollBar(InputText* inputText)
+    {
+        Q_UNUSED(inputText);
     }
 
 }

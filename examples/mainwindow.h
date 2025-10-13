@@ -23,6 +23,8 @@ public:
     void setupTab5();
     void setupTab6();
     void setupTab7();
+    void setupTab8();
+    void setupTab9();
 
 private:
     Ui::MainWindow *ui;

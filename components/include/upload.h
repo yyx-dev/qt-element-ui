@@ -42,12 +42,12 @@ namespace Element
         bool _isDrag = false;
     };
 
-    class ItemWidget : public QWidget
+    class FileListItemWidget : public QWidget
     {
     Q_OBJECT
 
     public:
-        ItemWidget(QListWidgetItem* item, const QString& path);
+        FileListItemWidget(QListWidgetItem* item, const QString& path);
 
     signals:
         void removeRequested(QListWidgetItem* item, const QString& path);

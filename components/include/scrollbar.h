@@ -1,5 +1,7 @@
 #pragma once
 
+#include "inputtext.h"
+
 #include <QApplication>
 
 namespace Element
@@ -8,8 +10,8 @@ namespace Element
     class ScrollBar
     {
     public:
-        ScrollBar();
-        static void setScrollBar(QApplication* app);
+        static void setAppScrollBar(QApplication* app);
+        static void setInputTextScrollBar(InputText* inputText);
     };
 
 }
