@@ -6,6 +6,10 @@
 
 ---
 
+<img src="./images/text-example.png"  />
+
+---
+
 <img src="./images/button-example.png"  />
 
 ---
@@ -27,3 +31,7 @@
 ---
 
 <img src="./images/progress-example.png"  />
+
+---
+
+<img src="./images/form-example.png"  />

@@ -83,20 +83,28 @@ void MainWindow::setupTab0()
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
 
-    ui->shadow_1->setStyleSheet("border: none; ");
-    ui->shadow_2->setStyleSheet("border: none; ");
-    ui->shadow_3->setStyleSheet("border: none; ");
-    ui->shadow_4->setStyleSheet("border: none; ");
+    auto setStyle = [](QWidget* widget) {
+        QFont font = widget->font();
+        font.setFamilies(CommonVar::fontFmailies);
+        font.setPointSize(10);
+        widget->setFont(font);
+        widget->setStyleSheet("border: none; color: #303133;");
+    };
+
+    setStyle(ui->shadow_1);
+    setStyle(ui->shadow_2);
+    setStyle(ui->shadow_3);
+    setStyle(ui->shadow_4);
 
     ui->shadow_1->setReadOnly(true);
     ui->shadow_2->setReadOnly(true);
     ui->shadow_3->setReadOnly(true);
     ui->shadow_4->setReadOnly(true);
 
-    ui->shadow_1->appendPlainText("\n\n\n      Shadow Basic");
-    ui->shadow_2->appendPlainText("\n\n\n      Shadow Light");
-    ui->shadow_3->appendPlainText("\n\n\n     Shadow Lighter");
-    ui->shadow_4->appendPlainText("\n\n\n      Shadow Dark");
+    ui->shadow_1->appendPlainText("\n\n      Shadow Basic");
+    ui->shadow_2->appendPlainText("\n\n      Shadow Light");
+    ui->shadow_3->appendPlainText("\n\n     Shadow Lighter");
+    ui->shadow_4->appendPlainText("\n\n      Shadow Dark");
 
     Shadow::setShadow(ui->shadow_1, Shadow::Type::Basic);
     Shadow::setShadow(ui->shadow_2, Shadow::Type::Light);
