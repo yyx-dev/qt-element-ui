@@ -302,7 +302,6 @@ namespace Element
         }
         else if (_showScore)
         {
-            qDebug() << value;
             _text->setText(QString::number((value / 10.0) * (_max / 50)) + " points");
             _text->setColor(color);
             _text->show();

@@ -458,7 +458,8 @@ void MainWindow::setupTab9()
 
     ui->rate->setSize(Rate::Size::Default);
 //    ui->rate->setDisabled(true);
-    ui->rate->setShowScore(true);
+    ui->rate->setShowText(true);
+//    ui->rate->setShowScore(true);
 //    ui->rate->setAllowHalf(true);
     ui->rate->setTexts("oops", "disappointed", "normal", "good", "great");
 }
