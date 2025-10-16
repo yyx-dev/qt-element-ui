@@ -455,6 +455,12 @@ void MainWindow::setupTab9()
     ui->radioGroup->addRadio(ui->radio_7)
                    .addRadio(ui->radio_8)
                    .addRadio(ui->radio_9);
+
+    ui->rate->setSize(Rate::Size::Default);
+//    ui->rate->setDisabled(true);
+    ui->rate->setShowScore(true);
+//    ui->rate->setAllowHalf(true);
+    ui->rate->setTexts("oops", "disappointed", "normal", "good", "great");
 }
 
 MainWindow::~MainWindow()

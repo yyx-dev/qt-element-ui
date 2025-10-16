@@ -2000,7 +2000,7 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>520</y>
+        <y>510</y>
         <width>331</width>
         <height>61</height>
        </rect>
@@ -2099,6 +2099,16 @@
         <string>Guangzhou</string>
        </property>
       </widget>
+     </widget>
+     <widget class="Element::Rate" name="rate" native="true">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>610</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>
@@ -2227,6 +2237,12 @@
    <class>Element::RadioGroup</class>
    <extends>QGroupBox</extends>
    <header location="global">radio.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Rate</class>
+   <extends>QWidget</extends>
+   <header location="global">rate.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
