@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tools/qsshelper.h"
+#include "base.h"
 #include "color.h"
 
 #include <QString>
@@ -90,4 +90,3 @@ namespace Element
 
     inline QHash<Message::Place, int> Message::_count;
 }
-

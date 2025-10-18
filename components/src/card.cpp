@@ -1,10 +1,10 @@
 #include "card.h"
 #include "shadow.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QPainter>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -56,13 +56,13 @@ namespace Element
         _footer->setWordWrap(true);
 
         QFont font = _header->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _header->setFont(font);
 
         font = _footer->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _footer->setFont(font);
 
         _mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -110,8 +110,8 @@ namespace Element
             label->setWordWrap(true);
 
             QFont font = label->font();
-            font.setFamilies(CommonVar::fontFmailies);
-            font.setPointSize(10);
+            font.setFamilies(Comm::fontFmailies);
+            font.setPointSize(Comm::defaultFontSize);
             label->setFont(font);
 
             bodyLayout->addWidget(label);

@@ -1,12 +1,12 @@
 #include "message.h"
-#include "tools/commvar.h"
+#include "base.h"
 #include "icon.h"
 
 #include <QBoxLayout>
 #include <QPainter>
 #include <QTimer>
 #include <QHash>
-#include <QDebug>
+
 
 
 namespace Element
@@ -36,8 +36,8 @@ namespace Element
         setAttribute(Qt::WA_DeleteOnClose);
 
         QFont font = _text->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _text->setFont(font);
 
         QHBoxLayout *layout = new QHBoxLayout(this);
@@ -237,4 +237,3 @@ namespace Element
         QWidget::paintEvent(event);
     }
 }
-

@@ -1,13 +1,12 @@
 #include "mainwindow.h"
+
 #include "scrollbar.h"
 #include "color.h"
 #include "icon.h"
-#include "tools/fontmanager.h"
-#include "tools/logger.h"
-#include "tools/dpiscaler.h"
+#include "base.h"
 
 #include <QApplication>
-#include <QDebug>
+
 
 int main(int argc, char* argv[])
 {

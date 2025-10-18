@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tools/qsshelper.h"
+#include "base.h"
 #include "color.h"
 #include "text.h"
 
@@ -83,4 +83,3 @@ namespace Element
 
     inline QHash<Notification::Position, int> Notification::_count;
 }
-

@@ -1,9 +1,9 @@
 #include "sidebar.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QPainter>
-#include <QDebug>
+
 #include <QStyleOptionTab>
 #include <QMouseEvent>
 
@@ -13,7 +13,7 @@ namespace Element
         : QTabBar(parent), _isSubMenu(isSubMenu)
     {
         QFont font;
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setPointSize(9);
         setFont(font);
         setMouseTracking(true);

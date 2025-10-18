@@ -8,10 +8,9 @@
 
 #include "inputline.h"
 #include "color.h"
-#include "tools/commvar.h"
-#include "tools/logger.h"
+#include "base.h"
 
-#include <QDebug>
+
 #include <QApplication>
 #include <QMargins>
 #include <QAction>
@@ -95,7 +94,7 @@ namespace Element
             height = 30;
         }
 
-        _qssHelper.setProperty("QLineEdit", "font-family", CommonVar::fontFmaily)
+        _qssHelper.setProperty("QLineEdit", "font-family", Comm::fontFmaily)
                 .setProperty("QLineEdit", "font-size", fontSize)
                 .setProperty("QLineEdit", "color", Color::regularText())
                 .setProperty("QLineEdit", "background", Color::baseBackground())
@@ -126,7 +125,7 @@ namespace Element
             return setSuffixIcon(icon, []{});
 
         _suffixAction->setIcon(
-            Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
+            Icon::instance().getIcon(icon, Color::placeholderText(), _iconSize));
         _suffixIcon = icon;
 
         return *this;
@@ -149,7 +148,7 @@ namespace Element
                 setSuffixIcon(Icon::None);
 
             _suffixAction = new QAction(
-                Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
+                Icon::instance().getIcon(icon, Color::placeholderText(), _iconSize),
                 "", this);
             connect(_suffixAction, &QAction::triggered, callback);
             addAction(_suffixAction, QLineEdit::TrailingPosition);
@@ -170,7 +169,7 @@ namespace Element
             return setPrefixIcon(icon, []{});
 
         _prefixAction->setIcon(
-            Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize));
+            Icon::instance().getIcon(icon, Color::placeholderText(), _iconSize));
         _prefixIcon = icon;
 
         return *this;
@@ -193,7 +192,7 @@ namespace Element
                 setPrefixIcon(Icon::None);
 
             _prefixAction = new QAction(
-                        Icon::instance().getIcon(icon, Color::placeholderText(), CommonVar::inputIconSize),
+                        Icon::instance().getIcon(icon, Color::placeholderText(), _iconSize),
                         "", this);
             connect(_prefixAction, &QAction::triggered, callback);
             addAction(_prefixAction, QLineEdit::LeadingPosition);
@@ -224,7 +223,7 @@ namespace Element
             {
                 _maxLengthLabel = new QLabel(this);
                 QSSHelper qssHelper;
-                qssHelper.setProperty("QLabel", "font-family", CommonVar::fontFmaily)
+                qssHelper.setProperty("QLabel", "font-family", Comm::fontFmaily)
                         .setProperty("QLabel", "font-size", "14px")
                         .setProperty("QLabel", "color", Color::secondaryText())
                         .setProperty("QLabel", "background", Color::baseBackground());
@@ -420,7 +419,7 @@ namespace Element
             _prefixAction->setIcon(Icon::instance().getIcon(
                 _prefixIcon,
                 isPrefixHovered ? Color::secondaryText() : Color::placeholderText(),
-                CommonVar::inputIconSize));
+                _iconSize));
 
             if (isPrefixHovered)
                 QApplication::setOverrideCursor(Qt::PointingHandCursor);
@@ -434,7 +433,7 @@ namespace Element
             _suffixAction->setIcon(Icon::instance().getIcon(
                 _suffixIcon,
                 isSuffixHovered ? Color::secondaryText() : Color::placeholderText(),
-                CommonVar::inputIconSize));
+                _iconSize));
 
             if (isSuffixHovered)
                 QApplication::setOverrideCursor(Qt::PointingHandCursor);

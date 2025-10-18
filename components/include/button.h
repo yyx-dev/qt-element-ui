@@ -7,7 +7,7 @@
 #pragma once
 
 #include "icon.h"
-#include "tools/qsshelper.h"
+#include "base.h"
 
 #include <QString>
 #include <QPushButton>

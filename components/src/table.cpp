@@ -1,11 +1,11 @@
 #include "table.h"
 
-#include "tools/commvar.h"
+#include "base.h"
 #include "color.h"
 
 #include <QHeaderView>
 #include <QEvent>
-#include <QDebug>
+
 #include <QMouseEvent>
 #include <QPainter>
 #include <QItemSelectionModel>
@@ -83,14 +83,14 @@ namespace Element
         setSelectionMode(QAbstractItemView::SingleSelection);
 
         QFont font = horizontalHeader()->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setWeight(CommonVar::boldFontWeight);
+        font.setFamilies(Comm::fontFmailies);
+        font.setBold(true);
         font.setPointSize(9);
         horizontalHeader()->setFont(font);
 
         font = QTableWidget::font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         setFont(font);
 
         viewport()->installEventFilter(this);

@@ -1,10 +1,10 @@
 #include "rate.h"
 
-#include "tools/commvar.h"
+#include "base.h"
 #include "color.h"
 #include "icon.h"
 
-#include <QDebug>
+
 #include <QtMath>
 
 namespace Element

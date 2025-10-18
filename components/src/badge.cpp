@@ -1,7 +1,7 @@
 #include "badge.h"
-#include "tools/commvar.h"
+#include "base.h"
 
-#include <QDebug>
+
 
 namespace Element
 {
@@ -20,7 +20,7 @@ namespace Element
         setAlignment(Qt::AlignCenter);
 
         QFont font = QLabel::font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setBold(true);
         font.setPointSize(7);
 

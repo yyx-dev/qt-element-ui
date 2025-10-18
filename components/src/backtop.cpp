@@ -2,12 +2,12 @@
 #include "icon.h"
 #include "color.h"
 #include "shadow.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QPainter>
 #include <QMouseEvent>
 #include <QScrollBar>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -120,10 +120,10 @@ namespace Element
         else
         {
             QFont font = QLabel::font();
-            font.setFamilies(CommonVar::fontFmailies);
+            font.setFamilies(Comm::fontFmailies);
             font.setBold(true);
             if (_size == Size::Default || _size == Size::Large) font.setPointSize(14);
-            else if (_size == Size::Small) font.setPointSize(10);
+            else if (_size == Size::Small) font.setPointSize(Comm::defaultFontSize);
 
             painter.setPen(Color::primary());
             painter.setFont(font);

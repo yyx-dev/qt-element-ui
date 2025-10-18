@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tools/qsshelper.h"
+#include "base.h"
 #include "text.h"
 
 #include <QWidget>

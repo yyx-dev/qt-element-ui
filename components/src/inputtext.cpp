@@ -1,11 +1,10 @@
 #include "inputtext.h"
 #include "color.h"
-#include "tools/commvar.h"
-#include "tools/logger.h"
+#include "base.h"
 
 #include <QApplication>
 #include <QPainter>
-#include <QDebug>
+
 #include <QMouseEvent>
 #include <QtMath>
 
@@ -17,7 +16,7 @@ namespace Element
     {
         setPlaceholderText(placeholder);
 
-        _qssHelper.setProperty("QTextEdit", "font-family", CommonVar::fontFmaily)
+        _qssHelper.setProperty("QTextEdit", "font-family", Comm::fontFmaily)
                 .setProperty("QTextEdit", "font-size", "16px")
                 .setProperty("QTextEdit", "color", Color::regularText())
                 .setProperty("QTextEdit", "background", Color::baseBackground())
@@ -95,7 +94,7 @@ namespace Element
             {
                 _maxLengthLabel = new QLabel(this);
                 QSSHelper qssHelper;
-                qssHelper.setProperty("QLabel", "font-family", CommonVar::fontFmaily)
+                qssHelper.setProperty("QLabel", "font-family", Comm::fontFmaily)
                         .setProperty("QLabel", "font-size", "14px")
                         .setProperty("QLabel", "color", Color::secondaryText())
                         .setProperty("QLabel", "background", Color::baseBackground());

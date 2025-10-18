@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tools/qsshelper.h"
+#include "base.h"
 #include "icon.h"
 
 #include <QLineEdit>
@@ -63,6 +63,21 @@ namespace Element
         InputLine(QWidget* parent = nullptr);
         InputLine(const QString& placeholder, QWidget* parent = nullptr);
 
+    protected:
+        void onTextChanged(const QString &text);
+
+        void focusInEvent(QFocusEvent *event) override;
+        void focusOutEvent(QFocusEvent *event) override;
+        void enterEvent(QEvent *event) override;
+        void leaveEvent(QEvent *event) override;
+        void mouseMoveEvent(QMouseEvent *event) override;
+
+    private:
+        void clearableChecker();
+        void showPasswordChecker();
+        void maxLengthChecker();
+        QString placeholderText();
+
     private:
         Size _size = Size::Default;
 
@@ -85,21 +100,6 @@ namespace Element
         bool _isPrefixHovered = false;
         bool _isSuffixHovered = false;
 
-    private:
-        void clearableChecker();
-        void showPasswordChecker();
-        void maxLengthChecker();
-
-    protected:
-        void onTextChanged(const QString &text);
-
-        void focusInEvent(QFocusEvent *event) override;
-        void focusOutEvent(QFocusEvent *event) override;
-        void enterEvent(QEvent *event) override;
-        void leaveEvent(QEvent *event) override;
-        void mouseMoveEvent(QMouseEvent *event) override;
-
-    private:
-        QString placeholderText();
+        int _iconSize = 20;
     };
 }

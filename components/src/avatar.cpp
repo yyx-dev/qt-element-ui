@@ -1,9 +1,9 @@
 #include "avatar.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QPainter>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -111,10 +111,10 @@ namespace Element
         else if (_type == Type::Text)
         {
             QFont font = QLabel::font();
-            font.setFamilies(CommonVar::fontFmailies);
+            font.setFamilies(Comm::fontFmailies);
             font.setBold(true);
-            if (_size == Size::Default || _size == Size::Large) font.setPointSize(10);
-            else if (_size == Size::Small) font.setPointSize(8);
+            if (_size == Size::Default || _size == Size::Large) font.setPointSize(Comm::defaultFontSize);
+            else if (_size == Size::Small) font.setPointSize(Comm::smallFontSize);
 
             painter.setPen(Qt::white);
             painter.setFont(font);

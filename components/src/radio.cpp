@@ -1,10 +1,10 @@
 #include "radio.h"
 
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QApplication>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -21,7 +21,7 @@ namespace Element
         : QRadioButton(text, parent)
     {
         QFont font = QRadioButton::font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setPixelSize(16);
         QRadioButton::setFont(font);
 

@@ -1,10 +1,10 @@
 #include "checkbox.h"
 
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QApplication>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -20,7 +20,7 @@ namespace Element
         : QCheckBox(text, parent)
     {
         QFont font = QCheckBox::font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setPixelSize(16);
         QCheckBox::setFont(font);
 

@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>4</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -1027,6 +1027,19 @@
         <width>113</width>
         <height>21</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="button_63">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>340</y>
+        <width>94</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Default</string>
       </property>
      </widget>
     </widget>

@@ -2,10 +2,10 @@
 
 #include "color.h"
 #include "icon.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QEvent>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -24,7 +24,7 @@ namespace Element
         , _layout(new QHBoxLayout(this))
     {
         QFont font = _textLabel->font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setPointSize(9);
 
         _textLabel->setFont(font);

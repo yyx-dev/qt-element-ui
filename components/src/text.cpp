@@ -1,8 +1,8 @@
 #include "text.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
-#include <QDebug>
+
 #include <QFont>
 
 namespace Element
@@ -20,8 +20,8 @@ namespace Element
         , _type(type)
     {
         QFont font = QLabel::font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setWeight(CommonVar::regularFontWeight);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         QLabel::setFont(font);
 
         QLabel::setWordWrap(true);
@@ -67,11 +67,11 @@ namespace Element
     {
         _size = size;
         if (size == Size::Default)
-            setFontSize(10);
+            setFontSize(Comm::defaultFontSize);
         else if (size == Size::Large)
-            setFontSize(12);
+            setFontSize(Comm::largeFontSize);
         else if (size == Size::Small)
-            setFontSize(9);
+            setFontSize(Comm::smallFontSize);
 
         QLabel::adjustSize();
         return *this;

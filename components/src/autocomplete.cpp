@@ -1,10 +1,10 @@
 #include "autocomplete.h"
 
-#include "tools/commvar.h"
+#include "base.h"
 #include "color.h"
 #include "shadow.h"
 
-#include <QDebug>
+
 #include <QBoxLayout>
 #include <QMouseEvent>
 
@@ -21,7 +21,7 @@ namespace Element
         layout->addWidget(_label);
 
         QFont font = _label->font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setPixelSize(16);
         _label->setFont(font);
 

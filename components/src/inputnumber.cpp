@@ -1,10 +1,10 @@
 #include "inputnumber.h"
 
-#include "tools/commvar.h"
+#include "base.h"
 #include "color.h"
 
 #include <QLineEdit>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -57,7 +57,7 @@ namespace Element
             buttonWidth = "32px", buttonHeight = "30px";
         }
 
-        _qssHelper.setProperty("QSpinBox", "font-family", CommonVar::fontFmaily)
+        _qssHelper.setProperty("QSpinBox", "font-family", Comm::fontFmaily)
             .setProperty("QSpinBox", "font-size", fontSize)
             .setProperty("QSpinBox", "color", Color::regularText())
             .setProperty("QSpinBox", "background", Color::baseBackground())

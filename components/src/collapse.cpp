@@ -2,11 +2,11 @@
 
 #include "icon.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
 #include <QPainter>
 #include <QMouseEvent>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -27,13 +27,13 @@ namespace Element
     {
         QFont font = _title->font();
         font.setPointSize(9);
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setBold(true);
         _title->setFont(font);
 
         font = _content->font();
         font.setPointSize(9);
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         _content->setFont(font);
 
         _title->setFixedHeight(60);

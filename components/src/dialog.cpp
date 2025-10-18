@@ -1,7 +1,7 @@
 #include "dialog.h"
 
 #include <QBoxLayout>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -79,4 +79,3 @@ namespace Element
         }
     }
 }
-

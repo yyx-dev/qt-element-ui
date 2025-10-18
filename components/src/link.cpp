@@ -1,8 +1,8 @@
 #include "link.h"
 #include "color.h"
-#include "tools/commvar.h"
+#include "base.h"
 
-#include <QDebug>
+
 #include <QApplication>
 
 namespace Element
@@ -14,8 +14,8 @@ namespace Element
         , _underline(Underline::Default)
     {
         QFont font;
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(CommonVar::defaultFontSize);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         font.setBold(true);
         QLabel::setFont(font);
 

@@ -9,9 +9,10 @@
 #include "notification.h"
 #include "badge.h"
 #include "shadow.h"
+#include "tooltip.h"
 
-#include <QGraphicsDropShadowEffect>
 #include <QDebug>
+#include <QTimer>
 
 #define TEXT 0
 #define BUTTON 1
@@ -24,7 +25,7 @@
 #define PROGRESS 8
 #define FORM 9
 
-#define CURRENT_INDEX FORM
+#define CURRENT_INDEX INPUT
 
 using namespace Element;
 
@@ -73,7 +74,6 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(9, Icon::Odometer);
 }
 
-
 void MainWindow::setupTab0()
 {
     ui->defaultText->setType(Text::Type::Default).setSize(Text::Size::Large);
@@ -85,8 +85,8 @@ void MainWindow::setupTab0()
 
     auto setStyle = [](QWidget* widget) {
         QFont font = widget->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         widget->setFont(font);
         widget->setStyleSheet("border: none; color: #303133;");
     };
@@ -229,6 +229,15 @@ void MainWindow::setupTab4()
 
     ui->autoComplete->setData({"qt", "vue", "element", "cooking",
                                "mint-ui", "vuex", "vue-router", "babel"});
+
+
+    ui->button_63->setText("Tooltip");
+    Tooltip* tooltip = new Tooltip("test tooltip", ui->button_63);
+
+    tooltip->setEffect(Tooltip::Effect::Dark);
+    tooltip->setPlacement(Tooltip::Placement::Top);
+    tooltip->setTrigger(Tooltip::Trigger::Hover);
+
 }
 
 void MainWindow::setupTab5()
@@ -468,4 +477,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-

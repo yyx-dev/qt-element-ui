@@ -1,6 +1,5 @@
 #include "icon.h"
-#include "tools/commvar.h"
-#include "tools/logger.h"
+#include "base.h"
 #include "color.h"
 
 #include <QSvgRenderer>
@@ -9,7 +8,7 @@
 #include <QPainter>
 #include <QApplication>
 #include <QDir>
-#include <QDebug>
+
 
 namespace Element
 {

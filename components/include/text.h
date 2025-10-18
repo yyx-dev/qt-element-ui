@@ -5,7 +5,7 @@
  * */
 #pragma once
 
-#include "tools/qsshelper.h"
+#include "base.h"
 
 #include <QString>
 #include <QLabel>

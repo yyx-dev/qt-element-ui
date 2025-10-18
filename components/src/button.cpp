@@ -1,10 +1,10 @@
 #include "button.h"
 #include "color.h"
 #include "icon.h"
-#include "tools/commvar.h"
-#include "tools/logger.h"
+#include "base.h"
 
-#include <QDebug>
+
+
 #include <QApplication>
 
 using namespace std;
@@ -25,7 +25,7 @@ namespace Element
                  font-weight: bold;
              }
          )");
-        _qsshelper.setProperty("QPushButton", "font-family", CommonVar::fontFmaily);
+        _qsshelper.setProperty("QPushButton", "font-family", Comm::fontFmaily);
         QPushButton::setStyleSheet(_qsshelper.generate());
 
         setStyle(Button::Style::Default);
@@ -544,13 +544,13 @@ namespace Element
 
         if (_type == Type::Default)
         {
-            QIcon icon = Icon::instance().getIcon(name, Color::regularText(), CommonVar::buttonIconSize);
+            QIcon icon = Icon::instance().getIcon(name, Color::regularText(), _iconSize);
             QPushButton::setIcon(icon);
             QPushButton::setIconSize(QSize(_iconSize, _iconSize));
         }
         else
         {
-            QIcon icon = Icon::instance().getIcon(name, Color::blankFill(), CommonVar::buttonIconSize);
+            QIcon icon = Icon::instance().getIcon(name, Color::blankFill(), _iconSize);
             QPushButton::setIcon(icon);
             QPushButton::setIconSize(QSize(_iconSize, _iconSize));
         }

@@ -11,32 +11,26 @@ RES = resources
 
 HEADERS += \
     $$files($$EXM/*.h) \
-    $$files($$INC/*.h) \
-    $$files($$INC/tools/*.h) \
-
+    $$files($$INC/*.h)
 
 SOURCES += \
     $$files($$EXM/*.cpp) \
-    $$files($$SRC/*.cpp) \
-    $$files($$SRC/tools/*.cpp) \
+    $$files($$SRC/*.cpp)
 
 FORMS += \
     $$files($$EXM/*.ui)
 
-
 RESOURCES += \
     $$files($$RES/*.qrc)
-
 
 INCLUDEPATH += \
     $$EXM \
     $$INC
 
+TRANSLATIONS += \
+    $$files($$RES/locales/*.ts)
 
 win32 {
     LIBS += -lgdi32
 }
 
-
-TRANSLATIONS += \
-    $$files($$RES/locales/*.ts)

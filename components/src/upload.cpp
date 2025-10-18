@@ -2,12 +2,11 @@
 
 #include "icon.h"
 #include "color.h"
-#include "tools/commvar.h"
-#include "tools/logger.h"
+#include "base.h"
 
 #include <QFileInfo>
 #include <QMimeData>
-#include <QDebug>
+
 #include <QBoxLayout>
 #include <QPainter>
 #include <QFileDialog>
@@ -34,8 +33,8 @@ namespace Element
         _dropTip->setAlignment(Qt::AlignCenter);
 
         QFont font = _dropTip->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _dropTip->setFont(font);
 
         QVBoxLayout* layout = new QVBoxLayout(this);
@@ -207,8 +206,8 @@ namespace Element
         _name->setStyleSheet("QLabel { color: #606266; }");
 
         QFont font = _name->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _name->setFont(font);
 
         QHBoxLayout* layout = new QHBoxLayout(this);

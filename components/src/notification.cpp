@@ -1,5 +1,5 @@
 #include "notification.h"
-#include "tools/commvar.h"
+#include "base.h"
 #include "icon.h"
 
 #include <QBoxLayout>
@@ -8,7 +8,7 @@
 #include <QHash>
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
-#include <QDebug>
+
 
 
 namespace Element
@@ -59,15 +59,15 @@ namespace Element
     void Notification::setupUI()
     {
         QFont font = _title->font();
-        font.setFamilies(CommonVar::fontFmailies);
+        font.setFamilies(Comm::fontFmailies);
         font.setBold(true);
-        font.setPointSize(12);
+        font.setPointSize(Comm::largeFontSize);
         _title->setFont(font);
         _title->adjustSize();
 
         font = _content->font();
-        font.setFamilies(CommonVar::fontFmailies);
-        font.setPointSize(10);
+        font.setFamilies(Comm::fontFmailies);
+        font.setPointSize(Comm::defaultFontSize);
         _content->setFont(font);
         _content->setWordWrap(true);
         _content->adjustSize();
@@ -229,4 +229,3 @@ namespace Element
         return QWidget::eventFilter(watched, event);
     }
 }
-

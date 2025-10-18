@@ -1,7 +1,6 @@
 #pragma once
 
-#include "tools/qsshelper.h"
-#include "tools/commvar.h"
+#include "base.h"
 #include "text.h"
 #include "shadow.h"
 
@@ -14,7 +13,7 @@
 #include <QStyleOptionMenuItem>
 #include <QPaintEvent>
 #include <QProxyStyle>
-#include <QDebug>
+
 
 
 namespace Element

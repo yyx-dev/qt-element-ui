@@ -3,7 +3,7 @@
 #include "color.h"
 
 #include <QBoxLayout>
-#include <QDebug>
+
 
 namespace Element
 {
@@ -98,8 +98,8 @@ namespace Element
             })");
 
         QFont menuFont;
-        menuFont.setFamilies(CommonVar::fontFmailies);
-        menuFont.setPointSize(10);
+        menuFont.setFamilies(Comm::fontFmailies);
+        menuFont.setPointSize(Comm::defaultFontSize);
         setFont(menuFont);
 
         setAttribute(Qt::WA_Hover);
