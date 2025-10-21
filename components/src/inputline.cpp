@@ -55,7 +55,7 @@ namespace Element
         return *this;
     }
 
-    bool InputLine::getDisabled()
+    bool InputLine::isDisabled()
     {
         return !QLineEdit::isEnabled();
     }
@@ -133,7 +133,7 @@ namespace Element
 
     InputLine& InputLine::setSuffixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
-        if (icon == Icon::None)
+        if (Icon::isNull(icon))
         {
             if (_suffixAction)
             {
@@ -177,7 +177,7 @@ namespace Element
 
     InputLine& InputLine::setPrefixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
-        if (icon == Icon::None)
+        if (Icon::isNull(icon))
         {
             if (_prefixAction)
             {

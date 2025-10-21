@@ -18,14 +18,14 @@ namespace Element
         enum class Size { Large, Default, Small };
 
     public:
-        Checkbox& setValue(const QString& value);
-        QString getValue();
+        Checkbox& setValue(const QVariant& value);
+        QVariant getValue();
 
         Checkbox& setText(const QString& text);
         QString getText();
 
         Checkbox& setDisabled(bool disabled);
-        bool getDisabled();
+        bool isDisabled();
 
         Checkbox& setSize(Size size);
         Size getSize();
@@ -52,7 +52,7 @@ namespace Element
         void leaveEvent(QEvent* event) override;
 
     private:
-        QString _value;
+        QVariant _value;
         Size _size = Size::Default;
         bool _border = false;
 
@@ -73,7 +73,7 @@ namespace Element
         Size getSize();
 
         CheckboxGroup& setDisabled(bool disabled);
-        bool getDisabled();
+        bool isDisabled();
 
         CheckboxGroup& setMin(int min);
         int getMin();

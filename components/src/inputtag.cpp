@@ -40,7 +40,7 @@ namespace Element
 
 //    }
 
-//    bool getDisabled()
+//    bool isDisabled()
 //    {
 
 //    }

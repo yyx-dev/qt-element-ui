@@ -192,7 +192,7 @@ namespace Element
         return *this;
     }
 
-    bool Rate::getDisabled()
+    bool Rate::isDisabled()
     {
         return !QWidget::isEnabled();
     }
@@ -212,7 +212,7 @@ namespace Element
 
     bool Rate::eventFilter(QObject* obj, QEvent* event)
     {
-        if (getDisabled())
+        if (isDisabled())
             return QWidget::eventFilter(obj, event);
 
         if (event->type() != QEvent::MouseMove
@@ -276,7 +276,7 @@ namespace Element
             }
             else
             {
-                if (getDisabled())
+                if (isDisabled())
                     _stars[i]->load(Icon::instance().getCodeArray(Icon::StarFilled, Color::baseFill()));
                 else
                     _stars[i]->load(Icon::instance().getCodeArray(Icon::Star, Color::darkBorder()));

@@ -224,15 +224,15 @@ namespace Element
 
         // 绘制圆角背景
         QPainterPath path;
-        path.addRoundedRect(rect().adjusted(1, 1, -1, -1), 4, 4, Qt::AbsoluteSize);
+        path.addRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
         painter.setClipPath(path);
 
         // 填充背景
         painter.fillPath(path, QColor(getBackgroundColor()));
 
         // 绘制边框
-        painter.setPen(QPen(QColor(getBorderColor()), 1));
-        painter.drawRoundedRect(rect().adjusted(1, 1, -1, -1), 4, 4, Qt::AbsoluteSize);
+        painter.setPen(QPen(QColor(getBorderColor()), 2));
+        painter.drawRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
 
         QWidget::paintEvent(event);
     }

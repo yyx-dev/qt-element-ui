@@ -69,10 +69,10 @@ namespace Element
         Button& setSize(Size size);
 
 
-        bool getDisabled();
+        bool isDisabled();
         Button& setDisabled(bool disabled);
 
-        bool getLoading();
+        bool isLoading();
         Button& setLoading(bool loading);
 
         QPair<Icon::Name, IconPosition> getIcon();

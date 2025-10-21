@@ -20,8 +20,7 @@ namespace Element
     Radio::Radio(const QString& text, bool checked, QWidget* parent)
         : QRadioButton(text, parent)
     {
-        QFont font = QRadioButton::font();
-        font.setFamilies(Comm::fontFmailies);
+        QFont font = FontManager::font();
         font.setPixelSize(16);
         QRadioButton::setFont(font);
 
@@ -45,13 +44,13 @@ namespace Element
         setCursor(Qt::PointingHandCursor);
     }
 
-    Radio& Radio::setValue(const QString& value)
+    Radio& Radio::setValue(const QVariant& value)
     {
         _value = value;
         return *this;
     }
 
-    QString Radio::getValue()
+    QVariant Radio::getValue()
     {
         return _value;
     }
@@ -73,7 +72,7 @@ namespace Element
         return *this;
     }
 
-    bool Radio::getDisabled()
+    bool Radio::isDisabled()
     {
         return !QRadioButton::isEnabled();
     }
@@ -228,7 +227,7 @@ namespace Element
         return *this;
     }
 
-    bool RadioGroup::getDisabled()
+    bool RadioGroup::isDisabled()
     {
         return !QGroupBox::isEnabled();
     }

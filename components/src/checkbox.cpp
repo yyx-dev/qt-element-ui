@@ -19,8 +19,7 @@ namespace Element
     Checkbox::Checkbox(const QString& text, bool checked, QWidget* parent)
         : QCheckBox(text, parent)
     {
-        QFont font = QCheckBox::font();
-        font.setFamilies(Comm::fontFmailies);
+        QFont font = FontManager::font();
         font.setPixelSize(16);
         QCheckBox::setFont(font);
 
@@ -49,13 +48,13 @@ namespace Element
         setCursor(Qt::PointingHandCursor);
     }
 
-    Checkbox& Checkbox::setValue(const QString& value)
+    Checkbox& Checkbox::setValue(const QVariant& value)
     {
         _value = value;
         return *this;
     }
 
-    QString Checkbox::getValue()
+    QVariant Checkbox::getValue()
     {
         return _value;
     }
@@ -77,7 +76,7 @@ namespace Element
         return *this;
     }
 
-    bool Checkbox::getDisabled()
+    bool Checkbox::isDisabled()
     {
         return !QCheckBox::isEnabled();
     }
@@ -249,7 +248,7 @@ namespace Element
         return *this;
     }
 
-    bool CheckboxGroup::getDisabled()
+    bool CheckboxGroup::isDisabled()
     {
         return !QGroupBox::isEnabled();
     }

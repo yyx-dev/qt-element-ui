@@ -1,11 +1,13 @@
 #include "scrollbar.h"
 
+#include <QApplication>
+
 namespace Element
 {
 
-    void ScrollBar::setAppScrollBar(QApplication* app)
+    void ScrollBar::setAppScrollBar()
     {
-        app->setStyleSheet(R"(
+        qApp->setStyleSheet(R"(
             QScrollBar {
                 background-color: transparent;
                 width: 10px;

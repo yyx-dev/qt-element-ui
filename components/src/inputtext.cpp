@@ -63,7 +63,7 @@ namespace Element
         return *this;
     }
 
-    bool InputText::getDisabled()
+    bool InputText::isDisabled()
     {
         return !QTextEdit::isEnabled();
     }

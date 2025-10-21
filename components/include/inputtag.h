@@ -44,7 +44,7 @@ namespace Element
 
 //        InputTag& setCollapse(int visiableCount, bool tooltipVisiable);
 
-//        bool getDisabled();
+//        bool isDisabled();
 //        InputTag& setDisabled(bool disabled);
 
 //        Effect getEffect();

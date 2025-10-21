@@ -19,7 +19,7 @@ namespace Element
         : QLabel(text, parent)
         , _type(type)
     {
-        QFont font = QLabel::font();
+        QFont font = FontManager::font();
         font.setFamilies(Comm::fontFmailies);
         font.setPointSize(Comm::defaultFontSize);
         QLabel::setFont(font);

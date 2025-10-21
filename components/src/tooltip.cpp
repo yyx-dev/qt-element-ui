@@ -42,6 +42,7 @@ namespace Element
         setEffect(effect);
         setShowArrow(true);
 
+        _label->adjustSize();
         adjustSize();
 
         _target->installEventFilter(this);
@@ -68,23 +69,21 @@ namespace Element
         if (effect == Effect::Dark)
         {
             _qsshelper.setProperty("QLabel", "color", Color::basicWhite());
-            _qsshelper.setProperty("QLabel", "background-color", Color::primaryText());
             _arrow->setColor(Color::primaryText());
+            _arrow->setBorder("");
         }
         else
         {
             _qsshelper.setProperty("QLabel", "color", Color::basicBlack());
-            _qsshelper.setProperty("QLabel", "background-color", Color::basicWhite());
-            _qsshelper.setProperty("QLabel", "border", "1px solid " + Color::lightBorder());
             _arrow->setColor(Color::basicWhite());
-            _arrow->setBorder(Color::lightBorder());
+            _arrow->setBorder(Color::darkBorder());
         }
 
-        _qsshelper.setProperty("QLabel", "border-radius", "4px");
         _qsshelper.setProperty("QLabel", "padding", "7px 11px");
 
         _label->setStyleSheet(_qsshelper.generate());
         adjustSize();
+        update();
 
         return *this;
     }
@@ -165,19 +164,76 @@ namespace Element
 
     void Tooltip::showEvent(QShowEvent* event)
     {
-        adjustSize();
         updatePosition();
+        QWidget::showEvent(event);
 
         if (_duration > 0)
             _autoCloseTimer->start(_duration);
-
-        QWidget::showEvent(event);
     }
 
     void Tooltip::hideEvent(QHideEvent* event)
     {
         _autoCloseTimer->stop();
         QWidget::hideEvent(event);
+    }
+
+    void Tooltip::paintEvent(QPaintEvent* event)
+    {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        // 绘制圆角背景
+        QPainterPath path;
+        path.addRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
+        painter.setClipPath(path);
+
+        // 填充背景
+        painter.fillPath(path, QColor(_effect == Effect::Dark ?
+                                        Color::primaryText() : Color::basicWhite()));
+
+        // 绘制边框
+        if (_effect == Effect::Light)
+        {
+            painter.setPen(QPen(QColor(Color::darkerBorder()), 1));
+            painter.drawRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
+
+            painter.setPen(QPen(QColor(Color::basicWhite()), 2));
+            QPoint bgn;
+            QPoint end;
+
+            if (_placement == Placement::Top
+             || _placement == Placement::TopStart
+             || _placement == Placement::TopEnd)
+            {
+                bgn = QPoint(_target->x() + (_target->width() - _arrow->width()) / 2 + 2, y() + height());
+                end = QPoint(_target->x() + (_target->width() + _arrow->width()) / 2 - 2, y() + height());
+            }
+            else if (_placement == Placement::Bottom
+                  || _placement == Placement::BottomStart
+                  || _placement == Placement::BottomEnd)
+            {
+                bgn = QPoint(_target->x() + (_target->width() - _arrow->width()) / 2 + 2, y());
+                end = QPoint(_target->x() + (_target->width() + _arrow->width()) / 2 - 2, y());
+            }
+            else if (_placement == Placement::Left
+                  || _placement == Placement::LeftStart
+                  || _placement == Placement::LeftEnd)
+            {
+                bgn = QPoint(x() + width(), _target->y() + (_target->height() - _arrow->height()) / 2 + 2);
+                end = QPoint(x() + width(), _target->y() + (_target->height() + _arrow->height()) / 2 - 2);
+            }
+            else if (_placement == Placement::Right
+                  || _placement == Placement::RightStart
+                  || _placement == Placement::RightEnd)
+            {
+                bgn = QPoint(x(), _target->y() + (_target->height() - _arrow->height()) / 2 + 2);
+                end = QPoint(x(), _target->y() + (_target->height() + _arrow->height()) / 2 - 2);
+            }
+
+            painter.drawLine(mapFromParent(bgn), mapFromParent(end));
+        }
+
+        QWidget::paintEvent(event);
     }
 
     bool Tooltip::eventFilter(QObject* obj, QEvent* event)

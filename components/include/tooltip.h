@@ -63,6 +63,7 @@ namespace Element
     protected:
         void showEvent(QShowEvent* event) override;
         void hideEvent(QHideEvent* event) override;
+        void paintEvent(QPaintEvent* event) override;
         bool eventFilter(QObject* obj, QEvent* event) override;
 
     private:

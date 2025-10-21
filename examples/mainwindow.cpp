@@ -234,10 +234,27 @@ void MainWindow::setupTab4()
     ui->button_63->setText("Tooltip");
     Tooltip* tooltip = new Tooltip("test tooltip", ui->button_63);
 
-    tooltip->setEffect(Tooltip::Effect::Dark);
-    tooltip->setPlacement(Tooltip::Placement::Top);
+    tooltip->setEffect(Tooltip::Effect::Light);
+    tooltip->setPlacement(Tooltip::Placement::Right);
     tooltip->setTrigger(Tooltip::Trigger::Hover);
 
+    ui->switch_1->setSize(Switch::Size::Large);
+    ui->switch_2->setSize(Switch::Size::Default);
+    ui->switch_3->setSize(Switch::Size::Small);
+
+    ui->switch_1->setActiveColor(Color::success());
+    ui->switch_1->setInactiveColor(Color::danger());
+
+    ui->switch_1->setActiveText("Pay by year");
+    ui->switch_1->setInactiveText("Pay by month");
+
+    // ui->switch_2->setLoading(true);
+    // ui->switch_2->setActiveAction(Icon::View);
+    // ui->switch_2->setInactiveAction(Icon::Hide);
+    ui->switch_2->setActiveAction('T');
+    ui->switch_2->setInactiveAction('F');
+
+    ui->switch_3->setDisabled(true);
 }
 
 void MainWindow::setupTab5()

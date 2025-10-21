@@ -109,7 +109,7 @@ namespace Element
         return *this;
     }
 
-    bool InputNumber::getDisabled()
+    bool InputNumber::isDisabled()
     {
         return !QSpinBox::isEnabled();
     }

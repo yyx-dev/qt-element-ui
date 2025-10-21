@@ -6,16 +6,18 @@
 #include "base.h"
 
 #include <QApplication>
-
+#include <QWindow>
+#include <QScreen>
 
 int main(int argc, char* argv[])
 {
+    qputenv("QT_SCALE_FACTOR", "1");
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     QApplication app(argc, argv);
 
-    Element::ScrollBar::setAppScrollBar(&app);
+    Element::ScrollBar::setAppScrollBar();
 
     Element::Log::setLevel(Element::Log::Level::Debug);
 

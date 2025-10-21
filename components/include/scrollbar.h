@@ -10,7 +10,7 @@ namespace Element
     class ScrollBar
     {
     public:
-        static void setAppScrollBar(QApplication* app);
+        static void setAppScrollBar();
         static void setInputTextScrollBar(InputText* inputText);
     };
 

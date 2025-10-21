@@ -47,7 +47,7 @@ namespace Element
         bool getClearable();
 
         Rate& setDisabled(bool disabled);
-        bool getDisabled();
+        bool isDisabled();
 
         Rate& setColors(const QString& lowColor = "#F7BA2A",
                         const QString& midColor = "#F7BA2A",

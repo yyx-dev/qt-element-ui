@@ -16,14 +16,14 @@ namespace Element
         enum class Size { Large, Default, Small };
 
     public:
-        Radio& setValue(const QString& value);
-        QString getValue();
+        Radio& setValue(const QVariant& value);
+        QVariant getValue();
 
         Radio& setText(const QString& text);
         QString getText();
 
         Radio& setDisabled(bool disabled);
-        bool getDisabled();
+        bool isDisabled();
 
         Radio& setSize(Size size);
         Size getSize();
@@ -47,7 +47,7 @@ namespace Element
         void leaveEvent(QEvent* event) override;
 
     private:
-        QString _value;
+        QVariant _value;
         Size _size = Size::Default;
         bool _border = false;
 
@@ -67,7 +67,7 @@ namespace Element
         Size getSize();
 
         RadioGroup& setDisabled(bool disabled);
-        bool getDisabled();
+        bool isDisabled();
 
         RadioGroup& addRadio(Radio* radio);
         RadioGroup& setTitle(const QString&);

@@ -7,6 +7,9 @@
 #include <QFile>
 #include <QDateTime>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 
 namespace Element
 {
@@ -140,39 +143,6 @@ namespace Element
 
 namespace Element
 {
-    FontManager& FontManager::instance()
-    {
-        static FontManager instance;
-        return instance;
-    }
-
-    void FontManager::loadFont(const QString& fontPath, const QString& name)
-    {
-        QFile fontFile(fontPath);
-        if (!fontFile.open(QIODevice::ReadOnly))
-            Log::error("Failed to open font file: " + fontPath);
-
-        int fontId = QFontDatabase::addApplicationFontFromData(fontFile.readAll());
-        if (fontId == -1)
-            Log::error("Failed to load font from: " + fontPath);
-
-        QString fontFamily = QFontDatabase::applicationFontFamilies(fontId).at(0);
-        _fontMap.insert(name, fontFamily);
-    }
-
-    void FontManager::setApplicationFont(const QString &name)
-    {
-        QFont font;
-        font.setFamily(name);
-        QApplication::setFont(font);
-    }
-
-    FontManager::FontManager()
-    {}
-}
-
-namespace Element
-{
     void Log::debug(const QString& msg) { log(Level::Debug, msg); }
     void Log::info (const QString& msg) { log(Level::Info, msg);  }
     void Log::warn (const QString& msg) { log(Level::Warn, msg);  }
@@ -221,6 +191,95 @@ namespace Element
     }
 
     Log::Level Log::_level = Log::Level::Debug;
+}
+
+namespace Element
+{
+    FontManager& FontManager::instance()
+    {
+        static FontManager instance;
+        return instance;
+    }
+
+    void FontManager::loadFont(const QString& fontPath, const QString& name)
+    {
+        QFile fontFile(fontPath);
+        if (!fontFile.open(QIODevice::ReadOnly))
+            Log::error("Failed to open font file: " + fontPath);
+
+        int fontId = QFontDatabase::addApplicationFontFromData(fontFile.readAll());
+        if (fontId == -1)
+            Log::error("Failed to load font from: " + fontPath);
+
+        QString fontFamily = QFontDatabase::applicationFontFamilies(fontId).at(0);
+        _fontMap.insert(name, fontFamily);
+    }
+
+    void FontManager::setApplicationFont(const QString &name)
+    {
+        QFont font;
+        font.setFamily(name);
+        QApplication::setFont(font);
+    }
+
+    QFont FontManager::font()
+    {
+        QFont font;
+        font.setFamilies(Comm::fontFmailies);
+        font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        return font;
+    }
+
+    QFont FontManager::font(QFont font)
+    {
+        font.setFamilies(Comm::fontFmailies);
+        font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        return font;
+    }
+
+
+    FontManager::FontManager()
+    {}
+}
+
+
+namespace Element
+{
+    ScaleHelper& ScaleHelper::instance()
+    {
+        static ScaleHelper instance;
+        return instance;
+    }
+
+    int ScaleHelper::scale(int v)
+    {
+        return v * _factor;
+    }
+
+    QSize ScaleHelper::scale(int w, int h)
+    {
+        return QSize(w * _factor, h * _factor);
+    }
+
+    QSize ScaleHelper::scale(QSize size)
+    {
+        return scale(size.width(), size.height());
+    }
+
+    ScaleHelper::ScaleHelper()
+    {
+        _factor = 0.0;
+
+#ifdef Q_OS_WIN
+        HDC screenDC = GetDC(nullptr);
+        int dpiX = GetDeviceCaps(screenDC, LOGPIXELSX);
+        ReleaseDC(nullptr, screenDC);
+        _factor = dpiX / 96.0;
+#endif
+
+        if (qFuzzyIsNull(_factor))
+            Log::fatal("wrong system factor");
+    }
 }
 
 namespace Element
@@ -321,7 +380,6 @@ namespace Element
 
     void Arrow::showEvent(QShowEvent* event)
     {
-        adjustSize();
         updatePosition();
         QWidget::showEvent(event);
     }

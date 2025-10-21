@@ -23,19 +23,19 @@ namespace Element
         , _bottom(40)
         , _svgRenderer(Icon::instance().getRenderer(Icon::CaretTop, Color::primary(), this))
     {
+        setVisible(false);
+        setCursor(Qt::PointingHandCursor);
+        setFont(FontManager::font());
+
+        if (_target)
+            connect(_target->verticalScrollBar(), &QScrollBar::valueChanged,
+                    this, &Backtop::onScrollBarValueChanged);
+
         setShape(_shape);
         setSize(_size);
         setType(_type);
 
         Element::Shadow::setShadow(this, Element::Shadow::Type::Lighter);
-
-        setVisible(false);
-        setCursor(Qt::PointingHandCursor);
-
-        if (_target) {
-            connect(_target->verticalScrollBar(), &QScrollBar::valueChanged,
-                    this, &Backtop::onScrollBarValueChanged);
-        }
     }
 
     Backtop& Backtop::setShape(Shape shape)
@@ -120,10 +120,9 @@ namespace Element
         else
         {
             QFont font = QLabel::font();
-            font.setFamilies(Comm::fontFmailies);
             font.setBold(true);
-            if (_size == Size::Default || _size == Size::Large) font.setPointSize(14);
-            else if (_size == Size::Small) font.setPointSize(Comm::defaultFontSize);
+            font.setPointSize(_size == Size::Default || _size == Size::Large
+                              ? 14 : Comm::defaultFontSize);
 
             painter.setPen(Color::primary());
             painter.setFont(font);

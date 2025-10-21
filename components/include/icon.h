@@ -58,6 +58,8 @@ namespace Element
 
         QSvgRenderer* getRenderer(Name icon, const QString& color, QObject* parent);
 
+        static bool isNull(Icon::Name icon) { return icon == Icon::None; }
+
     private:
         Icon();
         Icon(const Icon&) = delete;

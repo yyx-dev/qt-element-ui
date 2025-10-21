@@ -28,7 +28,7 @@ namespace Element
         Size getSize();
         InputNumber& setSize(Size size);
 
-        bool getDisabled();
+        bool isDisabled();
         InputNumber& setDisabled(bool disabled);
 
         bool getReadOnly();

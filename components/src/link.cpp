@@ -98,7 +98,7 @@ namespace Element
         return *this;
     }
 
-    bool Link::getDisabled()
+    bool Link::isDisabled()
     {
         return !QLabel::isEnabled();
     }

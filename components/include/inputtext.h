@@ -40,7 +40,7 @@ namespace Element
         int getWidth();
         InputText& setWidth(int width);
 
-        bool getDisabled();
+        bool isDisabled();
         InputText& setDisabled(bool disabled);
 
         int getMaxLength();

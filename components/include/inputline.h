@@ -29,7 +29,7 @@ namespace Element
         int getWidth();
         InputLine& setWidth(int width);
 
-        bool getDisabled();
+        bool isDisabled();
         InputLine& setDisabled(bool disabled);
 
         Size getSize();

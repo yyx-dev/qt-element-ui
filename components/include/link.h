@@ -37,7 +37,7 @@ namespace Element
         Underline getUnderline();
         Link& setUnderline(Underline underline);
 
-        bool getDisabled();
+        bool isDisabled();
         Link& setDisabled(bool disabled);
 
         Link& setText(const QString& text);

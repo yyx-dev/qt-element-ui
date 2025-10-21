@@ -32,6 +32,7 @@ namespace Element
         setType(Button::Type::Default);
         setSize(Button::Size::Default);
 
+        setCursor(Qt::PointingHandCursor);
         setMinimumHeight(40);
     }
 
@@ -499,7 +500,7 @@ namespace Element
             _qsshelper.setProperty("QPushButton", "padding", "5px 11px");
             _qsshelper.setProperty("QPushButton", "font-size", "14px");
 
-            if (_icon != Icon::Name::None)
+            if (!Icon::isNull(_icon))
                 QPushButton::setIconSize(QSize(_smallIconSize, _smallIconSize));
 
             setMinimumHeight(30);
@@ -510,7 +511,7 @@ namespace Element
     }
 
 
-    bool Button::getDisabled()
+    bool Button::isDisabled()
     {
         return !QPushButton::isEnabled();
     }
@@ -521,7 +522,7 @@ namespace Element
         return *this;
     }
 
-    bool Button::getLoading()
+    bool Button::isLoading()
     {
         return _loading;
     }

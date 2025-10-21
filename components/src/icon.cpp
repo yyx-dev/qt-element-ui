@@ -70,7 +70,7 @@ namespace Element
 
     bool Icon::checkIcon(Icon::Name icon)
     {
-        if (icon == Name::None)
+        if (Icon::isNull(icon))
         {
             Log::error("IconManager.checkIconIndex: icon name is none.");
             return false;
