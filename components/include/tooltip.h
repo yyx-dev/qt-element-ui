@@ -67,19 +67,9 @@ namespace Element
             Bottom, BottomStart, BottomEnd,
         };
 
-        enum class Effect
-        {
-            Dark,
-            Light,
-        };
+        enum class Effect { Dark, Light, };
 
-        enum class Trigger
-        {
-            Hover,
-            Click,
-            Focus,
-            ContextMenu
-        };
+        enum class Trigger { Hover, Click, Focus, ContextMenu };
 
     public:
         Tooltip& setPlacement(Placement placement);

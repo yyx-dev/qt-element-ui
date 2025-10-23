@@ -233,9 +233,8 @@ void MainWindow::setupTab4()
 
     ui->button_63->setText("Tooltip");
     Tooltip* tooltip = new Tooltip("test tooltip", ui->button_63);
-
     tooltip->setEffect(Tooltip::Effect::Light);
-    tooltip->setPlacement(Tooltip::Placement::TopStart);
+    tooltip->setPlacement(Tooltip::Placement::Top);
     tooltip->setTrigger(Tooltip::Trigger::Hover);
 
     ui->switch_1->setSize(Switch::Size::Large);

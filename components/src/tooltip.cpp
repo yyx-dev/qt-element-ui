@@ -453,7 +453,7 @@ namespace Element
             }
             else if (event->type() == QEvent::Move || event->type() == QEvent::Resize)
             {
-                if (isEnabled() && isVisible())
+                if (isEnabled())
                 {
                     updatePosition();
                     _arrow->updatePosition();
@@ -503,7 +503,7 @@ namespace Element
 
     void Tooltip::updatePosition()
     {
-        if (!_target || !_moveable) return;
+        if (!_target || _moveable) return;
 
         QPoint pos;
 
