@@ -9,6 +9,50 @@
 namespace Element
 {
 
+    // Two objects need to be set: partner and target.
+    // Partner is the pop-up widget, target is the pointing widget
+    class Arrow : public QWidget
+    {
+    Q_OBJECT
+
+    public:
+        enum class Direction { Up, Down, Left, Right };
+
+        enum class AlignMode { FollowPointing, FollowPopup };
+
+    public:
+        void setAlignMode(AlignMode mode);
+        AlignMode getAlignMode();
+
+        void setColor(const QString& color);
+        void setDirection(Direction direction);
+
+        // Due to anti-aliasing,
+        // the actual border color will appear lighter.
+        // Therefore, please set a darker color.​
+        void setBorder(const QString& color);
+
+        void updatePosition();
+
+    public:
+        Arrow(QWidget* partner, QWidget* target);
+        Arrow(const QString& color, Direction dir, QWidget* partner, QWidget* target);
+
+    protected:
+        void paintEvent(QPaintEvent* event) override;
+        void showEvent(QShowEvent* event) override;
+
+    private:
+        QWidget* _partner = nullptr;
+        QWidget* _target = nullptr;
+
+        Direction _direction = Direction::Down;
+        AlignMode _mode = AlignMode::FollowPointing;
+
+        QString _color;
+        QString _borderColor;
+    };
+
     class Tooltip : public QWidget
     {
 
@@ -50,6 +94,14 @@ namespace Element
         Tooltip& setAutoClose(int duration);
         Tooltip& setEnterable(bool enterable);
 
+        Placement getPlacement();
+
+        bool isDisabled();
+
+        Tooltip& setMoveable(bool moveable);
+        Tooltip& setPosition(const QPoint& start);
+
+    public:
         void show();
         void hide();
         void setVisible(bool visible) override;
@@ -68,6 +120,7 @@ namespace Element
 
     private:
         void updatePosition();
+        Placement checkPlacement();
 
     private:
         Placement _placement = Placement::Top;
@@ -80,6 +133,8 @@ namespace Element
         bool _showArrow = true;
         bool _duration = 0;
         bool _enterable = true;
+
+        bool _moveable = false;
 
     private:
         QWidget* _target = nullptr;

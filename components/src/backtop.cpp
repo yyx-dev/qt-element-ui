@@ -25,7 +25,7 @@ namespace Element
     {
         setVisible(false);
         setCursor(Qt::PointingHandCursor);
-        setFont(FontManager::font());
+        setFont(FontHelper::font());
 
         if (_target)
             connect(_target->verticalScrollBar(), &QScrollBar::valueChanged,

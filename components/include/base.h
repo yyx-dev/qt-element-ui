@@ -50,18 +50,18 @@ namespace Element
         static Level _level;
     };
 
-    class FontManager
+    class FontHelper
     {
     public:
-        static FontManager& instance();
+        static FontHelper& instance();
         void loadFont(const QString& fontPath, const QString& name = "");
         void setApplicationFont(const QString& name);
         static QFont font();
         static QFont font(QFont font);
     private:
-        FontManager();
-        FontManager(const FontManager&) = delete;
-        FontManager& operator=(const FontManager&) = delete;
+        FontHelper();
+        FontHelper(const FontHelper&) = delete;
+        FontHelper& operator=(const FontHelper&) = delete;
     private:
         QHash<QString, QString> _fontMap;
     };
@@ -84,40 +84,5 @@ namespace Element
 
 namespace Element
 {
-    // Two objects need to be set: partner and target.
-    // Partner is the pop-up widget, target is the pointing widget
-    class Arrow : public QWidget
-    {
-    Q_OBJECT
 
-    public:
-        enum class Direction { Up, Down, Left, Right };
-
-    public:
-        Arrow(QWidget* partner, QWidget* target);
-        Arrow(const QString& color, Direction dir, QWidget* partner, QWidget* target);
-
-        void setColor(const QString& color);
-        void setDirection(Direction direction);
-
-        // Due to anti-aliasing,
-        // the actual border color will appear lighter.
-        // Therefore, please set a darker color.​
-        void setBorder(const QString& color);
-
-    protected:
-        void paintEvent(QPaintEvent* event) override;
-        void showEvent(QShowEvent* event) override;
-
-    private:
-        void updatePosition();
-
-    private:
-        QWidget* _partner = nullptr;
-        QWidget* _target = nullptr;
-
-        Direction _direction = Direction::Down;
-        QString _color;
-        QString _borderColor;
-    };
 }

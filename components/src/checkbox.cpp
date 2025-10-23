@@ -19,7 +19,7 @@ namespace Element
     Checkbox::Checkbox(const QString& text, bool checked, QWidget* parent)
         : QCheckBox(text, parent)
     {
-        QFont font = FontManager::font();
+        QFont font = FontHelper::font();
         font.setPixelSize(16);
         QCheckBox::setFont(font);
 

@@ -20,7 +20,7 @@ namespace Element
         layout->setSpacing(0);
         layout->addWidget(_label);
 
-        QFont font = FontManager::font();
+        QFont font = FontHelper::font();
         font.setPixelSize(16);
         _label->setFont(font);
 

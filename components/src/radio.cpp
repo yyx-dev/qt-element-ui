@@ -20,7 +20,7 @@ namespace Element
     Radio::Radio(const QString& text, bool checked, QWidget* parent)
         : QRadioButton(text, parent)
     {
-        QFont font = FontManager::font();
+        QFont font = FontHelper::font();
         font.setPixelSize(16);
         QRadioButton::setFont(font);
 

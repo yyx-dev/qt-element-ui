@@ -19,7 +19,7 @@ namespace Element
         setAttribute(Qt::WA_TransparentForMouseEvents); // 允许鼠标事件穿透到父控件
         setAlignment(Qt::AlignCenter);
 
-        QFont font = FontManager::font();
+        QFont font = FontHelper::font();
         font.setBold(true);
         font.setPointSize(7);
 

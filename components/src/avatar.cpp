@@ -110,7 +110,7 @@ namespace Element
         }
         else if (_type == Type::Text)
         {
-            QFont font = FontManager::font();
+            QFont font = FontHelper::font();
             font.setBold(true);
             if (_size == Size::Default || _size == Size::Large) font.setPointSize(Comm::defaultFontSize);
             else if (_size == Size::Small) font.setPointSize(Comm::smallFontSize);

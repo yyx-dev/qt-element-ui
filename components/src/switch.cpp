@@ -21,7 +21,7 @@ namespace Element
     Switch::Switch(bool active, const QString& activeText, const QString& inactiveText, QWidget* parent)
         : QWidget(parent)
     {
-        setFont(FontManager::font());
+        setFont(FontHelper::font());
         setCursor(Qt::PointingHandCursor);
 
         setSize(_size);
@@ -97,27 +97,27 @@ namespace Element
         return _active;
     }
 
-    Switch& Switch::setActiveText(const QString& activeText)
+    Switch& Switch::setActiveText(const QString& text)
     {
-        _activeText = activeText;
+        _activeText = text;
         return *this;
     }
 
-    Switch& Switch::setInactiveText(const QString& inactiveText)
+    Switch& Switch::setInactiveText(const QString& text)
     {
-        _inactiveText = inactiveText;
+        _inactiveText = text;
         return *this;
     }
 
-    Switch& Switch::setActiveIcon(Icon::Name activeIcon)
+    Switch& Switch::setActiveIcon(Icon::Name icon)
     {
-        _activeIcon = activeIcon;
+        _activeIcon = icon;
         return *this;
     }
 
-    Switch& Switch::setInactiveIcon(Icon::Name inactiveIcon)
+    Switch& Switch::setInactiveIcon(Icon::Name icon)
     {
-        _inactiveIcon = inactiveIcon;
+        _inactiveIcon = icon;
         return *this;
     }
 
@@ -145,9 +145,9 @@ namespace Element
         return *this;
     }
 
-    Switch& Switch::setActiveValue(const QVariant& activeValue)
+    Switch& Switch::setActiveValue(const QVariant& value)
     {
-        _activeValue = activeValue;
+        _activeValue = value;
         return *this;
     }
 
@@ -156,9 +156,9 @@ namespace Element
         return _activeValue;
     }
 
-    Switch& Switch::setInactiveValue(const QVariant& inactiveValue)
+    Switch& Switch::setInactiveValue(const QVariant& value)
     {
-        _inactiveValue = inactiveValue;
+        _inactiveValue = value;
         return *this;
     }
 

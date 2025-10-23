@@ -235,7 +235,7 @@ void MainWindow::setupTab4()
     Tooltip* tooltip = new Tooltip("test tooltip", ui->button_63);
 
     tooltip->setEffect(Tooltip::Effect::Light);
-    tooltip->setPlacement(Tooltip::Placement::Right);
+    tooltip->setPlacement(Tooltip::Placement::TopStart);
     tooltip->setTrigger(Tooltip::Trigger::Hover);
 
     ui->switch_1->setSize(Switch::Size::Large);
@@ -255,6 +255,9 @@ void MainWindow::setupTab4()
     ui->switch_2->setInactiveAction('F');
 
     ui->switch_3->setDisabled(true);
+
+    ui->slider_1->setValue(11);
+    ui->slider_1->setDisabled(false);
 }
 
 void MainWindow::setupTab5()
