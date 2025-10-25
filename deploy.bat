@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: 设置路径变量
-set BINARY_EXE=D:\build-qt-element-ui-Desktop_Qt_5_14_2_MinGW_64_bit-Release\release\qt-element-ui.exe
+set BINARY_EXE=D:\qt-element-ui\build\release\qt-element-ui.exe
 set TARGET_DIR=D:\qt-element-ui_v0.1.0_windows_qt5.14.2
 set TARGET_EXE=%TARGET_DIR%\qt-element-ui.exe
 set ZIP_FILE=D:\qt-element-ui_v0.1.0_windows_qt5.14.2.zip
