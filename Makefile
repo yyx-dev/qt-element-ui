@@ -56,7 +56,8 @@ deploy: build
 
 else ifeq ($(shell uname), Darwin)
 deploy: build
-	cd build && $(MAKE) clean && \
-	cp -r release $(DEPLOY_DIR) && \
-	macdeployqt $(DEPLOY_DIR)/qt-element-ui -dmg
+	cd build && $(MAKE) clean
+	cd build && mkdir -p $(DEPLOY_DIR)
+	cd build && cp -r $(PROJECT_NAME).app $(DEPLOY_DIR)
+	cd build && macdeployqt $(DEPLOY_DIR)/$(PROJECT_NAME).app # -dmg
 endif
