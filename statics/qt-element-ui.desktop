@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Qt Element UI
+GenericName=Qt UI Components
+Comment=A Qt-based UI component library inspired by Element UI
+Exec=qt-element-ui
+Icon=qt-element-ui
+Categories=Development;Qt;
+Keywords=qt;ui;components;development;
+Version=1.0
+Terminal=false
+StartupWMClass=qt-element-ui
