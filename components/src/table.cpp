@@ -2,6 +2,7 @@
 
 #include "base.h"
 #include "color.h"
+#include "qtablewidget.h"
 
 #include <QHeaderView>
 #include <QEvent>
@@ -82,16 +83,14 @@ namespace Element
         setSelectionBehavior(QAbstractItemView::SelectRows);
         setSelectionMode(QAbstractItemView::SingleSelection);
 
-        QFont font = horizontalHeader()->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setBold(true);
-        font.setPointSize(9);
-        horizontalHeader()->setFont(font);
+        horizontalHeader()->setFont(FontHelper(horizontalHeader()->font())
+                .setBold()
+                .setPointSize(9)
+                .getFont());
 
-        font = QTableWidget::font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        setFont(font);
+        setFont(FontHelper(QTableWidget::font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         viewport()->installEventFilter(this);
     }

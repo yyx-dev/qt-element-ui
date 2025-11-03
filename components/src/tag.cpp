@@ -23,11 +23,9 @@ namespace Element
         , _closeIcon(new QLabel(this))
         , _layout(new QHBoxLayout(this))
     {
-        QFont font = _textLabel->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(9);
-
-        _textLabel->setFont(font);
+        _textLabel->setFont(FontHelper(_textLabel->font())
+                .setPointSize(9)
+                .getFont());
         _textLabel->setAlignment(Qt::AlignCenter);
 
         _closeIcon->setFixedSize(16, 16);

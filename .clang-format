@@ -1,0 +1,110 @@
+# BasedOnStyle: WebKit
+# 默认编码规范，可选:LLVM,Google,Chromium,Mozilla,WebKit,Microsoft,GNU,InheritParentConfig
+
+Standard: Cpp11 # 语言标准
+
+#================ 预处理指令风格 ================
+
+IncludeBlocks: Regroup # 重排include指令
+IndentPPDirectives: AfterHash # 预处理指令在#后缩进
+# IncludeCategories:
+#   # 普通头文件
+#   - Regex:    '^"'
+#     Priority: 1
+#   # 系统头文件
+#   - Regex:    '^<'
+#     Priority: 0
+
+
+#================  Common 通用风格属性  ================
+IndentWidth: 4 # 缩进大小
+TabWidth: 4 # Tab宽度
+UseTab: Never # 不使用Tab
+ColumnLimit: 0 # 每行长度不指定，这样原始的折行方式得以尽可能保留
+AlignConsecutiveAssignments: false # 连续的赋值语句，对齐它们的等号
+AlignEscapedNewlines: Left # 连续的续行符（反斜杠），对齐到可能的最左位置
+AlignOperands: true # 二元运算符的操作数过长，则换行后将它们对齐
+BreakBeforeBinaryOperators: All # 二元运算符表达式太长，把运算符换到下一行行首，而不是上一行行尾
+AllowShortCaseLabelsOnASingleLine: true # 短的case分支、if语句、while循环可以放进一行
+BreakBeforeTernaryOperators: false
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+IndentCaseLabels: false # case分支不缩进
+AlwaysBreakBeforeMultilineStrings: true # 多行字符串的第一行需要另起，这样它们的缩进能够一致
+BreakStringLiterals: true # 允许把一个字符串字面量断成两个
+ContinuationIndentWidth: 4 # 一行没写完，换到下一行时的缩进
+DerivePointerAlignment: false # 指针和引用符号紧跟在类型名后面，不按照文件中的多数习惯
+PointerAlignment: Left
+SpaceAfterCStyleCast: false # 类型转换操作后面应该紧跟一个空格，而括号里面不要空格
+SpacesInCStyleCastParentheses: false
+SpaceBeforeAssignmentOperators: true # 赋值号两侧各有一个空格
+SpaceBeforeParens: ControlStatements # 只有流程控制语句的括号前面才有空格
+SpaceBeforeRangeBasedForLoopColon: true # 基于范围的for循环，冒号前面有一个空格
+SpaceInEmptyParentheses: false # 空的括号里面不要放空格
+SpacesInSquareBrackets: false # 方括号里侧不要有空格
+
+
+#================  Blocks 代码块风格 ================
+AllowShortBlocksOnASingleLine: true # 允许短的代码块放在一行内
+BreakBeforeBraces: Custom # 左花括号需要放在新的一行
+BraceWrapping:
+  AfterClass: true # 类、枚举、结构体、联合体都换行
+  AfterEnum: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterNamespace: true # 命名空间换行
+  AfterControlStatement: true # 控制语句后换行
+  AfterFunction: true
+  # AfterExternBlock: true # extern块后换行
+  BeforeCatch: true # catch/else子句前换行
+  BeforeElse: true
+  IndentBraces: false # 花括号不缩进
+  SplitEmptyRecord: false # 空的class/namespace等花括号可以写成一对而不拆开
+  SplitEmptyNamespace: false
+KeepEmptyLinesAtTheStartOfBlocks: false # 代码块的开始处不能有空行
+MaxEmptyLinesToKeep: 2 # 连续的空行只保留至多两个，这样的话，1个和2个会有区别感
+MacroBlockBegin: 'BEGIN' # 宏名表示的代码块边界
+MacroBlockEnd: 'END'
+Cpp11BracedListStyle: true # 花括号表示初始化列表时，就按照普通方式处理
+
+#================ Comment 注释风格 ================
+AlignTrailingComments: true # 行尾注释上下对齐
+ReflowComments: false # 不允许分段注释
+SpacesBeforeTrailingComments: 1 # 末尾注释前面至少有一个空格
+
+#================ Class 类的风格属性 ================
+AccessModifierOffset: -4 # 访问控制属性的缩进（相对与内部块）
+BreakBeforeInheritanceComma: false # 多继承时所有基类放在同一行
+# SpaceBeforeInheritanceColon: true # 继承的冒号前有一个空格
+BreakConstructorInitializers: BeforeComma # 初始化列表在冒号、逗号之前断开
+ConstructorInitializerAllOnOneLineOrOnePerLine: false # 允许多个初始化项目写在同一行
+ConstructorInitializerIndentWidth: 4 # 初始化列表的缩进
+SpaceBeforeCtorInitializerColon: true # 初始化列表的冒号前有一个空格
+
+
+#================ Namespace 命名空间风格属性 ================
+CompactNamespaces: false # 不能将两个命名空间声明连续写在同一行
+FixNamespaceComments: false # 命名空间的后花括号自动加上注释，如果已经有了错误的，那就改成对的
+NamespaceIndentation: All # 命名空间，其他的都要缩进
+
+
+#================= Template 模板的风格属性 ===============
+AlwaysBreakTemplateDeclarations: false # template声明后不必须另起一行
+SpaceAfterTemplateKeyword: false # template关键字后面不能有空格
+SpacesInAngles: false # 尖括号里侧不要有空格
+
+
+#================= Functions 函数调用的风格属性 ===============
+AlignAfterOpenBracket: AlwaysBreak # 一行不能容纳所有参数时，强制把参数换到下一行
+AllowAllParametersOfDeclarationOnNextLine: true # 函数声明过长，把全部参数放在第二行，
+AllowShortFunctionsOnASingleLine: Inline # 允许短的函数定义放在一行内
+AlwaysBreakAfterReturnType: None # 函数定义的返回类型不能单独占一行
+BinPackArguments: true # 允许几个函数的实参、形参在同一行
+BinPackParameters: true
+IndentWrappedFunctionNames: true # 函数名如果被换到下一行，那么需要缩进
+SpacesInParentheses: false # 括号里面不要有空格
+
+
+#================= 不使用的项目 ===============
+CommentPragmas: '' # 一些可能有语法意义的注释，防止它们被折行
+ForEachMacros: [] # 解释成foreach循环的宏名

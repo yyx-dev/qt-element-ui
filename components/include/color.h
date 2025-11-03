@@ -1,9 +1,3 @@
-/*
- *
- * https://element-plus.org/zh-CN/component/color.html
- *
- * */
-
 #pragma once
 
 #include <QString>
@@ -11,81 +5,142 @@
 namespace Element
 {
 
-    class Color
+    struct Color
     {
-    public:
-        // 主色
-        static QString primary()   { return "#409EFF"; }
-        static QString primaryD1() { return "#337ECC"; }
-        static QString primaryL1() { return "#79BBFF"; }
-        static QString primaryL2() { return "#A0CFFF"; }
-        static QString primaryL3() { return "#C6E2FF"; }
-        static QString primaryL4() { return "#D9ECFF"; }
-        static QString primaryL5() { return "#ECF5FF"; }
+        /* 主色 */
 
-        static QString success()   { return "#67C23A"; }
-        static QString successD1() { return "#529B2E"; }
-        static QString successL1() { return "#95D475"; }
-        static QString successL2() { return "#B3E19D"; }
-        static QString successL3() { return "#D1EDC4"; }
-        static QString successL4() { return "#E1F3D8"; }
-        static QString successL5() { return "#F0F9EB"; }
+        // #409EFF
+        static QString primary();
+        // #337ECC
+        static QString primaryD1();
+        // #79BBFF
+        static QString primaryL1();
+        // #A0CFFF
+        static QString primaryL2();
+        // #C6E2FF
+        static QString primaryL3();
+        // #D9ECFF
+        static QString primaryL4();
+        // #ECF5FF
+        static QString primaryL5();
 
+        // #67C23A
+        static QString success();
+        // #529B2E
+        static QString successD1();
+        // #95D475
+        static QString successL1();
+        // #B3E19D
+        static QString successL2();
+        // #D1EDC4
+        static QString successL3();
+        // #E1F3D8
+        static QString successL4();
+        // #F0F9EB
+        static QString successL5();
 
-        static QString warning()   { return "#E6A23C"; }
-        static QString warningD1() { return "#B88230"; }
-        static QString warningL1() { return "#EEBE77"; }
-        static QString warningL2() { return "#F3D19E"; }
-        static QString warningL3() { return "#F8E3C5"; }
-        static QString warningL4() { return "#FAECD8"; }
-        static QString warningL5() { return "#FDF6EC"; }
+        // #E6A23C
+        static QString warning();
+        // #B88230
+        static QString warningD1();
+        // #EEBE77
+        static QString warningL1();
+        // #F3D19E
+        static QString warningL2();
+        // #F8E3C5
+        static QString warningL3();
+        // #FAECD8
+        static QString warningL4();
+        // #FDF6EC
+        static QString warningL5();
 
-        static QString danger()    { return "#F56C6C"; }
-        static QString dangerD1()  { return "#C45656"; }
-        static QString dangerL1()  { return "#F89898"; }
-        static QString dangerL2()  { return "#FAB6B6"; }
-        static QString dangerL3()  { return "#FCD3D3"; }
-        static QString dangerL4()  { return "#FDE2E2"; }
-        static QString dangerL5()  { return "#FEF0F0"; }
+        // #F56C6C
+        static QString danger();
+        // #C45656
+        static QString dangerD1();
+        // #F89898
+        static QString dangerL1();
+        // #FAB6B6
+        static QString dangerL2();
+        // #FCD3D3
+        static QString dangerL3();
+        // #FDE2E2
+        static QString dangerL4();
+        // #FEF0F0
+        static QString dangerL5();
 
-        static QString info()      { return "#909399"; }
-        static QString infoD1()    { return "#73767A"; }
-        static QString infoL1()    { return "#B1B3B8"; }
-        static QString infoL2()    { return "#C8C9CC"; }
-        static QString infoL3()    { return "#DEDFE0"; }
-        static QString infoL4()    { return "#E9E9EB"; }
-        static QString infoL5()    { return "#F4F4F5"; }
+        // #909399
+        static QString info();
+        // #73767A
+        static QString infoD1();
+        // #B1B3B8
+        static QString infoL1();
+        // #C8C9CC
+        static QString infoL2();
+        // #DEDFE0
+        static QString infoL3();
+        // #E9E9EB
+        static QString infoL4();
+        // #F4F4F5
+        static QString infoL5();
 
-        //文本
-        static QString primaryText()     { return "#303133"; }
-        static QString regularText()     { return "#606266"; }
-        static QString secondaryText()   { return "#909399"; }
-        static QString placeholderText() { return "#A8ABB2"; }
-        static QString disabledText()    { return "#C0C4CC"; }
+        /* 文本 */
 
-        //边框
-        static QString darkerBorder()     { return "#CDD0D6"; }
-        static QString darkBorder()       { return "#D4D7DE"; }
-        static QString baseBorder()       { return "#DCDFE6"; }
-        static QString lightBorder()      { return "#E4E7ED"; }
-        static QString lighterBorder()    { return "#EBEEF5"; }
-        static QString extraLightBorder() { return "#F2F6FC"; }
+        // #303133
+        static QString primaryText();
+        // #606266
+        static QString regularText();
+        // #909399
+        static QString secondaryText();
+        // #A8ABB2
+        static QString placeholderText();
+        // #C0C4CC
+        static QString disabledText();
 
-        //填充
-        static QString darkerFill()     { return "#E6E8EB"; }
-        static QString darkFill()       { return "#EBEDF0"; }
-        static QString baseFill()       { return "#F0F2F5"; }
-        static QString lightFill()      { return "#F5F7FA"; }
-        static QString lighterFill()    { return "#FAFAFA"; }
-        static QString extraLightFill() { return "#FAFCFF"; }
-        static QString blankFill()      { return "#FFFFFF"; }
+        /* 边框 */
 
-        //背景
-        static QString basicBlack()        { return "#000000"; }
-        static QString basicWhite()        { return "#FFFFFF"; }
-        static QString pageBackground()    { return "#F2F3F5"; }
-        static QString baseBackground()    { return "#FFFFFF"; }
-        static QString overlayBackground() { return "#FFFFFF"; }
+        // #CDD0D6
+        static QString darkerBorder();
+        // #D4D7DE
+        static QString darkBorder();
+        // #DCDFE6
+        static QString baseBorder();
+        // #E4E7ED
+        static QString lightBorder();
+        // #EBEEF5
+        static QString lighterBorder();
+        // #F2F6FC
+        static QString extraLightBorder();
+
+        /* 填充 */
+
+        // #E6E8EB
+        static QString darkerFill();
+        // #EBEDF0
+        static QString darkFill();
+        // #F0F2F5
+        static QString baseFill();
+        // #F5F7FA
+        static QString lightFill();
+        // #FAFAFA
+        static QString lighterFill();
+        // #FAFCFF
+        static QString extraLightFill();
+        // #FFFFFF
+        static QString blankFill();
+
+        /* 背景 */
+
+        // #000000
+        static QString basicBlack();
+        // #FFFFFF
+        static QString basicWhite();
+        // #F2F3F5
+        static QString pageBackground();
+        // #FFFFFF
+        static QString baseBackground();
+        // #FFFFFF
+        static QString overlayBackground();
     };
 
 }

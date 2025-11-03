@@ -19,10 +19,9 @@ namespace Element
         : QLabel(text, parent)
         , _type(type)
     {
-        QFont font = FontHelper::font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        QLabel::setFont(font);
+        setFont(FontHelper()
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         QLabel::setWordWrap(true);
         QLabel::adjustSize();

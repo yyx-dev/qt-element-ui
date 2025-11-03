@@ -16,7 +16,7 @@ namespace Element
         : QWidget(parent)
         , _text(new Text(text, Text::Type::Primary, this))
         , _icon(new QLabel(this))
-        , _menu(new Menu(this))
+        , _menu(new MenuforDropdown(this))
         , _actions(new QHash<QString, QAction*>())
     {
         _icon->setPixmap(Icon::instance().getPixmap(Icon::ArrowDown, Color::primary(), 18));
@@ -67,7 +67,7 @@ namespace Element
         QWidget::leaveEvent(event);
     }
 
-    Menu::Menu(QWidget* parent) : QMenu(parent)
+    MenuforDropdown::MenuforDropdown(QWidget* parent) : QMenu(parent)
     {
         setStyleSheet(R"(
             QMenu {
@@ -97,17 +97,16 @@ namespace Element
                 margin: 6px 0;
             })");
 
-        QFont menuFont;
-        menuFont.setFamilies(Comm::fontFmailies);
-        menuFont.setPointSize(Comm::defaultFontSize);
-        setFont(menuFont);
+        setFont(FontHelper()
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         setAttribute(Qt::WA_Hover);
 
         setWindowFlags(windowFlags() | Qt::NoDropShadowWindowHint);
     }
 
-    bool Menu::event(QEvent* e)
+    bool MenuforDropdown::event(QEvent* e)
     {
         if (e->type() == QEvent::HoverMove || e->type() == QEvent::HoverEnter)
         {

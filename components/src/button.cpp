@@ -500,7 +500,7 @@ namespace Element
             _qsshelper.setProperty("QPushButton", "padding", "5px 11px");
             _qsshelper.setProperty("QPushButton", "font-size", "14px");
 
-            if (!Icon::isNull(_icon))
+            if (!Icon::isNone(_icon))
                 QPushButton::setIconSize(QSize(_smallIconSize, _smallIconSize));
 
             setMinimumHeight(30);

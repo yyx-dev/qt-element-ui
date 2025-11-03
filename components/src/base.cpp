@@ -1,5 +1,6 @@
 #include "base.h"
 #include "color.h"
+#include "qfont.h"
 
 #include <QPainter>
 #include <QRegularExpression>
@@ -195,13 +196,13 @@ namespace Element
 
 namespace Element
 {
-    FontHelper& FontHelper::instance()
+    FontLoader& FontLoader::instance()
     {
-        static FontHelper instance;
+        static FontLoader instance;
         return instance;
     }
 
-    void FontHelper::loadFont(const QString& fontPath, const QString& name)
+    void FontLoader::loadFont(const QString& fontPath, const QString& name)
     {
         QFile fontFile(fontPath);
         if (!fontFile.open(QIODevice::ReadOnly))
@@ -215,31 +216,45 @@ namespace Element
         _fontMap.insert(name, fontFamily);
     }
 
-    void FontHelper::setApplicationFont(const QString &name)
+    void FontLoader::setApplicationFont(const QString &name)
     {
         QFont font;
         font.setFamily(name);
         QApplication::setFont(font);
     }
 
-    QFont FontHelper::font()
+    FontLoader::FontLoader() {}
+
+    FontHelper::FontHelper() { setFont(_font); }
+    FontHelper::FontHelper(QFont font) { setFont(font); }
+
+    FontHelper& FontHelper::setFont(QFont font)
     {
-        QFont font;
-        font.setFamilies(Comm::fontFmailies);
-        font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-        return font;
+        _font = font;
+        _font.setFamilies(Comm::fontFmailies);
+        _font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        return *this;
     }
 
-    QFont FontHelper::font(QFont font)
+    FontHelper& FontHelper::setPointSize(int pointSize)
     {
-        font.setFamilies(Comm::fontFmailies);
-        font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-        return font;
+        _font.setPointSize(pointSize);
+        return *this;
     }
 
+    FontHelper& FontHelper::setPixelSize(int pixelSize)
+    {
+        _font.setPixelSize(pixelSize);
+        return *this;
+    }
 
-    FontHelper::FontHelper()
-    {}
+    FontHelper& FontHelper::setBold(bool bold)
+    {
+        _font.setBold(bold);
+        return *this;
+    }
+
+    QFont FontHelper::getFont() { return _font; }
 }
 
 

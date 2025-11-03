@@ -11,34 +11,36 @@ else
 endif
 
 
-.PHONY: clean deploy
+.PHONY: all build run clean deploy
+
+all:
+	make build && make run
 
 build:
-	mkdir -p build && \
-	cd build && \
-	qmake ../$(PROJECT_NAME).pro CONFIG+=release && \
-	$(MAKE) -j8
+	mkdir -p build
+	cd build && qmake.exe ../qt-element-ui.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+	cd build && $(MAKE) -j16
+
+run:
+	cd build/release && ./qt-element-ui
 
 clean:
 	rm -rf build
-
-run: build
-	cd build/release && ./qt-element-ui
 
 ifeq ($(OS), Windows_NT)
 deploy: build
 	cd build && $(MAKE) clean
 	cd build && cp -r release $(DEPLOY_DIR)
-	cd build && windeployqt $(DEPLOY_DIR)/$(PROJECT_NAME).exe
+	cd build && windeployqt $(DEPLOY_DIR)/qt-element-ui.exe
 	cd build && zip -r $(DEPLOY_DIR).zip $(DEPLOY_DIR)
 
 else ifeq ($(shell uname), Linux)
 deploy: build
 	cd build && $(MAKE) clean
 	cd build && mkdir -p $(DEPLOY_DIR)
-	cd build && cp $(PROJECT_NAME) $(DEPLOY_DIR)
+	cd build && cp qt-element-ui $(DEPLOY_DIR)
 	cp statics/qt-element-ui.desktop statics/qt-element-ui.png build/$(DEPLOY_DIR)
-	cd build && linuxdeployqt $(DEPLOY_DIR)/$(PROJECT_NAME) -appimage -unsupported-allow-new-glibc -always-overwrite
+	cd build && linuxdeployqt $(DEPLOY_DIR)/qt-element-ui -appimage -unsupported-allow-new-glibc -always-overwrite
 # if cannot found -lGL, do
 # `sudo apt install libgl1-mesa-dev` on Ubuntu/Debian,
 # `sudo dnf install mesa-libGL-devel` on Fedora/RHEL,

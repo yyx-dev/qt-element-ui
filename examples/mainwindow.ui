@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>9</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -2179,6 +2179,24 @@
        </rect>
       </property>
      </widget>
+     <widget class="Element::Menu" name="menu">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>20</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <attribute name="headerVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -2324,6 +2342,11 @@
    <class>Element::Slider</class>
    <extends>QSlider</extends>
    <header location="global">slider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Menu</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">menu.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

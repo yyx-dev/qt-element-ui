@@ -55,15 +55,13 @@ namespace Element
         _header->setWordWrap(true);
         _footer->setWordWrap(true);
 
-        QFont font = _header->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _header->setFont(font);
+        _header->setFont(FontHelper(_header->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
-        font = _footer->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _footer->setFont(font);
+        _footer->setFont(FontHelper(_footer->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         _mainLayout->setContentsMargins(0, 0, 0, 0);
         _mainLayout->setSpacing(0);
@@ -109,10 +107,9 @@ namespace Element
             label->setStyleSheet("border: none; ");
             label->setWordWrap(true);
 
-            QFont font = label->font();
-            font.setFamilies(Comm::fontFmailies);
-            font.setPointSize(Comm::defaultFontSize);
-            label->setFont(font);
+            label->setFont(FontHelper(label->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
             bodyLayout->addWidget(label);
         }

@@ -181,10 +181,9 @@ namespace Element
     {
         hide();
 
-        QFont font = _label->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _label->setFont(font);
+        _label->setFont(FontHelper(_label->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         setPlacement(placement);
         setEffect(effect);

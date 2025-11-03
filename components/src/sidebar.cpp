@@ -12,10 +12,7 @@ namespace Element
     SideBar::SideBar(QWidget* parent, bool isSubMenu)
         : QTabBar(parent), _isSubMenu(isSubMenu)
     {
-        QFont font;
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(9);
-        setFont(font);
+        setFont(FontHelper().setPointSize(9).getFont());
         setMouseTracking(true);
     }
 

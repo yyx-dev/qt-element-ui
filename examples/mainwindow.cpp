@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "base.h"
+#include "qglobal.h"
 #include "ui_mainwindow.h"
 
 #include "icon.h"
@@ -25,7 +27,7 @@
 #define PROGRESS 8
 #define FORM 9
 
-#define CURRENT_INDEX INPUT
+#define CURRENT_INDEX FORM
 
 using namespace Element;
 
@@ -83,11 +85,11 @@ void MainWindow::setupTab0()
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
 
-    auto setStyle = [](QWidget* widget) {
-        QFont font = widget->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        widget->setFont(font);
+    auto setStyle = [](QWidget* widget)
+    {
+        widget->setFont(FontHelper(widget->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
         widget->setStyleSheet("border: none; color: #303133;");
     };
 
@@ -490,6 +492,20 @@ void MainWindow::setupTab9()
 //    ui->rate->setShowScore(true);
 //    ui->rate->setAllowHalf(true);
     ui->rate->setTexts("oops", "disappointed", "normal", "good", "great");
+
+    ui->menu->setFixedSize(170, 600);
+
+    Menu::Item* item1 = ui->menu->addTopItem(Icon::CirclePlus, "文本");
+    ui->menu->addGroupDesc(item1, "group 1");
+    ui->menu->addSubItem(item1, "sub test1");
+    ui->menu->addSubItem(item1, "sub test2");
+
+    Menu::Item* item2 = ui->menu->addTopItem(Icon::Open, "按钮");
+    ui->menu->addGroupDesc(item2, "group 2");
+    ui->menu->addSubItem(item2, "sub test1");
+    ui->menu->addSubItem(item2, "sub test2");
+
+    ui->menu->addTopItem("test3");
 }
 
 MainWindow::~MainWindow()

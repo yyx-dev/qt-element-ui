@@ -18,9 +18,9 @@ int main(int argc, char* argv[])
 
     Element::Log::setLevel(Element::Log::Level::Debug);
 
-    Element::FontHelper::instance().setApplicationFont("微软雅黑");
-    Element::FontHelper::instance().loadFont(":/fonts/Inter-Regular.ttf", "Inter-Regular");
-    Element::FontHelper::instance().loadFont(":/fonts/NotoSans-Regular.ttf", "NotoSans-Regular");
+    Element::FontLoader::instance().setApplicationFont("微软雅黑");
+    Element::FontLoader::instance().loadFont(":/fonts/Inter-Regular.ttf", "Inter-Regular");
+    Element::FontLoader::instance().loadFont(":/fonts/NotoSans-Regular.ttf", "NotoSans-Regular");
 
     MainWindow w;
 

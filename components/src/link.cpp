@@ -13,11 +13,10 @@ namespace Element
         , _type(Type::Default)
         , _underline(Underline::Default)
     {
-        QFont font;
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        font.setBold(true);
-        QLabel::setFont(font);
+        QLabel::setFont(FontHelper()
+                .setPointSize(Comm::defaultFontSize)
+                .setBold(true)
+                .getFont());
 
         setType(_type);
         setUnderline(_underline);

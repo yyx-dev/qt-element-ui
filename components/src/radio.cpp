@@ -20,9 +20,7 @@ namespace Element
     Radio::Radio(const QString& text, bool checked, QWidget* parent)
         : QRadioButton(text, parent)
     {
-        QFont font = FontHelper::font();
-        font.setPixelSize(16);
-        QRadioButton::setFont(font);
+        QRadioButton::setFont(FontHelper().setPixelSize(16).getFont());
 
         _qsshelper.setProperty("QRadioButton", "spacing", "10px");
         _qsshelper.setProperty("QRadioButton", "color", Color::regularText());
@@ -81,9 +79,9 @@ namespace Element
     {
         _size = size;
 
-        QFont font = QRadioButton::font();
-        font.setPixelSize(size == Size::Small ? 14 : 16);
-        QRadioButton::setFont(font);
+        QRadioButton::setFont(FontHelper(QRadioButton::font())
+                .setPixelSize(size == Size::Small ? 14 : 16)
+                .getFont());
 
         if (size == Size::Small)
         {

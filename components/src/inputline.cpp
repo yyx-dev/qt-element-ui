@@ -133,7 +133,7 @@ namespace Element
 
     InputLine& InputLine::setSuffixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
-        if (Icon::isNull(icon))
+        if (Icon::isNone(icon))
         {
             if (_suffixAction)
             {
@@ -177,7 +177,7 @@ namespace Element
 
     InputLine& InputLine::setPrefixIcon(Icon::Name icon, const std::function<void()>& callback)
     {
-        if (Icon::isNull(icon))
+        if (Icon::isNone(icon))
         {
             if (_prefixAction)
             {

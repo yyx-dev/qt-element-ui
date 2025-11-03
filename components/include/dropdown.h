@@ -18,7 +18,7 @@
 
 namespace Element
 {
-    class Menu;
+    class MenuforDropdown;
 
     class Dropdown : public QWidget
     {
@@ -40,16 +40,16 @@ namespace Element
     private:
         Text* _text;
         QLabel* _icon;
-        Menu * _menu;
+        MenuforDropdown * _menu;
         QHash<QString, QAction*>* _actions;
     };
 
-    class Menu : public QMenu
+    class MenuforDropdown : public QMenu
     {
     Q_OBJECT
 
     public:
-        Menu(QWidget* parent = nullptr);
+        MenuforDropdown(QWidget* parent = nullptr);
     protected:
         bool event(QEvent* e) override;
     };

@@ -1,13 +1,13 @@
 #include "notification.h"
 #include "base.h"
 #include "icon.h"
+#include "shadow.h"
 
 #include <QBoxLayout>
 #include <QPainter>
 #include <QTimer>
 #include <QHash>
 #include <QEvent>
-#include <QGraphicsDropShadowEffect>
 
 
 
@@ -58,17 +58,16 @@ namespace Element
 
     void Notification::setupUI()
     {
-        QFont font = _title->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setBold(true);
-        font.setPointSize(Comm::largeFontSize);
-        _title->setFont(font);
-        _title->adjustSize();
+        _title->setFont(FontHelper(_title->font())
+                .setPointSize(Comm::largeFontSize)
+                .setBold(true)
+                .getFont());
 
-        font = _content->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _content->setFont(font);
+        _content->setFont(FontHelper(_content->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
+
+        _title->adjustSize();
         _content->setWordWrap(true);
         _content->adjustSize();
 
@@ -85,12 +84,7 @@ namespace Element
         palette.setColor(QPalette::WindowText, Color::regularText());
         _content->setPalette(palette);
 
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
-        shadowEffect->setBlurRadius(15);
-        shadowEffect->setXOffset(0);
-        shadowEffect->setYOffset(0);
-        shadowEffect->setColor(QColor(0, 0, 0, 50));
-        QWidget::setGraphicsEffect(shadowEffect);
+        Element::Shadow::setShadow(this, Shadow::Type::Dark);
     }
 
     void Notification::show()

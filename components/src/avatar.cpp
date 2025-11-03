@@ -110,11 +110,10 @@ namespace Element
         }
         else if (_type == Type::Text)
         {
-            QFont font = FontHelper::font();
-            font.setBold(true);
-            if (_size == Size::Default || _size == Size::Large) font.setPointSize(Comm::defaultFontSize);
-            else if (_size == Size::Small) font.setPointSize(Comm::smallFontSize);
-
+            QFont font = FontHelper()
+                .setPointSize(_size == Size::Small ? Comm::smallFontSize : Comm::defaultFontSize)
+                .setBold()
+                .getFont();
             painter.setPen(Qt::white);
             painter.setFont(font);
 

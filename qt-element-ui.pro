@@ -1,7 +1,6 @@
 QT += core widgets gui svg
 
-CONFIG += c++17
-
+CONFIG += c++17 console
 
 INC = components/include
 SRC = components/src
@@ -33,4 +32,3 @@ TRANSLATIONS += \
 win32 {
     LIBS += -lgdi32
 }
-

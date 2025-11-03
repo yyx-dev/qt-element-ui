@@ -58,7 +58,7 @@ namespace Element
 
         QSvgRenderer* getRenderer(Name icon, const QString& color, QObject* parent);
 
-        static bool isNull(Icon::Name icon) { return icon == Icon::None; }
+        static bool isNone(Icon::Name icon) { return icon == Icon::None; }
 
     private:
         Icon();

@@ -32,10 +32,9 @@ namespace Element
                           "<span style='color:#409EFF;'>click to upload</span>");
         _dropTip->setAlignment(Qt::AlignCenter);
 
-        QFont font = _dropTip->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _dropTip->setFont(font);
+        _dropTip->setFont(FontHelper(_dropTip->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         QVBoxLayout* layout = new QVBoxLayout(this);
         layout->setAlignment(Qt::AlignCenter);
@@ -205,10 +204,9 @@ namespace Element
 
         _name->setStyleSheet("QLabel { color: #606266; }");
 
-        QFont font = _name->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _name->setFont(font);
+        _name->setFont(FontHelper(_name->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         QHBoxLayout* layout = new QHBoxLayout(this);
         layout->setContentsMargins(0, 0, 0, 0);

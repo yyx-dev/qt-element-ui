@@ -35,10 +35,9 @@ namespace Element
         setWindowFlags(Qt::FramelessWindowHint);
         setAttribute(Qt::WA_DeleteOnClose);
 
-        QFont font = _text->font();
-        font.setFamilies(Comm::fontFmailies);
-        font.setPointSize(Comm::defaultFontSize);
-        _text->setFont(font);
+        _text->setFont(FontHelper(_text->font())
+                .setPointSize(Comm::defaultFontSize)
+                .getFont());
 
         QHBoxLayout *layout = new QHBoxLayout(this);
         layout->setContentsMargins(10, 10, 10, 10);

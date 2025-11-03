@@ -20,9 +20,7 @@ namespace Element
         layout->setSpacing(0);
         layout->addWidget(_label);
 
-        QFont font = FontHelper::font();
-        font.setPixelSize(16);
-        _label->setFont(font);
+        _label->setFont(FontHelper().setPixelSize(16).getFont());
 
         _qsshelper.setProperty("QWidget", "color", Color::regularText());
         _qsshelper.setProperty("QWidget", "padding-left", "15px");

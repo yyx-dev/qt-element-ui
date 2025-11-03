@@ -25,16 +25,14 @@ namespace Element
         , _content(new QLabel(content, this))
         , _icon(new QLabel(this))
     {
-        QFont font = _title->font();
-        font.setPointSize(9);
-        font.setFamilies(Comm::fontFmailies);
-        font.setBold(true);
-        _title->setFont(font);
+        _title->setFont(FontHelper(_title->font())
+                .setPointSize(9)
+                .setBold()
+                .getFont());
 
-        font = _content->font();
-        font.setPointSize(9);
-        font.setFamilies(Comm::fontFmailies);
-        _content->setFont(font);
+        _content->setFont(FontHelper(_content->font())
+                .setPointSize(9)
+                .getFont());
 
         _title->setFixedHeight(60);
         _icon->setFixedHeight(60);

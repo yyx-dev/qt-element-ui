@@ -19,9 +19,10 @@ namespace Element
         setAttribute(Qt::WA_TransparentForMouseEvents); // 允许鼠标事件穿透到父控件
         setAlignment(Qt::AlignCenter);
 
-        QFont font = FontHelper::font();
-        font.setBold(true);
-        font.setPointSize(7);
+        setFont(FontHelper()
+                .setPointSize(Comm::smallFontSize)
+                .setBold()
+                .getFont());
 
         _qsshelper.setProperty("QLabel", "color", "white")
                 .setProperty("QLabel", "border", "none")

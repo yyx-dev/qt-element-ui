@@ -1,5 +1,6 @@
 #pragma once
 
+#include "qfont.h"
 #include <QWidget>
 #include <QFontDatabase>
 #include <QHash>
@@ -50,20 +51,35 @@ namespace Element
         static Level _level;
     };
 
+    class FontLoader
+    {
+    public:
+        static FontLoader& instance();
+        void loadFont(const QString& fontPath, const QString& name = "");
+        void setApplicationFont(const QString& name);
+
+    private:
+        FontLoader();
+        FontLoader(const FontLoader&) = delete;
+        FontLoader& operator=(const FontLoader&) = delete;
+
+    private:
+        QHash<QString, QString> _fontMap;
+    };
+
     class FontHelper
     {
     public:
-        static FontHelper& instance();
-        void loadFont(const QString& fontPath, const QString& name = "");
-        void setApplicationFont(const QString& name);
-        static QFont font();
-        static QFont font(QFont font);
-    private:
         FontHelper();
-        FontHelper(const FontHelper&) = delete;
-        FontHelper& operator=(const FontHelper&) = delete;
+        FontHelper(QFont font);
+        FontHelper& setFont(QFont font);
+        FontHelper& setPointSize(int pointSize);
+        FontHelper& setPixelSize(int pixelSize);
+        FontHelper& setBold(bool bold = true);
+        QFont getFont();
+
     private:
-        QHash<QString, QString> _fontMap;
+        QFont _font;
     };
 
     class ScaleHelper
@@ -80,9 +96,4 @@ namespace Element
     private:
         qreal _factor;
     };
-}
-
-namespace Element
-{
-
 }

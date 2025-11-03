@@ -1,4 +1,7 @@
 #include "switch.h"
+#include "base.h"
+#include "qfont.h"
+#include "qwidget.h"
 
 #include <QPainter>
 #include <QMouseEvent>
@@ -21,7 +24,7 @@ namespace Element
     Switch::Switch(bool active, const QString& activeText, const QString& inactiveText, QWidget* parent)
         : QWidget(parent)
     {
-        setFont(FontHelper::font());
+        setFont(FontHelper().getFont());
         setCursor(Qt::PointingHandCursor);
 
         setSize(_size);
@@ -195,10 +198,10 @@ namespace Element
             iconRect.moveCenter(thumbRect.center());
             painter.drawPixmap(iconRect, pixmap, pixmap.rect());
         }
-        else if (!Icon::isNull(_activeActionIcon) || !Icon::isNull(_inactiveActionIcon))
+        else if (!Icon::isNone(_activeActionIcon) || !Icon::isNone(_inactiveActionIcon))
         {
             Icon::Name icon = _active ? _activeActionIcon : _inactiveActionIcon;
-            if (Icon::isNull(icon))
+            if (Icon::isNone(icon))
                 return;
 
             QPixmap pixmap = Icon::instance().getPixmap(icon,
@@ -209,10 +212,9 @@ namespace Element
         }
         else if (_activeActionChar != 0 || _inactiveActionChar != 0)
         {
-            QFont font = QWidget::font();
-            font.setPointSize(11);
-
-            painter.setFont(font);
+            painter.setFont(FontHelper(QWidget::font())
+                    .setPointSize(11)
+                    .getFont());
             painter.setPen(_active ? _activeColor : _inactiveColor);
 
             QString text = QString(_active ? _activeActionChar : _inactiveActionChar);
@@ -229,9 +231,9 @@ namespace Element
         if (!_activeText.isEmpty() || !_inactiveText.isEmpty())
         {
             QFont font = QWidget::font();
-            font.setPointSize(9); // web : 12px == pointsize : 9 == pixelsize : 15
-
-            painter.setFont(font);
+            painter.setFont(FontHelper(font)
+                    .setPointSize(9) // web : 12px == pointsize : 9 == pixelsize : 15
+                    .getFont());
             painter.setPen(Color::blankFill());
 
             QString text = _active ? _activeText : _inactiveText;
@@ -241,10 +243,10 @@ namespace Element
                            _size == Size::Large ? 50 : _size == Size::Default ? 40 : 30);
             setFixedWidth(width);
         }
-        else if (!Icon::isNull(_activeIcon) || !Icon::isNull(_inactiveIcon))
+        else if (!Icon::isNone(_activeIcon) || !Icon::isNone(_inactiveIcon))
         {
             Icon::Name icon = _active ? _activeIcon : _inactiveIcon;
-            if (Icon::isNull(icon))
+            if (Icon::isNone(icon))
                 return;
 
             QPixmap pixmap = Icon::instance().getPixmap(icon, Color::blankFill(), 18);

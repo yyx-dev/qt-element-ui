@@ -19,9 +19,9 @@ namespace Element
     Checkbox::Checkbox(const QString& text, bool checked, QWidget* parent)
         : QCheckBox(text, parent)
     {
-        QFont font = FontHelper::font();
-        font.setPixelSize(16);
-        QCheckBox::setFont(font);
+        QCheckBox::setFont(FontHelper()
+                .setPixelSize(16)
+                .getFont());
 
         _qsshelper.setProperty("QCheckBox", "spacing", "10px");
         _qsshelper.setProperty("QCheckBox", "color", Color::regularText());
@@ -85,9 +85,10 @@ namespace Element
     {
         _size = size;
 
-        QFont font = QCheckBox::font();
-        font.setPixelSize(size == Size::Small ? 14 : 16);
-        QCheckBox::setFont(font);
+        QCheckBox::setFont(FontHelper()
+                .setFont(QCheckBox::font())
+                .setPixelSize(size == Size::Small ? 14 : 16)
+                .getFont());
 
         if (size == Size::Small)
         {
