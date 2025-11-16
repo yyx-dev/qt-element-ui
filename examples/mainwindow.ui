@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>10</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -2184,8 +2184,8 @@
        <rect>
         <x>470</x>
         <y>20</y>
-        <width>256</width>
-        <height>192</height>
+        <width>211</width>
+        <height>531</height>
        </rect>
       </property>
       <attribute name="headerVisible">
@@ -2196,6 +2196,96 @@
         <string notr="true">1</string>
        </property>
       </column>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_10">
+     <attribute name="title">
+      <string>页面</string>
+     </attribute>
+     <widget class="Element::Tabs" name="tabs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>461</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="tab1_tabs">
+       <attribute name="title">
+        <string>User</string>
+       </attribute>
+       <widget class="QLabel" name="label_user">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>40</y>
+          <width>121</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>User</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab2_tabs">
+       <attribute name="title">
+        <string>Config</string>
+       </attribute>
+       <widget class="QLabel" name="label_config">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>40</y>
+          <width>121</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Config</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab3_tabs">
+       <attribute name="title">
+        <string>Role</string>
+       </attribute>
+       <widget class="QLabel" name="label_role">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>40</y>
+          <width>121</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Role</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab4_tabs">
+       <attribute name="title">
+        <string>Task</string>
+       </attribute>
+       <widget class="QLabel" name="label_task">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>40</y>
+          <width>121</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Task</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -2347,6 +2437,12 @@
    <class>Element::Menu</class>
    <extends>QTreeWidget</extends>
    <header location="global">menu.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Tabs</class>
+   <extends>QTabWidget</extends>
+   <header location="global">tabs.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "qfont.h"
+#include "qpainter.h"
 #include <QWidget>
 #include <QFontDatabase>
 #include <QHash>
@@ -78,6 +79,9 @@ namespace Element
         FontHelper& setBold(bool bold = true);
         QFont getFont();
 
+        int getTextWidth(const QString& text);
+        int getTextHeight();
+
     private:
         QFont _font;
     };
@@ -95,5 +99,11 @@ namespace Element
         ScaleHelper& operator=(const ScaleHelper&) = delete;
     private:
         qreal _factor;
+    };
+
+    class DebugHelper
+    {
+    public:
+        static void drawBorder(QPainter& painter, const QRect& rect);
     };
 }

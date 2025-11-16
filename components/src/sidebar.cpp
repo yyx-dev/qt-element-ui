@@ -1,6 +1,7 @@
 #include "sidebar.h"
 #include "color.h"
 #include "base.h"
+#include "qglobal.h"
 
 #include <QPainter>
 
@@ -12,6 +13,8 @@ namespace Element
     SideBar::SideBar(QWidget* parent, bool isSubMenu)
         : QTabBar(parent), _isSubMenu(isSubMenu)
     {
+        setObjectName("SideBar");
+
         setFont(FontHelper().setPointSize(9).getFont());
         setMouseTracking(true);
     }
@@ -66,15 +69,18 @@ namespace Element
     TabWidget::TabWidget(QWidget* parent)
         : QTabWidget(parent)
     {
+        setObjectName("tabWidget");
+
         setTabBar(new SideBar(this));
         setTabPosition(QTabWidget::West);
         setMovable(false);
         setDocumentMode(true);
 
-        _qsshelper.setProperty("QTabWidget:pane", "border", "none");
-        _qsshelper.setProperty("QTabBar:tab", "padding", "10px 20px");
-        _qsshelper.setProperty("QTabBar:tab", "width", "130px");
-        _qsshelper.setProperty("QTabBar:tab", "height", "50px");
+        _qsshelper.setProperty("QTabWidget#tabWidget:pane", "border", "none");
+        _qsshelper.setProperty("QTabBar#SideBar::tab", "padding", "10px 20px");
+        _qsshelper.setProperty("QTabBar#SideBar::tab", "width", "130px");
+        _qsshelper.setProperty("QTabBar#SideBar::tab", "height", "50px");
+
         setStyleSheet(_qsshelper.generate());
 
         connect(this, &QTabWidget::currentChanged, this, &TabWidget::handleTabClicked);

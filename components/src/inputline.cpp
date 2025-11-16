@@ -233,9 +233,8 @@ namespace Element
             QString labelText = QString("0 / %1").arg(_maxLength);
             _maxLengthLabel->setText(labelText);
 
-            QFontMetrics fontMetrics(_maxLengthLabel->font());
-            int textWidth = fontMetrics.horizontalAdvance(labelText);
-            int textHeight = fontMetrics.height();
+            int textWidth = FontHelper(_maxLengthLabel->font()).getTextWidth(labelText);
+            int textHeight = FontHelper(_maxLengthLabel->font()).getTextHeight();
 
             int inputWidth = width();
             int inputHeight = height();

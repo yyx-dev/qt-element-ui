@@ -1,5 +1,4 @@
 #include "base.h"
-#include "color.h"
 #include "qfont.h"
 
 #include <QPainter>
@@ -255,6 +254,17 @@ namespace Element
     }
 
     QFont FontHelper::getFont() { return _font; }
+
+    int FontHelper::getTextWidth(const QString& text)
+    {
+        return QFontMetrics(_font).horizontalAdvance(text);
+    }
+
+    int FontHelper::getTextHeight()
+    {
+        return QFontMetrics(_font).height();
+    }
+
 }
 
 
@@ -299,5 +309,12 @@ namespace Element
 
 namespace Element
 {
+    void DebugHelper::drawBorder(QPainter& painter, const QRect& rect)
+    {
+        QPen redPen(Qt::red, 1);
+        painter.setPen(redPen);
+        painter.setBrush(Qt::NoBrush);
+        painter.drawRect(rect);
+    }
 
 }

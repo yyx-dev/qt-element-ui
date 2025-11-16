@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "base.h"
 #include "qglobal.h"
+#include "qlabel.h"
 #include "ui_mainwindow.h"
 
 #include "icon.h"
@@ -26,8 +27,9 @@
 #define PANEL 7
 #define PROGRESS 8
 #define FORM 9
+#define TABS 10
 
-#define CURRENT_INDEX FORM
+#define CURRENT_INDEX TABS
 
 using namespace Element;
 
@@ -53,6 +55,7 @@ MainWindow::MainWindow(QWidget* parent)
     setupTab7();
     setupTab8();
     setupTab9();
+    setupTab10();
 
     ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
 
@@ -74,6 +77,7 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(7, Icon::Postcard);
     ui->tabWidget->setTabIcon(8, Icon::Operation);
     ui->tabWidget->setTabIcon(9, Icon::Odometer);
+    ui->tabWidget->setTabIcon(10, Icon::DocumentCopy);
 }
 
 void MainWindow::setupTab0()
@@ -506,6 +510,24 @@ void MainWindow::setupTab9()
     ui->menu->addSubItem(item2, "sub test2");
 
     ui->menu->addTopItem("test3");
+}
+
+void MainWindow::setupTab10()
+{
+    ui->tabs->setTabPosition(Tabs::TabPosition::Top);
+    ui->tabs->setType(Tabs::Type::BorderCard);
+
+
+    auto setLabel = [](QLabel* label) {
+        label->setFont(FontHelper().setBold().getFont());
+        label->setStyleSheet("QLabel{ font-size: 32px; color: #6B778C; }");
+        label->raise();
+    };
+
+    setLabel(ui->label_user);
+    setLabel(ui->label_config);
+    setLabel(ui->label_role);
+    setLabel(ui->label_task);
 }
 
 MainWindow::~MainWindow()

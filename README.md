@@ -35,3 +35,7 @@
 ---
 
 <img src="./images/form-example.png"  />
+
+---
+
+<img src="./images/tabs-example.png"  />
