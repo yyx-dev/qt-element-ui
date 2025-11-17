@@ -84,7 +84,7 @@ namespace Element
         palette.setColor(QPalette::WindowText, Color::regularText());
         _content->setPalette(palette);
 
-        Element::Shadow::setShadow(this, Shadow::Type::Dark);
+        BackdropEffect::setShadow(this, BackdropEffect::ShadowType::Dark);
     }
 
     void Notification::show()

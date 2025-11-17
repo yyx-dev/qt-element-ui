@@ -68,7 +68,7 @@ namespace Element
 
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-        Element::Shadow::setShadow(this, Element::Shadow::Type::Basic);
+        BackdropEffect::setShadow(this, BackdropEffect::BackdropEffect::ShadowType::Basic);
 
         setFixedSize(width, _padding * 2 + 2);
         addItems(data);

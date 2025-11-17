@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "base.h"
+#include "drawer.h"
 #include "qglobal.h"
 #include "qlabel.h"
 #include "ui_mainwindow.h"
@@ -112,10 +113,10 @@ void MainWindow::setupTab0()
     ui->shadow_3->appendPlainText("\n\n     Shadow Lighter");
     ui->shadow_4->appendPlainText("\n\n      Shadow Dark");
 
-    Shadow::setShadow(ui->shadow_1, Shadow::Type::Basic);
-    Shadow::setShadow(ui->shadow_2, Shadow::Type::Light);
-    Shadow::setShadow(ui->shadow_3, Shadow::Type::Lighter);
-    Shadow::setShadow(ui->shadow_4, Shadow::Type::Dark);
+    BackdropEffect::setShadow(ui->shadow_1, BackdropEffect::ShadowType::Basic);
+    BackdropEffect::setShadow(ui->shadow_2, BackdropEffect::ShadowType::Light);
+    BackdropEffect::setShadow(ui->shadow_3, BackdropEffect::ShadowType::Lighter);
+    BackdropEffect::setShadow(ui->shadow_4, BackdropEffect::ShadowType::Dark);
 }
 
 void MainWindow::setupTab1()
@@ -528,6 +529,15 @@ void MainWindow::setupTab10()
     setLabel(ui->label_config);
     setLabel(ui->label_role);
     setLabel(ui->label_task);
+
+    Drawer* drawer = new Drawer(this);
+    connect(drawer, &Drawer::confirm, []() {
+        qDebug() << "Confirm Button Clicked";
+    });
+
+    connect(ui->button_64, &Button::clicked, [drawer]() {
+        drawer->setVisible(!drawer->isVisible());
+    });
 }
 
 MainWindow::~MainWindow()

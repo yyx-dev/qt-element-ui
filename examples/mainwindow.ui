@@ -2287,6 +2287,19 @@
        </widget>
       </widget>
      </widget>
+     <widget class="Element::Button" name="button_64">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>490</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>toggle drawer</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

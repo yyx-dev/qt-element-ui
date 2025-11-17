@@ -35,7 +35,7 @@ namespace Element
         setSize(_size);
         setType(_type);
 
-        Element::Shadow::setShadow(this, Element::Shadow::Type::Lighter);
+        BackdropEffect::setShadow(this, BackdropEffect::BackdropEffect::ShadowType::Lighter);
     }
 
     Backtop& Backtop::setShape(Shape shape)
