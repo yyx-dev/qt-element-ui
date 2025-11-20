@@ -4,7 +4,7 @@
 #include "base.h"
 
 #include <QPainter>
-
+#include <QGraphicsDropShadowEffect>
 
 namespace Element
 {

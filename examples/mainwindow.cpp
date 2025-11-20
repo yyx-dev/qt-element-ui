@@ -30,7 +30,7 @@
 #define FORM 9
 #define TABS 10
 
-#define CURRENT_INDEX TABS
+#define CURRENT_INDEX FORM
 
 using namespace Element;
 
@@ -512,15 +512,20 @@ void MainWindow::setupTab9()
 
     Menu::Item* item1 = ui->menu->addTopItem(Icon::CirclePlus, "文本");
     ui->menu->addGroupDesc(item1, "group 1");
-    ui->menu->addSubItem(item1, "sub test1");
-    ui->menu->addSubItem(item1, "sub test2");
+    Menu::Item* i11 = ui->menu->addSubItem(item1, "sub test1");
+    Menu::Item* i12 = ui->menu->addSubItem(item1, "sub test2");
 
     Menu::Item* item2 = ui->menu->addTopItem(Icon::Open, "按钮");
     ui->menu->addGroupDesc(item2, "group 2");
-    ui->menu->addSubItem(item2, "sub test1");
-    ui->menu->addSubItem(item2, "sub test2");
+    Menu::Item* i21 = ui->menu->addSubItem(item2, "sub test1");
+    Menu::Item* i22 = ui->menu->addSubItem(item2, "sub test2");
 
-    ui->menu->addTopItem("test3");
+    Menu::Item* i31 = ui->menu->addTopItem("test3");
+
+    ui->stack->setMenu(ui->menu);
+
+    ui->stack->addWidget(i11, ui->label_user);
+    ui->stack->addWidget(i12, ui->label_user);
 }
 
 void MainWindow::setupTab10()

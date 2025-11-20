@@ -8,35 +8,32 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-namespace Element
+class MainWindow : public QMainWindow
 {
-    class MainWindow : public QMainWindow
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        void setWindowIcon(Icon::Name icon);
+public:
+    void setWindowIcon(Element::Icon::Name icon);
 
-    public:
-        MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    private:
-        void setupWindow();
-        void setupTabs();
-        void setupTab0();
-        void setupTab1();
-        void setupTab2();
-        void setupTab3();
-        void setupTab4();
-        void setupTab5();
-        void setupTab6();
-        void setupTab7();
-        void setupTab8();
-        void setupTab9();
-        void setupTab10();
+private:
+    void setupWindow();
+    void setupTabs();
+    void setupTab0();
+    void setupTab1();
+    void setupTab2();
+    void setupTab3();
+    void setupTab4();
+    void setupTab5();
+    void setupTab6();
+    void setupTab7();
+    void setupTab8();
+    void setupTab9();
+    void setupTab10();
 
-    private:
-        Ui::MainWindow *ui;
-    };
-}
+private:
+    Ui::MainWindow *ui;
+};

@@ -1,6 +1,6 @@
 #include "shadow.h"
-#include <QPainter>
-#include <QEvent>
+
+#include <QGraphicsDropShadowEffect>
 
 namespace Element
 {
@@ -45,58 +45,4 @@ namespace Element
         widget->setGraphicsEffect(shadow);
     }
 
-    Mask* ShadowEf::setBgMask(QWidget* widget)
-    {
-        return new Mask(widget);
-    }
-
-    Mask::Mask(QWidget* partner)
-        : QWidget(partner->parentWidget())
-        , _partner(partner)
-    {
-        setGeometry(parentWidget()->rect());
-        partner->installEventFilter(this);
-    }
-
-    bool Mask::eventFilter(QObject* watched, QEvent* event)
-    {
-        if (watched == _partner)
-        {
-            if (event->type() == QEvent::Show)
-            {
-                show();
-                stackUnder(_partner);
-            }
-            else if (event->type() == QEvent::Hide)
-            {
-                hide();
-            }
-            else if (event->type() == QEvent::Destroy)
-            {
-                deleteLater();
-            }
-            return false;
-        }
-        else if (watched == parentWidget())
-        {
-            if (event->type() == QEvent::Resize)
-            {
-                setGeometry(parentWidget()->rect());
-            }
-            return false;
-        }
-
-        return QWidget::eventFilter(watched, event);
-    }
-
-    void Mask::paintEvent(QPaintEvent* event)
-    {
-        QPainter painter(this);
-        painter.fillRect(rect(), QColor(0, 0, 0, 128));
-    }
-
-    void Mask::mousePressEvent(QMouseEvent* event)
-    {
-        emit clicked();
-    }
 }

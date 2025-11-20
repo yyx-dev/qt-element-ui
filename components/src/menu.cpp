@@ -82,51 +82,47 @@ namespace Element
 
     Menu::Item* Menu::addTopItem(Icon::Name icon, const QString& text)
     {
-        QTreeWidgetItem* item = new QTreeWidgetItem(this);
-        setItemWidget(item, 0, new MenuItemWidget(MenuItemWidget::Type::TopItem, text, icon, item));
+        Item* item = new Item(this);
+        setItemWidget(item, 0, new Widget(Widget::Type::TopItem, text, icon, item));
         return item;
     }
 
-    Menu& Menu::addSubItem(Item* topLevelItem, const QString& text)
+    Menu::Item* Menu::addSubItem(Item* topItem, const QString& text)
     {
-        QTreeWidgetItem* item = new QTreeWidgetItem(topLevelItem);
-        setItemWidget(item, 0, new MenuItemWidget(MenuItemWidget::Type::SubItem, text, item));
-        return *this;
+        Item* item = new Item(topItem);
+        setItemWidget(item, 0, new Widget(Widget::Type::SubItem, text, item));
+        return item;
     }
 
-    Menu& Menu::addGroupDesc(Item* topLevelItem, const QString& text)
+    void Menu::addGroupDesc(Item* topItem, const QString& text)
     {
-        QTreeWidgetItem* item = new QTreeWidgetItem(topLevelItem);
-        setItemWidget(item, 0, new MenuItemWidget(MenuItemWidget::Type::GroupDesc, text, item));
-        return *this;
+        Item* item = new Item(topItem);
+        setItemWidget(item, 0, new Widget(Widget::Type::GroupDesc, text, item));
     }
 
     void Menu::mousePressEvent(QMouseEvent* event)
     {
         if (event->button() == Qt::LeftButton)
         {
-            QTreeWidgetItem* item = itemAt(event->pos());
+            Item* item = itemAt(event->pos());
 
             if (!item) return;
 
-            if (item->childCount() > 0)
+            if (item->childCount() > 0) // 有子项
             {
                 item->setExpanded(!item->isExpanded());
                 event->accept();
-                return;
             }
-            else // 需排除groupdesc
+            else
             {
-                MenuItemWidget* widget = qobject_cast<MenuItemWidget*>(itemWidget(item, 0));
-                if (widget && widget->getType() == MenuItemWidget::Type::GroupDesc)
+                auto* widget = qobject_cast<Widget*>(itemWidget(item, 0));
+                if (!widget) return;
+
+                if (widget->getType() != Widget::Type::GroupDesc)
                 {
-                    event->accept();
-                    return;
+                    itemClicked(item);
                 }
-                else
-                {
-                    qDebug() << "Menu selected item:" << widget;
-                }
+                event->accept();
             }
         }
 

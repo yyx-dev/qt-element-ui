@@ -14,6 +14,7 @@ namespace Element
 
     public:
         using Item = QTreeWidgetItem;
+        using Widget = MenuItemWidget;
 
         enum class Type
         {
@@ -24,6 +25,7 @@ namespace Element
 
     public:
         Type getType() { return _type; }
+        QString getText() { return _text; }
 
     public:
         MenuItemWidget(Type type, const QString& text, Item* item, QWidget* parent = nullptr);
@@ -44,13 +46,16 @@ namespace Element
         Q_OBJECT
     public:
         using Item = QTreeWidgetItem;
+        using Widget = MenuItemWidget;
 
     public:
         Item* addTopItem(const QString& text);
         Item* addTopItem(Icon::Name icon, const QString& text);
+        Item* addSubItem(Item* topItem, const QString& text);
+        void  addGroupDesc(Item* topItem, const QString& text);
 
-        Menu& addSubItem(Item* topLevelItem, const QString& text);
-        Menu& addGroupDesc(Item* topLevelItem, const QString& text);
+    signals:
+        void itemClicked(Item* item);
 
     public:
         Menu(QWidget* parent = nullptr);
@@ -58,7 +63,6 @@ namespace Element
     protected:
         void mousePressEvent(QMouseEvent* event) override;
 
-    private:
     private:
     };
 

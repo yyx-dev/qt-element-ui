@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>9</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -2184,7 +2184,7 @@
        <rect>
         <x>470</x>
         <y>20</y>
-        <width>211</width>
+        <width>181</width>
         <height>531</height>
        </rect>
       </property>
@@ -2196,6 +2196,19 @@
         <string notr="true">1</string>
        </property>
       </column>
+     </widget>
+     <widget class="Element::Stack" name="stack">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>20</y>
+        <width>461</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_10">
@@ -2297,7 +2310,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>toggle drawer</string>
+       <string>open drawer</string>
       </property>
      </widget>
     </widget>
@@ -2308,152 +2321,158 @@
   <customwidget>
    <class>Element::Text</class>
    <extends>QLabel</extends>
-   <header location="global">text.h</header>
+   <header>text.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Button</class>
    <extends>QPushButton</extends>
-   <header location="global">button.h</header>
+   <header>button.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Link</class>
    <extends>QLabel</extends>
-   <header location="global">link.h</header>
+   <header>link.h</header>
   </customwidget>
   <customwidget>
    <class>Element::InputText</class>
    <extends>QTextEdit</extends>
-   <header location="global">inputtext.h</header>
+   <header>inputtext.h</header>
   </customwidget>
   <customwidget>
    <class>Element::InputLine</class>
    <extends>QLineEdit</extends>
-   <header location="global">inputline.h</header>
+   <header>inputline.h</header>
   </customwidget>
   <customwidget>
    <class>Element::InputNumber</class>
    <extends>QSpinBox</extends>
-   <header location="global">inputnumber.h</header>
+   <header>inputnumber.h</header>
   </customwidget>
   <customwidget>
    <class>Element::InputTag</class>
    <extends>QLineEdit</extends>
-   <header location="global">inputtag.h</header>
+   <header>inputtag.h</header>
   </customwidget>
   <customwidget>
    <class>Element::TabWidget</class>
    <extends>QTabWidget</extends>
-   <header location="global">sidebar.h</header>
+   <header>tabwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Dropdown</class>
    <extends>QWidget</extends>
-   <header location="global">dropdown.h</header>
+   <header>dropdown.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Avatar</class>
    <extends>QLabel</extends>
-   <header location="global">avatar.h</header>
+   <header>avatar.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Tag</class>
    <extends>QLabel</extends>
-   <header location="global">tag.h</header>
+   <header>tag.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Table</class>
    <extends>QTableWidget</extends>
-   <header location="global">table.h</header>
+   <header>table.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Backtop</class>
    <extends>QLabel</extends>
-   <header location="global">backtop.h</header>
+   <header>backtop.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Card</class>
    <extends>QWidget</extends>
-   <header location="global">card.h</header>
+   <header>card.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::CollapseItem</class>
    <extends>QWidget</extends>
-   <header location="global">collapse.h</header>
+   <header>collapse.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Collapse</class>
    <extends>QWidget</extends>
-   <header location="global">collapse.h</header>
+   <header>collapse.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Upload</class>
    <extends>QWidget</extends>
-   <header location="global">upload.h</header>
+   <header>upload.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::PopList</class>
    <extends>QListWidget</extends>
-   <header location="global">autocomplete.h</header>
+   <header>autocomplete.h</header>
   </customwidget>
   <customwidget>
    <class>Element::AutoComplete</class>
    <extends>QLineEdit</extends>
-   <header location="global">autocomplete.h</header>
+   <header>autocomplete.h</header>
   </customwidget>
   <customwidget>
    <class>Element::CheckboxGroup</class>
    <extends>QGroupBox</extends>
-   <header location="global">checkbox.h</header>
+   <header>checkbox.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Checkbox</class>
    <extends>QCheckBox</extends>
-   <header location="global">checkbox.h</header>
+   <header>checkbox.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Radio</class>
    <extends>QRadioButton</extends>
-   <header location="global">radio.h</header>
+   <header>radio.h</header>
   </customwidget>
   <customwidget>
    <class>Element::RadioGroup</class>
    <extends>QGroupBox</extends>
-   <header location="global">radio.h</header>
+   <header>radio.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Rate</class>
    <extends>QWidget</extends>
-   <header location="global">rate.h</header>
+   <header>rate.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Switch</class>
    <extends>QWidget</extends>
-   <header location="global">switch.h</header>
+   <header>switch.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>Element::Slider</class>
    <extends>QSlider</extends>
-   <header location="global">slider.h</header>
+   <header>slider.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Menu</class>
    <extends>QTreeWidget</extends>
-   <header location="global">menu.h</header>
+   <header>menu.h</header>
   </customwidget>
   <customwidget>
    <class>Element::Tabs</class>
    <extends>QTabWidget</extends>
-   <header location="global">tabs.h</header>
+   <header>tabs.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Stack</class>
+   <extends>QStackedWidget</extends>
+   <header>stack.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

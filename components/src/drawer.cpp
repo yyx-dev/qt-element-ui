@@ -4,6 +4,7 @@
 #include "color.h"
 #include "base.h"
 #include "shadow.h"
+#include "mask.h"
 
 #include <QtMath>
 #include <QEvent>
@@ -24,8 +25,10 @@ namespace Element
         _layout->addStretch();
         _layout->addWidget(_footer);
 
+        setVisible(false);
+
         ShadowEf::setShadow(this, ShadowEf::Type::Dark);
-        auto mask = ShadowEf::setBgMask(this);
+        Mask* mask = MaskEf::setMask(this, topWidget);
 
         connect(mask, &Mask::clicked, this, &Drawer::hide);
     }

@@ -2,6 +2,7 @@
 
 #include "appbar.h"
 #include "menu.h"
+#include "stack.h"
 
 #include <QWidget>
 #include <QVBoxLayout>
@@ -15,11 +16,12 @@ namespace Example
     public:
         Widget(QWidget* parent = nullptr);
 
-    protected:
+        void setupUI();
 
     private:
         QVBoxLayout* _layout;
         Element::AppBar* _appbar;
         Element::Menu* _menu;
+        Element::Stack* _stack;
     };
 }
