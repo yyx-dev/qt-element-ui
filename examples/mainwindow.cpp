@@ -38,12 +38,7 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-
-    QPalette palette = this->palette();
-    palette.setColor(QPalette::Window, Qt::white);
-    this->setPalette(palette);
-    this->setAutoFillBackground(true);
+    setupWindow();
 
     setupTabs();
     setupTab0();
@@ -57,8 +52,23 @@ MainWindow::MainWindow(QWidget* parent)
     setupTab8();
     setupTab9();
     setupTab10();
-
     ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
+}
+
+void MainWindow::setWindowIcon(Icon::Name icon)
+{
+    QMainWindow::setWindowIcon(
+        Icon::instance().getIcon(icon, Color::primary(), 32));
+}
+
+void MainWindow::setupWindow()
+{
+    ui->setupUi(this);
+
+    QPalette p = palette();
+    p.setColor(QPalette::Window, Qt::white);
+    setPalette(p);
+    setAutoFillBackground(true);
 
     // Important!
     // Enable to let the focus widget loses focus,
@@ -113,10 +123,10 @@ void MainWindow::setupTab0()
     ui->shadow_3->appendPlainText("\n\n     Shadow Lighter");
     ui->shadow_4->appendPlainText("\n\n      Shadow Dark");
 
-    BackdropEffect::setShadow(ui->shadow_1, BackdropEffect::ShadowType::Basic);
-    BackdropEffect::setShadow(ui->shadow_2, BackdropEffect::ShadowType::Light);
-    BackdropEffect::setShadow(ui->shadow_3, BackdropEffect::ShadowType::Lighter);
-    BackdropEffect::setShadow(ui->shadow_4, BackdropEffect::ShadowType::Dark);
+    ShadowEf::setShadow(ui->shadow_1, ShadowEf::Type::Basic);
+    ShadowEf::setShadow(ui->shadow_2, ShadowEf::Type::Light);
+    ShadowEf::setShadow(ui->shadow_3, ShadowEf::Type::Lighter);
+    ShadowEf::setShadow(ui->shadow_4, ShadowEf::Type::Dark);
 }
 
 void MainWindow::setupTab1()

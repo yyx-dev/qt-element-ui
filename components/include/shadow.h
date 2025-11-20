@@ -7,10 +7,10 @@ namespace Element
 {
     class Mask;
 
-    class BackdropEffect
+    class ShadowEf
     {
     public:
-        enum class ShadowType
+        enum class Type
         {
             Basic,
             Light,
@@ -19,7 +19,7 @@ namespace Element
         };
 
     public:
-        static void setShadow(QWidget* widget, ShadowType type);
+        static void setShadow(QWidget* widget, Type type);
         static Mask* setBgMask(QWidget* widget);
     };
 

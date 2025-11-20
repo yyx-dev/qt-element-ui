@@ -92,7 +92,7 @@ namespace Element
         static ScaleHelper& instance();
         int scale(int v);
         QSize scale(int w, int h);
-        QSize scale(QSize size);
+        QSize scale(const QSize& size);
     private:
         ScaleHelper();
         ScaleHelper(const ScaleHelper&) = delete;
@@ -100,6 +100,17 @@ namespace Element
     private:
         qreal _factor;
     };
+
+    inline int sc(int v) {
+        return ScaleHelper::instance().scale(v);
+    }
+    inline QSize sc(int w, int h) {
+        return ScaleHelper::instance().scale(w, h);
+    }
+    inline QSize sc(const QSize& size) {
+        return ScaleHelper::instance().scale(size);
+    }
+
 
     class DebugHelper
     {

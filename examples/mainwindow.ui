@@ -2303,7 +2303,6 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

@@ -106,8 +106,7 @@ namespace Element
         QString svgData = file.readAll();
         file.close();
 
-        svgData.replace("fill=\"currentColor\"", QString("fill=\"%1\"").arg(color));
-
+        svgData.replace("currentColor", color);
         return svgData;
     }
 
@@ -122,10 +121,8 @@ namespace Element
 
         QPixmap pixmap(size, size);
 
-        if (bgColor.isEmpty())
-            pixmap.fill(Qt::transparent);
-        else
-            pixmap.fill(bgColor);
+        if (bgColor.isEmpty()) pixmap.fill(Qt::transparent);
+        else pixmap.fill(bgColor);
 
         QPainter painter(&pixmap);
         renderer.render(&painter);

@@ -71,7 +71,7 @@ namespace Element
 
         setLayout(_mainLayout);
 
-        BackdropEffect::setShadow(this, BackdropEffect::BackdropEffect::ShadowType::Basic);
+        ShadowEf::setShadow(this, ShadowEf::Type::Basic);
         setShadow(_shadow);
 
         setMouseTracking(true);

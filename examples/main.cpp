@@ -1,33 +1,13 @@
-#include "mainwindow.h"
-
-#include "scrollbar.h"
-#include "color.h"
-#include "icon.h"
-#include "base.h"
-
-#include <QApplication>
+#include "app.h"
+#include "window.h"
+#include "widget.h"
 
 int main(int argc, char* argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    Element::App app(argc, argv);
 
-    QApplication app(argc, argv);
-
-    Element::ScrollBar::setAppScrollBar();
-
-    Element::Log::setLevel(Element::Log::Level::Debug);
-
-    Element::FontLoader::instance().setApplicationFont("微软雅黑");
-    Element::FontLoader::instance().loadFont(":/fonts/Inter-Regular.ttf", "Inter-Regular");
-    Element::FontLoader::instance().loadFont(":/fonts/NotoSans-Regular.ttf", "NotoSans-Regular");
-
-    MainWindow w;
-
-    w.setWindowIcon(Element::Icon::instance().getIcon(
-        Element::Icon::ElementPlus, Element::Color::primary(), 32));
-    w.setWindowTitle("QT Element UI 效果展示");
-
+    Element::Window w;
+    w.setWidget(new Example::Widget(&w));
     w.show();
 
     return app.exec();

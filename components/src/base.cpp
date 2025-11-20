@@ -286,7 +286,7 @@ namespace Element
         return QSize(w * _factor, h * _factor);
     }
 
-    QSize ScaleHelper::scale(QSize size)
+    QSize ScaleHelper::scale(const QSize& size)
     {
         return scale(size.width(), size.height());
     }

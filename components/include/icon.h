@@ -47,13 +47,13 @@ namespace Element
     public:
         static Icon& instance();
 
-        QIcon getIcon(Name icon, const QString& color, int size);
+        QIcon   getIcon  (Name icon, const QString& color, int size);
         QPixmap getPixmap(Name icon, const QString& color, int size);
 
-        QIcon getIcon(Name icon, const QString& color, const QString& bgColor, int size);
+        QIcon   getIcon  (Name icon, const QString& color, const QString& bgColor, int size);
         QPixmap getPixmap(Name icon, const QString& color, const QString& bgColor, int size);
 
-        QString getCode(Name icon, const QString& color);
+        QString    getCode     (Name icon, const QString& color);
         QByteArray getCodeArray(Name icon, const QString& color);
 
         QSvgRenderer* getRenderer(Name icon, const QString& color, QObject* parent);

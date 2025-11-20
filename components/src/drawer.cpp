@@ -24,8 +24,8 @@ namespace Element
         _layout->addStretch();
         _layout->addWidget(_footer);
 
-        BackdropEffect::setShadow(this, BackdropEffect::ShadowType::Dark);
-        auto mask = BackdropEffect::setBgMask(this);
+        ShadowEf::setShadow(this, ShadowEf::Type::Dark);
+        auto mask = ShadowEf::setBgMask(this);
 
         connect(mask, &Mask::clicked, this, &Drawer::hide);
     }
