@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QScrollArea>
 
 namespace Element
 {
@@ -28,8 +29,15 @@ namespace Element
 
     Stack& Stack::addWidget(Menu::Item* item, QWidget* widget)
     {
-        int i = QStackedWidget::addWidget(widget);
+        QScrollArea* area = new QScrollArea;
+        area->setWidgetResizable(true);
+        area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        area->setWidget(widget);
+
+        int i = QStackedWidget::addWidget(area);
         _item2index.insert(item, i);
+
         return *this;
     }
 
@@ -56,6 +64,7 @@ namespace Element
         label->setStyleSheet("QLabel{ font-size: 32px; color: #6B778C; }");
 
         QVBoxLayout* layout = new QVBoxLayout(widget);
+        layout->setContentsMargins(20, 20, 0, 0);
         layout->addWidget(label, 0, Qt::AlignTop);
         return widget;
     }

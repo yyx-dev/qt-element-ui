@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 #else
     Element::Window window;
     Example::Widget widget(&window);
-    widget.setupUI();
+    widget.setupComponents();
     window.setWidget(&widget);
 #endif
 

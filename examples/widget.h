@@ -16,7 +16,7 @@ namespace Example
     public:
         Widget(QWidget* parent = nullptr);
 
-        void setupUI();
+        void setupComponents();
 
     private:
         QVBoxLayout* _layout;

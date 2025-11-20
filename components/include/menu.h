@@ -64,6 +64,10 @@ namespace Element
         void mousePressEvent(QMouseEvent* event) override;
 
     private:
+        void updateWidth(Widget::Type type, Icon::Name icon, const QString& text);
+
+    private:
+        int _minWidth = 0, _maxWidth = 0, _width = 0;
     };
 
 }
