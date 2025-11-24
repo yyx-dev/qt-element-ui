@@ -9,6 +9,8 @@ CompileFlags:
     - -ID:/qt-element-ui/build # for ui_generated headers
     - -ID:/qt-element-ui/components
     - -ID:/qt-element-ui/components/deprecated
+    - -ID:/qt-element-ui/examples
+    - -ID:/qt-element-ui/examples/gallery
     - -IC:/Qt/Qt5.14.2/5.14.2/mingw73_64/include
     - -IC:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore
     - -IC:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets
