@@ -79,3 +79,6 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
+/.cache/
+
+compile_commands.json

@@ -20,7 +20,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "mkdir -p build && cd build && cmake .. -G \"MinGW Makefiles\" -DCMAKE_CXX_COMPILER=g++ && make -j16 && ./qt-element-ui",
+                "mkdir -p build && cd build && cmake .. -G \"Ninja\" -DCMAKE_CXX_COMPILER=g++ && ninja -j16 && ./qt-element-ui",
             ],
             "group": "build",
             "presentation": {
