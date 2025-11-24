@@ -1,6 +1,6 @@
 #include "widget.h"
 #include "base.h"
-#include "window.h"
+#include "frameless.h"
 
 #include "gallery/overview-page.h"
 
