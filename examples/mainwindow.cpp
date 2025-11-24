@@ -15,7 +15,7 @@
 #include "shadow.h"
 #include "tooltip.h"
 
-#include "gallery/overview-page.h"
+#include "overview-page.h"
 
 #include <QDebug>
 #include <QTimer>

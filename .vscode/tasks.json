@@ -2,36 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "type": "shell",
-            "command": "make",
-            "args": ["build"],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            },
-            "problemMatcher": {
-                "base": "$gcc",
-            }
-        },
-        {
-            "label": "clean",
-            "type": "shell",
-            "command": "make",
-            "args": ["clean"],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "run",
+            "label": "qmake-build-and-run",
             "type": "shell",
             "command": "make",
             "args": ["all"],
@@ -44,17 +15,23 @@
             }
         },
         {
-            "label": "deploy",
+            "label": "cmake-build-and-run",
             "type": "shell",
-            "command": "make",
-            "args": ["deploy"],
+            "command": "bash",
+            "args": [
+                "-c",
+                "mkdir -p build && cd build && cmake .. -G \"MinGW Makefiles\" -DCMAKE_CXX_COMPILER=g++ && make -j16 && ./qt-element-ui",
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            }
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }

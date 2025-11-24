@@ -2,26 +2,24 @@ QT += core widgets gui svg
 
 CONFIG += c++17 console
 
-INC = components/
 SRC = components/
+DEP = components/deprecated
 EXM = examples
 RES = resources
-DEP = components/deprecated
-
-GALLERY = examples/gallery
+GAL = gallery
 
 
 HEADERS += \
     $$files($$EXM/*.h) \
-    $$files($$INC/*.h) \
+    $$files($$SRC/*.h) \
     $$files($$DEP/*.h) \
-    $$files($$GALLERY/*.h)
+    $$files($$GAL/*.h)
 
 SOURCES += \
     $$files($$EXM/*.cpp) \
     $$files($$SRC/*.cpp) \
     $$files($$DEP/*.cpp) \
-    $$files($$GALLERY/*.cpp)
+    $$files($$GAL/*.cpp)
 
 FORMS += \
     $$files($$EXM/*.ui)
@@ -31,8 +29,9 @@ RESOURCES += \
 
 INCLUDEPATH += \
     $$EXM \
-    $$INC \
-    $$DEP
+    $$SRC \
+    $$DEP \
+    $$GAL
 
 TRANSLATIONS += \
     $$files($$RES/locales/*.ts)

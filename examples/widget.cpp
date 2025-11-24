@@ -2,7 +2,7 @@
 #include "base.h"
 #include "frameless.h"
 
-#include "gallery/overview-page.h"
+#include "overview-page.h"
 
 #include <QMouseEvent>
 
