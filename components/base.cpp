@@ -231,7 +231,6 @@ namespace Element
     {
         _font = font;
         _font.setFamilies(Comm::fontFmailies);
-        _font.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         return *this;
     }
 

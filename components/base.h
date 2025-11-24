@@ -117,4 +117,12 @@ namespace Element
     public:
         static void drawBorder(QPainter& painter, const QRect& rect);
     };
+
+    inline void setBgColor(QWidget* widget, const QColor& color)
+    {
+        QPalette pal = widget->palette();
+        pal.setColor(QPalette::Window, color);
+        widget->setAutoFillBackground(true);
+        widget->setPalette(pal);
+    }
 }

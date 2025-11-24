@@ -1,5 +1,10 @@
 #include "widget.h"
 #include "base.h"
+#include "window.h"
+
+#include "gallery/overview-page.h"
+
+#include <QMouseEvent>
 
 namespace Example
 {
@@ -11,12 +16,17 @@ namespace Example
         , _stack(new Element::Stack(_menu, this))
     {
         setMinimumSize(Element::sc(1200, 741));
+        setMouseTracking(true);
 
-        QPalette pal = palette();
-        pal.setColor(QPalette::Window, Qt::white);
-        setAutoFillBackground(true);
-        setPalette(pal);
+        Element::FramelessEf::setFrameless(this);
 
+        Element::setBgColor(this, Qt::white);
+        setupContainer();
+        setupComponents();
+    }
+
+    void Widget::setupContainer()
+    {
         QHBoxLayout* layout = new QHBoxLayout;
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(0);
@@ -33,7 +43,7 @@ namespace Example
     {
         using namespace Element;
 
-        _menu->addTopItem("Overview 组件总览");
+        Menu::Item* overview = _menu->addTopItem("Overview 组件总览");
         Menu::Item* basic = _menu->addTopItem("Basic 基础组件");
         Menu::Item* form = _menu->addTopItem("Form 表单组件");
         Menu::Item* data = _menu->addTopItem("Data 数据展示");
@@ -41,6 +51,7 @@ namespace Example
         Menu::Item* feedback = _menu->addTopItem("Feedback 反馈组件");
         Menu::Item* others = _menu->addTopItem("Others 其他");
 
+        _stack->addWidget(overview, new OverviewPage(this));
         _menu->addSubItem(basic, "Button 按钮");
         _menu->addSubItem(basic, "Border 边框");
         _menu->addSubItem(basic, "Color 色彩");
@@ -128,4 +139,18 @@ namespace Example
         _menu->addSubItem(others, "Watermark 水印");
     }
 
+    void Widget::mousePressEvent(QMouseEvent* event)
+    {
+        QWidget::mousePressEvent(event);
+    }
+
+    void Widget::mouseMoveEvent(QMouseEvent* event)
+    {
+        QWidget::mouseMoveEvent(event);
+    }
+
+    void Widget::mouseReleaseEvent(QMouseEvent* event)
+    {
+        QWidget::mouseReleaseEvent(event);
+    }
 }

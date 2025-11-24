@@ -12,7 +12,7 @@ namespace Element
 
         _app = new QApplication(argc, argv);
 
-        ScrollBar::setAppScrollBar();
+        // ScrollBar::setAppScrollBar();
         Log::setLevel(Element::Log::Level::Debug);
 
         FontLoader::instance().setApplicationFont("微软雅黑");
@@ -27,7 +27,6 @@ namespace Element
         setOrganizationName("yyx");
         setOrganizationDomain("yyx.org");
 
-        setPalette(QPalette(Qt::white));
     }
 
     App::~App()

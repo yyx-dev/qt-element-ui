@@ -29,11 +29,17 @@ namespace Element
 
     Stack& Stack::addWidget(Menu::Item* item, QWidget* widget)
     {
-        QScrollArea* area = new QScrollArea;
+        QWidget* container = new QWidget;
+        QVBoxLayout* layout = new QVBoxLayout(container);
+        layout->setContentsMargins(40, 40, 40, 40);
+        layout->addWidget(widget);
+
+        QScrollArea* area = new QScrollArea(this);
         area->setWidgetResizable(true);
+        area->setFrameStyle(QFrame::NoFrame);
         area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        area->setWidget(widget);
+        area->setWidget(container);
 
         int i = QStackedWidget::addWidget(area);
         _item2index.insert(item, i);
@@ -46,7 +52,7 @@ namespace Element
         if (!_item2index.contains(item))
         {
             _item2index.insert(item, count());
-            QStackedWidget::addWidget(defaultWidget(item));
+            addWidget(item, defaultWidget(item));
         }
 
         setCurrentIndex(_item2index.value(item));
@@ -64,7 +70,6 @@ namespace Element
         label->setStyleSheet("QLabel{ font-size: 32px; color: #6B778C; }");
 
         QVBoxLayout* layout = new QVBoxLayout(widget);
-        layout->setContentsMargins(20, 20, 0, 0);
         layout->addWidget(label, 0, Qt::AlignTop);
         return widget;
     }

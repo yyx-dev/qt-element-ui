@@ -28,7 +28,6 @@ namespace Element
         App(int argc, char **argv);
         ~App();
 
-
     private:
         QApplication* _app;
     };

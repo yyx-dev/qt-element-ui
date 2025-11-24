@@ -111,6 +111,17 @@ namespace Element
         QWidget::mouseReleaseEvent(event);
     }
 
+    void AppBar::mouseDoubleClickEvent(QMouseEvent* event)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            onMaxButtonClicked();
+            event->accept();
+            return;
+        }
+        QWidget::mouseDoubleClickEvent(event);
+    }
+
     void AppBar::paintEvent(QPaintEvent* event)
     {
         QPainter painter(this);

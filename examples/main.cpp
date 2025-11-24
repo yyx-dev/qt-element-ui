@@ -1,24 +1,20 @@
 #include "app.h"
-#include "window.h"
 #include "widget.h"
+#include "mainwindow.h"
 
 // #define TEST
-
-#include "mainwindow.h"
 
 int main(int argc, char* argv[])
 {
     Element::App app(argc, argv);
+
 #ifdef TEST
     MainWindow window;
-#else
-    Element::Window window;
-    Example::Widget widget(&window);
-    widget.setupComponents();
-    window.setWidget(&widget);
-#endif
-
     window.show();
+#else
+    Example::Widget widget;
+    widget.show();
+#endif
 
     return app.exec();
 }

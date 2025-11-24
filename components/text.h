@@ -1,11 +1,7 @@
-/*
- *
- * https://element-plus.org/zh-CN/component/text
- *
- * */
 #pragma once
 
 #include "base.h"
+#include "color.h"
 
 #include <QString>
 #include <QLabel>
@@ -13,7 +9,6 @@
 
 namespace Element
 {
-
     class Text : public QLabel
     {
     Q_OBJECT
@@ -66,7 +61,9 @@ namespace Element
         bool getTruncated();
         Text& setTruncated(bool truncated);
 
-        void setColor(const QString& color);
+    public:
+        Text& setColor(const QString& color);
+        Text& setFontSize(int size);
 
     signals:
         void clicked();
@@ -86,14 +83,40 @@ namespace Element
         bool _truncated = false;
 
     private:
-        QSSHelper _qsshelper;
-
-    private:
-        void setFontColor(const QString& color);
         void setFontColor(int color);
-        void setFontSize(int size);
         void setSubscript();
         void setSupscript();
     };
+
+    inline Text* h1(const QString& text, QWidget* parent)
+    {
+        Text* h1 = new Text(text, parent);
+        h1->setFontSize(25);
+        return h1;
+    }
+
+    inline Text* h2(const QString& text, QWidget* parent)
+    {
+        Text* h2 = new Text(text, parent);
+        h2->setColor(Color::primaryText());
+        h2->setFontSize(20);
+        return h2;
+    }
+
+    inline Text* h3(const QString& text, QWidget* parent)
+    {
+        Text* h3 = new Text(text, parent);
+        h3->setColor(Color::primaryText());
+        h3->setFontSize(16);
+        return h3;
+    }
+
+    inline Text* p(const QString& text, QWidget* parent)
+    {
+        Text* p = new Text(text, parent);
+        p->setColor(Color::primaryText());
+        p->setFontSize(12);
+        return p;
+    }
 
 }

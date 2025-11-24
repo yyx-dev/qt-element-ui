@@ -15,6 +15,8 @@
 #include "shadow.h"
 #include "tooltip.h"
 
+#include "gallery/overview-page.h"
+
 #include <QDebug>
 #include <QTimer>
 
@@ -30,7 +32,7 @@
 #define FORM 9
 #define TABS 10
 
-#define CURRENT_INDEX FORM
+#define CURRENT_INDEX TEXT
 
 using namespace Element;
 
@@ -99,6 +101,15 @@ void MainWindow::setupTab0()
     ui->infoText->setType(Text::Type::Info);
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
+
+    Text* _h1 = h1("Overview", ui->tab_0);
+    _h1->move(ui->h1->pos());
+    Text* _h2 = h2("源代码", ui->tab_0);
+    _h2->move(ui->h2->pos());
+    Text* _h3 = h3("Attributes", ui->tab_0);
+    _h3->move(ui->h3->pos());
+    Text* _p = p("Element Plus", ui->tab_0);
+    _p->move(ui->p->pos());
 
     auto setStyle = [](QWidget* widget)
     {
@@ -512,20 +523,17 @@ void MainWindow::setupTab9()
 
     Menu::Item* item1 = ui->menu->addTopItem(Icon::CirclePlus, "文本");
     ui->menu->addGroupDesc(item1, "group 1");
-    Menu::Item* i11 = ui->menu->addSubItem(item1, "sub test1");
-    Menu::Item* i12 = ui->menu->addSubItem(item1, "sub test2");
-
+    ui->menu->addSubItem(item1, "sub test1");
+    ui->menu->addSubItem(item1, "sub test2");
     Menu::Item* item2 = ui->menu->addTopItem(Icon::Open, "按钮");
     ui->menu->addGroupDesc(item2, "group 2");
-    Menu::Item* i21 = ui->menu->addSubItem(item2, "sub test1");
-    Menu::Item* i22 = ui->menu->addSubItem(item2, "sub test2");
-
-    Menu::Item* i31 = ui->menu->addTopItem("test3");
+    ui->menu->addSubItem(item2, "sub test1");
+    ui->menu->addSubItem(item2, "sub test2");
+    Menu::Item* item3 = ui->menu->addTopItem("test3");
 
     ui->stack->setMenu(ui->menu);
 
-    ui->stack->addWidget(i11, ui->label_user);
-    ui->stack->addWidget(i12, ui->label_user);
+    ui->stack->addWidget(item3, new OverviewPage(ui->tab_9));
 }
 
 void MainWindow::setupTab10()

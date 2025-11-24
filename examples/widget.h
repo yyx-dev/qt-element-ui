@@ -12,10 +12,16 @@ namespace Example
     class Widget : public QWidget
     {
         Q_OBJECT
-
     public:
         Widget(QWidget* parent = nullptr);
 
+    protected:
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseMoveEvent(QMouseEvent* event) override;
+        void mouseReleaseEvent(QMouseEvent* event) override;
+
+    private:
+        void setupContainer();
         void setupComponents();
 
     private:

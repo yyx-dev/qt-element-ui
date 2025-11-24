@@ -24,7 +24,7 @@ namespace Element
         void mouseMoveEvent(QMouseEvent* event) override;
         void mouseReleaseEvent(QMouseEvent* event) override;
         void paintEvent(QPaintEvent* event) override;
-
+        void mouseDoubleClickEvent(QMouseEvent* event);
     private:
         void onMinButtonClicked();
         void onMaxButtonClicked();

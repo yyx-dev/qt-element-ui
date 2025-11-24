@@ -2,7 +2,6 @@
 #include "color.h"
 #include "base.h"
 
-
 #include <QFont>
 
 namespace Element
@@ -40,19 +39,19 @@ namespace Element
         _type = type;
 
         if (type == Type::Default)
-            setFontColor(Color::regularText());
+            setColor(Color::regularText());
         else if (type == Type::Primary)
-            setFontColor(Color::primary());
+            setColor(Color::primary());
         else if (type == Type::Success)
-            setFontColor(Color::success());
+            setColor(Color::success());
         else if (type == Type::Info)
-            setFontColor(Color::info());
+            setColor(Color::info());
         else if (type == Type::Warning)
-            setFontColor(Color::warning());
+            setColor(Color::warning());
         else if (type == Type::Danger)
-            setFontColor(Color::danger());
+            setColor(Color::danger());
 
-        setSize(_size);
+        // setSize(_size);
 
         return *this;
     }
@@ -121,16 +120,14 @@ namespace Element
         return *this;
     }
 
-    void Text::setColor(const QString& color)
+    Text& Text::setColor(const QString& color)
     {
-        setFontColor(color);
-    }
-
-
-    void Text::setFontColor(const QString& color)
-    {
-       _qsshelper.setProperty("QLabel", "color", color);
-        setStyleSheet(_qsshelper.generate());
+        QPalette palette = QLabel::palette();
+        palette.setColor(QPalette::WindowText, color);
+        palette.setColor(QPalette::Window, Color::baseBackground());
+        QLabel::setAutoFillBackground(true);
+        QLabel::setPalette(palette);
+        return *this;
     }
 
     void Text::setFontColor(int color)
@@ -142,24 +139,25 @@ namespace Element
         QLabel::setPalette(palette);
     }
 
-    void Text::setFontSize(int size)
+    Text& Text::setFontSize(int size)
     {
         QFont font = QLabel::font();
         font.setPointSize(size);
         QLabel::setFont(font);
         QLabel::adjustSize();
+        return *this;
     }
 
     void Text::setSubscript()
     {
         QLabel::setTextFormat(Qt::RichText);
-        QLabel::setText("<sup>" + QLabel::text() + "</sup>");
+        QLabel::setText("<sub>" + QLabel::text() + "</sub>");
     }
 
     void Text::setSupscript()
     {
         QLabel::setTextFormat(Qt::RichText);
-        QLabel::setText("<sub>" + QLabel::text() + "</sub>");
+        QLabel::setText("<sup>" + QLabel::text() + "</sup>");
     }
 
     void Text::enterEvent(QEvent* event)
