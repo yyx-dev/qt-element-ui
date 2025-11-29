@@ -4,16 +4,16 @@
     <g filter="url(#filter0_d_12403_168893)">
         <path
             d="M89 61C89 59.8954 89.8954 59 91 59H189C190.105 59 191 59.8954 191 61V119C191 120.105 190.105 121 189 121H91C89.8954 121 89 120.105 89 119V61Z"
-            fill="#F5F7FA"></path>
+            fill="#FFFFFF"></path>
         <path
             d="M91 58.7C89.7297 58.7 88.7 59.7297 88.7 61V119C88.7 120.27 89.7297 121.3 91 121.3H189C190.27 121.3 191.3 120.27 191.3 119V61C191.3 59.7297 190.27 58.7 189 58.7H91Z"
-            stroke="#D4D7DE" stroke-width="0.6"></path>
+            stroke="#D8DBE2" stroke-width="0.6"></path>
     </g>
     <rect x="186" y="77" width="4" height="27" rx="2" fill="#409EFF"></rect>
-    <path d="M90 67H190V67.8H90V67Z" fill="#D4D7DE"></path>
-    <circle cx="94.5" cy="63.5" r="1.5" fill="#D4D7DE"></circle>
-    <circle cx="99.5" cy="63.5" r="1.5" fill="#D4D7DE"></circle>
-    <circle cx="104.5" cy="63.5" r="1.5" fill="#D4D7DE"></circle>
+    <path d="M90 67H190V67.8H90V67Z" fill="#D8DBE2"></path>
+    <circle cx="94.5" cy="63.5" r="1.5" fill="#D8DBE2"></circle>
+    <circle cx="99.5" cy="63.5" r="1.5" fill="#D8DBE2"></circle>
+    <circle cx="104.5" cy="63.5" r="1.5" fill="#D8DBE2"></circle>
     <defs>
         <filter id="filter0_d_12403_168893" x="80.4" y="50.4004" width="119.2" height="79.1992"
             filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

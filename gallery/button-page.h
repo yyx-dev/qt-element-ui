@@ -8,11 +8,11 @@ namespace Gallery
 {
     using namespace Element;
 
-    class OverviewPage : public QWidget
+    class ButtonPage : public QWidget
     {
         Q_OBJECT
     public:
-        OverviewPage(QWidget* parent = nullptr);
+        ButtonPage(QWidget* parent = nullptr);
 
     private:
         void setupWidget();

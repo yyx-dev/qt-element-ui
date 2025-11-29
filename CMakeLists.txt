@@ -37,6 +37,7 @@ file(GLOB FORMS
 
 file(GLOB RESOURCES
     resources/*.qrc
+    gallery/*.qrc
 )
 
 file(GLOB TRANSLATIONS
@@ -63,5 +64,9 @@ target_link_libraries(qt-element-ui
     Qt5::Gui
     Qt5::Svg
 )
+
+if(WIN32)
+    target_link_libraries(qt-element-ui gdi32)
+endif()
 
 qt5_add_translation(QM_FILES ${TRANSLATIONS})

@@ -1,5 +1,4 @@
 #include "frameless.h"
-#include "base.h"
 
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
@@ -10,7 +9,6 @@ namespace Element
         : QMainWindow(parent)
     {
         setAttribute(Qt::WA_TranslucentBackground);
-        // setAttribute(Qt::WA_TransparentForMouseEvents);
         setWindowFlag(Qt::FramelessWindowHint);
         setContentsMargins(20, 20, 20, 20);
     }
@@ -22,14 +20,17 @@ namespace Element
         _widget = widget;
         widget->installEventFilter(this);
 
-        setMinimumSize(widget->size());
+        QMargins m = contentsMargins();
+        setMinimumSize(widget->minimumSize()
+                + QSize(m.left() + m.right(), m.top() + m.bottom()));
+
         setCentralWidget(widget);
 
         QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
         shadow->setBlurRadius(20);
         shadow->setOffset(0, 0);
         shadow->setColor(QColor(0, 0, 0, 255));
-        setGraphicsEffect(shadow);
+        widget->setGraphicsEffect(shadow);
     }
 
     void _ShadowWindow::changeEvent(QEvent *event)

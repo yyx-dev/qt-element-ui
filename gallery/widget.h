@@ -7,7 +7,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 
-namespace Example
+namespace Gallery
 {
     class Widget : public QWidget
     {

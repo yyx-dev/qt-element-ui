@@ -533,7 +533,7 @@ void MainWindow::setupTab9()
 
     ui->stack->setMenu(ui->menu);
 
-    ui->stack->addWidget(item3, new OverviewPage(ui->tab_9));
+    ui->stack->addWidget(item3, new Gallery::OverviewPage(ui->tab_9));
 }
 
 void MainWindow::setupTab10()

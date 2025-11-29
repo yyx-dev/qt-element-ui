@@ -25,7 +25,8 @@ FORMS += \
     $$files($$EXM/*.ui)
 
 RESOURCES += \
-    $$files($$RES/*.qrc)
+    $$files($$RES/*.qrc) \
+    $$files($$GAL/*.qrc)
 
 INCLUDEPATH += \
     $$EXM \

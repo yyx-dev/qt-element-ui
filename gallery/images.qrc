@@ -1,2 +1,16 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>images/button.svg</file>
+        <file>images/border.svg</file>
+        <file>images/color.svg</file>
+        <file>images/container.svg</file>
+        <file>images/icon.svg</file>
+        <file>images/layout.svg</file>
+        <file>images/link.svg</file>
+        <file>images/scrollbar.svg</file>
+        <file>images/space.svg</file>
+        <file>images/splitter.svg</file>
+        <file>images/text.svg</file>
+        <file>images/typography.svg</file>
+    </qresource>
+</RCC>

@@ -115,7 +115,7 @@ namespace Element
     {
         Text* p = new Text(text, parent);
         p->setColor(Color::primaryText());
-        p->setFontSize(12);
+        p->setFontSize(11);
         return p;
     }
 

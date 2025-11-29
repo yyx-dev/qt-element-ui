@@ -224,12 +224,14 @@ namespace Element
 
     FontLoader::FontLoader() {}
 
+
     FontHelper::FontHelper() { setFont(_font); }
     FontHelper::FontHelper(QFont font) { setFont(font); }
 
     FontHelper& FontHelper::setFont(QFont font)
     {
         _font = font;
+        // _font.setLetterSpacing(QFont::AbsoluteSpacing, 0.8);
         _font.setFamilies(Comm::fontFmailies);
         return *this;
     }

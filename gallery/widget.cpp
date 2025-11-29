@@ -3,11 +3,13 @@
 #include "frameless.h"
 
 #include "overview-page.h"
+#include "button-page.h"
 
 #include <QMouseEvent>
 
-namespace Example
+namespace Gallery
 {
+
     Widget::Widget(QWidget* parent)
         : QWidget(parent)
         , _layout(new QVBoxLayout(this))
@@ -51,8 +53,7 @@ namespace Example
         Menu::Item* feedback = _menu->addTopItem("Feedback 反馈组件");
         Menu::Item* others = _menu->addTopItem("Others 其他");
 
-        _stack->addWidget(overview, new OverviewPage(this));
-        _menu->addSubItem(basic, "Button 按钮");
+        Menu::Item* button = _menu->addSubItem(basic, "Button 按钮");
         _menu->addSubItem(basic, "Border 边框");
         _menu->addSubItem(basic, "Color 色彩");
         _menu->addSubItem(basic, "Container 布局容器");
@@ -137,6 +138,10 @@ namespace Example
 
         _menu->addSubItem(others, "Divider 分割线");
         _menu->addSubItem(others, "Watermark 水印");
+
+        _stack->addWidget(overview, new OverviewPage(this));
+        _stack->addWidget(button, new ButtonPage(this));
+
     }
 
     void Widget::mousePressEvent(QMouseEvent* event)
@@ -153,4 +158,5 @@ namespace Example
     {
         QWidget::mouseReleaseEvent(event);
     }
+
 }

@@ -29,17 +29,14 @@ namespace Element
 
     Stack& Stack::addWidget(Menu::Item* item, QWidget* widget)
     {
-        QWidget* container = new QWidget;
-        QVBoxLayout* layout = new QVBoxLayout(container);
-        layout->setContentsMargins(40, 40, 40, 40);
-        layout->addWidget(widget);
+        widget->setContentsMargins(40, 40, 40, 80);
 
         QScrollArea* area = new QScrollArea(this);
         area->setWidgetResizable(true);
         area->setFrameStyle(QFrame::NoFrame);
         area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        area->setWidget(container);
+        area->setWidget(widget);
 
         int i = QStackedWidget::addWidget(area);
         _item2index.insert(item, i);
