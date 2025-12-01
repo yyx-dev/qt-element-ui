@@ -38,5 +38,5 @@ TRANSLATIONS += \
     $$files($$RES/locales/*.ts)
 
 win32 {
-    LIBS += -lgdi32
+    LIBS += -lgdi32 -ldwmapi
 }

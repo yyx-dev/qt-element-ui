@@ -2,7 +2,8 @@
 #include "text.h"
 #include "inputline.h"
 #include "card.h"
-#include <QImage>
+#include "image.h"
+#include <QSvgWidget>
 
 namespace Gallery
 {
@@ -10,6 +11,7 @@ namespace Gallery
         : QWidget(parent)
         , _layout(new Layout(this))
     {
+        _layout->setSpacing(Layout::SpaceSize::Large);
         setupWidget();
     }
 
@@ -24,8 +26,7 @@ namespace Gallery
         auto createCard = [&](const QString& header, const QString& image) {
             auto card = new Card(this);
             card->setHeader(header);
-            card->setBody(QImage(image));
-            card->setMaximumSize(sc(350, 265));
+            card->setBody(new QSvgWidget(image));
             return card;
         };
 
@@ -46,9 +47,11 @@ namespace Gallery
         _layout->addWidget(text2);
         _layout->addWidget(line);
         _layout->addWidget(text3);
-        _layout->addWidgets({ buttonCard, borderCard, colorCard, containerCard,
-                iconCard, layoutCard, linkCard, textCard,
-                scrollbarCard, spaceCard, splitterCard, typographyCard });
+        _layout->addWidgets<FlowLayout>({
+            buttonCard, borderCard, colorCard, containerCard,
+            iconCard, layoutCard, linkCard, textCard,
+            scrollbarCard, spaceCard, splitterCard, typographyCard
+        });
 
         auto text4 = h3("Form 表单组件", this);
         auto text5 = h3("Data 数据展示", this);

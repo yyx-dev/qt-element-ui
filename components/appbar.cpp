@@ -20,7 +20,6 @@ namespace Element
         , _maxButton(new _AppBarButton(_AppBarButton::Type::Max, this))
         , _closeButton(new _AppBarButton(_AppBarButton::Type::Close, this))
     {
-
         setFixedHeight(sc(48));
 
         _layout->setContentsMargins(0, 0, 0, 0);
@@ -76,8 +75,11 @@ namespace Element
         if (event->button() == Qt::LeftButton)
         {
             QWidget* child = childAt(event->pos());
-            if (!child || (child != _minButton && child != _maxButton
-                    && child != _closeButton && child != _backButton))
+            if (!child
+             || (child != _minButton
+              && child != _maxButton
+              && child != _closeButton
+              && child != _backButton))
             {
                 _dragging = true;
                 _dragStartPos = event->globalPos() - window()->frameGeometry().topLeft();

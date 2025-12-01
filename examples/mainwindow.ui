@@ -166,56 +166,17 @@
        </rect>
       </property>
      </widget>
-     <widget class="Element::Text" name="h1">
+     <widget class="QScrollBar" name="scrollbar">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>200</y>
-        <width>81</width>
-        <height>21</height>
+        <x>1110</x>
+        <y>120</y>
+        <width>16</width>
+        <height>391</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Default h1</string>
-      </property>
-     </widget>
-     <widget class="Element::Text" name="h2">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>200</y>
-        <width>81</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Default h2</string>
-      </property>
-     </widget>
-     <widget class="Element::Text" name="h3">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>200</y>
-        <width>81</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Default h3</string>
-      </property>
-     </widget>
-     <widget class="Element::Text" name="p">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>200</y>
-        <width>71</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Default p</string>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
      </widget>
     </widget>

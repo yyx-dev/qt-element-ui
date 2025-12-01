@@ -9,15 +9,12 @@
 namespace Element
 {
     Card::Card(QWidget* parent)
-        : Card("", QStringList(), "", parent)
+        : Card("", nullptr, "", parent)
     {}
-    Card::Card(const QStringList& contents, QWidget* parent)
-        : Card("", contents, "", parent)
+    Card::Card(const QString& header, QWidget* widget, QWidget* parent)
+        : Card(header, widget, "", parent)
     {}
-    Card::Card(const QString& header, const QStringList& contents, QWidget* parent)
-        : Card(header, contents, "", parent)
-    {}
-    Card::Card(const QString& header, const QStringList& contents, const QString& footer, QWidget* parent)
+    Card::Card(const QString& header, QWidget* widget, const QString& footer, QWidget* parent)
         : QWidget(parent)
         , _header(new QLabel(this))
         , _footer(new QLabel(this))
@@ -27,30 +24,19 @@ namespace Element
         setupUI();
         setHeader(header);
         setFooter(footer);
-        setBody(contents);
-    }
-
-    Card::Card(const QString& header, QWidget* widget, QWidget* parent)
-        : Card(header, widget, "", parent)
-    {}
-    Card::Card(const QString& header, QWidget* widget, const QString& footer, QWidget* parent)
-        : QWidget(parent)
-        , _header(new QLabel(this))
-        , _footer(new QLabel(this))
-        , _body(widget)
-        , _mainLayout(new QVBoxLayout(this))
-    {
-        setupUI();
-        setHeader(header);
-        setFooter(footer);
         setBody(widget);
+
+        setMinimumSize(sc(300, 240));
+        setMaximumSize(sc(380, 280));
     }
 
     void Card::setupUI()
     {
-        _header->setStyleSheet("padding: 18px 20px; border: none; border-bottom: 1px solid #E4E7ED; color: #303133; ");
-        _footer->setStyleSheet("padding: 18px 20px; border: none; border-top: 1px solid #E4E7ED; color: #303133; ");
-        _body->setStyleSheet("padding: 20px; border: none; color: #303133; ");
+        int paddingh = sc(8);
+        int paddingv = sc(12);
+        _header->setStyleSheet(QString("padding: %1px %2px; border: none; border-bottom: 1px solid #E4E7ED; color: #303133;").arg(paddingh).arg(paddingv));
+        _footer->setStyleSheet(QString("padding: %1px %2px; border: none; border-top: 1px solid #E4E7ED; color: #303133; ").arg(paddingh).arg(paddingv));
+        _body->setStyleSheet("border: none; color: #303133; ");
 
         _header->setWordWrap(true);
         _footer->setWordWrap(true);
@@ -66,10 +52,8 @@ namespace Element
         _mainLayout->setContentsMargins(0, 0, 0, 0);
         _mainLayout->setSpacing(0);
         _mainLayout->addWidget(_header);
-        _mainLayout->addWidget(_body);
+        _mainLayout->addWidget(_body, 1);
         _mainLayout->addWidget(_footer);
-
-        setLayout(_mainLayout);
 
         ShadowEf::setShadow(this, ShadowEf::Type::Basic);
         setShadow(_shadow);
@@ -81,7 +65,6 @@ namespace Element
     {
         _header->setText(header);
         _header->setVisible(!header.isEmpty());
-
         return *this;
     }
 
@@ -89,72 +72,27 @@ namespace Element
     {
         _footer->setText(footer);
         _footer->setVisible(!footer.isEmpty());
-
-        return *this;
-    }
-
-    Card& Card::setBody(const QStringList& contents)
-    {
-        cleanLayout(_body);
-
-        QVBoxLayout* bodyLayout = new QVBoxLayout(_body);
-        bodyLayout->setContentsMargins(0, 0, 0, 0);
-        bodyLayout->setSpacing(10);
-
-        for (const QString& content : contents)
-        {
-            QLabel* label = new QLabel(content, _body);
-            label->setStyleSheet("border: none; ");
-            label->setWordWrap(true);
-
-            label->setFont(FontHelper(label->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
-
-            bodyLayout->addWidget(label);
-        }
-
-        return *this;
-    }
-
-    Card& Card::setBody(const QImage& image)
-    {
-        cleanLayout(_body);
-
-        QLabel* imageLabel = new QLabel(_body);
-        imageLabel->setPixmap(QPixmap::fromImage(image));
-        imageLabel->setScaledContents(true);
-
-        QVBoxLayout* bodyLayout = new QVBoxLayout(_body);
-        bodyLayout->setContentsMargins(0, 0, 0, 0);
-        bodyLayout->addWidget(imageLabel);
-
         return *this;
     }
 
     Card& Card::setBody(QWidget* widget)
     {
-        cleanLayout(_body);
-
-        QVBoxLayout* bodyLayout = new QVBoxLayout(_body);
-        bodyLayout->setContentsMargins(0, 0, 0, 0);
-        bodyLayout->addWidget(widget);
-
+        if (widget)
+        {
+            cleanLayout(_body);
+            QVBoxLayout* layout = new QVBoxLayout(_body);
+            layout->setContentsMargins(1, 0, 1, 1);
+            layout->addWidget(widget);
+        }
         return *this;
     }
 
     Card& Card::setShadow(Shadow shadow)
     {
         _shadow = shadow;
-
-        if (_shadow == Shadow::Always)
-            graphicsEffect()->setEnabled(true);
-        else
-            graphicsEffect()->setEnabled(false);
-
+        graphicsEffect()->setEnabled(_shadow == Shadow::Always);
         return *this;
     }
-
 
     void Card::paintEvent(QPaintEvent* event)
     {
@@ -163,7 +101,7 @@ namespace Element
 
         // 绘制圆角背景
         QPainterPath path;
-        path.addRoundedRect(rect().adjusted(1, 1, -1, -1), 4, 4, Qt::AbsoluteSize);
+        path.addRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
         painter.setClipPath(path);
 
         // 填充背景
@@ -171,12 +109,11 @@ namespace Element
 
         // 绘制边框
         painter.setPen(QPen(QColor(Color::lightBorder()), 1));
-        painter.drawRoundedRect(rect().adjusted(1, 1, -1, -1), 4, 4, Qt::AbsoluteSize);
+        painter.drawRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
 
         QWidget::paintEvent(event);
     }
 
-    // 新增：处理鼠标进入事件
     void Card::enterEvent(QEvent* event)
     {
         if (_shadow == Shadow::Hover)
@@ -184,7 +121,6 @@ namespace Element
         QWidget::enterEvent(event);
     }
 
-    // 新增：处理鼠标离开事件
     void Card::leaveEvent(QEvent* event)
     {
         if (_shadow == Shadow::Hover)

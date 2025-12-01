@@ -1,8 +1,8 @@
 #include "menu.h"
-
 #include "base.h"
 #include "color.h"
 #include "qglobal.h"
+#include "scrollbar.h"
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -22,7 +22,7 @@ namespace Element
         , _item(item)
     {
         setFixedHeight(_type == Type::TopItem ? 70 : _type == Type::SubItem ? 60 : 40);
-        setFont(FontHelper().setPixelSize(15).getFont());
+        setFont(FontHelper().setPointSize(10).getFont());
         if (_type == Type::TopItem || _type == Type::SubItem)
             setCursor(Qt::PointingHandCursor);
     }
@@ -81,6 +81,8 @@ namespace Element
         setStyleSheet("QTreeWidget { \
             border: none; \
             border-right: 1px solid " + Color::baseBorder() + "; }" );
+
+        setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
     }
 
     Menu::Item* Menu::addTopItem(const QString& text)

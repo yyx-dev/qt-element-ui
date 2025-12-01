@@ -11,7 +11,7 @@ namespace Gallery
 {
 
     Widget::Widget(QWidget* parent)
-        : QWidget(parent)
+        : Element::FramelessWindow(parent)
         , _layout(new QVBoxLayout(this))
         , _appbar(new Element::AppBar(this))
         , _menu(new Element::Menu(this))
@@ -19,8 +19,6 @@ namespace Gallery
     {
         setMinimumSize(Element::sc(1200, 741));
         setMouseTracking(true);
-
-        Element::FramelessEf::setFrameless(this);
 
         Element::setBgColor(this, Qt::white);
         setupContainer();
@@ -142,21 +140,6 @@ namespace Gallery
         _stack->addWidget(overview, new OverviewPage(this));
         _stack->addWidget(button, new ButtonPage(this));
 
-    }
-
-    void Widget::mousePressEvent(QMouseEvent* event)
-    {
-        QWidget::mousePressEvent(event);
-    }
-
-    void Widget::mouseMoveEvent(QMouseEvent* event)
-    {
-        QWidget::mouseMoveEvent(event);
-    }
-
-    void Widget::mouseReleaseEvent(QMouseEvent* event)
-    {
-        QWidget::mouseReleaseEvent(event);
     }
 
 }

@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QTimer>
+#include <QSvgWidget>
 
 #define TEXT 0
 #define BUTTON 1
@@ -102,15 +103,6 @@ void MainWindow::setupTab0()
     ui->warningText->setType(Text::Type::Warning);
     ui->dangerText->setType(Text::Type::Danger);
 
-    Text* _h1 = h1("Overview", ui->tab_0);
-    _h1->move(ui->h1->pos());
-    Text* _h2 = h2("源代码", ui->tab_0);
-    _h2->move(ui->h2->pos());
-    Text* _h3 = h3("Attributes", ui->tab_0);
-    _h3->move(ui->h3->pos());
-    Text* _p = p("Element Plus", ui->tab_0);
-    _p->move(ui->p->pos());
-
     auto setStyle = [](QWidget* widget)
     {
         widget->setFont(FontHelper(widget->font())
@@ -138,6 +130,9 @@ void MainWindow::setupTab0()
     ShadowEf::setShadow(ui->shadow_2, ShadowEf::Type::Light);
     ShadowEf::setShadow(ui->shadow_3, ShadowEf::Type::Lighter);
     ShadowEf::setShadow(ui->shadow_4, ShadowEf::Type::Dark);
+
+    ui->scrollbar->setVisible(true);
+    qDebug() << ui->scrollbar->isVisible();
 }
 
 void MainWindow::setupTab1()
@@ -442,12 +437,14 @@ void MainWindow::setupTab6()
 void MainWindow::setupTab7()
 {
     ui->card_1->setHeader("Card name")
-               .setBody({"List item 1", "List item 2", "List item 3", "List item 4"})
+            //    .setBody({"List item 1", "List item 2", "List item 3", "List item 4"})
                .setFooter("Footer content")
                .setShadow(Card::Shadow::Always);
 
+    QLabel* label = new QLabel;
+    label->setPixmap(QPixmap(":/icons/other/hamburger.png"));
     ui->card_2->setHeader("Yummy hamburger")
-               .setBody(QImage(":/icons/other/hamburger.png"));
+               .setBody((label));
 
     ui->collapseItem->setTitle("Consistency")
         .setContent("Consistent with real life: in line with the process and logic of real life, "

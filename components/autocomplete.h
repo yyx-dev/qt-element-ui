@@ -53,9 +53,9 @@ namespace Element
 
     private:
         QSSHelper _qsshelper;
-        static const int _itemHeight = 35;
-        static const int _maxHeight = 300;
-        static const int _padding = 15;
+        static constexpr int _itemHeight = 35;
+        static constexpr int _maxHeight = 300;
+        static constexpr int _padding = 15;
     };
 
     class AutoComplete : public InputLine

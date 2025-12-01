@@ -1,14 +1,15 @@
 #pragma once
 
-#include <QWidget>
+#include <QLabel>
 
 namespace Element
 {
 
-    class Image : public QWidget
+    class Image : public QLabel
     {
-    Q_OBJECT
+        Q_OBJECT
     public:
+        Image& fit();
     public:
     public:
     private:

@@ -50,8 +50,9 @@ namespace Element
 
     InputLine& InputLine::setWidth(int width)
     {
-        QLineEdit::setMinimumWidth(width);
-        QLineEdit::setMaximumWidth(width);
+        // QLineEdit::setMinimumWidth(width);
+        // QLineEdit::setMaximumWidth(width);
+        QLineEdit::setFixedWidth(width);
         return *this;
     }
 
@@ -75,24 +76,10 @@ namespace Element
     {
         _size = size;
 
-        QString fontSize;
-        int height = 0;
-
-        if (size == Size::Large)
-        {
-            fontSize = "16px";
-            height = 50;
-        }
-        else if (size == Size::Default)
-        {
-            fontSize = "16px";
-            height = 40;
-        }
-        else if (size == Size::Small)
-        {
-            fontSize = "12px";
-            height = 30;
-        }
+        QString fontSize = size == Size::Large ? "16px"
+                       : size == Size::Default ? "14px" : "12px";
+        int height = size == Size::Large ? sc(40)
+                 : size == Size::Default ? sc(32) : sc(24);
 
         _qssHelper.setProperty("QLineEdit", "font-family", Comm::fontFmaily)
                 .setProperty("QLineEdit", "font-size", fontSize)
@@ -108,7 +95,7 @@ namespace Element
                 .setProperty("QLineEdit:disabled", "color", Color::placeholderText());
         setStyleSheet(_qssHelper.generate());
 
-        setFixedSize(300, height);
+        setFixedHeight(height);
         adjustSize();
 
         return *this;

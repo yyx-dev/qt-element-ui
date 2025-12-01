@@ -17,16 +17,13 @@ namespace Element
     public:
         Card& setHeader(const QString& header);
         Card& setFooter(const QString& footer);
-        Card& setBody(const QStringList& contents);
-        Card& setBody(const QImage& image);
+
         Card& setBody(QWidget* widget);
+
         Card& setShadow(Shadow shadow);
 
     public:
         Card(QWidget* parent = nullptr);
-        Card(const QStringList& contents, QWidget* parent = nullptr);
-        Card(const QString& header, const QStringList& contents, QWidget* parent = nullptr);
-        Card(const QString& header, const QStringList& contents, const QString& footer, QWidget* parent = nullptr);
         Card(const QString& header, QWidget* widget, QWidget* parent = nullptr);
         Card(const QString& header, QWidget* widget, const QString& footer, QWidget* parent = nullptr);
 

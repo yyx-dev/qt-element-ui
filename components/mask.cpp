@@ -50,13 +50,13 @@ namespace Element
         return QWidget::eventFilter(watched, event);
     }
 
-    void Mask::paintEvent(QPaintEvent* event)
+    void Mask::paintEvent(QPaintEvent*)
     {
         QPainter painter(this);
         painter.fillRect(rect(), QColor(0, 0, 0, 128));
     }
 
-    void Mask::mousePressEvent(QMouseEvent* event)
+    void Mask::mousePressEvent(QMouseEvent*)
     {
         emit clicked();
     }

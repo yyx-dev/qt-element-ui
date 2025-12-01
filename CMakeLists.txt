@@ -66,7 +66,7 @@ target_link_libraries(qt-element-ui
 )
 
 if(WIN32)
-    target_link_libraries(qt-element-ui gdi32)
+    target_link_libraries(qt-element-ui gdi32 dwmapi)
 endif()
 
 qt5_add_translation(QM_FILES ${TRANSLATIONS})

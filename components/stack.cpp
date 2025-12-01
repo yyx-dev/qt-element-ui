@@ -1,5 +1,6 @@
 #include "stack.h"
 #include "base.h"
+#include "scrollbar.h"
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -32,10 +33,12 @@ namespace Element
         widget->setContentsMargins(40, 40, 40, 80);
 
         QScrollArea* area = new QScrollArea(this);
-        area->setWidgetResizable(true);
-        area->setFrameStyle(QFrame::NoFrame);
+
+        area->setVerticalScrollBar(new ScrollBar(Qt::Vertical, area));
         area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        area->setWidgetResizable(true);
+        area->setFrameStyle(QFrame::NoFrame);
         area->setWidget(widget);
 
         int i = QStackedWidget::addWidget(area);

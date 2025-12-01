@@ -13,7 +13,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-        void setWindowIcon(Element::Icon::Name icon);
+    void setWindowIcon(Element::Icon::Name icon);
 
 public:
     MainWindow(QWidget *parent = nullptr);
