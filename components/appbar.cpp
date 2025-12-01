@@ -11,6 +11,10 @@
 namespace Element
 {
     AppBar::AppBar(QWidget* parent)
+        : AppBar(8, parent)
+    {}
+
+    AppBar::AppBar(int dragMargin, QWidget* parent)
         : QWidget(parent)
         , _layout(new QHBoxLayout(this))
         , _iconLabel(new QLabel(this))
@@ -21,6 +25,7 @@ namespace Element
         , _closeButton(new _AppBarButton(_AppBarButton::Type::Close, this))
     {
         setFixedHeight(sc(48));
+        setMouseTracking(true);
 
         _layout->setContentsMargins(0, 0, 0, 0);
         _layout->setSpacing(0);
@@ -46,15 +51,14 @@ namespace Element
         connect(_minButton, &QPushButton::clicked, this, &AppBar::onMinButtonClicked);
         connect(_maxButton, &QPushButton::clicked, this, &AppBar::onMaxButtonClicked);
         connect(_closeButton, &QPushButton::clicked, this, &AppBar::onCloseButtonClicked);
+
+        setDragMargin(_dragMargin);
     }
 
-    AppBar& AppBar::setBgColor(const QString& color)
+
+    void AppBar::setDragMargin(int margin)
     {
-        QPalette pal = palette();
-        pal.setColor(QPalette::Window, color);
-        setPalette(pal);
-        setAutoFillBackground(true);
-        return *this;
+        _dragMargin = margin;
     }
 
     void AppBar::changeEvent(QEvent* event)
@@ -74,52 +78,47 @@ namespace Element
     {
         if (event->button() == Qt::LeftButton)
         {
+            if (event->pos().y() <= _dragMargin)
+            {
+                QWidget::mousePressEvent(event);
+                return;
+            }
+
             QWidget* child = childAt(event->pos());
-            if (!child
-             || (child != _minButton
-              && child != _maxButton
-              && child != _closeButton
-              && child != _backButton))
+
+            if ((!child)
+             || (child != _minButton && child != _maxButton && child != _closeButton && child != _backButton))
             {
                 _dragging = true;
                 _dragStartPos = event->globalPos() - window()->frameGeometry().topLeft();
-                event->accept();
-                return;
             }
         }
-        QWidget::mousePressEvent(event);
     }
 
     void AppBar::mouseMoveEvent(QMouseEvent* event)
     {
-        if (_dragging && event->buttons() & Qt::LeftButton)
+        if (event->pos().y() > _dragMargin && _dragging && event->buttons() & Qt::LeftButton)
         {
             QPoint newPos = event->globalPos() - _dragStartPos;
             window()->move(newPos);
-            event->accept();
-            return;
         }
         QWidget::mouseMoveEvent(event);
     }
 
     void AppBar::mouseReleaseEvent(QMouseEvent* event)
     {
-        if (event->button() == Qt::LeftButton && _dragging)
+        if (event->pos().y() > _dragMargin && event->button() == Qt::LeftButton && _dragging)
         {
             _dragging = false;
-            event->accept();
-            return;
         }
         QWidget::mouseReleaseEvent(event);
     }
 
     void AppBar::mouseDoubleClickEvent(QMouseEvent* event)
     {
-        if (event->button() == Qt::LeftButton)
+        if (event->pos().y() > _dragMargin && event->button() == Qt::LeftButton)
         {
             onMaxButtonClicked();
-            event->accept();
-            return;
         }
         QWidget::mouseDoubleClickEvent(event);
     }

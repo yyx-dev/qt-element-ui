@@ -4,14 +4,20 @@
 
 namespace Element
 {
+    class DragProxy;
+
     class FramelessWindow : public QWidget
     {
         Q_OBJECT
     public:
         FramelessWindow(QWidget* parent = nullptr);
+        QMargins getDraMargins();
 
     protected:
-        void showEvent(QShowEvent *event) override;
+        void showEvent(QShowEvent* event) override;
+
+    private:
+        DragProxy* _dragProxy = nullptr;
     };
 
     class DragProxy : public QObject
@@ -19,8 +25,12 @@ namespace Element
         Q_OBJECT
 
     public:
-        void setBorderWidth(int top, int right, int bottom, int left);
-        DragProxy(QWidget *parent);
+        void setMargins(const QMargins& margins);
+        void setMargins(int top, int right, int bottom, int left);
+        QMargins getMargins();
+
+    public:
+        DragProxy(QWidget* parent);
 
     protected:
         enum Region
@@ -38,9 +48,9 @@ namespace Element
         };
 
     protected:
-        virtual bool eventFilter(QObject* obj, QEvent* event);
+        bool eventFilter(QObject* obj, QEvent* event);
 
-        void makeRegions();
+        void checkRegions();
         Region hitRegion(const QPoint& pos);
         void updateGeometry(int x, int y, int w, int h);
 
@@ -50,16 +60,13 @@ namespace Element
         void stopCursorTimer();
 
     private:
-        QWidget* _proxyWidget;
-        int _top, _right, _bottom, _left;
+        QWidget* _proxyWidget = nullptr;
+        QMargins _margins = {8, 8, 8, 8};
         QRect _regions[9];
-
-        QPoint _originPosGlobal; // 拖拽前鼠标位置
-        QRect _originGeo;        // 拖拽前窗体位置和大小
-
-        bool _mousePressed; // 鼠标是否按下
-        Region _regionPressed; // 记录鼠标按下时所点击的区域
-
-        int _cursorTimerId;
+        QPoint _originPosGlobal;
+        QRect _originGeo;
+        bool _mousePressed = false;
+        Region _regionPressed = Unknown;
+        int _cursorTimerId = 0;
     };
 }

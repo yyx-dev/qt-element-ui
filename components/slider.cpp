@@ -246,7 +246,6 @@ namespace Element
         {
             int scale = mark.first;
             QString text = mark.second;
-            qDebug() << scale;
         }
         return *this;
     }

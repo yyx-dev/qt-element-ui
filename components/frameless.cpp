@@ -11,6 +11,7 @@ namespace Element
 {
     FramelessWindow::FramelessWindow(QWidget* parent)
         : QWidget(parent)
+        , _dragProxy(new DragProxy(this))
     {
         setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
@@ -30,11 +31,14 @@ namespace Element
         DwmSetWindowAttribute(hwnd, DWMWA_ALLOW_NCPAINT, &value, sizeof(value));
 
         SetWindowPos(hwnd, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
-
-        DragProxy* dragProxy = new DragProxy(this);
     }
 
-    void FramelessWindow::showEvent(QShowEvent *event)
+    QMargins FramelessWindow::getDraMargins()
+    {
+        return _dragProxy->getMargins();
+    }
+
+    void FramelessWindow::showEvent(QShowEvent* event)
     {
         QWidget::showEvent(event);
         QRect geo = QGuiApplication::primaryScreen()->availableGeometry();
@@ -43,22 +47,28 @@ namespace Element
 
 
     DragProxy::DragProxy(QWidget* parent)
-        : QObject((QObject*)parent)
+        : QObject(parent)
         , _proxyWidget(parent)
-        , _mousePressed(false)
-        , _regionPressed(Unknown)
-        , _cursorTimerId(0)
     {
         _proxyWidget->setMouseTracking(true);
         _proxyWidget->installEventFilter(this);
-
-        setBorderWidth(8, 8, 8, 8);
+        setMargins(_margins);
     }
 
-    void DragProxy::setBorderWidth(int top, int right, int bottom, int left)
+    void DragProxy::setMargins(const QMargins& m)
     {
-        _top = top, _right = right, _bottom = bottom, _left = left;
-        makeRegions();
+        setMargins(m.top(), m.right(), m.bottom(), m.left());
+    }
+
+    void DragProxy::setMargins(int top, int right, int bottom, int left)
+    {
+        _margins = QMargins(left, top, right, bottom);
+        checkRegions();
+    }
+
+    QMargins DragProxy::getMargins()
+    {
+        return _margins;
     }
 
     void DragProxy::updateGeometry(int x, int y, int w, int h)
@@ -74,8 +84,11 @@ namespace Element
         _proxyWidget->setGeometry(x, y, w, h);
     }
 
-    bool DragProxy::eventFilter(QObject* obj, QEvent* event)
+    bool DragProxy::eventFilter(QObject* watched, QEvent* event)
     {
+        if (watched != _proxyWidget)
+            return QObject::eventFilter(watched, event);
+
         if (event->type() == QEvent::MouseMove)
         {
             QMouseEvent* mouseEvent = (QMouseEvent*)event;
@@ -113,11 +126,9 @@ namespace Element
             }
             else // 鼠标已按下
             {
-                QRect geo = _proxyWidget->geometry();
-
                 if (_regionPressed == Inner)
                 {
-                    _proxyWidget->move(_originGeo.topLeft() + curPosGlobal - _originPosGlobal);
+                    // _proxyWidget->move(_originGeo.topLeft() + curPosGlobal - _originPosGlobal);
                 }
                 else if (_regionPressed == Top)
                 {
@@ -163,18 +174,17 @@ namespace Element
         }
         else if (event->type() == QEvent::MouseButtonPress)
         {
-            QMouseEvent* mouseEvent = (QMouseEvent*)event;
-            if (mouseEvent->button() == Qt::LeftButton)
+            QMouseEvent* mouseEv = (QMouseEvent*)event;
+            if (mouseEv->button() == Qt::LeftButton)
             {
                 _mousePressed = true;
 
-                QPoint curPos = mouseEvent->pos();
+                QPoint curPos = mouseEv->pos();
                 _regionPressed = hitRegion(curPos);
-
                 _originPosGlobal = _proxyWidget->mapToGlobal(curPos);
                 _originGeo = _proxyWidget->geometry();
 
-                startCursorTimer();
+                stopCursorTimer();
             }
         }
         else if (event->type() == QEvent::MouseButtonRelease)
@@ -186,34 +196,32 @@ namespace Element
         }
         else if (event->type() == QEvent::Resize)
         {
-            makeRegions();
-            qDebug() << "Resize frameless regions." << _proxyWidget->geometry();
+            checkRegions();
         }
         else if (event->type() == QEvent::Leave)
         {
             _proxyWidget->setCursor(Qt::ArrowCursor);
-            startCursorTimer();
+            stopCursorTimer();
         }
         else if (event->type() == QEvent::Timer)
         {
-            QTimerEvent* timerEvent = (QTimerEvent*)event;
-            if (timerEvent->timerId() == _cursorTimerId)
+            if (static_cast<QTimerEvent*>(event)->timerId() == _cursorTimerId)
             {
                 if (_regions[Inner].contains(_proxyWidget->mapFromGlobal(QCursor::pos())))
                 {
                     _proxyWidget->setCursor(Qt::ArrowCursor);
-                    startCursorTimer();
+                    stopCursorTimer();
                 }
             }
         }
 
-        return QObject::eventFilter(obj, event);
+        return QObject::eventFilter(watched, event);
     }
 
     void DragProxy::startCursorTimer()
     {
-        startCursorTimer();
-        _cursorTimerId = _proxyWidget->startTimer(50);
+        stopCursorTimer();
+        _cursorTimerId = _proxyWidget->startTimer(100);
     }
 
     void DragProxy::stopCursorTimer()
@@ -225,20 +233,20 @@ namespace Element
         }
     }
 
-    void DragProxy::makeRegions()
+    void DragProxy::checkRegions()
     {
-        int width = _proxyWidget->width();
-        int height = _proxyWidget->height();
+        int width = _proxyWidget->width(), height = _proxyWidget->height();
+        int left = _margins.left(), right = _margins.right(), top = _margins.top(), bottom = _margins.bottom();
 
-        _regions[Top]         = QRect(_left, 0, width - _left - _right, _top);
-        _regions[TopRight]    = QRect(width - _right, 0, _right, _top);
-        _regions[Right]       = QRect(width - _right, _top, _right, height - _top - _bottom);
-        _regions[RightBottom] = QRect(width - _right, height - _bottom, _right, _bottom);
-        _regions[Bottom]      = QRect(_left, height - _bottom, width - _left - _right, _bottom);
-        _regions[LeftBottom]  = QRect(0, height - _bottom, _left, _bottom);
-        _regions[Left]        = QRect(0, _top, _left, height - _top - _bottom);
-        _regions[LeftTop]     = QRect(0, 0, _left, _top);
-        _regions[Inner]       = QRect(_left, _top, width - _left - _right, height - _top - _bottom);
+        _regions[Top]         = QRect(left, 0, width - left - right, top);
+        _regions[TopRight]    = QRect(width - right, 0, right, top);
+        _regions[Right]       = QRect(width - right, top, right, height - top - bottom);
+        _regions[RightBottom] = QRect(width - right, height - bottom, right, bottom);
+        _regions[Bottom]      = QRect(left, height - bottom, width - left - right, bottom);
+        _regions[LeftBottom]  = QRect(0, height - bottom, left, bottom);
+        _regions[Left]        = QRect(0, top, left, height - top - bottom);
+        _regions[LeftTop]     = QRect(0, 0, left, top);
+        _regions[Inner]       = QRect(left, top, width - left - right, height - top - bottom);
     }
 
     DragProxy::Region DragProxy::hitRegion(const QPoint& pos)

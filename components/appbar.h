@@ -13,10 +13,11 @@ namespace Element
     {
         Q_OBJECT
     public:
-        AppBar& setBgColor(const QString& color);
+        AppBar(QWidget* parent = nullptr);
+        AppBar(int dragMargin, QWidget* parent = nullptr);
 
     public:
-        AppBar(QWidget* parent = nullptr);
+        void setDragMargin(int margin);
 
     protected:
         void changeEvent(QEvent* event) override;
@@ -25,6 +26,7 @@ namespace Element
         void mouseReleaseEvent(QMouseEvent* event) override;
         void paintEvent(QPaintEvent* event) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
+
     private:
         void onMinButtonClicked();
         void onMaxButtonClicked();
@@ -42,6 +44,7 @@ namespace Element
     private:
         bool _dragging = false;
         QPoint _dragStartPos;
+        int _dragMargin = 8;
     };
 
     class _AppBarButton : public QPushButton

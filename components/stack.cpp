@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QCoreApplication>
 
 namespace Element
 {
@@ -16,6 +17,8 @@ namespace Element
         : QStackedWidget(parent)
     {
         setMenu(menu);
+        setMouseTracking(true);
+        setContentsMargins(0, 0, 4, 0); // remaing space for dragging width
     }
 
     Stack& Stack::setMenu(Menu* menu)
@@ -31,19 +34,14 @@ namespace Element
     Stack& Stack::addWidget(Menu::Item* item, QWidget* widget)
     {
         widget->setContentsMargins(40, 40, 40, 80);
+        setMouseTrackingRec(widget);
 
-        QScrollArea* area = new QScrollArea(this);
-
-        area->setVerticalScrollBar(new ScrollBar(Qt::Vertical, area));
-        area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        area->setWidgetResizable(true);
-        area->setFrameStyle(QFrame::NoFrame);
+        ScrollArea* area = new ScrollArea(this);
+        area->setMouseTracking(true);
         area->setWidget(widget);
 
         int i = QStackedWidget::addWidget(area);
         _item2index.insert(item, i);
-
         return *this;
     }
 
@@ -72,6 +70,55 @@ namespace Element
         QVBoxLayout* layout = new QVBoxLayout(widget);
         layout->addWidget(label, 0, Qt::AlignTop);
         return widget;
+    }
+
+    ScrollArea::ScrollArea(QWidget* parent)
+        : QScrollArea(parent)
+    {
+        setVerticalScrollBar(new ScrollBar(Qt::Vertical, viewport()));
+        setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        setWidgetResizable(true);
+        setFrameStyle(QFrame::NoFrame);
+    }
+
+    void ScrollArea::mousePressEvent(QMouseEvent* event)
+    {
+        QMouseEvent newEvent(
+            QEvent::MouseButtonPress,
+            mapFromGlobal(mapToGlobal(event->pos())),
+            event->globalPos(),
+            event->button(),
+            event->buttons(),
+            event->modifiers()
+        );
+        QCoreApplication::sendEvent(parentWidget(), &newEvent);
+    }
+
+    void ScrollArea::mouseMoveEvent(QMouseEvent* event)
+    {
+        QMouseEvent newEvent(
+            QEvent::MouseMove,
+            mapFromGlobal(mapToGlobal(event->pos())),
+            event->globalPos(),
+            event->button(),
+            event->buttons(),
+            event->modifiers()
+        );
+        QCoreApplication::sendEvent(parentWidget(), &newEvent);
+    }
+
+    void ScrollArea::mouseReleaseEvent(QMouseEvent* event)
+    {
+        QMouseEvent newEvent(
+            QEvent::MouseButtonRelease,
+            mapFromGlobal(mapToGlobal(event->pos())),
+            event->globalPos(),
+            event->button(),
+            event->buttons(),
+            event->modifiers()
+        );
+        QCoreApplication::sendEvent(parentWidget(), &newEvent);
     }
 
 }

@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QtMath>
+#include <QCoreApplication>
 
 namespace Element
 {
@@ -68,6 +69,7 @@ namespace Element
         , _maxWidth(sc(200))
         , _width(_minWidth)
     {
+        setMouseTracking(true);
         setHeaderHidden(true);
         setRootIsDecorated(false);
         setIndentation(0);
@@ -123,27 +125,64 @@ namespace Element
         {
             Item* item = itemAt(event->pos());
 
-            if (!item) return;
-
-            if (item->childCount() > 0) // 有子项
+            if (item)
             {
-                item->setExpanded(!item->isExpanded());
-                event->accept();
+                if (item->childCount() > 0) // 有子项
+                {
+                    item->setExpanded(!item->isExpanded());
+                    event->accept();
+                }
+                else
+                {
+                    auto* widget = qobject_cast<Widget*>(itemWidget(item, 0));
+                    if (!widget) return;
+
+                    if (widget->getType() != Widget::Type::GroupDesc)
+                    {
+                        itemClicked(item);
+                    }
+                    event->accept();
+                }
             }
             else
             {
-                auto* widget = qobject_cast<Widget*>(itemWidget(item, 0));
-                if (!widget) return;
-
-                if (widget->getType() != Widget::Type::GroupDesc)
-                {
-                    itemClicked(item);
-                }
-                event->accept();
+                QMouseEvent newEvent(
+                    QEvent::MouseButtonPress,
+                    mapFromGlobal(mapToGlobal(event->pos())),
+                    event->globalPos(),
+                    event->button(),
+                    event->buttons(),
+                    event->modifiers()
+                );
+                QCoreApplication::sendEvent(parentWidget(), &newEvent);
             }
         }
+    }
 
-        QTreeWidget::mousePressEvent(event);
+    void Menu::mouseMoveEvent(QMouseEvent* event)
+    {
+        QMouseEvent newEvent(
+            QEvent::MouseMove,
+            mapFromGlobal(mapToGlobal(event->pos())),
+            event->globalPos(),
+            event->button(),
+            event->buttons(),
+            event->modifiers()
+        );
+        QCoreApplication::sendEvent(parentWidget(), &newEvent);
+    }
+
+    void Menu::mouseReleaseEvent(QMouseEvent* event)
+    {
+        QMouseEvent newEvent(
+            QEvent::MouseButtonRelease,
+            mapFromGlobal(mapToGlobal(event->pos())),
+            event->globalPos(),
+            event->button(),
+            event->buttons(),
+            event->modifiers()
+        );
+        QCoreApplication::sendEvent(parentWidget(), &newEvent);
     }
 
     void Menu::updateWidth(Widget::Type type, Icon::Name icon, const QString& text)

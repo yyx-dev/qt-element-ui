@@ -13,12 +13,11 @@ namespace Gallery
     Widget::Widget(QWidget* parent)
         : Element::FramelessWindow(parent)
         , _layout(new QVBoxLayout(this))
-        , _appbar(new Element::AppBar(this))
+        , _appbar(new Element::AppBar(getDraMargins().top(), this))
         , _menu(new Element::Menu(this))
         , _stack(new Element::Stack(_menu, this))
     {
         setMinimumSize(Element::sc(1200, 741));
-        setMouseTracking(true);
 
         Element::setBgColor(this, Qt::white);
         setupContainer();

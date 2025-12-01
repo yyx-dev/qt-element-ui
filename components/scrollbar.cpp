@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QQueue>
 #include <QDateTime>
+#include <QDebug>
 
 namespace Element
 {
@@ -13,59 +14,21 @@ namespace Element
         , lastWheelEvent(nullptr)
         , stepsTotal(0)
     {
+        setMouseTracking(true);
         setStyleSheet(R"(
-            QScrollBar {
-                background-color: transparent;
-                border: none;
-            }
-            QScrollBar:vertical {
-                width: 10px;
-            }
-            QScrollBar:horizontal {
-                height: 10px;
-            }
-            QScrollBar::handle {
-                background: rgba(144, 147, 153, 0.3);
-                border-radius: 5px;
-            }
-            QScrollBar::handle:hover {
-                background: rgba(144, 147, 153, 0.5);
-            }
-            QScrollBar::handle:pressed {
-                background: rgba(144, 147, 153, 0.5);
-            }
-            QScrollBar::add-page, QScrollBar::sub-page {
-                background: none;
-            }
-            QScrollBar::add-line:vertical {
-                height: 0px;
-                subcontrol-position: bottom;
-                subcontrol-origin: margin;
-            }
-            QScrollBar::sub-line:vertical {
-                height: 0px;
-                subcontrol-position: top;
-                subcontrol-origin: margin;
-            }
-            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-                height: 0px;
-                width: 0px;
-            }
-            QScrollBar::add-line:horizontal {
-                width: 0px;
-                subcontrol-position: right;
-                subcontrol-origin: margin;
-            }
-            QScrollBar::sub-line:horizontal {
-                width: 0px;
-                subcontrol-position: left;
-                subcontrol-origin: margin;
-            }
-            QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
-                width: 0px;
-                height: 0px;
-            }
-        )");
+            QScrollBar { background-color: transparent; border: none; }
+            QScrollBar:vertical { width: 10px; }
+            QScrollBar:horizontal { height: 10px; }
+            QScrollBar::handle { background: rgba(144, 147, 153, 0.3); border-radius: 5px; }
+            QScrollBar::handle:hover { background: rgba(144, 147, 153, 0.5); }
+            QScrollBar::handle:pressed { background: rgba(144, 147, 153, 0.5); }
+            QScrollBar::add-page, QScrollBar::sub-page { background: none; }
+            QScrollBar::add-line:vertical { height: 0px; subcontrol-position: bottom; subcontrol-origin: margin; }
+            QScrollBar::sub-line:vertical { height: 0px; subcontrol-position: top; subcontrol-origin: margin; }
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical { height: 0px; width: 0px; }
+            QScrollBar::add-line:horizontal { width: 0px; subcontrol-position: right; subcontrol-origin: margin; }
+            QScrollBar::sub-line:horizontal { width: 0px; subcontrol-position: left; subcontrol-origin: margin; }
+            QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal { width: 0px; height: 0px; } )");
 
         smoothMoveTimer = new QTimer(this);
         connect(smoothMoveTimer, &QTimer::timeout, this, &ScrollBar::slotSmoothMove);

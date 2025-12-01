@@ -3,6 +3,7 @@
 #include "menu.h"
 
 #include <QStackedWidget>
+#include <QScrollArea>
 
 namespace Element
 {
@@ -26,5 +27,20 @@ namespace Element
     private:
         Menu* _menu;
         QHash<Menu::Item*, int> _item2index;
+    };
+
+    class ScrollArea : public QScrollArea
+    {
+        Q_OBJECT
+    public:
+    public:
+        ScrollArea(QWidget* parent = nullptr);
+
+    protected:
+        void mousePressEvent(QMouseEvent* e) override;
+        void mouseMoveEvent(QMouseEvent* e) override;
+        void mouseReleaseEvent(QMouseEvent* e) override;
+
+    private:
     };
 }

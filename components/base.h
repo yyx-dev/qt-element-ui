@@ -125,4 +125,17 @@ namespace Element
         widget->setAutoFillBackground(true);
         widget->setPalette(pal);
     }
+
+    inline void setMouseTrackingRec(QWidget* widget, bool enable = true)
+    {
+        if (!widget) return;
+
+        widget->setMouseTracking(enable);
+
+        for (QObject* child : widget->children())
+        {
+            setMouseTrackingRec(qobject_cast<QWidget*>(child), enable);
+        }
+    }
+
 }

@@ -130,9 +130,6 @@ void MainWindow::setupTab0()
     ShadowEf::setShadow(ui->shadow_2, ShadowEf::Type::Light);
     ShadowEf::setShadow(ui->shadow_3, ShadowEf::Type::Lighter);
     ShadowEf::setShadow(ui->shadow_4, ShadowEf::Type::Dark);
-
-    ui->scrollbar->setVisible(true);
-    qDebug() << ui->scrollbar->isVisible();
 }
 
 void MainWindow::setupTab1()

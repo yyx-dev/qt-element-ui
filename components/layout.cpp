@@ -253,8 +253,6 @@ namespace Element
             {
                 int nextX = x + colIndex * (itemWidth + spacing);
                 item->setGeometry(QRect(QPoint(nextX, y), QSize(itemWidth, itemHeight)));
-
-                qDebug() << QRect(QPoint(nextX, y), QSize(itemWidth, itemHeight));
             }
 
             rowHeight = qMax(rowHeight, itemHeight);
