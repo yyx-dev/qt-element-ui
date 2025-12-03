@@ -525,8 +525,6 @@ void MainWindow::setupTab9()
     ui->menu->addSubItem(item2, "sub test2");
     Menu::Item* item3 = ui->menu->addTopItem("test3");
 
-    ui->stack->setMenu(ui->menu);
-
     ui->stack->addWidget(item3, new Gallery::OverviewPage(ui->tab_9));
 }
 

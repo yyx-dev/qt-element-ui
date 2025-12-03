@@ -7,7 +7,8 @@
 
 namespace Element
 {
-    class _AppBarButton;
+    class _BackButton;
+    class _CtrlButton;
 
     class AppBar : public QWidget
     {
@@ -27,6 +28,13 @@ namespace Element
         void paintEvent(QPaintEvent* event) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
 
+    signals:
+        void backButtonClicked();
+
+    public slots:
+        void enableBackButton();
+        void disableBackButton();
+
     private:
         void onMinButtonClicked();
         void onMaxButtonClicked();
@@ -36,10 +44,10 @@ namespace Element
         QHBoxLayout* _layout;
         QLabel* _iconLabel;
         QLabel* _titleLabel;
-        QLabel* _backButton;
-        _AppBarButton* _minButton;
-        _AppBarButton* _maxButton;
-        _AppBarButton* _closeButton;
+        _BackButton* _backButton;
+        _CtrlButton* _minButton;
+        _CtrlButton* _maxButton;
+        _CtrlButton* _closeButton;
 
     private:
         bool _dragging = false;
@@ -47,7 +55,24 @@ namespace Element
         int _dragMargin = 8;
     };
 
-    class _AppBarButton : public QPushButton
+    class _BackButton : public QLabel
+    {
+        Q_OBJECT
+    public:
+        _BackButton(QWidget* parent = nullptr);
+
+    protected:
+        void enterEvent(QEvent* event) override;
+        void leaveEvent(QEvent* event) override;
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseReleaseEvent(QMouseEvent* event) override;
+        void paintEvent(QPaintEvent* event) override;
+
+    private:
+        bool _pressed = false;
+    };
+
+    class _CtrlButton : public QPushButton
     {
         Q_OBJECT
     public:
@@ -57,7 +82,7 @@ namespace Element
         void setType(Type type);
         Type getType();
 
-        _AppBarButton(Type type, QWidget* parent = nullptr);
+        _CtrlButton(Type type, QWidget* parent = nullptr);
 
     protected:
         void paintEvent(QPaintEvent* event) override;

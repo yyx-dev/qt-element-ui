@@ -3,7 +3,7 @@
 #include "icon.h"
 
 #include <QTreeWidget>
-#include <QWidget>
+#include <QStack>
 
 
 namespace Element
@@ -54,8 +54,13 @@ namespace Element
         Item* addSubItem(Item* topItem, const QString& text);
         void  addGroupDesc(Item* topItem, const QString& text);
 
+    public slots:
+        void jumpToLastItem();
+
     signals:
         void itemClicked(Item* item);
+        void historyEmpty();
+        void historyFilled();
 
     public:
         Menu(QWidget* parent = nullptr);
@@ -70,6 +75,7 @@ namespace Element
 
     private:
         int _minWidth = 0, _maxWidth = 0, _width = 0;
+        QStack<Item*> _history;
     };
 
 }

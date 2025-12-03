@@ -119,6 +119,19 @@ namespace Element
         setItemWidget(item, 0, widget);
     }
 
+    void Menu::jumpToLastItem()
+    {
+        if (!_history.isEmpty())
+        {
+            Item* item = _history.pop();
+            setCurrentItem(item);
+            emit itemClicked(item);
+        }
+
+        if (_history.isEmpty())
+            emit historyEmpty();
+    }
+
     void Menu::mousePressEvent(QMouseEvent* event)
     {
         if (event->button() == Qt::LeftButton)
@@ -140,6 +153,10 @@ namespace Element
                     if (widget->getType() != Widget::Type::GroupDesc)
                     {
                         itemClicked(item);
+                        setCurrentItem(item);
+                        _history.push(item);
+                        if (_history.size() == 1)
+                            emit historyFilled();
                     }
                     event->accept();
                 }

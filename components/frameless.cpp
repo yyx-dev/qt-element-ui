@@ -40,9 +40,9 @@ namespace Element
 
     void FramelessWindow::showEvent(QShowEvent* event)
     {
-        QWidget::showEvent(event);
         QRect geo = QGuiApplication::primaryScreen()->availableGeometry();
         move((geo.width() - width()) / 2, (geo.height() - height()) / 2);
+        QWidget::showEvent(event);
     }
 
 

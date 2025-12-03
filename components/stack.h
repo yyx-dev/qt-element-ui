@@ -11,21 +11,21 @@ namespace Element
     {
         Q_OBJECT
     public:
-        Stack& setMenu(Menu* menu);
+        Stack& setFooter(QWidget* footer);
         Stack& addWidget(Menu::Item* item, QWidget* widget);
 
     public:
         Stack(QWidget* parent = nullptr);
-        Stack(Menu* menu, QWidget* parent = nullptr);
 
-    protected:
+    public slots:
+        void showWidget(Menu::Item* item);
 
     private:
-        void showWidget(Menu::Item* item);
         QWidget* defaultWidget(Menu::Item* item);
 
     private:
         Menu* _menu;
+        QWidget* _footer;
         QHash<Menu::Item*, int> _item2index;
     };
 
@@ -33,14 +33,11 @@ namespace Element
     {
         Q_OBJECT
     public:
-    public:
         ScrollArea(QWidget* parent = nullptr);
 
     protected:
         void mousePressEvent(QMouseEvent* e) override;
         void mouseMoveEvent(QMouseEvent* e) override;
         void mouseReleaseEvent(QMouseEvent* e) override;
-
-    private:
     };
 }

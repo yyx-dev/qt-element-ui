@@ -10,24 +10,15 @@
 namespace Element
 {
     Stack::Stack(QWidget* parent)
-        : Stack(nullptr, parent)
-    {}
-
-    Stack::Stack(Menu* menu, QWidget* parent)
         : QStackedWidget(parent)
     {
-        setMenu(menu);
         setMouseTracking(true);
         setContentsMargins(0, 0, 4, 0); // remaing space for dragging width
     }
 
-    Stack& Stack::setMenu(Menu* menu)
+    Stack& Stack::setFooter(QWidget* footer)
     {
-        if (menu)
-        {
-            _menu = menu;
-            connect(_menu, &Menu::itemClicked, this, &Stack::showWidget);
-        }
+        _footer = footer;
         return *this;
     }
 
@@ -60,10 +51,8 @@ namespace Element
     {
         QWidget* widget = new QWidget;
 
-        MenuItemWidget* itemWidget = qobject_cast<MenuItemWidget*>(_menu->itemWidget(item, 0));
-
         QLabel* label = new QLabel(widget);
-        label->setText(itemWidget->getText());
+        label->setText("Default Widget");
         label->setFont(FontHelper().setBold().getFont());
         label->setStyleSheet("QLabel{ font-size: 32px; color: #6B778C; }");
 

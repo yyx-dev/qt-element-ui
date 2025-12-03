@@ -19,10 +19,10 @@ namespace Element
         , _layout(new QHBoxLayout(this))
         , _iconLabel(new QLabel(this))
         , _titleLabel(new QLabel(this))
-        , _backButton(new QLabel(this))
-        , _minButton(new _AppBarButton(_AppBarButton::Type::Min, this))
-        , _maxButton(new _AppBarButton(_AppBarButton::Type::Max, this))
-        , _closeButton(new _AppBarButton(_AppBarButton::Type::Close, this))
+        , _backButton(new _BackButton(this))
+        , _minButton(new _CtrlButton(_CtrlButton::Type::Min, this))
+        , _maxButton(new _CtrlButton(_CtrlButton::Type::Max, this))
+        , _closeButton(new _CtrlButton(_CtrlButton::Type::Close, this))
     {
         setFixedHeight(sc(48));
         setMouseTracking(true);
@@ -30,24 +30,21 @@ namespace Element
         _layout->setContentsMargins(0, 0, 0, 0);
         _layout->setSpacing(0);
 
-        _backButton->setFixedSize(sc(40, 36));
-
         _iconLabel->setPixmap(App::getWindowIcon().pixmap(24));
         _titleLabel->setText(App::getApplicationDisplayName());
-        _titleLabel->setContentsMargins(sc(8), 0, sc(8), 0);
-
-        _backButton->setPixmap(Icon::instance().getPixmap(Icon::Back, Color::placeholderText(), 22));
-        _backButton->setAlignment(Qt::AlignCenter);
 
         _layout->addSpacing(5);
         _layout->addWidget(_backButton);
+        _layout->addSpacing(3);
         _layout->addWidget(_iconLabel);
+        _layout->addSpacing(10);
         _layout->addWidget(_titleLabel);
         _layout->addStretch();
         _layout->addWidget(_minButton, 0, Qt::AlignTop);
         _layout->addWidget(_maxButton, 0, Qt::AlignTop);
         _layout->addWidget(_closeButton, 0, Qt::AlignTop);
 
+        connect(_backButton, &QLabel::linkActivated, this, &AppBar::backButtonClicked);
         connect(_minButton, &QPushButton::clicked, this, &AppBar::onMinButtonClicked);
         connect(_maxButton, &QPushButton::clicked, this, &AppBar::onMaxButtonClicked);
         connect(_closeButton, &QPushButton::clicked, this, &AppBar::onCloseButtonClicked);
@@ -55,10 +52,21 @@ namespace Element
         setDragMargin(_dragMargin);
     }
 
-
     void AppBar::setDragMargin(int margin)
     {
         _dragMargin = margin;
+    }
+
+    void AppBar::enableBackButton()
+    {
+        _backButton->setEnabled(true);
+        _backButton->setPixmap(Icon::instance().getPixmap(Icon::Back, Color::secondaryText(), 22));
+    }
+
+    void AppBar::disableBackButton()
+    {
+        _backButton->setEnabled(false);
+        _backButton->setPixmap(Icon::instance().getPixmap(Icon::Back, Color::placeholderText(), 22));
     }
 
     void AppBar::changeEvent(QEvent* event)
@@ -93,6 +101,7 @@ namespace Element
                 _dragStartPos = event->globalPos() - window()->frameGeometry().topLeft();
             }
         }
+        QWidget::mousePressEvent(event);
     }
 
     void AppBar::mouseMoveEvent(QMouseEvent* event)
@@ -116,11 +125,11 @@ namespace Element
 
     void AppBar::mouseDoubleClickEvent(QMouseEvent* event)
     {
-        if (event->pos().y() > _dragMargin && event->button() == Qt::LeftButton)
+        QWidget* child = childAt(event->pos());
+        if (!child && child != _backButton && event->button() == Qt::LeftButton)
         {
             onMaxButtonClicked();
         }
-        QWidget::mouseDoubleClickEvent(event);
     }
 
     void AppBar::paintEvent(QPaintEvent* event)
@@ -148,7 +157,82 @@ namespace Element
     }
 
 
-    _AppBarButton::_AppBarButton(Type type, QWidget* parent)
+    _BackButton::_BackButton(QWidget* parent)
+        : QLabel(parent)
+    {
+        setPixmap(Icon::instance().getPixmap(Icon::Back, Color::placeholderText(), 22));
+        setAlignment(Qt::AlignCenter);
+        setFixedSize(sc(40, 36));
+        setEnabled(false);
+    }
+
+    void _BackButton::enterEvent(QEvent* event)
+    {
+        if (isEnabled())
+            setCursor(Qt::PointingHandCursor);
+        QLabel::enterEvent(event);
+        update();
+    }
+
+    void _BackButton::leaveEvent(QEvent* event)
+    {
+        if (isEnabled())
+            setCursor(Qt::ArrowCursor);
+        QLabel::leaveEvent(event);
+        update();
+    }
+
+    void _BackButton::mousePressEvent(QMouseEvent* event)
+    {
+        _pressed = true;
+        QLabel::mousePressEvent(event);
+        update();
+    }
+
+    void _BackButton::mouseReleaseEvent(QMouseEvent* event)
+    {
+        _pressed = false;
+        emit linkActivated("");
+        QLabel::mouseReleaseEvent(event);
+        update();
+    }
+
+    void _BackButton::paintEvent(QPaintEvent* event)
+    {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        QRect rect = this->rect().adjusted(1, 1, -1, -1);
+
+        if (!isEnabled())
+        {
+            QLabel::paintEvent(event);
+            return;
+        }
+
+        if (underMouse() && _pressed)
+        {
+            painter.setBrush(QBrush(QColor(0xCC, 0xCC, 0xCC, 40)));
+            painter.setPen(Qt::NoPen);
+            painter.drawRoundedRect(rect, 4, 4);
+        }
+        else if (underMouse())
+        {
+            painter.setBrush(QBrush(QColor(0xCC, 0xCC, 0xCC, 20)));
+            painter.setPen(Qt::NoPen);
+            painter.drawRoundedRect(rect, 4, 4);
+        }
+        else
+        {
+            painter.setBrush(QBrush(Qt::white));
+            painter.setPen(Qt::NoPen);
+            painter.drawRoundedRect(rect, 4, 4);
+        }
+
+        QLabel::paintEvent(event);
+    }
+
+    _CtrlButton::_CtrlButton(Type type, QWidget* parent)
         : QPushButton(parent)
         , _type(type)
     {
@@ -156,17 +240,17 @@ namespace Element
         setFixedSize(sc(48, 32));
     }
 
-    void _AppBarButton::setType(Type type)
+    void _CtrlButton::setType(Type type)
     {
         _type = type;
     }
 
-    _AppBarButton::Type _AppBarButton::getType()
+    _CtrlButton::Type _CtrlButton::getType()
     {
         return _type;
     }
 
-    void _AppBarButton::paintEvent(QPaintEvent*)
+    void _CtrlButton::paintEvent(QPaintEvent*)
     {
         QPainter painter(this);
 
