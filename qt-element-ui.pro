@@ -4,7 +4,7 @@ CONFIG += c++17 console
 
 SRC = components/
 DEP = components/deprecated
-EXM = examples
+EXM = example
 RES = resources
 GAL = gallery
 

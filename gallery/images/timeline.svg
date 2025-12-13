@@ -1,0 +1,17 @@
+<svg data-v-4f7eedf4="" width="280" height="180" viewBox="0 0 280 180" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <rect width="280" height="180" fill="#f5f7fa"></rect>
+    <circle cx="114" cy="54" r="3" fill="#409eff"></circle>
+    <circle cx="114" cy="90" r="3" fill="#d4d7de"></circle>
+    <circle cx="114" cy="126" r="3" fill="#d4d7de"></circle>
+    <line x1="114.15" y1="60" x2="114.15" y2="84" stroke="#d4d7de"
+        stroke-width="0.3"></line>
+    <line x1="114.15" y1="96" x2="114.15" y2="120" stroke="#d4d7de"
+        stroke-width="0.3"></line>
+    <rect x="127" y="51" width="45" height="4" rx="2" fill="#409eff"></rect>
+    <rect x="127" y="87" width="45" height="4" rx="2" fill="#d4d7de"></rect>
+    <rect x="127" y="123" width="45" height="4" rx="2" fill="#d4d7de"></rect>
+    <rect x="127" y="59" width="24" height="4" rx="2" fill="#409eff"></rect>
+    <rect x="127" y="95" width="24" height="4" rx="2" fill="#d4d7de"></rect>
+    <rect x="127" y="131" width="24" height="4" rx="2" fill="#d4d7de"></rect>
+</svg>

@@ -20,19 +20,19 @@ find_package(Qt5 COMPONENTS Core Widgets Gui Svg LinguistTools REQUIRED)
 file(GLOB_RECURSE HEADERS
     components/*.h
     components/deprecated/*.h
-    examples/*.h
+    example/*.h
     gallery/*.h
 )
 
 file(GLOB_RECURSE SOURCES
     components/*.cpp
     components/deprecated/*.cpp
-    examples/*.cpp
+    example/*.cpp
     gallery/*.cpp
 )
 
 file(GLOB FORMS
-    examples/*.ui
+    example/*.ui
 )
 
 file(GLOB RESOURCES
@@ -54,7 +54,7 @@ add_executable(qt-element-ui
 target_include_directories(qt-element-ui PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/components
     ${CMAKE_CURRENT_SOURCE_DIR}/components/deprecated
-    ${CMAKE_CURRENT_SOURCE_DIR}/examples
+    ${CMAKE_CURRENT_SOURCE_DIR}/example
     ${CMAKE_CURRENT_SOURCE_DIR}/gallery
 )
 

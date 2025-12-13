@@ -29,6 +29,14 @@ namespace Element
         QBoxLayout::insertWidget(count() - 1, widget);
     }
 
+    void Layout::addWidgets(QList<QWidget*> widgets)
+    {
+        FlowLayout* layout = new FlowLayout(static_cast<FlowLayout::SpaceSize>(_size));
+        foreach (QWidget* widget, widgets)
+            layout->addWidget(widget);
+        QBoxLayout::insertLayout(count() - 1, layout);
+    }
+
 
     FlowLayout::FlowLayout(QWidget* parent)
         : FlowLayout(SpaceSize::Default, parent)

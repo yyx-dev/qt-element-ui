@@ -90,25 +90,7 @@ namespace Element
     public:
         void setSpacing(SpaceSize size);
         void addWidget(QWidget* widget);
-
-        template<typename LayoutType>
-        void addWidgets(QList<QWidget*> widgets)
-        {
-            if constexpr (std::is_same_v<LayoutType, FlowLayout>)
-            {
-                FlowLayout* layout = new FlowLayout(static_cast<FlowLayout::SpaceSize>(_size));
-                foreach (QWidget* widget, widgets)
-                    layout->addWidget(widget);
-                QBoxLayout::insertLayout(count() - 1, layout);
-            }
-            else if constexpr (std::is_same_v<LayoutType, FluidLayout>)
-            {
-                FluidLayout* layout = new FluidLayout(static_cast<FluidLayout::SpaceSize>(_size));
-                foreach (QWidget* widget, widgets)
-                    layout->addWidget(widget);
-                QBoxLayout::insertLayout(count() - 1, layout);
-            }
-        }
+        void addWidgets(QList<QWidget*> widgets);
 
     public:
         Layout(QWidget* parent = nullptr);
