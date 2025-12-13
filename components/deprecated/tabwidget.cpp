@@ -16,6 +16,8 @@ namespace Element
         setObjectName("SideBar");
         setFont(FontHelper().setPointSize(9).getFont());
         setMouseTracking(true);
+        setStyleSheet(R"(QTabBar::scroller { width: 0px; }
+                         QTabBar::down-arrow, QTabBar::up-arrow { width: 0px; })");
     }
 
     void SideBar::paintEvent(QPaintEvent*)

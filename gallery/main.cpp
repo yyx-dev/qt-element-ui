@@ -1,12 +1,9 @@
 #include "app.h"
 
-// #define EXAMPLE
+#define EXAMPLE
 
-#ifdef EXAMPLE
 #include "mainwindow.h"
-#else
 #include "container.h"
-#endif
 
 void configurator(Element::Menu* menu, Element::Stack* stack);
 
@@ -15,8 +12,10 @@ int main(int argc, char* argv[])
     Element::App app(argc, argv);
 
 #ifdef EXAMPLE
+
     MainWindow window;
     window.show();
+
 #else
 
     Element::Container* container = Element::ContainerBuilder()

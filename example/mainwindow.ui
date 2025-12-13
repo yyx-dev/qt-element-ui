@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -1022,21 +1022,11 @@
        </rect>
       </property>
      </widget>
-     <widget class="Element::PopList" name="popList">
+     <widget class="Element::Autocomplete" name="autocomplete">
       <property name="geometry">
        <rect>
         <x>730</x>
         <y>20</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="Element::AutoComplete" name="autoComplete">
-      <property name="geometry">
-       <rect>
-        <x>730</x>
-        <y>260</y>
         <width>113</width>
         <height>21</height>
        </rect>
@@ -1109,6 +1099,16 @@
       </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Element::Select" name="select">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>80</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -2327,6 +2327,31 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_11">
+     <attribute name="title">
+      <string>其他</string>
+     </attribute>
+     <widget class="Element::Carousel" name="carousel" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>600</width>
+        <height>350</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Image" name="image" native="true">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>20</y>
+        <width>300</width>
+        <height>300</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>
@@ -2423,12 +2448,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Element::PopList</class>
-   <extends>QListWidget</extends>
-   <header>autocomplete.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Element::AutoComplete</class>
+   <class>Element::Autocomplete</class>
    <extends>QLineEdit</extends>
    <header>autocomplete.h</header>
   </customwidget>
@@ -2487,6 +2507,23 @@
    <extends>QStackedWidget</extends>
    <header>stack.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Carousel</class>
+   <extends>QWidget</extends>
+   <header>carousel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Image</class>
+   <extends>QWidget</extends>
+   <header>image.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Select</class>
+   <extends>QLineEdit</extends>
+   <header>select.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -3,15 +3,14 @@
 #include "base.h"
 #include "color.h"
 #include "shadow.h"
-
+#include "scrollbar.h"
 
 #include <QBoxLayout>
 #include <QMouseEvent>
 
 namespace Element
 {
-
-    PopListItemWidget::PopListItemWidget(const QString& text, QWidget* parent)
+    CompletionListItemWidget::CompletionListItemWidget(const QString& text, QWidget* parent)
         : QWidget(parent)
         , _label(new QLabel(text, this))
     {
@@ -30,27 +29,27 @@ namespace Element
         setFixedHeight(_itemHeight);
     }
 
-    QLabel* PopListItemWidget::getLabel()
+    QLabel* CompletionListItemWidget::getLabel()
     {
         return _label;
     }
 
-    void PopListItemWidget::mousePressEvent(QMouseEvent* event)
+    void CompletionListItemWidget::mousePressEvent(QMouseEvent* event)
     {
         if (event->button() == Qt::LeftButton)
             emit clicked(_label->text());
         QWidget::mousePressEvent(event);
     }
 
-    PopList::PopList(QWidget* parent)
-        : PopList(300, {}, parent)
+    CompletionList::CompletionList(QWidget* parent)
+        : CompletionList(300, {}, parent)
     {}
 
-    PopList::PopList(int width, QWidget* parent)
-        : PopList(width, {}, parent)
+    CompletionList::CompletionList(int width, QWidget* parent)
+        : CompletionList(width, {}, parent)
     {}
 
-    PopList::PopList(int width, const QStringList& data, QWidget* parent)
+    CompletionList::CompletionList(int width, const QStringList& data, QWidget* parent)
         : QListWidget(parent)
     {
         _qsshelper.setProperty("QListWidget", "background-color", "white");
@@ -58,7 +57,7 @@ namespace Element
         _qsshelper.setProperty("QListWidget", "border-radius", "4px");
         _qsshelper.setProperty("QListWidget", "padding", QString::number(_padding) + "px 0px");
         setStyleSheet(_qsshelper.generate());
-
+        setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
 
         setMouseTracking(true);
         setFocusPolicy(Qt::NoFocus);
@@ -74,15 +73,15 @@ namespace Element
         addItems(data);
     }
 
-    void PopList::addItem(const QString& text)
+    void CompletionList::addItem(const QString& text)
     {
         QListWidgetItem* item = new QListWidgetItem(this);
-        PopListItemWidget* widget = new PopListItemWidget(text, this);
+        CompletionListItemWidget* widget = new CompletionListItemWidget(text, this);
 
         item->setSizeHint(widget->size());
         setItemWidget(item, widget);
 
-        connect(widget, &PopListItemWidget::clicked, this, [&](const QString& text) {
+        connect(widget, &CompletionListItemWidget::clicked, this, [&](const QString& text) {
             hide();
             emit itemClicked(text);
         });
@@ -90,26 +89,26 @@ namespace Element
         updateHeight(count());
     }
 
-    void PopList::addItems(const QStringList& texts)
+    void CompletionList::addItems(const QStringList& texts)
     {
         for (const QString& text : texts)
             addItem(text);
     }
 
-    void PopList::setItems(const QStringList& texts)
+    void CompletionList::setItems(const QStringList& texts)
     {
         clear();
         addItems(texts);
     }
 
-    void PopList::filterItems(const QString& text)
+    void CompletionList::filterItems(const QString& text)
     {
         int visibleCount = 0;
 
         for (int i = 0; i < count(); ++i)
         {
             QListWidgetItem* item = this->item(i);
-            PopListItemWidget* widget = qobject_cast<PopListItemWidget*>(itemWidget(item));
+            CompletionListItemWidget* widget = qobject_cast<CompletionListItemWidget*>(itemWidget(item));
 
             if (!widget) return;
 
@@ -124,77 +123,83 @@ namespace Element
         updateHeight(visibleCount);
     }
 
-    void PopList::updateHeight(int count)
+    void CompletionList::updateHeight(int count)
     {
         int totalHeight = _itemHeight * count + _padding * 2 + 2;
         int newHeight = qMin(totalHeight, _maxHeight);
         setFixedHeight(newHeight);
     }
 
-    AutoComplete::AutoComplete(QWidget* parent)
-        : AutoComplete({}, parent)
+    Autocomplete::Autocomplete(QWidget* parent)
+        : Autocomplete({}, parent)
     {}
 
-    AutoComplete::AutoComplete(const QStringList& data, QWidget* parent)
+    Autocomplete::Autocomplete(const QStringList& data, QWidget* parent)
         : InputLine(parent)
-        , _popList(new PopList(width(), data, parent))
+        , _popList(new CompletionList(width(), data, parent))
     {
         _popList->hide();
 
-        connect(_popList, &PopList::itemClicked, this, [this](const QString& text) {
+        connect(_popList, &CompletionList::itemClicked, this, [this](const QString& text) {
             setText(text);
             setFocus();
             _popList->hide();
         });
 
-        connect(this, &AutoComplete::textChanged, this, &AutoComplete::onTextChanged);
+        connect(this, &Autocomplete::textChanged, this, &Autocomplete::onTextChanged);
     }
 
-    AutoComplete& AutoComplete::setData(const QStringList& data)
+    Autocomplete& Autocomplete::setCompletions(const QStringList& completions)
     {
-        _data = data;
-        _popList->setItems(data);
+        _completions = completions;
+        _popList->setItems(completions);
         return *this;
     }
 
-    AutoComplete& AutoComplete::setTriggerOnFocus(bool triggerOnFocus)
+    Autocomplete& Autocomplete::setTriggerOnFocus(bool triggerOnFocus)
     {
         _triggerOnFocus = triggerOnFocus;
         return *this;
     }
 
-    AutoComplete& AutoComplete::setPlacement(Placement placement)
+    Autocomplete& Autocomplete::setPlacement(Placement placement)
     {
         _placement = placement;
         return *this;
     }
 
-    AutoComplete& AutoComplete::addItem(const QString& text)
+    Autocomplete& Autocomplete::addItem(const QString& text)
     {
         _popList->addItem(text);
         return *this;
     }
 
-    AutoComplete& AutoComplete::addItems(const QStringList& texts)
+    Autocomplete& Autocomplete::addItems(const QStringList& texts)
     {
         _popList->addItems(texts);
         return *this;
     }
 
-    void AutoComplete::focusInEvent(QFocusEvent* event)
-    {
-        InputLine::focusInEvent(event);
-        if (_triggerOnFocus)
-            showPopList();
-    }
-
-    void AutoComplete::focusOutEvent(QFocusEvent* event)
+    void Autocomplete::focusOutEvent(QFocusEvent* event)
     {
         InputLine::focusOutEvent(event);
         _popList->hide();
     }
 
-    void AutoComplete::showPopList()
+    void Autocomplete::mousePressEvent(QMouseEvent* event)
+    {
+        InputLine::mousePressEvent(event);
+        if (event->button() == Qt::LeftButton)
+        {
+            if (_triggerOnFocus)
+            {
+                if (_popList->isVisible()) _popList->hide();
+                else showPopList();
+            }
+        }
+    }
+
+    void Autocomplete::showPopList()
     {
         if (_placement == Placement::Bottom)
             _popList->move(x(), y() + height() + 15);
@@ -205,7 +210,7 @@ namespace Element
         _popList->show();
     }
 
-    void AutoComplete::onTextChanged(const QString& text)
+    void Autocomplete::onTextChanged(const QString& text)
     {
         if (!_triggerOnFocus && text.isEmpty())
         {

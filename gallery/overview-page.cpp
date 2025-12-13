@@ -28,7 +28,7 @@ namespace Gallery
 
         auto text1 = h1("Overview 组件总览", this);
         auto text2 = p("以下是 Element Plus 提供的所有组件。", this);
-        auto inputline = new InputLine(this);
+        auto input = new InputLine(this);
         auto text3 = h3("Basic 基础组件", this);
         auto text4 = h3("Form 表单组件", this);
         auto text5 = h3("Data 数据展示", this);
@@ -116,7 +116,7 @@ namespace Gallery
 
         _layout->addWidget(text1);
         _layout->addWidget(text2);
-        _layout->addWidget(inputline);
+        _layout->addWidget(input);
 
         _layout->addWidget(text3);
         _layout->addWidgets({

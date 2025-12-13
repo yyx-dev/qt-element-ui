@@ -15,8 +15,6 @@
 #include "shadow.h"
 #include "tooltip.h"
 
-#include "overview-page.h"
-
 #include <QDebug>
 #include <QTimer>
 #include <QSvgWidget>
@@ -32,8 +30,9 @@
 #define PROGRESS 8
 #define FORM 9
 #define TABS 10
+#define OTHER 11
 
-#define CURRENT_INDEX TEXT
+#define CURRENT_INDEX INPUT
 
 using namespace Element;
 
@@ -55,6 +54,7 @@ MainWindow::MainWindow(QWidget* parent)
     setupTab8();
     setupTab9();
     setupTab10();
+    setupTab11();
     ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
 }
 
@@ -92,6 +92,7 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(8, Icon::Operation);
     ui->tabWidget->setTabIcon(9, Icon::Odometer);
     ui->tabWidget->setTabIcon(10, Icon::DocumentCopy);
+    ui->tabWidget->setTabIcon(11, Icon::Notebook);
 }
 
 void MainWindow::setupTab0()
@@ -241,15 +242,10 @@ void MainWindow::setupTab4()
     ui->spinBox_3->setSize(InputNumber::Size::Small);
     ui->spinBox_4->setDisabled(true);
 
-    ui->popList->addItem("Item 1");
-    ui->popList->addItem("Item 2");
-    ui->popList->addItem("Item 3");
-    ui->popList->addItem("Item 4");
-    ui->popList->addItem("Item 5");
-
-    ui->autoComplete->setData({"qt", "vue", "element", "cooking",
+    ui->autocomplete->setCompletions({"qt", "vue", "element", "cooking",
                                "mint-ui", "vuex", "vue-router", "babel"});
 
+    ui->select->setOptions({"Option 1", "Option 2", "Option 3", "Option 4", "Option 5"});
 
     ui->button_63->setText("Tooltip");
     Tooltip* tooltip = new Tooltip("test tooltip", ui->button_63);
@@ -524,8 +520,6 @@ void MainWindow::setupTab9()
     ui->menu->addSubItem(item2, "sub test1");
     ui->menu->addSubItem(item2, "sub test2");
     Menu::Item* item3 = ui->menu->addTopItem("test3");
-
-    ui->stack->addWidget(item3, new Gallery::OverviewPage(ui->tab_9));
 }
 
 void MainWindow::setupTab10()
@@ -553,6 +547,17 @@ void MainWindow::setupTab10()
     connect(ui->button_64, &Button::clicked, [drawer]() {
         drawer->setVisible(!drawer->isVisible());
     });
+}
+
+void MainWindow::setupTab11()
+{
+    ui->image->setPixmap(QPixmap(":/icons/other/hamburger.png"));
+    ui->image->setFit(Image::Fit::Fill);
+
+    ui->carousel->addImage(QPixmap(":/icons/other/hamburger.png"));
+    ui->carousel->addImage(QPixmap(":/icons/other/square-default-avatar.png"));
+    ui->carousel->addImage(QPixmap(":/icons/other/example-avatar.png"));
+
 }
 
 MainWindow::~MainWindow()

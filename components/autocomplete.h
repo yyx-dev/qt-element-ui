@@ -1,21 +1,66 @@
 #pragma once
 
-#include "inputline.h"
 #include "base.h"
+#include "inputline.h"
 
-#include <QWidget>
 #include <QLabel>
 #include <QListWidget>
 #include <QTimer>
+#include <QWidget>
+
 
 namespace Element
 {
-    class PopListItemWidget : public QWidget
+    class CompletionList;
+
+    class Autocomplete : public InputLine
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
-        PopListItemWidget(const QString& text, QWidget* parent = nullptr);
+        enum class Placement
+        {
+            Top,
+            Bottom
+        };
+
+    public:
+        Autocomplete& setCompletions(const QStringList& completions);
+        Autocomplete& setTriggerOnFocus(bool triggerOnFocus);
+        Autocomplete& setPlacement(Placement placement);
+
+        Autocomplete& addItem(const QString& text);
+        Autocomplete& addItems(const QStringList& texts);
+
+        // TODO: 防抖
+
+    public:
+        Autocomplete(QWidget* parent = nullptr);
+        Autocomplete(const QStringList& data, QWidget* parent = nullptr);
+
+    private:
+        void showPopList();
+        void onTextChanged(const QString& text);
+
+    protected:
+        void focusOutEvent(QFocusEvent* event) override;
+        void mousePressEvent(QMouseEvent* event) override;
+
+    private:
+        CompletionList* _popList = nullptr;
+
+    private:
+        QStringList _completions;
+        bool _triggerOnFocus = true;
+        Placement _placement = Placement::Bottom;
+    };
+
+    class CompletionListItemWidget : public QWidget
+    {
+        Q_OBJECT
+
+    public:
+        CompletionListItemWidget(const QString& text, QWidget* parent = nullptr);
         QLabel* getLabel();
 
     signals:
@@ -25,14 +70,14 @@ namespace Element
         void mousePressEvent(QMouseEvent* event) override;
 
     private:
-        QLabel* _label;
+        QLabel* _label = nullptr;
         QSSHelper _qsshelper;
         static const int _itemHeight = 35;
     };
 
-    class PopList : public QListWidget
+    class CompletionList : public QListWidget
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
         void addItem(const QString& text);
@@ -41,9 +86,9 @@ namespace Element
         void filterItems(const QString& text);
 
     public:
-        PopList(QWidget* parent = nullptr);
-        PopList(int width, QWidget* parent = nullptr);
-        PopList(int width, const QStringList& data, QWidget* parent = nullptr);
+        CompletionList(QWidget* parent = nullptr);
+        CompletionList(int width, QWidget* parent = nullptr);
+        CompletionList(int width, const QStringList& data, QWidget* parent = nullptr);
 
     signals:
         void itemClicked(const QString& text);
@@ -57,43 +102,4 @@ namespace Element
         static constexpr int _maxHeight = 300;
         static constexpr int _padding = 15;
     };
-
-    class AutoComplete : public InputLine
-    {
-    Q_OBJECT
-
-    public:
-        enum class Placement { Top, Bottom };
-
-    public:
-        AutoComplete& setData(const QStringList& data);
-        AutoComplete& setTriggerOnFocus(bool triggerOnFocus);
-        AutoComplete& setPlacement(Placement placement);
-
-        AutoComplete& addItem(const QString& text);
-        AutoComplete& addItems(const QStringList& texts);
-
-        // TODO: 防抖
-
-    public:
-        AutoComplete(QWidget* parent = nullptr);
-        AutoComplete(const QStringList& data, QWidget* parent = nullptr);
-
-    private:
-        void showPopList();
-        void onTextChanged(const QString& text);
-
-    protected:
-        void focusInEvent(QFocusEvent* event) override;
-        void focusOutEvent(QFocusEvent* event) override;
-
-    private:
-        PopList* _popList;
-
-    private:
-        QStringList _data;
-        bool _triggerOnFocus = true;
-        Placement _placement = Placement::Bottom;
-    };
-
 }

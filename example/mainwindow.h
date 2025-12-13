@@ -33,6 +33,7 @@ private:
     void setupTab8();
     void setupTab9();
     void setupTab10();
+    void setupTab11();
 
 private:
     Ui::MainWindow *ui;

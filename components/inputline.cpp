@@ -29,6 +29,7 @@ namespace Element
         setPlaceholderText(placeholder);
         setSize(Size::Default);
 
+        setMinimumWidth(sc(240));
         connect(this, &QLineEdit::textChanged, this, &InputLine::onTextChanged);
     }
 
@@ -77,7 +78,7 @@ namespace Element
         _size = size;
 
         QString fontSize = size == Size::Large ? "16px"
-                       : size == Size::Default ? "14px" : "12px";
+                       : size == Size::Default ? "16px" : "14px";
         int height = size == Size::Large ? sc(40)
                  : size == Size::Default ? sc(32) : sc(24);
 
