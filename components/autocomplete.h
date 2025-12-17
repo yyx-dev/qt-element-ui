@@ -18,11 +18,7 @@ namespace Element
         Q_OBJECT
 
     public:
-        enum class Placement
-        {
-            Top,
-            Bottom
-        };
+        enum class Placement { Top, Bottom };
 
     public:
         Autocomplete& setCompletions(const QStringList& completions);
@@ -39,7 +35,6 @@ namespace Element
         Autocomplete(const QStringList& data, QWidget* parent = nullptr);
 
     private:
-        void showPopList();
         void onTextChanged(const QString& text);
 
     protected:
@@ -47,12 +42,12 @@ namespace Element
         void mousePressEvent(QMouseEvent* event) override;
 
     private:
-        CompletionList* _popList = nullptr;
-
-    private:
         QStringList _completions;
         bool _triggerOnFocus = true;
         Placement _placement = Placement::Bottom;
+
+    private:
+        CompletionList* _popList = nullptr;
     };
 
     class CompletionListItemWidget : public QWidget
@@ -80,23 +75,44 @@ namespace Element
         Q_OBJECT
 
     public:
+        enum class Placement { Top, Bottom };
+
+    public:
         void addItem(const QString& text);
         void addItems(const QStringList& texts);
         void setItems(const QStringList& texts);
         void filterItems(const QString& text);
 
     public:
-        CompletionList(QWidget* parent = nullptr);
-        CompletionList(int width, QWidget* parent = nullptr);
-        CompletionList(int width, const QStringList& data, QWidget* parent = nullptr);
+        void show();
+
+    public:
+        CompletionList(Placement placement,
+                       Autocomplete* input = nullptr,
+                       QWidget* parent = nullptr);
+        CompletionList(int width,
+                       Placement placement,
+                       Autocomplete* input = nullptr,
+                       QWidget* parent = nullptr);
+        CompletionList(int width,
+                       Placement placement,
+                       const QStringList& data,
+                       Autocomplete* input = nullptr,
+                       QWidget* parent = nullptr);
 
     signals:
         void itemClicked(const QString& text);
+
+    protected:
+        void showEvent(QShowEvent* event) override;
 
     private:
         void updateHeight(int count);
 
     private:
+        Placement _placement;
+        Autocomplete* _input = nullptr;
+
         QSSHelper _qsshelper;
         static constexpr int _itemHeight = 35;
         static constexpr int _maxHeight = 300;

@@ -1,5 +1,5 @@
 #include "base.h"
-#include "qfont.h"
+#include "color.h"
 
 #include <QPainter>
 #include <QRegularExpression>
@@ -316,6 +316,154 @@ namespace Element
         painter.setPen(redPen);
         painter.setBrush(Qt::NoBrush);
         painter.drawRect(rect);
+    }
+
+    Arrow::Arrow(QWidget* partner, QWidget* target)
+        : Arrow(Color::primaryText(), Direction::Down, partner, target)
+    {}
+
+    Arrow::Arrow(const QString& color, Direction dir, QWidget* partner, QWidget* target)
+        : QWidget(target->parentWidget())
+        , _partner(partner)
+        , _target(target)
+    {
+        setFixedSize(16, 8);
+        setAttribute(Qt::WA_TransparentForMouseEvents);
+
+        setColor(color);
+        setDirection(dir);
+        updatePosition();
+    }
+
+    void Arrow::setAlignMode(Arrow::AlignMode mode)
+    {
+        _mode = mode;
+        updatePosition();
+    }
+
+    Arrow::AlignMode Arrow::getAlignMode()
+    {
+        return _mode;
+    }
+
+    void Arrow::setColor(const QString& color)
+    {
+        _color = color;
+        update();
+    }
+
+    void Arrow::setDirection(Direction direction)
+    {
+        _direction = direction;
+        update();
+    }
+
+    void Arrow::setBorder(const QString& color)
+    {
+        _borderColor = color;
+        update();
+    }
+
+    void Arrow::paintEvent(QPaintEvent*)
+    {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        QPolygon triangle;
+        switch (_direction)
+        {
+        case Direction::Down:
+            triangle << QPoint(0, 0) << QPoint(16, 0) << QPoint(8, 8);
+            break;
+        case Direction::Up:
+            triangle << QPoint(0, 8) << QPoint(16, 8) << QPoint(8, 0);
+            break;
+        case Direction::Left:
+            triangle << QPoint(8, 0) << QPoint(8, 16) << QPoint(0, 8);
+            break;
+        case Direction::Right:
+            triangle << QPoint(0, 0) << QPoint(0, 16) << QPoint(8, 8);
+            break;
+        }
+
+        // 绘制填充
+        painter.setBrush(QColor(_color));
+        painter.setPen(Qt::NoPen);
+        painter.drawPolygon(triangle);
+
+        // 绘制左斜边和右斜边
+        if (!_borderColor.isEmpty())
+        {
+            QColor bc(_borderColor);
+            QPen borderPen(bc);
+
+            borderPen.setWidth(1);
+            painter.setPen(borderPen);
+            painter.setBrush(Qt::NoBrush);
+
+            if (_direction == Direction::Down)
+            {
+                painter.drawLine(triangle[0], triangle[2]); // 左斜边
+                painter.drawLine(triangle[1], triangle[2]); // 右斜边
+            }
+            else if (_direction == Direction::Up)
+            {
+                painter.drawLine(triangle[0], triangle[2]); // 左斜边
+                painter.drawLine(triangle[1], triangle[2]); // 右斜边
+            }
+            else if (_direction == Direction::Left)
+            {
+                painter.drawLine(triangle[0], triangle[2]); // 上斜边
+                painter.drawLine(triangle[1], triangle[2]); // 下斜边
+            }
+            else if (_direction == Direction::Right)
+            {
+                painter.drawLine(triangle[0], triangle[2]); // 上斜边
+                painter.drawLine(triangle[1], triangle[2]); // 下斜边
+            }
+        }
+    }
+
+    void Arrow::showEvent(QShowEvent* event)
+    {
+        updatePosition();
+        QWidget::showEvent(event);
+    }
+
+    void Arrow::updatePosition()
+    {
+        if (!_target) return;
+
+        QWidget* target = _target;
+        if (_mode == AlignMode::FollowPopup)
+            target = _partner;
+
+        QPoint pos;
+        if (_direction == Direction::Up)
+        {
+            pos = QPoint(target->x() + (target->width() - 16) / 2,
+                        _partner->y() - 8);
+        }
+        else if (_direction == Direction::Down)
+        {
+            pos = QPoint(target->x() + (target->width() - 16) / 2,
+                        _partner->y() + _partner->height());
+        }
+        else if (_direction == Direction::Left)
+        {
+            setFixedSize(8, 16);
+            pos = QPoint(_partner->x() - 8,
+                        target->y() + (target->height() - 16) / 2);
+        }
+        else if (_direction == Direction::Right)
+        {
+            setFixedSize(8, 16);
+            pos = QPoint(_partner->x() + _partner->width(),
+                        target->y() + (target->height() - 16) / 2);
+        }
+
+        move(pos);
+        update();
     }
 
 }

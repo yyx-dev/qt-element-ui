@@ -3,7 +3,7 @@
 #include "base.h"
 #include "color.h"
 #include "shadow.h"
-
+#include "scrollbar.h"
 
 #include <QBoxLayout>
 #include <QMouseEvent>
@@ -42,16 +42,19 @@ namespace Element
         QWidget::mousePressEvent(event);
     }
 
-    OptionList::OptionList(QWidget* parent)
-        : OptionList(300, {}, parent)
+
+    OptionList::OptionList(Placement placement, Select* input, QWidget* parent)
+        : OptionList(300, placement, {}, input, parent)
     {}
 
-    OptionList::OptionList(int width, QWidget* parent)
-        : OptionList(width, {}, parent)
+    OptionList::OptionList(int width, Placement placement, Select* input, QWidget* parent)
+        : OptionList(width, placement, {}, input, parent)
     {}
 
-    OptionList::OptionList(int width, const QStringList& data, QWidget* parent)
+    OptionList::OptionList(int width, Placement placement, const QStringList& data, Select* input, QWidget* parent)
         : QListWidget(parent)
+        , _placement(placement)
+        , _input(input)
     {
         _qsshelper.setProperty("QListWidget", "background-color", "white");
         _qsshelper.setProperty("QListWidget", "border", "1px solid " + Color::darkBorder());
@@ -59,9 +62,9 @@ namespace Element
         _qsshelper.setProperty("QListWidget", "padding", QString::number(_padding) + "px 0px");
         setStyleSheet(_qsshelper.generate());
 
-
         setMouseTracking(true);
         setFocusPolicy(Qt::NoFocus);
+        setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
 
         setSelectionMode(QAbstractItemView::NoSelection);
         setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
@@ -124,6 +127,24 @@ namespace Element
         updateHeight(visibleCount);
     }
 
+    void OptionList::show()
+    {
+        QWidget::raise();
+        QWidget::show();
+    }
+
+    void OptionList::showEvent(QShowEvent* event)
+    {
+        static const int interval = _padding;
+
+        if (_placement == Placement::Bottom)
+            move(_input->x(), _input->y() + _input->height() + interval);
+        else
+            move(_input->x(), _input->y() - height() - interval);
+
+        QWidget::showEvent(event);
+    }
+
     void OptionList::updateHeight(int count)
     {
         int totalHeight = _itemHeight * count + _padding * 2 + 2;
@@ -131,18 +152,19 @@ namespace Element
         setFixedHeight(newHeight);
     }
 
+
     Select::Select(QWidget* parent)
         : Select({}, parent)
     {}
 
     Select::Select(const QStringList& data, QWidget* parent)
         : InputLine(parent)
-        , _popList(new OptionList(width(), data, parent))
+        , _popList(new OptionList(width(),
+            (OptionList::Placement)_placement, data, this, parent))
     {
         setPlaceholder("Select");
         setReadOnly(true);
         setSuffixIcon(Icon::Name::ArrowDown);
-
 
         _popList->hide();
 
@@ -198,20 +220,15 @@ namespace Element
             else
             {
                 setSuffixIcon(Icon::Name::ArrowUp);
-                showPopList();
+                _popList->show();
             }
         }
     }
 
-    void Select::showPopList()
+    void Select::mouseDoubleClickEvent(QMouseEvent* e)
     {
-        if (_placement == Placement::Bottom)
-            _popList->move(x(), y() + height() + 15);
-        else
-            _popList->move(x(), y() - _popList->height() - 15);
-
-        _popList->raise();
-        _popList->show();
+        Select::mousePressEvent(e);
+        e->accept();
     }
 
 }

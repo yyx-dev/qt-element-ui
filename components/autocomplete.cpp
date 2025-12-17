@@ -41,26 +41,28 @@ namespace Element
         QWidget::mousePressEvent(event);
     }
 
-    CompletionList::CompletionList(QWidget* parent)
-        : CompletionList(300, {}, parent)
+    CompletionList::CompletionList(Placement placement, Autocomplete* input, QWidget* parent)
+        : CompletionList(300, placement, {}, input, parent)
     {}
 
-    CompletionList::CompletionList(int width, QWidget* parent)
-        : CompletionList(width, {}, parent)
+    CompletionList::CompletionList(int width, Placement placement, Autocomplete* input, QWidget* parent)
+        : CompletionList(width, placement, {}, input, parent)
     {}
 
-    CompletionList::CompletionList(int width, const QStringList& data, QWidget* parent)
+    CompletionList::CompletionList(int width, Placement placement, const QStringList& data, Autocomplete* input, QWidget* parent)
         : QListWidget(parent)
+        , _placement(placement)
+        , _input(input)
     {
         _qsshelper.setProperty("QListWidget", "background-color", "white");
         _qsshelper.setProperty("QListWidget", "border", "1px solid " + Color::darkBorder());
         _qsshelper.setProperty("QListWidget", "border-radius", "4px");
         _qsshelper.setProperty("QListWidget", "padding", QString::number(_padding) + "px 0px");
         setStyleSheet(_qsshelper.generate());
-        setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
 
         setMouseTracking(true);
         setFocusPolicy(Qt::NoFocus);
+        setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
 
         setSelectionMode(QAbstractItemView::NoSelection);
         setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
@@ -112,8 +114,7 @@ namespace Element
 
             if (!widget) return;
 
-            bool matches =
-                    text.isEmpty() ||
+            bool matches = text.isEmpty() ||
                     widget->getLabel()->text().startsWith(text, Qt::CaseInsensitive);
             item->setHidden(!matches);
             if (matches)
@@ -123,6 +124,24 @@ namespace Element
         updateHeight(visibleCount);
     }
 
+    void CompletionList::show()
+    {
+        QWidget::raise();
+        QWidget::show();
+    }
+
+    void CompletionList::showEvent(QShowEvent* event)
+    {
+        static const int interval = _padding;
+
+        if (_placement == Placement::Bottom)
+            move(_input->x(), _input->y() + _input->height() + interval);
+        else
+            move(_input->x(), _input->y() - height() - interval);
+
+        QWidget::showEvent(event);
+    }
+
     void CompletionList::updateHeight(int count)
     {
         int totalHeight = _itemHeight * count + _padding * 2 + 2;
@@ -130,13 +149,15 @@ namespace Element
         setFixedHeight(newHeight);
     }
 
+
     Autocomplete::Autocomplete(QWidget* parent)
         : Autocomplete({}, parent)
     {}
 
     Autocomplete::Autocomplete(const QStringList& data, QWidget* parent)
         : InputLine(parent)
-        , _popList(new CompletionList(width(), data, parent))
+        , _popList(new CompletionList(width(),
+            (CompletionList::Placement)_placement, data, this, parent))
     {
         _popList->hide();
 
@@ -188,26 +209,15 @@ namespace Element
 
     void Autocomplete::mousePressEvent(QMouseEvent* event)
     {
-        InputLine::mousePressEvent(event);
         if (event->button() == Qt::LeftButton)
         {
             if (_triggerOnFocus)
             {
-                if (_popList->isVisible()) _popList->hide();
-                else showPopList();
+                if (!_popList->isVisible())
+                    _popList->show();
             }
         }
-    }
-
-    void Autocomplete::showPopList()
-    {
-        if (_placement == Placement::Bottom)
-            _popList->move(x(), y() + height() + 15);
-        else
-            _popList->move(x(), y() - _popList->height() - 15);
-
-        _popList->raise();
-        _popList->show();
+        InputLine::mousePressEvent(event);
     }
 
     void Autocomplete::onTextChanged(const QString& text)

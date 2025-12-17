@@ -22,6 +22,7 @@ namespace Element
 
     private:
         QWidget* defaultWidget(Menu::Item* item);
+        void setMouseTrackingRec(QWidget* widget, bool enable = true);
 
     private:
         Menu* _menu;

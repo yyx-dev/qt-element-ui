@@ -61,6 +61,17 @@ namespace Element
         return widget;
     }
 
+    void Stack::setMouseTrackingRec(QWidget* widget, bool enable)
+    {
+        if (!widget) return;
+
+        widget->setMouseTracking(enable);
+
+        for (QObject* child : widget->children())
+            setMouseTrackingRec(qobject_cast<QWidget*>(child), enable);
+    }
+
+
     ScrollArea::ScrollArea(QWidget* parent)
         : QScrollArea(parent)
     {

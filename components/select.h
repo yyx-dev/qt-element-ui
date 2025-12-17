@@ -14,7 +14,7 @@ namespace Element
 
     class Select : public InputLine
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
         enum class Placement { Top, Bottom };
@@ -30,24 +30,22 @@ namespace Element
         Select(QWidget* parent = nullptr);
         Select(const QStringList& data, QWidget* parent = nullptr);
 
-    private:
-        void showPopList();
-
     protected:
         void focusOutEvent(QFocusEvent* event) override;
         void mousePressEvent(QMouseEvent* event) override;
+        void mouseDoubleClickEvent(QMouseEvent* e) override;
 
     private:
         QStringList _options;
         Placement _placement = Placement::Bottom;
 
     private:
-        OptionList* _popList;
+        OptionList* _popList = nullptr;
     };
 
     class OptionListItemWidget : public QWidget
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
         OptionListItemWidget(const QString& text, QWidget* parent = nullptr);
@@ -60,14 +58,16 @@ namespace Element
         void mousePressEvent(QMouseEvent* event) override;
 
     private:
-        QLabel* _label;
+        QLabel* _label = nullptr;
         QSSHelper _qsshelper;
         static const int _itemHeight = 35;
     };
 
     class OptionList : public QListWidget
     {
-    Q_OBJECT
+        Q_OBJECT
+    public:
+        enum class Placement { Top, Bottom };
 
     public:
         void addItem(const QString& text);
@@ -76,17 +76,34 @@ namespace Element
         void filterItems(const QString& text);
 
     public:
-        OptionList(QWidget* parent = nullptr);
-        OptionList(int width, QWidget* parent = nullptr);
-        OptionList(int width, const QStringList& data, QWidget* parent = nullptr);
+        void show();
 
+    public:
+        OptionList(Placement placement,
+                   Select* input = nullptr,
+                   QWidget* parent = nullptr);
+        OptionList(int width,
+                   Placement placement,
+                   Select* input = nullptr,
+                   QWidget* parent = nullptr);
+        OptionList(int width,
+                   Placement placement,
+                   const QStringList& data,
+                   Select* input = nullptr,
+                   QWidget* parent = nullptr);
     signals:
         void itemClicked(const QString& text);
+
+    protected:
+        void showEvent(QShowEvent* event) override;
 
     private:
         void updateHeight(int count);
 
     private:
+        Placement _placement;
+        Select* _input = nullptr;
+
         QSSHelper _qsshelper;
         static constexpr int _itemHeight = 35;
         static constexpr int _maxHeight = 300;

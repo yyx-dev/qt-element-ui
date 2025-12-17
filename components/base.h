@@ -126,16 +126,56 @@ namespace Element
         widget->setPalette(pal);
     }
 
-    inline void setMouseTrackingRec(QWidget* widget, bool enable = true)
+
+    // Two objects need to set: partner and target.
+    // Partner is the pop-up widget, target is the pointing widget.
+    // eg. the pop-up widget is the tooltip, the pointing widget is the button.
+    // +--------------+
+    // |   Tooltip    | <=> parnter
+    // +------\/------+
+    //
+    //   +----------+
+    //   |  Button  |  <=> target
+    //   +----------+
+    class Arrow : public QWidget
     {
-        if (!widget) return;
+    Q_OBJECT
 
-        widget->setMouseTracking(enable);
+    public:
+        enum class Direction { Up, Down, Left, Right };
+        enum class AlignMode { FollowPointing, FollowPopup };
 
-        for (QObject* child : widget->children())
-        {
-            setMouseTrackingRec(qobject_cast<QWidget*>(child), enable);
-        }
-    }
+    public:
+        void setAlignMode(AlignMode mode);
+        AlignMode getAlignMode();
+
+        void setColor(const QString& color);
+        void setDirection(Direction direction);
+
+        // Due to anti-aliasing,
+        // the actual border color will appear lighter.
+        // Therefore, please set a darker color.​
+        void setBorder(const QString& color);
+
+        void updatePosition();
+
+    public:
+        Arrow(QWidget* partner, QWidget* target);
+        Arrow(const QString& color, Direction dir, QWidget* partner, QWidget* target);
+
+    protected:
+        void paintEvent(QPaintEvent* event) override;
+        void showEvent(QShowEvent* event) override;
+
+    private:
+        QWidget* _partner = nullptr;
+        QWidget* _target = nullptr;
+
+        Direction _direction = Direction::Down;
+        AlignMode _mode = AlignMode::FollowPointing;
+
+        QString _color;
+        QString _borderColor;
+    };
 
 }
