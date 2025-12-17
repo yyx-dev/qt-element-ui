@@ -2,7 +2,7 @@
 
 #define EXAMPLE
 
-#include "mainwindow.h"
+#include "example.h"
 #include "container.h"
 
 void configurator(Element::Menu* menu, Element::Stack* stack);
@@ -13,8 +13,8 @@ int main(int argc, char* argv[])
 
 #ifdef EXAMPLE
 
-    MainWindow window;
-    window.show();
+    Example example;
+    example.show();
 
 #else
 

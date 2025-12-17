@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Example</class>
+ <widget class="QMainWindow" name="Example">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -2326,6 +2326,36 @@
        <string>open drawer</string>
       </property>
      </widget>
+     <widget class="Element::Progress" name="progress_1" native="true">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>30</y>
+        <width>500</width>
+        <height>30</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Progress" name="progress_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>90</y>
+        <width>200</width>
+        <height>150</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Element::Progress" name="progress_3" native="true">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>90</y>
+        <width>200</width>
+        <height>150</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_11">
      <attribute name="title">
@@ -2524,6 +2554,12 @@
    <class>Element::Select</class>
    <extends>QLineEdit</extends>
    <header>select.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Element::Progress</class>
+   <extends>QWidget</extends>
+   <header>progress.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

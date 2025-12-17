@@ -1,9 +1,9 @@
-#include "mainwindow.h"
+#include "example.h"
 #include "base.h"
 #include "drawer.h"
 #include "qglobal.h"
 #include "qlabel.h"
-#include "ui_mainwindow.h"
+#include "ui_example.h"
 
 #include "icon.h"
 #include "text.h"
@@ -29,16 +29,16 @@
 #define PANEL 7
 #define PROGRESS 8
 #define FORM 9
-#define TABS 10
+#define PAGES 10
 #define OTHER 11
 
-#define CURRENT_INDEX INPUT
+#define CURRENT_INDEX PAGES
 
 using namespace Element;
 
-MainWindow::MainWindow(QWidget* parent)
+Example::Example(QWidget* parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::Example)
 {
     setupWindow();
 
@@ -58,13 +58,13 @@ MainWindow::MainWindow(QWidget* parent)
     ui->tabWidget->setCurrentIndex(CURRENT_INDEX);
 }
 
-void MainWindow::setWindowIcon(Icon::Name icon)
+void Example::setWindowIcon(Icon::Name icon)
 {
     QMainWindow::setWindowIcon(
         Icon::instance().getIcon(icon, Color::primary(), 32));
 }
 
-void MainWindow::setupWindow()
+void Example::setupWindow()
 {
     ui->setupUi(this);
 
@@ -79,7 +79,7 @@ void MainWindow::setupWindow()
     setFocusPolicy(Qt::ClickFocus);
 }
 
-void MainWindow::setupTabs()
+void Example::setupTabs()
 {
     ui->tabWidget->setTabIcon(0, Icon::CirclePlus);
     ui->tabWidget->setTabIcon(1, Icon::Open);
@@ -95,7 +95,7 @@ void MainWindow::setupTabs()
     ui->tabWidget->setTabIcon(11, Icon::Notebook);
 }
 
-void MainWindow::setupTab0()
+void Example::setupTab0()
 {
     ui->defaultText->setType(Text::Type::Default).setSize(Text::Size::Large);
     ui->primaryText->setType(Text::Type::Primary).setSize(Text::Size::Default);
@@ -133,7 +133,7 @@ void MainWindow::setupTab0()
     ShadowEf::setShadow(ui->shadow_4, ShadowEf::Type::Dark);
 }
 
-void MainWindow::setupTab1()
+void Example::setupTab1()
 {
     ui->button_1->setStyle(Button::Style::Default).setType(Button::Type::Default).setDisabled(false);
     ui->button_2->setStyle(Button::Style::Default).setType(Button::Type::Primary).setDisabled(false);
@@ -185,7 +185,7 @@ void MainWindow::setupTab1()
     ui->button_41->setStyle(Button::Style::Text).setType(Button::Type::Danger);
 }
 
-void MainWindow::setupTab2()
+void Example::setupTab2()
 {
     QVBoxLayout *contentLayout = new QVBoxLayout(ui->scrollAreaWidgetContents);
     ui->scrollAreaWidgetContents->setBackgroundRole(QPalette::Light);
@@ -200,7 +200,7 @@ void MainWindow::setupTab2()
     ui->backtop->setTarget(ui->scrollArea);
 }
 
-void MainWindow::setupTab3()
+void Example::setupTab3()
 {
     ui->link_1 ->setType(Link::Type::Default);
     ui->link_2 ->setType(Link::Type::Primary);
@@ -220,7 +220,7 @@ void MainWindow::setupTab3()
     ui->link_16->setUnderline(Link::Underline::Never);
 }
 
-void MainWindow::setupTab4()
+void Example::setupTab4()
 {
     ui->input_01->setClearable(true);
     ui->input_02->setDisabled(true);
@@ -275,7 +275,7 @@ void MainWindow::setupTab4()
     ui->slider_1->setDisabled(false);
 }
 
-void MainWindow::setupTab5()
+void Example::setupTab5()
 {
     connect(ui->button_42, &Button::clicked, this, [&]() {
         Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
@@ -378,7 +378,7 @@ void MainWindow::setupTab5()
     ui->dropdown->addItem("action 4");
 }
 
-void MainWindow::setupTab6()
+void Example::setupTab6()
 {
     ui->avatar->setImage();
 
@@ -427,7 +427,7 @@ void MainWindow::setupTab6()
               .setHightlight(2, Table::Highlight::Success);
 }
 
-void MainWindow::setupTab7()
+void Example::setupTab7()
 {
     ui->card_1->setHeader("Card name")
             //    .setBody({"List item 1", "List item 2", "List item 3", "List item 4"})
@@ -447,7 +447,7 @@ void MainWindow::setupTab7()
     ui->collapseItem->setCollapse();
 }
 
-void MainWindow::setupTab8()
+void Example::setupTab8()
 {
     CollapseItem* item_1 = new CollapseItem("Consistency", "Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;\nConsistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.", ui->collapse);
     CollapseItem* item_2 = new CollapseItem("Feedback", "Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;\nVisual feedback: reflect current state by updating or rearranging elements of the page.", ui->collapse);
@@ -475,7 +475,7 @@ void MainWindow::setupTab8()
     });
 }
 
-void MainWindow::setupTab9()
+void Example::setupTab9()
 {
     ui->checkbox_1->setSize(Checkbox::Size::Large).setBorder(true);
     ui->checkbox_2->setSize(Checkbox::Size::Large);
@@ -522,11 +522,10 @@ void MainWindow::setupTab9()
     Menu::Item* item3 = ui->menu->addTopItem("test3");
 }
 
-void MainWindow::setupTab10()
+void Example::setupTab10()
 {
     ui->tabs->setTabPosition(Tabs::TabPosition::Top);
     ui->tabs->setType(Tabs::Type::BorderCard);
-
 
     auto setLabel = [](QLabel* label) {
         label->setFont(FontHelper().setBold().getFont());
@@ -547,9 +546,26 @@ void MainWindow::setupTab10()
     connect(ui->button_64, &Button::clicked, [drawer]() {
         drawer->setVisible(!drawer->isVisible());
     });
+
+    ui->progress_1->setPercentage(50)
+        // .setStatus(Progress::Status::Warning)
+        .setColor([](int percentage) {
+            if (percentage >= 100) return "#6f7ad3";
+            else if (percentage >= 80) return "#1989fa";
+            else if (percentage >= 60) return "#5cb87a";
+            else if (percentage >= 40) return "#e6a23c";
+            else if (percentage >= 20) return "#f56c6c";
+            return "";
+        });
+
+    ui->progress_2->setPercentage(75)
+        .setType(Progress::Type::Circle);
+
+    ui->progress_3->setPercentage(50)
+        .setType(Progress::Type::Dashboard);
 }
 
-void MainWindow::setupTab11()
+void Example::setupTab11()
 {
     ui->image->setPixmap(QPixmap(":/icons/other/hamburger.png"));
     ui->image->setFit(Image::Fit::Fill);
@@ -560,7 +576,7 @@ void MainWindow::setupTab11()
 
 }
 
-MainWindow::~MainWindow()
+Example::~Example()
 {
     delete ui;
 }

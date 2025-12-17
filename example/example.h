@@ -5,10 +5,10 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class Example; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class Example : public QMainWindow
 {
     Q_OBJECT
 
@@ -16,8 +16,8 @@ public:
     void setWindowIcon(Element::Icon::Name icon);
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    Example(QWidget *parent = nullptr);
+    ~Example();
 
 private:
     void setupWindow();
@@ -36,5 +36,5 @@ private:
     void setupTab11();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::Example *ui;
 };
