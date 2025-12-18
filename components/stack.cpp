@@ -1,5 +1,5 @@
 #include "stack.h"
-#include "base.h"
+#include "private/utils.h"
 #include "scrollbar.h"
 
 #include <QLabel>

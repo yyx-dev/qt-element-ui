@@ -1,6 +1,6 @@
 #include "tabs.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 #include "qcolor.h"
 #include "qglobal.h"
 #include "qline.h"

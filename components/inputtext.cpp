@@ -1,6 +1,6 @@
 #include "inputtext.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QApplication>
 #include <QPainter>

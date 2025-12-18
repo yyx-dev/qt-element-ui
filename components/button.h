@@ -1,21 +1,13 @@
-/*
- *
- * https://element-plus.org/zh-CN/component/button
- *
- * */
-
 #pragma once
 
 #include "icon.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QString>
 #include <QPushButton>
 
-
 namespace Element
 {
-
     class Button : public QPushButton
     {
     Q_OBJECT

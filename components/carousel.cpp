@@ -1,7 +1,7 @@
 #include "carousel.h"
 #include "icon.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QPainter>
 #include <QMouseEvent>

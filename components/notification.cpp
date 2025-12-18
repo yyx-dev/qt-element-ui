@@ -1,5 +1,5 @@
 #include "notification.h"
-#include "base.h"
+#include "private/utils.h"
 #include "icon.h"
 #include "shadow.h"
 

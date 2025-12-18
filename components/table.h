@@ -1,6 +1,6 @@
 #pragma once
 
-#include "base.h"
+#include "private/utils.h"
 
 #include <QTableWidget>
 #include <QHeaderView>

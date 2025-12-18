@@ -1,5 +1,5 @@
 #include "layout.h"
-#include "base.h"
+#include "private/utils.h"
 #include <QTimer>
 
 namespace Element

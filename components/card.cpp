@@ -1,7 +1,7 @@
 #include "card.h"
 #include "shadow.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QPainter>
 #include <QGraphicsDropShadowEffect>

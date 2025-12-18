@@ -1,6 +1,6 @@
 #include "autocomplete.h"
 
-#include "base.h"
+#include "private/utils.h"
 #include "color.h"
 #include "shadow.h"
 #include "scrollbar.h"

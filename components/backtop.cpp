@@ -2,7 +2,7 @@
 #include "icon.h"
 #include "color.h"
 #include "shadow.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QPainter>
 #include <QMouseEvent>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "inputline.h"
-#include "base.h"
+#include "private/utils.h"
 
 #include <QWidget>
 #include <QLabel>

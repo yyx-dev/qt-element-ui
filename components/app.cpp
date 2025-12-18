@@ -1,6 +1,6 @@
 #include "app.h"
 #include "scrollbar.h"
-#include "base.h"
+#include "private/utils.h"
 #include "color.h"
 
 namespace Element
@@ -12,7 +12,6 @@ namespace Element
 
         _app = new QApplication(argc, argv);
 
-        // ScrollBar::setAppScrollBar();
         Log::setLevel(Element::Log::Level::Debug);
 
         FontLoader::instance().setApplicationFont("微软雅黑");
@@ -26,7 +25,6 @@ namespace Element
         setApplicationVersion("beta-0.0.1");
         setOrganizationName("yyx");
         setOrganizationDomain("yyx.org");
-
     }
 
     App::~App()

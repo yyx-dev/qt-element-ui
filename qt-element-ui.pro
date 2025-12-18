@@ -3,7 +3,7 @@ QT += core widgets gui svg
 CONFIG += c++17 console
 
 SRC = components/
-DEP = components/deprecated
+PRI = components/private
 EXM = example
 RES = resources
 GAL = gallery

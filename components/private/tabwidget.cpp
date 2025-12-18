@@ -1,6 +1,6 @@
 #include "tabwidget.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 #include "qglobal.h"
 
 #include <QPainter>

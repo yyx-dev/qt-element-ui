@@ -1,5 +1,5 @@
 #include "slider.h"
-#include "base.h"
+#include "private/utils.h"
 #include "color.h"
 
 #include <QPainter>

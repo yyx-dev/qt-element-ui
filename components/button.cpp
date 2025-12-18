@@ -1,7 +1,7 @@
 #include "button.h"
 #include "color.h"
 #include "icon.h"
-#include "base.h"
+#include "private/utils.h"
 
 
 
@@ -15,7 +15,7 @@ namespace Element
     Button::Button(QWidget* parent)
         : QPushButton(parent)
     {
-        QPalette palette = QPushButton::palette();
+        QPalette palette = this->palette();
         palette.setColor(QPalette::ButtonText, Color::regularText());
 
         _qsshelper = QString(R"(
@@ -26,14 +26,13 @@ namespace Element
              }
          )");
         _qsshelper.setProperty("QPushButton", "font-family", Comm::fontFmaily);
-        QPushButton::setStyleSheet(_qsshelper.generate());
+        setStyleSheet(_qsshelper.generate());
 
         setStyle(Button::Style::Default);
         setType(Button::Type::Default);
         setSize(Button::Size::Default);
 
         setCursor(Qt::PointingHandCursor);
-        setMinimumHeight(40);
     }
 
     Button::Button(const QString& text, QWidget* parent)
@@ -492,7 +491,7 @@ namespace Element
         {
             _qsshelper.setProperty("QPushButton", "padding", "12px 19px");
 
-            setMinimumHeight(50);
+            setMinimumHeight(sc(40));
         }
         else if (_size == Size::Small)
         {
@@ -503,7 +502,11 @@ namespace Element
             if (!Icon::isNone(_icon))
                 QPushButton::setIconSize(QSize(_smallIconSize, _smallIconSize));
 
-            setMinimumHeight(30);
+            setMinimumHeight(sc(24));
+        }
+        else if (_size == Size::Default)
+        {
+            setMinimumHeight(sc(32));
         }
 
         QPushButton::setStyleSheet(_qsshelper.generate());

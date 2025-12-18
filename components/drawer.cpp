@@ -2,7 +2,7 @@
 #include "text.h"
 #include "icon.h"
 #include "color.h"
-#include "base.h"
+#include "private/utils.h"
 #include "shadow.h"
 #include "mask.h"
 

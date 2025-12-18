@@ -1,5 +1,5 @@
 #include "example.h"
-#include "base.h"
+#include "private/utils.h"
 #include "drawer.h"
 #include "qglobal.h"
 #include "qlabel.h"
