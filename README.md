@@ -6,7 +6,26 @@
 >
 > 为开源生态贡献一份力量是我一直以来的目标，虽实力有限，仍不断前进。
 
----
+#### 编译方法
+
+1. cmake
+
+```
+mkdir -p build && cd build
+cmake .. -G \"MinGW Makefiles\" -DCMAKE_CXX_COMPILER=g++ && make -j16
+./qt-element-ui
+```
+
+2. qmake
+
+```
+mkdir -p build && cd build
+qmake.exe ../qt-element-ui.pro
+$(MAKE) -j16
+cd release && ./qt-element-ui
+```
+
+#### 实际效果
 
 <img src="./images/frameless-example.png"  />
 

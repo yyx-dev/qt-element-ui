@@ -18,7 +18,7 @@ all:
 
 build:
 	mkdir -p build
-	cd build && qmake.exe ../qt-element-ui.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+	cd build && qmake.exe ../qt-element-ui.pro
 	cd build && $(MAKE) -j16
 
 run:
