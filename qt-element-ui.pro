@@ -12,13 +12,13 @@ GAL = gallery
 HEADERS += \
     $$files($$EXM/*.h) \
     $$files($$SRC/*.h) \
-    $$files($$DEP/*.h) \
+    $$files($$PRI/*.h) \
     $$files($$GAL/*.h)
 
 SOURCES += \
     $$files($$EXM/*.cpp) \
     $$files($$SRC/*.cpp) \
-    $$files($$DEP/*.cpp) \
+    $$files($$PRI/*.cpp) \
     $$files($$GAL/*.cpp)
 
 FORMS += \
@@ -31,7 +31,7 @@ RESOURCES += \
 INCLUDEPATH += \
     $$EXM \
     $$SRC \
-    $$DEP \
+    $$PRI \
     $$GAL
 
 TRANSLATIONS += \
