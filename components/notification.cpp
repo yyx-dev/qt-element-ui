@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QHash>
 #include <QEvent>
+#include <QPainterPath>
 
 
 

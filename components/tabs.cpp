@@ -10,6 +10,7 @@
 
 #include <QStylePainter>
 #include <QStyleOptionTab>
+#include <QPainterPath>
 
 
 namespace Element
