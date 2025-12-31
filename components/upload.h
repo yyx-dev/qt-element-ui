@@ -27,7 +27,11 @@ namespace Element
         void dragEnterEvent(QDragEnterEvent* event) override;
         void dragLeaveEvent(QDragLeaveEvent* event) override;
         void dropEvent(QDropEvent* event) override;
-        void enterEvent(QEvent* event) override;
+        #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void enterEvent(QEnterEvent* event) override;
+#else
+    void enterEvent(QEvent* event) override;
+#endif
         void leaveEvent(QEvent* event) override;
         void mousePressEvent(QMouseEvent* event) override;
 
@@ -54,7 +58,11 @@ namespace Element
 
     protected:
         bool eventFilter(QObject* obj, QEvent* event) override;
-        void enterEvent(QEvent* event) override;
+        #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void enterEvent(QEnterEvent* event) override;
+#else
+    void enterEvent(QEvent* event) override;
+#endif
         void leaveEvent(QEvent* event) override;
 
     private:

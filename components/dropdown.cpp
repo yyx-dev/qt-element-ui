@@ -54,7 +54,11 @@ namespace Element
         return *this;
     }
 
-    void Dropdown::enterEvent(QEvent* event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void Dropdown::enterEvent(QEnterEvent* event)
+#else
+void Dropdown::enterEvent(QEvent* event)
+#endif
     {
         QPoint menuPos = _text->mapToGlobal(QPoint(5, _text->height() + 10));
         _menu->popup(menuPos);

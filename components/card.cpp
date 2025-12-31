@@ -1,19 +1,24 @@
 #include "card.h"
-#include "shadow.h"
 #include "color.h"
 #include "private/utils.h"
+#include "shadow.h"
 
-#include <QPainter>
 #include <QGraphicsDropShadowEffect>
+#include <QPainter>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 namespace Element
 {
     Card::Card(QWidget* parent)
         : Card("", nullptr, "", parent)
-    {}
+    {
+    }
     Card::Card(const QString& header, QWidget* widget, QWidget* parent)
         : Card(header, widget, "", parent)
-    {}
+    {
+    }
     Card::Card(const QString& header, QWidget* widget, const QString& footer, QWidget* parent)
         : QWidget(parent)
         , _header(new QLabel(this))
@@ -42,12 +47,12 @@ namespace Element
         _footer->setWordWrap(true);
 
         _header->setFont(FontHelper(_header->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                             .setPointSize(Comm::defaultFontSize)
+                             .getFont());
 
         _footer->setFont(FontHelper(_footer->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                             .setPointSize(Comm::defaultFontSize)
+                             .getFont());
 
         _mainLayout->setContentsMargins(0, 0, 0, 0);
         _mainLayout->setSpacing(0);
@@ -114,7 +119,11 @@ namespace Element
         QWidget::paintEvent(event);
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void Card::enterEvent(QEnterEvent* event)
+#else
     void Card::enterEvent(QEvent* event)
+#endif
     {
         if (_shadow == Shadow::Hover)
             graphicsEffect()->setEnabled(true);

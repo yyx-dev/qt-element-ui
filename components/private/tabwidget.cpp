@@ -1,12 +1,17 @@
-#include "tabwidget.h"
 #include "color.h"
 #include "private/utils.h"
 #include "qglobal.h"
+#include "tabwidget.h"
 
 #include <QPainter>
 
-#include <QStyleOptionTab>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
+
 #include <QMouseEvent>
+#include <QStyleOptionTab>
+
 
 namespace Element
 {
@@ -37,7 +42,7 @@ namespace Element
                 painter.fillRect(rect, Color::primaryL5());
 
             // 绘制边框
-            painter.setPen(Color::baseBorder()) ;
+            painter.setPen(Color::baseBorder());
             painter.drawLine(rect.right(), rect.top(), rect.right(), rect.bottom());
 
             const MenuItem& menuItem = static_cast<TabWidget*>(parent())->menus()[i];
@@ -45,8 +50,7 @@ namespace Element
             // 绘制图标
             if (menuItem.icon != Icon::None)
             {
-                QIcon icon = Icon::instance().getIcon(menuItem.icon,
-                                                                selected ? Color::primary() : Color::primaryText(), 20);
+                QIcon icon = Icon::instance().getIcon(menuItem.icon, selected ? Color::primary() : Color::primaryText(), 20);
                 icon.paint(&painter, rect.adjusted(30, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, QIcon::Normal);
             }
 

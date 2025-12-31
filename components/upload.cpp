@@ -1,14 +1,16 @@
+#include "color.h"
+#include "icon.h"
+#include "private/utils.h"
 #include "upload.h"
 
-#include "icon.h"
-#include "color.h"
-#include "private/utils.h"
-
+#include <QBoxLayout>
 #include <QFileInfo>
 #include <QMimeData>
-
-#include <QBoxLayout>
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QFileDialog>
 
 namespace Element
@@ -25,16 +27,16 @@ namespace Element
 
         _icon->setAlignment(Qt::AlignCenter);
         _icon->setFixedSize(80, 80);
-        _icon->setPixmap(Icon::instance()
-                         .getPixmap(Icon::UploadFilled, Color::placeholderText(), 80));
+        _icon->setPixmap(Icon::instance().getPixmap(Icon::UploadFilled, Color::placeholderText(), 80));
 
-        _dropTip->setText("<span style='color:#606266;'>Drop file here or</span> "
-                          "<span style='color:#409EFF;'>click to upload</span>");
+        _dropTip->setText(
+            "<span style='color:#606266;'>Drop file here or</span> "
+            "<span style='color:#409EFF;'>click to upload</span>");
         _dropTip->setAlignment(Qt::AlignCenter);
 
         _dropTip->setFont(FontHelper(_dropTip->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                              .setPointSize(Comm::defaultFontSize)
+                              .getFont());
 
         QVBoxLayout* layout = new QVBoxLayout(this);
         layout->setAlignment(Qt::AlignCenter);
@@ -101,7 +103,8 @@ namespace Element
             _isDrag = true;
             event->acceptProposedAction();
         }
-        else {
+        else
+        {
             event->ignore();
         }
         update();
@@ -116,14 +119,14 @@ namespace Element
 
     void FileDrop::dropEvent(QDropEvent* event)
     {
-        const QMimeData *mimeData = event->mimeData();
+        const QMimeData* mimeData = event->mimeData();
 
         if (mimeData->hasUrls())
         {
             QStringList paths;
             QList<QUrl> urlList = mimeData->urls();
 
-            foreach (const QUrl &url, urlList)
+            foreach (const QUrl& url, urlList)
             {
                 QString path = url.toLocalFile();
                 if (QFileInfo(path).isFile())
@@ -143,7 +146,11 @@ namespace Element
         update();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void FileDrop::enterEvent(QEnterEvent* event)
+#else
     void FileDrop::enterEvent(QEvent* event)
+#endif
     {
         _isHover = true;
         update();
@@ -167,13 +174,13 @@ namespace Element
             if (_multiple)
             {
                 paths = QFileDialog::getOpenFileNames(
-                        this, "打开", QDir::rootPath(),
-                        "All Files (*.*)"); // "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
+                    this, "打开", QDir::rootPath(),
+                    "All Files (*.*)"); // "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
             }
             else
             {
                 QString path = QFileDialog::getOpenFileName(
-                        this, "打开", QDir::rootPath(), "All Files (*.*)");
+                    this, "打开", QDir::rootPath(), "All Files (*.*)");
                 if (!path.isEmpty())
                     paths.append(path);
             }
@@ -191,7 +198,6 @@ namespace Element
     }
 
 
-
     FileListItemWidget::FileListItemWidget(QListWidgetItem* item, const QString& path)
         : _icon(new QLabel(this))
         , _name(new QLabel(QFileInfo(path).fileName(), this))
@@ -205,8 +211,8 @@ namespace Element
         _name->setStyleSheet("QLabel { color: #606266; }");
 
         _name->setFont(FontHelper(_name->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                           .setPointSize(Comm::defaultFontSize)
+                           .getFont());
 
         QHBoxLayout* layout = new QHBoxLayout(this);
         layout->setContentsMargins(0, 0, 0, 0);
@@ -237,13 +243,16 @@ namespace Element
             {
                 if (static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
                     emit removeRequested(_item, _path);
-
             }
         }
         return QWidget::eventFilter(obj, event);
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void FileListItemWidget::enterEvent(QEnterEvent* event)
+#else
     void FileListItemWidget::enterEvent(QEvent* event)
+#endif
     {
         _name->setStyleSheet("QLabel { color: #409EFF; }");
         _state->setPixmap(Icon::instance().getPixmap(Icon::Close, "#85878B", 18));
@@ -256,7 +265,6 @@ namespace Element
         _state->setPixmap(Icon::instance().getPixmap(Icon::CircleCheck, Color::success(), 18));
         QWidget::leaveEvent(event);
     }
-
 
 
     FileList::FileList(QWidget* parent)
@@ -353,7 +361,6 @@ namespace Element
 
             emit removeRequested(path);
         });
-
     }
 
     Upload& Upload::setTip(const QString& tip, Text::Type type)
@@ -372,7 +379,7 @@ namespace Element
             _select->setText("select files");
             connect(_select, &Button::clicked, this, [&] {
                 QStringList paths = QFileDialog::getOpenFileNames(
-                        this, "打开", QDir::rootPath(), "All Files (*.*)");
+                    this, "打开", QDir::rootPath(), "All Files (*.*)");
 
                 if (!paths.isEmpty())
                 {
@@ -386,7 +393,7 @@ namespace Element
             _select->setText("select file");
             connect(_select, &Button::clicked, this, [&] {
                 QString path = QFileDialog::getOpenFileName(
-                        this, "打开", QDir::rootPath(), "All Files (*.*)");
+                    this, "打开", QDir::rootPath(), "All Files (*.*)");
 
                 if (!path.isEmpty())
                 {

@@ -1,4 +1,3 @@
-#include "tabs.h"
 #include "color.h"
 #include "private/utils.h"
 #include "qcolor.h"
@@ -7,25 +6,32 @@
 #include "qnamespace.h"
 #include "qpaintdevice.h"
 #include "qpainter.h"
+#include "tabs.h"
 
-#include <QStylePainter>
 #include <QStyleOptionTab>
+#include <QStylePainter>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 namespace Element
 {
 
     Tabs::Tabs(QWidget* parent)
         : Tabs(Type::Default, TabPosition::Top, parent)
-    {}
+    {
+    }
 
     Tabs::Tabs(Type type, QWidget* parent)
         : Tabs(type, TabPosition::Top, parent)
-    {}
+    {
+    }
 
     Tabs::Tabs(TabPosition position, QWidget* parent)
         : Tabs(Type::Default, position, parent)
-    {}
+    {
+    }
 
     Tabs::Tabs(Type type, TabPosition position, QWidget* parent)
         : QTabWidget(parent)
@@ -54,7 +60,8 @@ namespace Element
         QTabWidget::setTabPosition(
             pos == TabPosition::Top    ? QTabWidget::North :
             pos == TabPosition::Bottom ? QTabWidget::South :
-            pos == TabPosition::Left   ? QTabWidget::West : QTabWidget::East);
+            pos == TabPosition::Left   ? QTabWidget::West :
+                                         QTabWidget::East);
 
         _bar->setTabPosition(pos);
         return *this;
@@ -96,9 +103,9 @@ namespace Element
     {
         switch (_type)
         {
-            case Type::Default: paintDefaultStyle(); break;
-            case Type::Card: paintCardStyle(); break;
-            case Type::BorderCard: paintBorderCardStyle(); break;
+        case Type::Default: paintDefaultStyle(); break;
+        case Type::Card: paintCardStyle(); break;
+        case Type::BorderCard: paintBorderCardStyle(); break;
         }
     }
 
@@ -202,11 +209,11 @@ namespace Element
     {
         switch (_type)
         {
-            case Tabs::Type::Default: paintDefaultStyle(); break;
-            case Tabs::Type::Card:
-                paintCardStyle();
-                break;
-            case Tabs::Type::BorderCard: paintBorderCardStyle(); break;
+        case Tabs::Type::Default: paintDefaultStyle(); break;
+        case Tabs::Type::Card:
+            paintCardStyle();
+            break;
+        case Tabs::Type::BorderCard: paintBorderCardStyle(); break;
         }
     }
 
@@ -313,18 +320,19 @@ namespace Element
             bool selected = i == currentIndex();
             bool hovered = i == tabAt(mapFromGlobal(QCursor::pos()));
 
-            opt.palette.setColor(QPalette::ButtonText,
-                    selected || hovered ? Color::primary() : Color::primaryText());
+            opt.palette.setColor(QPalette::ButtonText, selected || hovered ? Color::primary() : Color::primaryText());
             painter.setPen(opt.palette.buttonText().color());
 
             QRect rect = tabRect(i);
             QRect textRect = _position == Tabs::TabPosition::Top    ? rect.adjusted(0, 0, 0, 0) :
                              _position == Tabs::TabPosition::Bottom ? rect.adjusted(0, 0, 0, 0) :
-                             _position == Tabs::TabPosition::Left   ? rect.adjusted(0, 0, -30, 0) : rect.adjusted(30, 0, 0, 0);
+                             _position == Tabs::TabPosition::Left   ? rect.adjusted(0, 0, -30, 0) :
+                                                                      rect.adjusted(30, 0, 0, 0);
 
             int align = _position == Tabs::TabPosition::Top    ? Qt::AlignVCenter | Qt::AlignLeft :
                         _position == Tabs::TabPosition::Bottom ? Qt::AlignVCenter | Qt::AlignLeft :
-                        _position == Tabs::TabPosition::Left   ? Qt::AlignVCenter | Qt::AlignRight : Qt::AlignVCenter | Qt::AlignLeft;
+                        _position == Tabs::TabPosition::Left   ? Qt::AlignVCenter | Qt::AlignRight :
+                                                                 Qt::AlignVCenter | Qt::AlignLeft;
 
             painter.drawText(textRect, align, tabText(i));
         }
@@ -342,8 +350,7 @@ namespace Element
             bool selected = i == currentIndex();
             bool hovered = i == tabAt(mapFromGlobal(QCursor::pos()));
 
-            opt.palette.setColor(QPalette::ButtonText,
-                    selected || hovered ? Color::primary() : Color::primaryText());
+            opt.palette.setColor(QPalette::ButtonText, selected || hovered ? Color::primary() : Color::primaryText());
             painter.setPen(opt.palette.buttonText().color());
 
             painter.drawText(tabRect(i), Qt::AlignCenter, tabText(i));

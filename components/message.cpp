@@ -1,27 +1,33 @@
+#include "icon.h"
 #include "message.h"
 #include "private/utils.h"
-#include "icon.h"
 
 #include <QBoxLayout>
 #include <QPainter>
-#include <QTimer>
-#include <QHash>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
+#include <QHash>
+#include <QTimer>
 
 
 namespace Element
 {
     Message::Message(const QString& message, QWidget* parent)
         : Message(message, "", Type::Info, parent)
-    {}
+    {
+    }
 
     Message::Message(const QString& message, const QString& paramater, QWidget* parent)
         : Message(message, paramater, Type::Info, parent)
-    {}
+    {
+    }
 
     Message::Message(const QString& message, Message::Type type, QWidget* parent)
         : Message(message, "", type, parent)
-    {}
+    {
+    }
 
     Message::Message(const QString& message, const QString& paramater, Type type, QWidget* parent)
         : QWidget(parent)
@@ -36,10 +42,10 @@ namespace Element
         setAttribute(Qt::WA_DeleteOnClose);
 
         _text->setFont(FontHelper(_text->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                           .setPointSize(Comm::defaultFontSize)
+                           .getFont());
 
-        QHBoxLayout *layout = new QHBoxLayout(this);
+        QHBoxLayout* layout = new QHBoxLayout(this);
         layout->setContentsMargins(10, 10, 10, 10);
         layout->setSpacing(10);
         layout->addWidget(_icon);
@@ -93,7 +99,8 @@ namespace Element
     {
         _showClose = showClose;
         if (!autoClose)
-        {}
+        {
+        }
         return *this;
     }
 
@@ -112,11 +119,11 @@ namespace Element
     void Message::updateTextAndIcon()
     {
         QString coloredMessage = QString("<span style='color:%1'>%2</span>")
-            .arg(getColor())
-            .arg(_message);
+                                     .arg(getColor())
+                                     .arg(_message);
 
         QString coloredParameter = QString("<span style='color:#008080'>%2</span>")
-            .arg(_paramater);
+                                       .arg(_paramater);
 
         _text->setText(coloredMessage + coloredParameter);
 
@@ -130,27 +137,33 @@ namespace Element
 
         int x = 0, y = 0;
 
-        if (_placement == Place::Top) {
+        if (_placement == Place::Top)
+        {
             x = (parentRect.width() - widgetSize.width()) / 2;
             y = 10 + (10 + widgetSize.height()) * _count[Place::Top]++;
         }
-        else if (_placement == Place::TopLeft) {
+        else if (_placement == Place::TopLeft)
+        {
             x = 10;
             y = 10 + (10 + widgetSize.height()) * _count[Place::TopLeft]++;
         }
-        else if (_placement == Place::TopRight) {
+        else if (_placement == Place::TopRight)
+        {
             x = parentRect.width() - widgetSize.width() - 10;
             y = 10 + (10 + widgetSize.height()) * _count[Place::TopRight]++;
         }
-        else if (_placement == Place::Bottom) {
+        else if (_placement == Place::Bottom)
+        {
             x = (parentRect.width() - widgetSize.width()) / 2;
             y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::Bottom];
         }
-        else if (_placement == Place::BottomLeft) {
+        else if (_placement == Place::BottomLeft)
+        {
             x = 10;
             y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::BottomLeft];
         }
-        else if (_placement == Place::BottomRight) {
+        else if (_placement == Place::BottomRight)
+        {
             x = parentRect.width() - widgetSize.width() - 10;
             y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::BottomRight];
         }
@@ -204,8 +217,8 @@ namespace Element
         case Type::Primary: return Icon::instance().getPixmap(Icon::InfoFilled, Color::primary(), 20);
         case Type::Success: return Icon::instance().getPixmap(Icon::SuccessFilled, Color::success(), 20);
         case Type::Warning: return Icon::instance().getPixmap(Icon::WarningFilled, Color::warning(), 20);
-        case Type::Info:    return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 20);
-        case Type::Error:   return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 20);
+        case Type::Info: return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 20);
+        case Type::Error: return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 20);
         }
         return QPixmap();
     }
@@ -216,7 +229,7 @@ namespace Element
         QWidget::close();
     }
 
-    void Message::paintEvent(QPaintEvent *event)
+    void Message::paintEvent(QPaintEvent* event)
     {
         QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing);

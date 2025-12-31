@@ -1,15 +1,20 @@
-#include "progress.h"
-#include "private/utils.h"
 #include "color.h"
 #include "icon.h"
+#include "private/utils.h"
+#include "progress.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 namespace Element
 {
     Progress::Progress(QWidget* parent)
         : Progress(0, parent)
-    {}
+    {
+    }
 
     Progress::Progress(int percentage, QWidget* parent)
         : QWidget(parent)
@@ -31,17 +36,17 @@ namespace Element
         switch (_type)
         {
         case Type::Line: {
-                setFixedHeight(qMax(_strokeWidth, FontHelper(font()).getTextHeight()));
-            }
-            break;
+            setFixedHeight(qMax(_strokeWidth, FontHelper(font()).getTextHeight()));
+        }
+        break;
         case Type::Circle: {
-                setMinimumSize(sc(50, 50));
-            }
-            break;
+            setMinimumSize(sc(50, 50));
+        }
+        break;
         case Type::Dashboard: {
-                setMinimumSize(sc(50, 40));
-            }
-            break;
+            setMinimumSize(sc(50, 40));
+        }
+        break;
         }
         update();
         return *this;
@@ -186,9 +191,9 @@ namespace Element
             if (_status != Status::None)
             {
                 QPixmap pixmap = Icon::instance().getPixmap(
-                        _status == Status::Success ? Icon::CircleCheck
-                    : _status == Status::Exception ? Icon::CircleClose : Icon::WarningFilled,
-                        getColor(), sc(16));
+                    _status == Status::Success ? Icon::CircleCheck : _status == Status::Exception ? Icon::CircleClose :
+                                                                                                    Icon::WarningFilled,
+                    getColor(), sc(16));
                 QRect iconRect = QRect(0, 0, pixmap.width(), pixmap.height());
                 iconRect.moveCenter(textRect.center());
                 painter.drawPixmap(iconRect, pixmap);
@@ -223,14 +228,14 @@ namespace Element
         QPen pen;
         pen.setColor(QColor(getColor()));
         pen.setWidth(sw);
-        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap
-                    : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap : Qt::RoundCap);
+        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap :
+                                                                                                                        Qt::RoundCap);
 
         painter.setPen(pen);
         painter.setBrush(Qt::NoBrush);
         int startAngle = 90 * 16;
         int spanAngle = -360 * _precentage / 100.0 * 16;
-        painter.drawArc(rect.adjusted(sw/2, sw/2, -sw/2, -sw/2), startAngle, spanAngle);
+        painter.drawArc(rect.adjusted(sw / 2, sw / 2, -sw / 2, -sw / 2), startAngle, spanAngle);
 
         // 绘制文字/图标
         if (_showText)
@@ -240,8 +245,9 @@ namespace Element
             if (_status != Status::None)
             {
                 QPixmap pixmap = Icon::instance().getPixmap(
-                    _status == Status::Success ? Icon::CircleCheck :
-                    _status == Status::Exception ? Icon::CircleClose : Icon::WarningFilled,
+                    _status == Status::Success   ? Icon::CircleCheck :
+                    _status == Status::Exception ? Icon::CircleClose :
+                                                   Icon::WarningFilled,
                     getColor(), sc(16));
                 QRect iconRect(0, 0, pixmap.width(), pixmap.height());
                 iconRect.moveCenter(rect.center());
@@ -275,26 +281,26 @@ namespace Element
         QPen pen;
         pen.setColor(QColor(Color::lightFill()));
         pen.setWidth(sw);
-        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap
-                    : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap : Qt::RoundCap);
+        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap :
+                                                                                                                        Qt::RoundCap);
 
         painter.setPen(pen);
         painter.setBrush(Qt::NoBrush);
         int startAngle = 227 * 16;
         int spanAngle = -274 * 16;
-        painter.drawArc(rect.adjusted(sw/2, sw/2, -sw/2, -sw/2), startAngle, spanAngle);
+        painter.drawArc(rect.adjusted(sw / 2, sw / 2, -sw / 2, -sw / 2), startAngle, spanAngle);
 
         // 绘制前景
         pen.setColor(QColor(getColor()));
         pen.setWidth(sw);
-        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap
-                    : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap : Qt::RoundCap);
+        pen.setCapStyle(_strokeLinecap == StrokeLinecap::Butt ? Qt::FlatCap : _strokeLinecap == StrokeLinecap::Square ? Qt::SquareCap :
+                                                                                                                        Qt::RoundCap);
 
         painter.setPen(pen);
         painter.setBrush(Qt::NoBrush);
         startAngle = 227 * 16;
         spanAngle = -274 * _precentage / 100.0 * 16;
-        painter.drawArc(rect.adjusted(sw/2, sw/2, -sw/2, -sw/2), startAngle, spanAngle);
+        painter.drawArc(rect.adjusted(sw / 2, sw / 2, -sw / 2, -sw / 2), startAngle, spanAngle);
 
         // 绘制文字/图标
         if (_showText)
@@ -304,8 +310,9 @@ namespace Element
             if (_status != Status::None)
             {
                 QPixmap pixmap = Icon::instance().getPixmap(
-                    _status == Status::Success ? Icon::CircleCheck :
-                    _status == Status::Exception ? Icon::CircleClose : Icon::WarningFilled,
+                    _status == Status::Success   ? Icon::CircleCheck :
+                    _status == Status::Exception ? Icon::CircleClose :
+                                                   Icon::WarningFilled,
                     getColor(), sc(16));
                 QRect iconRect(0, 0, pixmap.width(), pixmap.height());
                 iconRect.moveCenter(rect.center());

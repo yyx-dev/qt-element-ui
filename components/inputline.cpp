@@ -371,7 +371,11 @@ namespace Element
         QLineEdit::focusOutEvent(event);
     }
 
-    void InputLine::enterEvent(QEvent* event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void InputLine::enterEvent(QEnterEvent* event)
+#else
+void InputLine::enterEvent(QEvent* event)
+#endif
     {
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);

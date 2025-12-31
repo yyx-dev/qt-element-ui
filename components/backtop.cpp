@@ -1,10 +1,14 @@
 #include "backtop.h"
-#include "icon.h"
 #include "color.h"
-#include "shadow.h"
+#include "icon.h"
 #include "private/utils.h"
+#include "shadow.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QMouseEvent>
 #include <QScrollBar>
 
@@ -13,7 +17,8 @@ namespace Element
 {
     Backtop::Backtop(QWidget* parent)
         : Backtop(nullptr, parent)
-    {}
+    {
+    }
 
     Backtop::Backtop(QScrollArea* target, QWidget* parent)
         : QLabel(parent)
@@ -28,8 +33,7 @@ namespace Element
         setFont(FontHelper().getFont());
 
         if (_target)
-            connect(_target->verticalScrollBar(), &QScrollBar::valueChanged,
-                    this, &Backtop::onScrollBarValueChanged);
+            connect(_target->verticalScrollBar(), &QScrollBar::valueChanged, this, &Backtop::onScrollBarValueChanged);
 
         setShape(_shape);
         setSize(_size);
@@ -47,9 +51,12 @@ namespace Element
     Backtop& Backtop::setSize(Size size)
     {
         _size = size;
-        if (_size == Size::Default) setFixedSize(60, 60);
-        else if (_size == Size::Large) setFixedSize(80, 80);
-        else if (_size == Size::Small) setFixedSize(40, 40);
+        if (_size == Size::Default)
+            setFixedSize(60, 60);
+        else if (_size == Size::Large)
+            setFixedSize(80, 80);
+        else if (_size == Size::Small)
+            setFixedSize(40, 40);
         return *this;
     }
 
@@ -102,27 +109,33 @@ namespace Element
         int y = (height() - size) / 2;
 
         QPainterPath clipPath;
-        if (_shape == Shape::Circle)      clipPath.addEllipse(x, y, size, size);
-        else if (_shape == Shape::Square) clipPath.addRoundedRect(x, y, size, size, 4, 4);
+        if (_shape == Shape::Circle)
+            clipPath.addEllipse(x, y, size, size);
+        else if (_shape == Shape::Square)
+            clipPath.addRoundedRect(x, y, size, size, 4, 4);
         painter.setClipPath(clipPath);
 
         painter.setBrush(Qt::white);
         painter.setPen(Qt::NoPen);
-        if (_shape == Shape::Circle)      painter.drawEllipse(x, y, size, size);
-        else if (_shape == Shape::Square) painter.drawRoundedRect(x, y, size, size, 4, 4);
+        if (_shape == Shape::Circle)
+            painter.drawEllipse(x, y, size, size);
+        else if (_shape == Shape::Square)
+            painter.drawRoundedRect(x, y, size, size, 4, 4);
 
         if (_type == Type::Icon && _svgRenderer->isValid())
         {
-            if (_size == Size::Default)    _svgRenderer->render(&painter, QRectF(18, 18, 25, 25));
-            else if (_size == Size::Large) _svgRenderer->render(&painter, QRectF(25, 25, 30, 30));
-            else if (_size == Size::Small) _svgRenderer->render(&painter, QRectF(11, 10, 18, 18));
+            if (_size == Size::Default)
+                _svgRenderer->render(&painter, QRectF(18, 18, 25, 25));
+            else if (_size == Size::Large)
+                _svgRenderer->render(&painter, QRectF(25, 25, 30, 30));
+            else if (_size == Size::Small)
+                _svgRenderer->render(&painter, QRectF(11, 10, 18, 18));
         }
         else
         {
             QFont font = QLabel::font();
             font.setBold(true);
-            font.setPointSize(_size == Size::Default || _size == Size::Large
-                              ? 14 : Comm::defaultFontSize);
+            font.setPointSize(_size == Size::Default || _size == Size::Large ? 14 : Comm::defaultFontSize);
 
             painter.setPen(Color::primary());
             painter.setFont(font);

@@ -160,7 +160,11 @@ namespace Element
         QLabel::setText("<sup>" + QLabel::text() + "</sup>");
     }
 
-    void Text::enterEvent(QEvent* event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void Text::enterEvent(QEnterEvent* event)
+#else
+void Text::enterEvent(QEvent* event)
+#endif
     {
         QLabel::enterEvent(event);
         emit hovered(true);

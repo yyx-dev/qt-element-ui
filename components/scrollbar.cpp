@@ -1,10 +1,11 @@
 #include "scrollbar.h"
 
-#include <QtMath>
 #include <QApplication>
-#include <QQueue>
 #include <QDateTime>
 #include <QDebug>
+#include <QQueue>
+#include <QtMath>
+
 
 namespace Element
 {
@@ -42,12 +43,24 @@ namespace Element
         while (now - scrollStamps.front() > 500)
             scrollStamps.dequeue();
         double accRatio = qMin(scrollStamps.size() / 15.0, 1.0);
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (!lastWheelEvent)
+        {
+            // Qt 6 使用 clone() 方法创建一个新的副本
+            lastWheelEvent = e->clone();
+        }
+        else
+        {
+            // 如果已经存在旧的事件对象，先删除旧的再克隆新的
+            delete lastWheelEvent;
+            lastWheelEvent = e->clone();
+        }
+#else
         if (!lastWheelEvent)
             lastWheelEvent = new QWheelEvent(*e);
         else
             *lastWheelEvent = *e;
-
+#endif
         stepsTotal = 60 * 400 / 1000;
         double multiplier = 1.0;
         if (QApplication::keyboardModifiers() & Qt::ALT)
@@ -60,7 +73,8 @@ namespace Element
 
         bool isTop = delta.y() > 0 && value() == minimum();
         bool isBottom = delta.y() < 0 && value() == maximum();
-        if (!isTop && !isBottom) {
+        if (!isTop && !isBottom)
+        {
             e->accept();
         }
     }
@@ -76,7 +90,8 @@ namespace Element
     {
         QPointF totalDelta;
 
-        for (auto & it : stepsLeftQueue) {
+        for (auto& it : stepsLeftQueue)
+        {
             totalDelta += subDelta(it.first, it.second);
             --(it.second);
         }
@@ -84,22 +99,22 @@ namespace Element
             stepsLeftQueue.pop_front();
 
         QWheelEvent e(
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
             lastWheelEvent->position(),
             lastWheelEvent->globalPosition(),
-    #else
+#else
             lastWheelEvent->pos(),
             lastWheelEvent->globalPos(),
-    #endif
+#endif
             QPoint(),
             totalDelta.toPoint(),
             lastWheelEvent->buttons(),
             lastWheelEvent->modifiers(),
             lastWheelEvent->phase(),
-            lastWheelEvent->inverted()
-        );
+            lastWheelEvent->inverted());
         QScrollBar::wheelEvent(&e);
-        if (stepsLeftQueue.empty()) {
+        if (stepsLeftQueue.empty())
+        {
             smoothMoveTimer->stop();
         }
     }

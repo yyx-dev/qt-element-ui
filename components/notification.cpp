@@ -1,21 +1,25 @@
+#include "icon.h"
 #include "notification.h"
 #include "private/utils.h"
-#include "icon.h"
 #include "shadow.h"
 
 #include <QBoxLayout>
 #include <QPainter>
-#include <QTimer>
-#include <QHash>
-#include <QEvent>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
+#include <QEvent>
+#include <QHash>
+#include <QTimer>
 
 
 namespace Element
 {
     Notification::Notification(const QString& title, const QString& content, QWidget* parent)
         : Notification(title, content, Type::Primary, parent)
-    {}
+    {
+    }
 
     Notification::Notification(const QString& title, const QString& content, Type type, QWidget* parent)
         : QWidget(parent)
@@ -59,13 +63,13 @@ namespace Element
     void Notification::setupUI()
     {
         _title->setFont(FontHelper(_title->font())
-                .setPointSize(Comm::largeFontSize)
-                .setBold(true)
-                .getFont());
+                            .setPointSize(Comm::largeFontSize)
+                            .setBold(true)
+                            .getFont());
 
         _content->setFont(FontHelper(_content->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                              .setPointSize(Comm::defaultFontSize)
+                              .getFont());
 
         _title->adjustSize();
         _content->setWordWrap(true);
@@ -120,7 +124,8 @@ namespace Element
     {
         _showClose = showClose;
         if (!autoClose)
-        {}
+        {
+        }
         return *this;
     }
 
@@ -143,19 +148,23 @@ namespace Element
 
         int x = 0, y = 0;
 
-        if (_positon == Position::TopLeft) {
+        if (_positon == Position::TopLeft)
+        {
             x = 15;
             y = 10 + (10 + widgetSize.height()) * _count[Position::TopLeft]++;
         }
-        else if (_positon == Position::TopRight) {
+        else if (_positon == Position::TopRight)
+        {
             x = parentRect.width() - widgetSize.width() - 15;
             y = 10 + (10 + widgetSize.height()) * _count[Position::TopRight]++;
         }
-        else if (_positon == Position::BottomLeft) {
+        else if (_positon == Position::BottomLeft)
+        {
             x = 15;
             y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Position::BottomLeft];
         }
-        else if (_positon == Position::BottomRight) {
+        else if (_positon == Position::BottomRight)
+        {
             x = parentRect.width() - widgetSize.width() - 15;
             y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Position::BottomRight];
         }
@@ -171,8 +180,8 @@ namespace Element
         case Type::Primary: return Icon::instance().getPixmap(Icon::InfoFilled, Color::primary(), 24);
         case Type::Success: return Icon::instance().getPixmap(Icon::SuccessFilled, Color::success(), 24);
         case Type::Warning: return Icon::instance().getPixmap(Icon::WarningFilled, Color::warning(), 24);
-        case Type::Info:    return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 24);
-        case Type::Error:   return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 24);
+        case Type::Info: return Icon::instance().getPixmap(Icon::InfoFilled, Color::info(), 24);
+        case Type::Error: return Icon::instance().getPixmap(Icon::CircleCloseFilled, Color::danger(), 24);
         }
         return QPixmap();
     }

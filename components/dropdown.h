@@ -1,19 +1,22 @@
 #pragma once
 
 #include "private/utils.h"
-#include "text.h"
 #include "shadow.h"
+#include "text.h"
 
-#include <QWidget>
+#include <QHash>
 #include <QLabel>
 #include <QMenu>
-#include <QHash>
 #include <QPainter>
-#include <QStylePainter>
-#include <QStyleOptionMenuItem>
+#include <QWidget>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QPaintEvent>
 #include <QProxyStyle>
-
+#include <QStyleOptionMenuItem>
+#include <QStylePainter>
 
 
 namespace Element
@@ -22,7 +25,7 @@ namespace Element
 
     class Dropdown : public QWidget
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
         Dropdown& setText(const QString& text);
@@ -34,22 +37,27 @@ namespace Element
         Dropdown(const QString& text, QWidget* parent);
 
     protected:
-        void enterEvent(QEvent *event) override;
-        void leaveEvent(QEvent *event) override;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        void enterEvent(QEnterEvent* event) override;
+#else
+        void enterEvent(QEvent* event) override;
+#endif
+        void leaveEvent(QEvent* event) override;
 
     private:
         Text* _text;
         QLabel* _icon;
-        MenuforDropdown * _menu;
+        MenuforDropdown* _menu;
         QHash<QString, QAction*>* _actions;
     };
 
     class MenuforDropdown : public QMenu
     {
-    Q_OBJECT
+        Q_OBJECT
 
     public:
         MenuforDropdown(QWidget* parent = nullptr);
+
     protected:
         bool event(QEvent* e) override;
     };

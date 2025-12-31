@@ -1,19 +1,25 @@
+#include "color.h"
 #include "menu.h"
 #include "private/utils.h"
-#include "color.h"
 #include "qglobal.h"
 #include "scrollbar.h"
 
 #include <QMouseEvent>
 #include <QPainter>
-#include <QtMath>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QCoreApplication>
+#include <QtMath>
+
 
 namespace Element
 {
     MenuItemWidget::MenuItemWidget(Type type, const QString& text, Item* item, QWidget* parent)
         : MenuItemWidget(type, text, Icon::None, item, parent)
-    {}
+    {
+    }
 
     MenuItemWidget::MenuItemWidget(Type type, const QString& text, Icon::Name icon, Item* item, QWidget* parent)
         : QWidget(parent)
@@ -22,7 +28,8 @@ namespace Element
         , _icon(icon)
         , _item(item)
     {
-        setFixedHeight(_type == Type::TopItem ? 70 : _type == Type::SubItem ? 60 : 40);
+        setFixedHeight(_type == Type::TopItem ? 70 : _type == Type::SubItem ? 60 :
+                                                                              40);
         setFont(FontHelper().setPointSize(10).getFont());
         if (_type == Type::TopItem || _type == Type::SubItem)
             setCursor(Qt::PointingHandCursor);
@@ -37,9 +44,9 @@ namespace Element
         bool hovered = underMouse();
 
         // 绘制背景
-        painter.fillRect(rect, _type == Type::GroupDesc ? Color::baseBackground()
-                                              : hovered ? Color::primaryL5()
-                                             : selected ? Color::primaryL5() : Color::baseBackground());
+        painter.fillRect(rect, _type == Type::GroupDesc ? Color::baseBackground() : hovered ? Color::primaryL5() :
+                                                                                selected    ? Color::primaryL5() :
+                                                                                              Color::baseBackground());
         // 绘制图标
         if (!Icon::isNone(_icon))
         {
@@ -48,10 +55,11 @@ namespace Element
         }
 
         // 绘制文本
-        painter.setPen(_type == Type::GroupDesc ? Color::secondaryText()
-                                     : selected ? Color::primary() : Color::primaryText());
-        QRect textRect = rect.adjusted(!Icon::isNone(_icon) ? 60
-                                   : _type == Type::TopItem ? 30 : 50, 0, 0, 0);
+        painter.setPen(_type == Type::GroupDesc ? Color::secondaryText() : selected ? Color::primary() :
+                                                                                      Color::primaryText());
+        QRect textRect = rect.adjusted(!Icon::isNone(_icon) ? 60 : _type == Type::TopItem ? 30 :
+                                                                                            50,
+                                       0, 0, 0);
 
         painter.drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, _text);
 
@@ -80,9 +88,11 @@ namespace Element
 
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-        setStyleSheet("QTreeWidget { \
+        setStyleSheet(
+            "QTreeWidget { \
             border: none; \
-            border-right: 1px solid " + Color::baseBorder() + "; }" );
+            border-right: 1px solid "
+            + Color::baseBorder() + "; }");
 
         setVerticalScrollBar(new ScrollBar(Qt::Vertical, this));
     }
@@ -169,8 +179,7 @@ namespace Element
                     event->globalPos(),
                     event->button(),
                     event->buttons(),
-                    event->modifiers()
-                );
+                    event->modifiers());
                 QCoreApplication::sendEvent(parentWidget(), &newEvent);
             }
         }
@@ -184,8 +193,7 @@ namespace Element
             event->globalPos(),
             event->button(),
             event->buttons(),
-            event->modifiers()
-        );
+            event->modifiers());
         QCoreApplication::sendEvent(parentWidget(), &newEvent);
     }
 
@@ -197,15 +205,15 @@ namespace Element
             event->globalPos(),
             event->button(),
             event->buttons(),
-            event->modifiers()
-        );
+            event->modifiers());
         QCoreApplication::sendEvent(parentWidget(), &newEvent);
     }
 
     void Menu::updateWidth(Widget::Type type, Icon::Name icon, const QString& text)
     {
         int width = FontHelper().setPixelSize(15).getTextWidth(text)
-                    + (!Icon::isNone(icon) ? 60 : type == Widget::Type::TopItem ? 30 : 50)
+                    + (!Icon::isNone(icon) ? 60 : type == Widget::Type::TopItem ? 30 :
+                                                                                  50)
                     + 20 + 35;
         width = qBound(_width, width, _maxWidth);
 

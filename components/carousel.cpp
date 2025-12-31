@@ -1,16 +1,21 @@
 #include "carousel.h"
-#include "icon.h"
 #include "color.h"
+#include "icon.h"
 #include "private/utils.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QMouseEvent>
 
 namespace Element
 {
-    Carousel::Carousel(QWidget *parent)
+    Carousel::Carousel(QWidget* parent)
         : Carousel({}, parent)
-    {}
+    {
+    }
 
     Carousel::Carousel(const QList<QPixmap>& images, QWidget* parent)
         : QWidget(parent)
@@ -89,7 +94,7 @@ namespace Element
         return *this;
     }
 
-    void Carousel::paintEvent(QPaintEvent *event)
+    void Carousel::paintEvent(QPaintEvent* event)
     {
         QWidget::paintEvent(event);
 
@@ -157,10 +162,13 @@ namespace Element
                 painter.drawRect(rect);
             }
         }
-
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void Carousel::enterEvent(QEnterEvent* event)
+#else
     void Carousel::enterEvent(QEvent* event)
+#endif
     {
         if (_arrow != Arrow::Never)
             update();
@@ -320,10 +328,7 @@ namespace Element
 
         for (int i = 0; i < _images.size(); ++i)
         {
-            QRect rect(startX + i * (indicatorW + spacing),
-                    y - indicatorH / 2,
-                    indicatorW,
-                    indicatorH);
+            QRect rect(startX + i * (indicatorW + spacing), y - indicatorH / 2, indicatorW, indicatorH);
             _indicatorRects.append(rect);
         }
     }

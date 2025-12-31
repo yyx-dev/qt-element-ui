@@ -176,7 +176,11 @@ namespace Element
         return QCheckBox::checkState() == Qt::CheckState::PartiallyChecked;
     }
 
-    void Checkbox::enterEvent(QEvent* event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void Checkbox::enterEvent(QEnterEvent* event)
+#else
+void Checkbox::enterEvent(QEvent* event)
+#endif
     {
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);

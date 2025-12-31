@@ -166,7 +166,11 @@ namespace Element
         setEnabled(false);
     }
 
-    void _BackButton::enterEvent(QEvent* event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void _BackButton::enterEvent(QEnterEvent* event)
+#else
+void _BackButton::enterEvent(QEvent* event)
+#endif
     {
         if (isEnabled())
             setCursor(Qt::PointingHandCursor);

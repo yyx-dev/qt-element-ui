@@ -1,10 +1,13 @@
 #include "collapse.h"
-
-#include "icon.h"
 #include "color.h"
+#include "icon.h"
 #include "private/utils.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QMouseEvent>
 
 
@@ -12,11 +15,13 @@ namespace Element
 {
     CollapseItem::CollapseItem(QWidget* parent)
         : CollapseItem("", "", Status::Collapse, parent)
-    {}
+    {
+    }
 
     CollapseItem::CollapseItem(const QString& title, const QString& content, QWidget* parent)
         : CollapseItem(title, content, Status::Collapse, parent)
-    {}
+    {
+    }
 
     CollapseItem::CollapseItem(const QString& title, const QString& content, Status status, QWidget* parent)
         : QWidget(parent)
@@ -26,13 +31,13 @@ namespace Element
         , _icon(new QLabel(this))
     {
         _title->setFont(FontHelper(_title->font())
-                .setPointSize(9)
-                .setBold()
-                .getFont());
+                            .setPointSize(9)
+                            .setBold()
+                            .getFont());
 
         _content->setFont(FontHelper(_content->font())
-                .setPointSize(9)
-                .getFont());
+                              .setPointSize(9)
+                              .getFont());
 
         _title->setFixedHeight(60);
         _icon->setFixedHeight(60);
@@ -173,7 +178,7 @@ namespace Element
         return *this;
     }
 
-    void CollapseItem::paintEvent(QPaintEvent *event)
+    void CollapseItem::paintEvent(QPaintEvent* event)
     {
         QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing);
@@ -205,11 +210,9 @@ namespace Element
     {
         if (!isEnabled())
             setCursor(Qt::ForbiddenCursor);
-        else if (_titleLayout
-              && _titleLayout->geometry().contains(event->pos())
-              && _allowCollapse)
+        else if (_titleLayout && _titleLayout->geometry().contains(event->pos()) && _allowCollapse)
             setCursor(Qt::PointingHandCursor);
-       else
+        else
             unsetCursor();
 
         QWidget::mouseMoveEvent(event);

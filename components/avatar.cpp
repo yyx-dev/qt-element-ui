@@ -3,40 +3,50 @@
 #include "private/utils.h"
 
 #include <QPainter>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 
 namespace Element
 {
 
-    Avatar::Avatar(QWidget* parent) : QLabel(parent)
+    Avatar::Avatar(QWidget* parent)
+        : QLabel(parent)
     {
         setSize(_size);
     }
 
-    Avatar::Avatar(Icon::Name icon, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(Icon::Name icon, QWidget* parent)
+        : Avatar(parent)
     {
         setIcon(icon);
     }
-    Avatar::Avatar(const QImage& image, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(const QImage& image, QWidget* parent)
+        : Avatar(parent)
     {
         setImage(image);
     }
-    Avatar::Avatar(const QString& text, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(const QString& text, QWidget* parent)
+        : Avatar(parent)
     {
         setText(text);
     }
 
-    Avatar::Avatar(Icon::Name icon, Shape shape, Size size, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(Icon::Name icon, Shape shape, Size size, QWidget* parent)
+        : Avatar(parent)
     {
         setIcon(icon);
         _shape = shape, _size = size;
     }
-    Avatar::Avatar(const QImage& image, Shape shape, Size size, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(const QImage& image, Shape shape, Size size, QWidget* parent)
+        : Avatar(parent)
     {
         setImage(image);
         _shape = shape, _size = size;
     }
-    Avatar::Avatar(const QString& text, Shape shape, Size size, QWidget* parent) : Avatar(parent)
+    Avatar::Avatar(const QString& text, Shape shape, Size size, QWidget* parent)
+        : Avatar(parent)
     {
         setText(text);
         _shape = shape, _size = size;
@@ -93,27 +103,34 @@ namespace Element
         int y = (height() - size) / 2;
 
         QPainterPath clipPath;
-        if (_shape == Shape::Circle)      clipPath.addEllipse(x, y, size, size);
-        else if (_shape == Shape::Square) clipPath.addRoundedRect(x, y, size, size, 4, 4);
+        if (_shape == Shape::Circle)
+            clipPath.addEllipse(x, y, size, size);
+        else if (_shape == Shape::Square)
+            clipPath.addRoundedRect(x, y, size, size, 4, 4);
         painter.setClipPath(clipPath);
 
         painter.setBrush(QColor(Color::disabledText()));
         painter.setPen(Qt::NoPen);
-        if (_shape == Shape::Circle)      painter.drawEllipse(x, y, size, size);
-        else if (_shape == Shape::Square) painter.drawRoundedRect(x, y, size, size, 4, 4);
+        if (_shape == Shape::Circle)
+            painter.drawEllipse(x, y, size, size);
+        else if (_shape == Shape::Square)
+            painter.drawRoundedRect(x, y, size, size, 4, 4);
 
         if (_type == Type::Icon && _svgRenderer->isValid())
         {
-            if (_size == Size::Default)    _svgRenderer->render(&painter, QRectF(13, 12, 25, 25));
-            else if (_size == Size::Large) _svgRenderer->render(&painter, QRectF(15, 15, 30, 30));
-            else if (_size == Size::Small) _svgRenderer->render(&painter, QRectF(6, 5, 18, 18));
+            if (_size == Size::Default)
+                _svgRenderer->render(&painter, QRectF(13, 12, 25, 25));
+            else if (_size == Size::Large)
+                _svgRenderer->render(&painter, QRectF(15, 15, 30, 30));
+            else if (_size == Size::Small)
+                _svgRenderer->render(&painter, QRectF(6, 5, 18, 18));
         }
         else if (_type == Type::Text)
         {
             QFont font = FontHelper()
-                .setPointSize(_size == Size::Small ? Comm::smallFontSize : Comm::defaultFontSize)
-                .setBold()
-                .getFont();
+                             .setPointSize(_size == Size::Small ? Comm::smallFontSize : Comm::defaultFontSize)
+                             .setBold()
+                             .getFont();
             painter.setPen(Qt::white);
             painter.setFont(font);
 
@@ -123,19 +140,21 @@ namespace Element
         else if (_type == Type::Image && !_image.isNull())
         {
             QRectF imageRect(0, 0, calcSize(), calcSize());
-            QImage scaledImage = _image.scaled(imageRect.size().toSize(),
-                                              Qt::KeepAspectRatio,
-                                              Qt::SmoothTransformation);
+            QImage scaledImage = _image.scaled(imageRect.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
             painter.drawImage(imageRect, scaledImage);
         }
     }
 
     int Avatar::calcSize()
     {
-        if (_size == Size::Default) return 50;
-        else if (_size == Size::Small) return 30;
-        else if (_size == Size::Large) return 60;
-        else return 0;
+        if (_size == Size::Default)
+            return 50;
+        else if (_size == Size::Small)
+            return 30;
+        else if (_size == Size::Large)
+            return 60;
+        else
+            return 0;
     }
 
 }

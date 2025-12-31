@@ -1,25 +1,33 @@
-#include "slider.h"
-#include "private/utils.h"
 #include "color.h"
+#include "private/utils.h"
+#include "slider.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
+#include <QApplication>
 #include <QMouseEvent>
 #include <QStyleOptionSlider>
-#include <QApplication>
+
 
 namespace Element
 {
     Slider::Slider(QWidget* parent)
         : Slider(0, Orientation::Horizontal, parent)
-    {}
+    {
+    }
 
     Slider::Slider(int value, QWidget* parent)
         : Slider(value, Orientation::Horizontal, parent)
-    {}
+    {
+    }
 
     Slider::Slider(Orientation orient, QWidget* parent)
         : Slider(0, orient, parent)
-    {}
+    {
+    }
 
     Slider::Slider(int value, Orientation orient, QWidget* parent)
         : QSlider(parent)
@@ -92,7 +100,7 @@ namespace Element
         painter.drawEllipse(hdlRect);
     }
 
-    void Slider::mouseMoveEvent(QMouseEvent *event)
+    void Slider::mouseMoveEvent(QMouseEvent* event)
     {
         if (!isEnabled())
             return;
@@ -152,7 +160,11 @@ namespace Element
         }
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void Slider::enterEvent(QEnterEvent* event)
+#else
     void Slider::enterEvent(QEvent* event)
+#endif
     {
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);
@@ -253,8 +265,7 @@ namespace Element
     Slider& Slider::setOrientation(Orientation orient)
     {
         _orientation = orient;
-        QSlider::setOrientation(orient == Orientation::Horizontal
-                ? Qt::Horizontal : Qt::Vertical);
+        QSlider::setOrientation(orient == Orientation::Horizontal ? Qt::Horizontal : Qt::Vertical);
         setSize(200);
         return *this;
     }
@@ -275,10 +286,9 @@ namespace Element
     }
 
 
-    Slider &Slider::setOrientation(Qt::Orientation orient)
+    Slider& Slider::setOrientation(Qt::Orientation orient)
     {
-        setOrientation(orient == Qt::Orientation::Horizontal
-                ? Orientation::Horizontal : Orientation::Vertical);
+        setOrientation(orient == Qt::Orientation::Horizontal ? Orientation::Horizontal : Orientation::Vertical);
         _tooltip->setPlacement(Tooltip::Placement::Top);
         return *this;
     }

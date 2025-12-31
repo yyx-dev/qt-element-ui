@@ -1,25 +1,33 @@
-#include "switch.h"
 #include "private/utils.h"
 #include "qfont.h"
 #include "qwidget.h"
+#include "switch.h"
 
 #include <QPainter>
-#include <QMouseEvent>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QApplication>
+#include <QMouseEvent>
+
 
 namespace Element
 {
     Switch::Switch(QWidget* parent)
         : Switch(false, "", "", parent)
-    {}
+    {
+    }
 
     Switch::Switch(bool active, QWidget* parent)
         : Switch(active, "", "", parent)
-    {}
+    {
+    }
 
     Switch::Switch(const QString& activeText, const QString& inactiveText, QWidget* parent)
         : Switch(false, activeText, inactiveText, parent)
-    {}
+    {
+    }
 
     Switch::Switch(bool active, const QString& activeText, const QString& inactiveText, QWidget* parent)
         : QWidget(parent)
@@ -39,8 +47,10 @@ namespace Element
 
         _size = size;
         setFixedSize(scaler.scale(
-                size == Size::Large ? 50 : size == Size::Default ? 40 : 30,
-                size == Size::Large ? 24 : size == Size::Default ? 20 : 16));
+            size == Size::Large ? 50 : size == Size::Default ? 40 :
+                                                               30,
+            size == Size::Large ? 24 : size == Size::Default ? 20 :
+                                                               16));
         adjustSize();
 
         return *this;
@@ -182,18 +192,16 @@ namespace Element
 
         // thumb​​
         int diameter = height() * 4 / 5; // Diameter of the thumb​​.
-        int gap = height() / 10;  // This gap = (height - diameter) / 2.​
+        int gap = height() / 10;         // This gap = (height - diameter) / 2.​
 
-        QRectF thumbRect(_active ? width() - diameter - gap : gap,
-                    gap, diameter, diameter);
+        QRectF thumbRect(_active ? width() - diameter - gap : gap, gap, diameter, diameter);
 
         painter.setBrush(QColor(Color::blankFill()));
         painter.drawEllipse(thumbRect);
 
         if (_loading)
         {
-            QPixmap pixmap = Icon::instance().getPixmap(Icon::Loading,
-                    _active ? _activeColor : _inactiveColor, 18);
+            QPixmap pixmap = Icon::instance().getPixmap(Icon::Loading, _active ? _activeColor : _inactiveColor, 18);
             QRectF iconRect = QRectF(0, 0, pixmap.width(), pixmap.height());
             iconRect.moveCenter(thumbRect.center());
             painter.drawPixmap(iconRect, pixmap, pixmap.rect());
@@ -204,8 +212,7 @@ namespace Element
             if (Icon::isNone(icon))
                 return;
 
-            QPixmap pixmap = Icon::instance().getPixmap(icon,
-                    _active ? _activeColor : _inactiveColor, 18);
+            QPixmap pixmap = Icon::instance().getPixmap(icon, _active ? _activeColor : _inactiveColor, 18);
             QRectF iconRect = QRectF(0, 0, pixmap.width(), pixmap.height());
             iconRect.moveCenter(thumbRect.center());
             painter.drawPixmap(iconRect, pixmap, pixmap.rect());
@@ -213,8 +220,8 @@ namespace Element
         else if (_activeActionChar != 0 || _inactiveActionChar != 0)
         {
             painter.setFont(FontHelper(QWidget::font())
-                    .setPointSize(11)
-                    .getFont());
+                                .setPointSize(11)
+                                .getFont());
             painter.setPen(_active ? _activeColor : _inactiveColor);
 
             QString text = QString(_active ? _activeActionChar : _inactiveActionChar);
@@ -232,15 +239,15 @@ namespace Element
         {
             QFont font = QWidget::font();
             painter.setFont(FontHelper(font)
-                    .setPointSize(9) // web : 12px == pointsize : 9 == pixelsize : 15
-                    .getFont());
+                                .setPointSize(9) // web : 12px == pointsize : 9 == pixelsize : 15
+                                .getFont());
             painter.setPen(Color::blankFill());
 
             QString text = _active ? _activeText : _inactiveText;
             painter.drawText(spaceRect, Qt::AlignCenter, text);
 
-            int width = qMax(QFontMetrics(font).horizontalAdvance(text) + height() + 2 * gap,
-                           _size == Size::Large ? 50 : _size == Size::Default ? 40 : 30);
+            int width = qMax(QFontMetrics(font).horizontalAdvance(text) + height() + 2 * gap, _size == Size::Large ? 50 : _size == Size::Default ? 40 :
+                                                                                                                                                   30);
             setFixedWidth(width);
         }
         else if (!Icon::isNone(_activeIcon) || !Icon::isNone(_inactiveIcon))
@@ -263,14 +270,18 @@ namespace Element
         QWidget::mousePressEvent(event);
     }
 
-    void Switch::enterEvent(QEvent *event)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void Switch::enterEvent(QEnterEvent* event)
+#else
+    void Switch::enterEvent(QEvent* event)
+#endif
     {
         QWidget::enterEvent(event);
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);
     }
 
-    void Switch::leaveEvent(QEvent *event)
+    void Switch::leaveEvent(QEvent* event)
     {
         QWidget::leaveEvent(event);
         QApplication::restoreOverrideCursor();

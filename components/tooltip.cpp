@@ -1,9 +1,12 @@
+#include "color.h"
+#include "private/utils.h"
 #include "tooltip.h"
 
-#include "private/utils.h"
-#include "color.h"
-
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QEvent>
 #include <QMouseEvent>
 
@@ -12,7 +15,8 @@ namespace Element
 
     Arrow::Arrow(QWidget* partner, QWidget* target)
         : Arrow(Color::primaryText(), Direction::Down, partner, target)
-    {}
+    {
+    }
 
     Arrow::Arrow(const QString& color, Direction dir, QWidget* partner, QWidget* target)
         : QWidget(target->parentWidget())
@@ -133,25 +137,21 @@ namespace Element
         QPoint pos;
         if (_direction == Direction::Up)
         {
-            pos = QPoint(target->x() + (target->width() - 16) / 2,
-                        _partner->y() - 8);
+            pos = QPoint(target->x() + (target->width() - 16) / 2, _partner->y() - 8);
         }
         else if (_direction == Direction::Down)
         {
-            pos = QPoint(target->x() + (target->width() - 16) / 2,
-                        _partner->y() + _partner->height());
+            pos = QPoint(target->x() + (target->width() - 16) / 2, _partner->y() + _partner->height());
         }
         else if (_direction == Direction::Left)
         {
             setFixedSize(8, 16);
-            pos = QPoint(_partner->x() - 8,
-                        target->y() + (target->height() - 16) / 2);
+            pos = QPoint(_partner->x() - 8, target->y() + (target->height() - 16) / 2);
         }
         else if (_direction == Direction::Right)
         {
             setFixedSize(8, 16);
-            pos = QPoint(_partner->x() + _partner->width(),
-                        target->y() + (target->height() - 16) / 2);
+            pos = QPoint(_partner->x() + _partner->width(), target->y() + (target->height() - 16) / 2);
         }
 
         move(pos);
@@ -160,15 +160,18 @@ namespace Element
 
     Tooltip::Tooltip(const QString& text, QWidget* target)
         : Tooltip(text, Placement::Top, Effect::Dark, target)
-    {}
+    {
+    }
 
     Tooltip::Tooltip(const QString& text, Placement placement, QWidget* target)
         : Tooltip(text, placement, Effect::Dark, target)
-    {}
+    {
+    }
 
     Tooltip::Tooltip(const QString& text, Effect effect, QWidget* target)
         : Tooltip(text, Placement::Top, effect, target)
-    {}
+    {
+    }
 
     Tooltip::Tooltip(const QString& text, Placement placement, Effect effect, QWidget* target)
         : QWidget(target->parentWidget())
@@ -182,8 +185,8 @@ namespace Element
         hide();
 
         _label->setFont(FontHelper(_label->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                            .setPointSize(Comm::defaultFontSize)
+                            .getFont());
 
         setPlacement(placement);
         setEffect(effect);
@@ -357,8 +360,7 @@ namespace Element
         painter.setClipPath(path);
 
         // 填充背景
-        painter.fillPath(path, QColor(_effect == Effect::Dark ?
-                                        Color::primaryText() : Color::basicWhite()));
+        painter.fillPath(path, QColor(_effect == Effect::Dark ? Color::primaryText() : Color::basicWhite()));
 
         // 绘制边框以及空白线
         if (_effect == Effect::Light)
@@ -373,29 +375,23 @@ namespace Element
             QPoint bgn, end;
 
             if (_placement == Placement::Top
-             || _placement == Placement::TopStart
-             || _placement == Placement::TopEnd)
+                || _placement == Placement::TopStart
+                || _placement == Placement::TopEnd)
             {
                 bgn = QPoint(target->x() + (target->width() - _arrow->width()) / 2 + 2, y() + height());
                 end = QPoint(target->x() + (target->width() + _arrow->width()) / 2 - 2, y() + height());
             }
-            else if (_placement == Placement::Bottom
-                  || _placement == Placement::BottomStart
-                  || _placement == Placement::BottomEnd)
+            else if (_placement == Placement::Bottom || _placement == Placement::BottomStart || _placement == Placement::BottomEnd)
             {
                 bgn = QPoint(target->x() + (target->width() - _arrow->width()) / 2 + 2, y());
                 end = QPoint(target->x() + (target->width() + _arrow->width()) / 2 - 2, y());
             }
-            else if (_placement == Placement::Left
-                  || _placement == Placement::LeftStart
-                  || _placement == Placement::LeftEnd)
+            else if (_placement == Placement::Left || _placement == Placement::LeftStart || _placement == Placement::LeftEnd)
             {
                 bgn = QPoint(x() + width(), target->y() + (target->height() - _arrow->height()) / 2 + 2);
                 end = QPoint(x() + width(), target->y() + (target->height() + _arrow->height()) / 2 - 2);
             }
-            else if (_placement == Placement::Right
-                  || _placement == Placement::RightStart
-                  || _placement == Placement::RightEnd)
+            else if (_placement == Placement::Right || _placement == Placement::RightStart || _placement == Placement::RightEnd)
             {
                 bgn = QPoint(x(), target->y() + (target->height() - _arrow->height()) / 2 + 2);
                 end = QPoint(x(), target->y() + (target->height() + _arrow->height()) / 2 - 2);
@@ -412,13 +408,17 @@ namespace Element
         {
             auto time2show = [&] {
                 _hideTimer->stop();
-                if (_showAfter > 0) _showTimer->start(_showAfter);
-                else show();
+                if (_showAfter > 0)
+                    _showTimer->start(_showAfter);
+                else
+                    show();
             };
             auto time2hide = [&] {
                 _showTimer->stop();
-                if (_hideAfter > 0) _hideTimer->start(_hideAfter);
-                else hide();
+                if (_hideAfter > 0)
+                    _hideTimer->start(_hideAfter);
+                else
+                    hide();
             };
 
             if (_trigger == Trigger::Hover)
@@ -431,7 +431,7 @@ namespace Element
             else if (_trigger == Trigger::Click)
             {
                 if (event->type() == QEvent::MouseButtonPress
-                 && static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
+                    && static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
                     time2show();
                 else if (event->type() == QEvent::FocusOut)
                     time2hide();
@@ -466,8 +466,7 @@ namespace Element
     Tooltip& Tooltip::setMoveable(bool moveable)
     {
         _moveable = moveable;
-        _arrow->setAlignMode(moveable ?
-                Arrow::AlignMode::FollowPopup : Arrow::AlignMode::FollowPointing);
+        _arrow->setAlignMode(moveable ? Arrow::AlignMode::FollowPopup : Arrow::AlignMode::FollowPointing);
         return *this;
     }
 
@@ -562,20 +561,14 @@ namespace Element
     Tooltip::Placement Tooltip::checkPlacement()
     {
         if (_placement == Placement::Top
-         || _placement == Placement::TopStart
-         || _placement == Placement::TopEnd)
+            || _placement == Placement::TopStart
+            || _placement == Placement::TopEnd)
             return Placement::Top;
-        else if (_placement == Placement::Left
-              || _placement == Placement::LeftStart
-              || _placement == Placement::LeftEnd)
+        else if (_placement == Placement::Left || _placement == Placement::LeftStart || _placement == Placement::LeftEnd)
             return Placement::Left;
-        else if (_placement == Placement::Right
-              || _placement == Placement::RightStart
-              || _placement == Placement::RightEnd)
+        else if (_placement == Placement::Right || _placement == Placement::RightStart || _placement == Placement::RightEnd)
             return Placement::Right;
-        else if (_placement == Placement::Bottom
-              || _placement == Placement::BottomStart
-              || _placement == Placement::BottomEnd)
+        else if (_placement == Placement::Bottom || _placement == Placement::BottomStart || _placement == Placement::BottomEnd)
             return Placement::Bottom;
         return _placement;
     }

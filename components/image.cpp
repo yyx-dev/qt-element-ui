@@ -1,13 +1,18 @@
-#include "image.h"
 #include "color.h"
+#include "image.h"
 
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 namespace Element
 {
     Image::Image(QWidget* parent)
         : Image(QPixmap(), parent)
-    {}
+    {
+    }
 
     Image::Image(const QPixmap& pixmap, QWidget* parent)
         : QWidget(parent)
@@ -64,8 +69,7 @@ namespace Element
             break;
         case Fit::None:
             if (!_imageRect.isEmpty())
-                painter.drawPixmap(_imageRect, _pixmap,
-                        QRect(0, 0, _originalSize.width(), _originalSize.height()));
+                painter.drawPixmap(_imageRect, _pixmap, QRect(0, 0, _originalSize.width(), _originalSize.height()));
             break;
         }
     }
@@ -77,7 +81,8 @@ namespace Element
 
     void Image::updateGeometry()
     {
-        if (_pixmap.isNull() || size().isEmpty()) {
+        if (_pixmap.isNull() || size().isEmpty())
+        {
             _imageRect = QRect();
             return;
         }
@@ -87,40 +92,35 @@ namespace Element
 
         switch (_fit)
         {
-        case Fit::Fill:
-        {
+        case Fit::Fill: {
             // 填充整个区域，可能变形
             _imageRect = rect();
             break;
         }
-        case Fit::Contain:
-        {
+        case Fit::Contain: {
             // 保持宽高比，完整显示图片
             QSize scaledSize = imageSize.scaled(widgetSize, Qt::KeepAspectRatio);
             _imageRect = QRect(0, 0, scaledSize.width(), scaledSize.height());
             _imageRect.moveCenter(rect().center());
             break;
         }
-        case Fit::Cover:
-        {
+        case Fit::Cover: {
             // 保持宽高比，填充整个区域，可能裁剪
             QSize scaledSize = imageSize.scaled(widgetSize, Qt::KeepAspectRatioByExpanding);
             _imageRect = QRect(0, 0, scaledSize.width(), scaledSize.height());
             _imageRect.moveCenter(rect().center());
             break;
         }
-        case Fit::None:
-        {
+        case Fit::None: {
             // 不缩放，居中显示
             _imageRect = QRect(0, 0, imageSize.width(), imageSize.height());
             _imageRect.moveCenter(rect().center());
             break;
         }
-        case Fit::ScaleDown:
-        {
+        case Fit::ScaleDown: {
             // 类似contain，但只在图片大于控件时才缩放
             if (imageSize.width() > widgetSize.width()
-             || imageSize.height() > widgetSize.height())
+                || imageSize.height() > widgetSize.height())
             {
                 // 需要缩放，使用contain逻辑
                 QSize scaledSize = imageSize.scaled(widgetSize, Qt::KeepAspectRatio);

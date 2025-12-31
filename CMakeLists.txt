@@ -15,10 +15,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 #set(CMAKE_BUILD_TYPE Release)
 
-find_package(Qt6 COMPONENTS Core Widgets Gui Svg LinguistTools QUIET)
+find_package(Qt6 COMPONENTS Core Widgets Gui SvgWidgets LinguistTools QUIET)
 if(Qt6_FOUND)
-    set(QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Svg)
-    message(STATUS "Found Qt6, using C++ latest/23")
+    set(QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::Gui  Qt6::SvgWidgets)
+    message(STATUS "Found Qt6, using C++ latest")
 else()
     find_package(Qt5 COMPONENTS Core Widgets Gui Svg LinguistTools REQUIRED)
     set(QT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Svg)

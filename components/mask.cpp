@@ -1,6 +1,9 @@
 #include "mask.h"
 
 #include <QPainter>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 #include <QEvent>
 
 namespace Element

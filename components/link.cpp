@@ -115,7 +115,11 @@ namespace Element
         return *this;
     }
 
-    void Link::enterEvent(QEvent *event)
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void Link::enterEvent(QEnterEvent* event)
+#else
+void Link::enterEvent(QEvent* event)
+#endif
     {
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);

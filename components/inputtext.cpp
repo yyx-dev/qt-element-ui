@@ -1,9 +1,13 @@
-#include "inputtext.h"
 #include "color.h"
+#include "inputtext.h"
 #include "private/utils.h"
 
 #include <QApplication>
 #include <QPainter>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#    include <QPainterPath>
+#endif
 
 #include <QMouseEvent>
 #include <QtMath>
@@ -17,17 +21,17 @@ namespace Element
         setPlaceholderText(placeholder);
 
         _qssHelper.setProperty("QTextEdit", "font-family", Comm::fontFmaily)
-                .setProperty("QTextEdit", "font-size", "16px")
-                .setProperty("QTextEdit", "color", Color::regularText())
-                .setProperty("QTextEdit", "background", Color::baseBackground())
-                .setProperty("QTextEdit", "border-radius", "4px")
-                .setProperty("QTextEdit", "border", "1px solid " + Color::baseBorder())
-                .setProperty("QTextEdit", "padding", "1px 11px")
-                .setProperty("QTextEdit:hover", "border", "1px solid " + Color::disabledText())
-                .setProperty("QTextEdit:focus", "border", "1px solid " + Color::primary())
-                .setProperty("QTextEdit:disabled", "border", "1px solid " + Color::lightBorder())
-                .setProperty("QTextEdit:disabled", "background", Color::lightFill())
-                .setProperty("QTextEdit:disabled", "color", Color::placeholderText());
+            .setProperty("QTextEdit", "font-size", "16px")
+            .setProperty("QTextEdit", "color", Color::regularText())
+            .setProperty("QTextEdit", "background", Color::baseBackground())
+            .setProperty("QTextEdit", "border-radius", "4px")
+            .setProperty("QTextEdit", "border", "1px solid " + Color::baseBorder())
+            .setProperty("QTextEdit", "padding", "1px 11px")
+            .setProperty("QTextEdit:hover", "border", "1px solid " + Color::disabledText())
+            .setProperty("QTextEdit:focus", "border", "1px solid " + Color::primary())
+            .setProperty("QTextEdit:disabled", "border", "1px solid " + Color::lightBorder())
+            .setProperty("QTextEdit:disabled", "background", Color::lightFill())
+            .setProperty("QTextEdit:disabled", "color", Color::placeholderText());
         setStyleSheet(_qssHelper.generate());
 
         setMinimumSize(300, 65);
@@ -38,7 +42,8 @@ namespace Element
 
     InputText::InputText(QWidget* parent)
         : InputText("Please input", parent)
-    {}
+    {
+    }
 
     QString InputText::getPlaceholder()
     {
@@ -95,9 +100,9 @@ namespace Element
                 _maxLengthLabel = new QLabel(this);
                 QSSHelper qssHelper;
                 qssHelper.setProperty("QLabel", "font-family", Comm::fontFmaily)
-                        .setProperty("QLabel", "font-size", "14px")
-                        .setProperty("QLabel", "color", Color::secondaryText())
-                        .setProperty("QLabel", "background", Color::baseBackground());
+                    .setProperty("QLabel", "font-size", "14px")
+                    .setProperty("QLabel", "color", Color::secondaryText())
+                    .setProperty("QLabel", "background", Color::baseBackground());
                 _maxLengthLabel->setStyleSheet(qssHelper.generate());
             }
 
@@ -215,13 +220,17 @@ namespace Element
         QString tips;
         tips.reserve(16);
         tips.append(QString::number(toPlainText().length()))
-             .append(" / ")
-             .append(QString::number(_maxLength));
+            .append(" / ")
+            .append(QString::number(_maxLength));
 
         _maxLengthLabel->setText(tips);
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void InputText::enterEvent(QEnterEvent* event)
+#else
     void InputText::enterEvent(QEvent* event)
+#endif
     {
         if (!isEnabled())
             QApplication::setOverrideCursor(Qt::ForbiddenCursor);
@@ -235,7 +244,7 @@ namespace Element
         QTextEdit::leaveEvent(event);
     }
 
-    void InputText::resizeEvent(QResizeEvent *event)
+    void InputText::resizeEvent(QResizeEvent* event)
     {
         QTextEdit::resizeEvent(event);
 
@@ -254,7 +263,7 @@ namespace Element
 
         int totalRows = 0;
 
-        for (const QString &line : lines)
+        for (const QString& line : lines)
         {
             if (line.isEmpty())
             {
@@ -274,9 +283,9 @@ namespace Element
     int InputText::calculateHeight(int rows)
     {
         return QFontMetrics(font()).height() * rows
-            + contentsMargins().top()
-            + contentsMargins().bottom()
-            + frameWidth() - 4;
+               + contentsMargins().top()
+               + contentsMargins().bottom()
+               + frameWidth() - 4;
     }
 
     void InputText::updateHeight()
@@ -313,14 +322,14 @@ namespace Element
         QPainter painter(this);
 
         painter.setRenderHint(QPainter::Antialiasing);
-        painter.setPen(QPen (QColor("#666666"), 1.6));
+        painter.setPen(QPen(QColor("#666666"), 1.6));
 
         int in = 3;
         painter.drawLine(0 + in, height() - in, width() - in, 0 + in);
         painter.drawLine(5 + in, height() - in, width() - in, 5 + in);
     }
 
-    void ResizeHandler::mousePressEvent(QMouseEvent *event)
+    void ResizeHandler::mousePressEvent(QMouseEvent* event)
     {
         if (event->button() == Qt::LeftButton)
         {
@@ -330,7 +339,7 @@ namespace Element
         }
     }
 
-    void ResizeHandler:: mouseMoveEvent(QMouseEvent *event)
+    void ResizeHandler::mouseMoveEvent(QMouseEvent* event)
     {
         if (_isResizing)
         {
