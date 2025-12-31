@@ -67,12 +67,9 @@ target_include_directories(qt-element-ui PRIVATE
 )
 
 target_link_libraries(qt-element-ui
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::Gui
-    Qt5::Svg
+    ${QT_LIBRARIES}
 )
-target_compile_options(qt-element-uiui INTERFACE
+target_compile_options(qt-element-ui INTERFACE
     # GCC
     $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:Debug>>:-Wall -Wextra -Wpedantic -O0 -g>
     $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:Release>>:-Wall -O3 -DNDEBUG>
