@@ -68,5 +68,6 @@ cd release && ./qt-element-ui
 
 1. 成员变量命名以_开头，声明默认值时使用=。
 2. getter、setter方法名需以get、set开头。
-3. 设计接口要考虑到使用场景，比如水印要提供setWatermark的静态方法，以便其他控件设置水印背景。
-4. 字体统一从utils.h的FontHelper::getFont获取，字号等需和已有控件保持一致。
+3. 公开的成员函数如不需要返回，请返回类对象引用，以支持链式调用。
+4. 设计接口要考虑到使用场景，比如水印要提供setWatermark的静态方法，以便其他控件设置水印背景。
+5. 字体统一从utils.h的FontHelper::getFont获取，字号等需和已有控件保持一致。
