@@ -31,9 +31,6 @@
                 "clear": true,
                 "showReuseMessage": false
             },
-            "problemMatcher": [
-                "$gcc"
-            ]
         }
     ]
 }
