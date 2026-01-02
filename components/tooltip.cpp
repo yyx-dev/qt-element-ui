@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QEvent>
 #include <QMouseEvent>
+#include <QPainterPath>
 
 namespace Element
 {

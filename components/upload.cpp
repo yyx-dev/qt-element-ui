@@ -10,6 +10,7 @@
 #include <QBoxLayout>
 #include <QPainter>
 #include <QFileDialog>
+#include <QPainterPath>
 
 namespace Element
 {

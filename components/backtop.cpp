@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QScrollBar>
+#include <QPainterPath>
 
 
 namespace Element
