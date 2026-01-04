@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>11</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -2365,9 +2365,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>20</y>
+        <y>10</y>
         <width>600</width>
-        <height>350</height>
+        <height>271</height>
        </rect>
       </property>
      </widget>
@@ -2375,11 +2375,195 @@
       <property name="geometry">
        <rect>
         <x>670</x>
-        <y>20</y>
+        <y>10</y>
         <width>300</width>
-        <height>300</height>
+        <height>271</height>
        </rect>
       </property>
+     </widget>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>290</y>
+        <width>951</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="Element::Watermark" name="watermark" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkContent">
+            <property name="text">
+             <string>Content</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::InputLine" name="ldtWatermarkContent"/>
+          </item>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkColorPicker">
+            <property name="text">
+             <string>Color</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnWatermarkColorPicker">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkFontSize">
+            <property name="text">
+             <string>FontSize</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Slider" name="sliderWatermarkFontSize">
+            <property name="minimum">
+             <number>8</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkRotate">
+            <property name="text">
+             <string>Rotate</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Slider" name="sliderWatermarkRotate">
+            <property name="minimum">
+             <number>-180</number>
+            </property>
+            <property name="maximum">
+             <number>180</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkGap">
+            <property name="text">
+             <string>Gap</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_3" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <property name="spacing">
+              <number>10</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>1</number>
+             </property>
+             <item>
+              <widget class="Element::InputNumber" name="spbWatermarkHorizontalGap">
+               <property name="maximum">
+                <number>999</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Element::InputNumber" name="spbWatermarkVerticalGap">
+               <property name="maximum">
+                <number>999</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="Element::Text" name="lblWatermarkOffset">
+            <property name="text">
+             <string>Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_4" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="spacing">
+              <number>10</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>1</number>
+             </property>
+             <item>
+              <widget class="Element::InputNumber" name="spbWatermarkOffsetLeft">
+               <property name="maximum">
+                <number>999</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Element::InputNumber" name="spbWatermarkOffsetTop">
+               <property name="maximum">
+                <number>999</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -2559,6 +2743,12 @@
    <class>Element::Progress</class>
    <extends>QWidget</extends>
    <header>progress.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Watermark</class>
+   <extends>QWidget</extends>
+   <header>watermark.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
