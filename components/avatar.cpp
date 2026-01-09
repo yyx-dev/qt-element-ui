@@ -3,6 +3,7 @@
 #include "private/utils.h"
 
 #include <QPainter>
+#include <QPainterPath>
 
 
 namespace Element

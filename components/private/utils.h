@@ -111,13 +111,6 @@ namespace Element
         return ScaleHelper::instance().scale(size);
     }
 
-
-    class DebugHelper
-    {
-    public:
-        static void drawBorder(QPainter& painter, const QRect& rect);
-    };
-
     inline void setBgColor(QWidget* widget, const QColor& color)
     {
         QPalette pal = widget->palette();

@@ -5,6 +5,7 @@
 
 #include <QPainter>
 #include <QGraphicsDropShadowEffect>
+#include <QPainterPath>
 
 namespace Element
 {

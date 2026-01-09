@@ -294,7 +294,7 @@ namespace Element
 
     ScaleHelper::ScaleHelper()
     {
-        _factor = 0.0;
+        _factor = 1.0;
 
 #ifdef Q_OS_WIN
         HDC screenDC = GetDC(nullptr);
@@ -306,16 +306,4 @@ namespace Element
         if (qFuzzyIsNull(_factor))
             Log::fatal("wrong system factor");
     }
-}
-
-namespace Element
-{
-    void DebugHelper::drawBorder(QPainter& painter, const QRect& rect)
-    {
-        QPen redPen(Qt::red, 1);
-        painter.setPen(redPen);
-        painter.setBrush(Qt::NoBrush);
-        painter.drawRect(rect);
-    }
-
 }

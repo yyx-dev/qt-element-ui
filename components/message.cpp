@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <QHash>
+#include <QPainterPath>
 
 
 
