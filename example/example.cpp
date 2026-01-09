@@ -18,6 +18,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QSvgWidget>
+#include <QColorDialog>
 
 #define TEXT 0
 #define BUTTON 1
@@ -574,6 +575,59 @@ void Example::setupTab11()
     ui->carousel->addImage(QPixmap(":/icons/other/square-default-avatar.png"));
     ui->carousel->addImage(QPixmap(":/icons/other/example-avatar.png"));
 
+    //watermark
+    ui->ldtWatermarkContent->setText(ui->watermark->content());
+    connect(ui->ldtWatermarkContent, &Element::InputLine::textChanged, this, [this](const QString& text) {
+        ui->watermark->setWatermark(text);
+    });
+
+    auto currentColor = ui->watermark->color();
+    ui->btnWatermarkColorPicker->setStyleSheet(QString("background-color: rgba(%1, %2, %3, %4);").arg(currentColor.red()).arg(currentColor.green()).arg(currentColor.blue()).arg(currentColor.alpha()));
+    connect(ui->btnWatermarkColorPicker, &QPushButton::clicked, this, [this]()
+    {
+        auto color = QColorDialog::getColor(ui->watermark->color(), this);
+        if (color.isValid())
+        {
+            ui->watermark->setColor(color);
+            ui->btnWatermarkColorPicker->setStyleSheet(QString("background-color: rgba(%1, %2, %3, %4);").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
+        }
+    });
+
+    ui->sliderWatermarkFontSize->setValue(ui->watermark->font().pointSize());
+    connect(ui->sliderWatermarkFontSize, &Element::Slider::valueChanged, this, [this](int value)
+    {
+        ui->watermark->setFont(FontHelper(ui->watermark->font()).setPointSize(value).getFont());
+    });
+
+    ui->sliderWatermarkRotate->setValue(ui->watermark->rotate());
+    connect(ui->sliderWatermarkRotate, &Element::Slider::valueChanged, this, [this](int value)
+    {
+        ui->watermark->setRotate(value);
+    });
+
+    ui->spbWatermarkHorizontalGap->setValue(ui->watermark->gap().width());
+    connect(ui->spbWatermarkHorizontalGap, QOverload<int>::of(&Element::InputNumber::valueChanged), this, [this](int value)
+    {
+        ui->watermark->setGap({ui->watermark->gap().width(), value});
+    });
+
+    ui->spbWatermarkVerticalGap->setValue(ui->watermark->gap().height());
+    connect(ui->spbWatermarkVerticalGap, QOverload<int>::of(&Element::InputNumber::valueChanged), this, [this](int value)
+    {
+        ui->watermark->setGap({value, ui->watermark->gap().height()});
+    });
+    
+    ui->spbWatermarkOffsetLeft->setValue(ui->watermark->offset().x());
+    connect(ui->spbWatermarkOffsetLeft, QOverload<int>::of(&Element::InputNumber::valueChanged), this, [this](int value)
+    {
+        ui->watermark->setOffset({value, ui->watermark->offset().y()});
+    });
+
+    ui->spbWatermarkOffsetTop->setValue(ui->watermark->offset().y());
+    connect(ui->spbWatermarkOffsetTop, QOverload<int>::of(&Element::InputNumber::valueChanged), this, [this](int value)
+    {
+        ui->watermark->setOffset({ui->watermark->offset().x(), value});
+    });
 }
 
 Example::~Example()
