@@ -578,7 +578,7 @@ void Example::setupTab11()
     //watermark
     ui->ldtWatermarkContent->setText(ui->watermark->content());
     connect(ui->ldtWatermarkContent, &Element::InputLine::textChanged, this, [this](const QString& text) {
-        ui->watermark->setContent(text);
+        ui->watermark->setWatermark(text);
     });
 
     auto currentColor = ui->watermark->color();
@@ -596,7 +596,7 @@ void Example::setupTab11()
     ui->sliderWatermarkFontSize->setValue(ui->watermark->font().pointSize());
     connect(ui->sliderWatermarkFontSize, &Element::Slider::valueChanged, this, [this](int value)
     {
-        ui->watermark->setFont(QFont(ui->watermark->font().family(), value));
+        ui->watermark->setFont(FontHelper(ui->watermark->font()).setPointSize(value).getFont());
     });
 
     ui->sliderWatermarkRotate->setValue(ui->watermark->rotate());

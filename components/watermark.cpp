@@ -1,133 +1,151 @@
 #include "watermark.h"
+#include "utils.h"
 #include <QPainter>
 
 namespace Element
 {
+Watermark::Watermark(QWidget *parent)
+    : QWidget{parent}
+{
+    setFont(FontHelper(QWidget::font()).setPointSize(Comm::defaultFontSize).getFont());
+}
 
-    Watermark::Watermark(QWidget *parent)
-        : QWidget{parent}
-    {}
+Watermark &Watermark::setWatermark(const QString &text)
+{
+    return setContent(text);
+}
 
-    QString Watermark::content() const
+QString Watermark::watermark() const
+{
+    return content();
+}
+
+QString Watermark::content() const
+{
+    return _content;
+}
+
+Watermark &Watermark::setContent(const QString &content)
+{
+    if(_content == content)
     {
-        return m_content;
+        return *this;
     }
 
-    void Watermark::setContent(const QString &content)
+    _content = content;
+    update();
+    return *this;
+}
+
+QColor Watermark::color() const
+{
+    return _color;
+}
+
+Watermark &Watermark::setColor(const QColor &color)
+{
+    if(_color == color)
     {
-        if(m_content == content)
+        return *this;
+    }
+
+    _color = color;
+    update();
+    return *this;
+}
+
+
+QFont Watermark::font() const
+{
+    return _font;
+}
+
+Watermark &Watermark::setFont(const QFont &font)
+{
+    if(_font == font)
+    {
+        return *this;
+    }
+
+    _font = font;
+    update();
+    return *this;
+}
+
+int Watermark::rotate() const
+{
+    return _rotate;
+}
+
+Watermark &Watermark::setRotate(int rotate)
+{
+    if(_rotate == rotate)
+    {
+        return *this;
+    }
+
+    _rotate = rotate;
+    update();
+    return *this;
+}
+
+QSize Watermark::gap() const
+{
+    return _gap;
+}
+
+Watermark& Watermark::setGap(const QSize &gap)
+{
+    if(_gap == gap)
+    {
+        return *this;
+    }
+
+    _gap = gap;
+    update();
+    return *this;
+}
+
+QPoint Watermark::offset() const
+{
+    return _offset;
+}
+
+Watermark& Watermark::setOffset(const QPoint &offset)
+{
+    if(_offset == offset)
+    {
+        return *this;
+    }
+
+    _offset = offset;
+    update();
+    return *this;
+}
+
+
+void Watermark::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event)
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::TextAntialiasing);
+
+    QFont font(_font);
+    painter.setFont(font);
+    painter.setPen(_color);
+
+    //rotate the canvas
+    painter.translate(width() / 2, height() / 2);
+    painter.rotate(_rotate);
+    painter.translate(-width() / 2, -height() / 2);
+
+    for (int y = -height() + _offset.y(); y < height() * 2; y += _gap.height())
+    {
+        for (int x = -width() + _offset.x(); x < width() * 2; x += _gap.width())
         {
-            return;
-        }
-
-        m_content = content;
-        update();
-    }
-
-    QColor Watermark::color() const
-    {
-        return m_color;
-    }
-
-    void Watermark::setColor(const QColor &color)
-    {
-        if(m_color == color)
-        {
-            return;
-        }
-
-        m_color = color;
-        update();
-    }
-
-
-    QFont Watermark::font() const
-    {
-        return m_font;
-    }
-
-    void Watermark::setFont(const QFont &font)
-    {
-        if(m_font == font)
-        {
-            return;
-        }
-
-        m_font = font;
-        update();
-    }
-
-    int Watermark::rotate() const
-    {
-        return m_rotate;
-    }
-
-    void Watermark::setRotate(int rotate)
-    {
-        if(m_rotate == rotate)
-        {
-            return;
-        }
-
-        m_rotate = rotate;
-        update();
-    }
-
-    QSize Watermark::gap() const
-    {
-        return m_gap;
-    }
-
-    void Watermark::setGap(const QSize &gap)
-    {
-        if(m_gap == gap)
-        {
-            return;
-        }
-
-        m_gap = gap;
-        update();
-    }
-
-    QPoint Watermark::offset() const
-    {
-        return m_offset;
-    }
-
-    void Watermark::setOffset(const QPoint &offset)
-    {
-        if(m_offset == offset)
-        {
-            return;
-        }
-
-        m_offset = offset;
-        update();
-    }
-
-
-    void Watermark::paintEvent(QPaintEvent *event)
-    {
-        Q_UNUSED(event)
-        QPainter painter(this);
-        painter.setRenderHint(QPainter::TextAntialiasing);
-
-        QFont font(m_font);
-        painter.setFont(font);
-        painter.setPen(m_color);
-
-        //rotate the canvas
-        painter.translate(width() / 2, height() / 2);
-        painter.rotate(m_rotate);
-        painter.translate(-width() / 2, -height() / 2);
-
-        for (int y = -height() + m_offset.y(); y < height() * 2; y += m_gap.height())
-        {
-            for (int x = -width() + m_offset.x(); x < width() * 2; x += m_gap.width())
-            {
-                QRect rect(x, y, m_gap.width(), m_gap.height());
-                painter.drawText(rect, Qt::AlignCenter, m_content);
-            }
+            QRect rect(x, y, _gap.width(), _gap.height());
+            painter.drawText(rect, Qt::AlignCenter, _content);
         }
     }
+}
 }

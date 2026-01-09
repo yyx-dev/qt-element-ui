@@ -5,40 +5,45 @@
 namespace Element
 {
 
-    class Watermark : public QWidget
-    {
-        Q_OBJECT
-    public:
-        explicit Watermark(QWidget *parent = nullptr);
+class Watermark : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit Watermark(QWidget *parent = nullptr);
 
-        QString content() const;
-        void setContent(const QString &content);
+    Watermark& setWatermark(const QString &text);
+    QString watermark() const;
 
-        QColor color() const;
-        void setColor(const QColor &color);
+    //From the Element standard documentation
+    QString content() const;
+    Watermark& setContent(const QString &content);
 
-        QFont font() const;
-        void setFont(const QFont &font);
+    QColor color() const;
+    Watermark& setColor(const QColor &color);
 
-        int rotate() const;
-        void setRotate(int rotate);
+    QFont font() const;
+    Watermark& setFont(const QFont &font);
 
-        QSize gap() const;
-        void setGap(const QSize &gap);
+    int rotate() const;
+    Watermark& setRotate(int rotate);
 
-        QPoint offset() const;
-        void setOffset(const QPoint &offset);
+    QSize gap() const;
+    Watermark& setGap(const QSize &gap);
 
-    protected:
-        void paintEvent(QPaintEvent *event) override;
+    QPoint offset() const;
+    Watermark& setOffset(const QPoint &offset);
 
-    private:
-        QString m_content{"Element Plus"};
-        QColor m_color{0, 0, 0, 38};
-        QFont m_font{"黑体", 10};
-        int m_rotate{-22};
-        QSize m_gap{100, 100};
-        QPoint m_offset{0, 0};
-    };
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
+private:
+    //The default values are from the element standard document.
+    QString _content = "Element Plus";
+    QColor _color = {0, 0, 0, 38};
+    QFont _font;
+    int _rotate = -22;
+    QSize _gap = {100, 100};
+    QPoint _offset = {0, 0};
+};
 
 }
