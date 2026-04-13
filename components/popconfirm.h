@@ -5,7 +5,7 @@
 namespace Element
 {
 
-    class PopConfirm : public QWidget
+    class Popconfirm : public QWidget
     {
     Q_OBJECT
     public:

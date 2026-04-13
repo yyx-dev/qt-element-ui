@@ -119,9 +119,12 @@ namespace Element
 
     Notification& Notification::setShowClose(bool showClose, bool autoClose)
     {
-        _showClose = showClose;
-        if (!autoClose)
-        {}
+        if(!showClose)
+            _close->hide();
+        else
+            _close->show();
+
+        adjustSize();
         return *this;
     }
 

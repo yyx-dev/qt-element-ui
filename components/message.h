@@ -6,12 +6,20 @@
 #include <QString>
 #include <QLabel>
 #include <QHash>
+#include <QPoint>
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
+#include <QParallelAnimationGroup>
 
 namespace Element
 {
+    class MessageManager;
+
     class Message : public QWidget
     {
-    Q_OBJECT
+        Q_OBJECT
+
+        friend class MessageManager;
 
     public:
         enum class Type
@@ -36,20 +44,23 @@ namespace Element
     public:
         Message& setMessage(const QString& message);
         Message& setParamater(const QString& paramater);
-
         Message& setType(Type type);
         Message& setPlain(bool plain);
-        Message& setShowClose(bool showClose, bool autoClose = true);
+        Message& setShowClose(bool showClose);
+        Message& setAutoClose(bool autoClose);
         Message& setPlacement(Place place);
         Message& setDuration(int msec);
+        Message& setOnClose(bool onClose);
 
     public:
-        Message(const QString& message, QWidget* parent = nullptr);
-        Message(const QString& message, const QString& paramater, QWidget* parent = nullptr);
-        Message(const QString& message, Type type = Type::Info, QWidget* parent = nullptr);
-        Message(const QString& message, const QString& paramater, Type type = Type::Info, QWidget* parent = nullptr);
+        Message(QWidget* parent, const QString& message);
+        Message(QWidget* parent, const QString& message, Type type, const QString& paramater = "");
 
         void show();
+        static MessageManager* getManager(QWidget* parent);
+
+    signals:
+        void close();
 
     private:
         void updateTextAndIcon();
@@ -59,11 +70,14 @@ namespace Element
         QString getBorderColor();
         QString getBackgroundColor();
         QPixmap getIcon();
+        Place getPlacement();
 
+        void stopFadeIn();
         void onTimeout();
 
     protected:
         void paintEvent(QPaintEvent *event) override;
+        bool eventFilter(QObject* watched, QEvent* event) override;
 
     private:
         QString _message;
@@ -73,20 +87,27 @@ namespace Element
         Type _type = Type::Info;
         Place _placement = Place::Top;
         bool _plain = false;
-        bool _showClose = false;
+        bool _onClose = false;
+        bool _autoClose = true;
         int _duration = 3000;
 
     private:
         QSSHelper _qsshelper;
         QLabel* _icon;
         QLabel* _text;
+        QLabel* _close;
         QTimer* _timer;
-        static QHash<Place, int> _count;
+        QPropertyAnimation* _opaAni;
+        QPropertyAnimation* _moveAni;
+        QGraphicsOpacityEffect* _opaEff;
+        QParallelAnimationGroup* _fadeIn;
+        QParallelAnimationGroup* _fadeOut;
+
+        MessageManager* _manager; 
+        static QHash<QWidget*, MessageManager*> _managersHash;
     };
 
     inline uint qHash(Message::Place key, uint seed = 0) noexcept {
         return static_cast<uint>(std::hash<int>{}(static_cast<int>(key))) ^ seed;
     }
-
-    inline QHash<Message::Place, int> Message::_count;
 }

@@ -5,7 +5,7 @@
 namespace Element
 {
 
-    class PopOver : public QWidget
+    class Popover : public QWidget
     {
     Q_OBJECT
     public:
