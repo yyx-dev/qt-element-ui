@@ -32,8 +32,8 @@ namespace Element
         //setAttribute(Qt::WA_DeleteOnClose);
 
         _text->setFont(FontHelper(_text->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+                           .setPointSize(Comm::defaultFontSize)
+                           .getFont());
 
         QHBoxLayout *layout = new QHBoxLayout(this);
         layout->setContentsMargins(10, 10, 10, 10);
@@ -153,11 +153,11 @@ namespace Element
     void Message::updateTextAndIcon()
     {
         QString coloredMessage = QString("<span style='color:%1'>%2</span>")
-            .arg(getColor())
+        .arg(getColor())
             .arg(_message);
 
         QString coloredParameter = QString("<span style='color:#008080'>%2</span>")
-            .arg(_paramater);
+                                       .arg(_paramater);
 
         _text->setText(coloredMessage + coloredParameter);
 
@@ -172,26 +172,19 @@ namespace Element
         switch (_placement)
         {
         case Place::Top:
+        case Place::TopLeft:
+        case Place::TopRight:
             startRect.moveTop(endRect.y() - 20);
-            _fadeIn->addAnimation(_opaAni);
             break;
 
         case Place::Bottom:
-            startRect.moveTop(endRect.y() + 20);
-            _fadeIn->addAnimation(_opaAni);
-            break;
-
-        case Place::TopLeft:
         case Place::BottomLeft:
-            startRect.moveLeft(endRect.x() - width());
-            break;
-
-        case Place::TopRight:
         case Place::BottomRight:
-            startRect.moveLeft(endRect.x() + width());
+            startRect.moveTop(endRect.y() + 20);
             break;
         }
 
+        _fadeIn->addAnimation(_opaAni);
         _moveAni->setStartValue(startRect);
         _moveAni->setEndValue(endRect);
 
@@ -268,20 +261,16 @@ namespace Element
         switch(_placement)
         {
         case Place::Top:
+        case Place::TopLeft:
+        case Place::TopRight:
             endRect = QRect(gm.x(), gm.y() - 20,
                             gm.width(), gm.height());
             break;
 
         case Place::Bottom:
-            endRect = QRect(gm.x(), gm.y() + 20,
-                            gm.width(), gm.height());
-            break;
-
-        case Place::TopLeft:
-        case Place::TopRight:
         case Place::BottomLeft:
         case Place::BottomRight:
-            endRect = QRect(gm.x(), gm.y(),
+            endRect = QRect(gm.x(), gm.y() + 20,
                             gm.width(), gm.height());
             break;
         }
@@ -297,7 +286,7 @@ namespace Element
             this->deleteLater();
         });
 
-         _fadeOut->start();
+        _fadeOut->start();
 
         if (_manager)
             _manager->removeMessage(this);
