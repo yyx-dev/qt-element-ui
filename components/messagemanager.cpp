@@ -63,8 +63,7 @@ namespace Element
         bool topAligned = (placement == Message::Place::Top ||
                            placement == Message::Place::TopLeft ||
                            placement == Message::Place::TopRight);
-        int startY = topAligned ? _offset : (pw->height() - _offset);
-        int curY = startY;
+        int curY = topAligned ? _offset : (pw->height() - _offset);
 
         for (int i = 0; i < list.size(); ++i)
         {
