@@ -8,6 +8,8 @@
 
 namespace Element
 {
+    class HLine;
+
     class Divider : public QWidget
     {
     Q_OBJECT
@@ -34,8 +36,6 @@ namespace Element
     protected:
         explicit Divider(QWidget* parent = nullptr) : QWidget(parent) {}
     };
-
-    class HLine;
 
     class HDivider : public Divider
     {
@@ -95,5 +95,18 @@ namespace Element
 
     protected:
         void paintEvent(QPaintEvent* event) override;
+    };
+
+    class HLine : public QWidget
+    {
+    public:
+        explicit HLine(QWidget* parent = nullptr);
+
+    public:
+        HLine& setLineColor(const QString& color);
+        HLine& setLineStyle(Divider::LineStyle ls);
+
+    protected:
+        void paintEvent(QPaintEvent*) override;
     };
 }

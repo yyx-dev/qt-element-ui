@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -1386,6 +1386,19 @@
       </property>
       <property name="text">
        <string>On Close</string>
+      </property>
+     </widget>
+     <widget class="Element::Button" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>430</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Popover</string>
       </property>
      </widget>
     </widget>

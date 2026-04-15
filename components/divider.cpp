@@ -2,64 +2,6 @@
 
 namespace Element
 {
-    class HLine : public QWidget
-    {
-    public:
-        explicit HLine(QWidget* parent = nullptr) : QWidget(parent)
-        {
-            setFixedHeight(1);
-            setMinimumWidth(20);
-            setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-            setProperty("color", "#dcdfe6");
-            setProperty("style", "solid");
-        }
-
-        void setLineColor(const QString& color)
-        {
-            if (color != property("color").toString())
-            {
-                setProperty("color", color);
-                update();
-            }
-        }
-
-        void setLineStyle(Divider::LineStyle ls)
-        {
-            QString style = Divider::getLineStyleString(ls);
-            if (style != property("style").toString())
-            {
-                setProperty("style", style);
-                update();
-            }
-        }
-
-    protected:
-        void paintEvent(QPaintEvent*) override
-        {
-            QPainter painter(this);
-            painter.setRenderHint(QPainter::Antialiasing, false);
-
-            QString color = property("color").toString();
-            QString style = property("style").toString();
-
-            QPen pen;
-            pen.setColor(QColor(color));
-            pen.setWidth(1);
-            if (style == "solid")
-                pen.setStyle(Qt::SolidLine);
-            else if (style == "dashed")
-                pen.setStyle(Qt::DashLine);
-            else if (style == "dotted")
-                pen.setStyle(Qt::DotLine);
-            else if(style == "dashDotLine")
-                pen.setStyle(Qt::DashDotLine);
-            else if(style == "dashDotDotLine")
-                pen.setStyle(Qt::DashDotDotLine);
-            painter.setPen(pen);
-            painter.drawLine(0, 0, width(), 0);
-        }
-    };
-
     QString Divider::getLineStyleString(LineStyle style)
     {
         switch (style)
@@ -324,5 +266,61 @@ namespace Element
             pen.setStyle(Qt::DashDotDotLine);
         painter.setPen(pen);
         painter.drawLine(0, 0, 0, height());
+    }
+
+    HLine::HLine(QWidget* parent)
+        : QWidget(parent)
+    {
+        setFixedHeight(1);
+        setMinimumWidth(20);
+        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        setProperty("color", "#dcdfe6");
+        setProperty("style", "solid");
+    }
+
+    HLine& HLine::setLineColor(const QString& color)
+    {
+        if (color != property("color").toString())
+        {
+            setProperty("color", color);
+            update();
+        }
+        return *this;
+    }
+
+    HLine& HLine::setLineStyle(Divider::LineStyle ls)
+    {
+        QString style = Divider::getLineStyleString(ls);
+        if (style != property("style").toString())
+        {
+            setProperty("style", style);
+            update();
+        }
+        return *this;
+    }
+
+    void HLine::paintEvent(QPaintEvent*)
+    {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing, false);
+
+        QString color = property("color").toString();
+        QString style = property("style").toString();
+
+        QPen pen;
+        pen.setColor(QColor(color));
+        pen.setWidth(1);
+        if (style == "solid")
+            pen.setStyle(Qt::SolidLine);
+        else if (style == "dashed")
+            pen.setStyle(Qt::DashLine);
+        else if (style == "dotted")
+            pen.setStyle(Qt::DotLine);
+        else if(style == "dashDotLine")
+            pen.setStyle(Qt::DashDotLine);
+        else if(style == "dashDotDotLine")
+            pen.setStyle(Qt::DashDotDotLine);
+        painter.setPen(pen);
+        painter.drawLine(0, 0, width(), 0);
     }
 }
