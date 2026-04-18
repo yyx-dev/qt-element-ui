@@ -53,8 +53,10 @@ namespace Element
         Message& setOnClose(bool onClose);
 
     public:
-        Message(QWidget* parent, const QString& message);
-        Message(QWidget* parent, const QString& message, Type type, const QString& paramater = "");
+        Message(const QString& message, QWidget* parent = nullptr);
+        Message(const QString& message, const QString& paramater, QWidget* parent = nullptr);
+        Message(const QString& message, Type type = Type::Info, QWidget* parent = nullptr);
+        Message(const QString& message, const QString& paramater, Type type = Type::Info, QWidget* parent = nullptr);
 
         void show();
         static MessageManager* getManager(QWidget* parent);

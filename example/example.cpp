@@ -315,62 +315,74 @@ void Example::setupTab5()
 
     connect(ui->button_42, &Button::clicked, this, [&]() {
         Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
+
+        dialog->setBeforeClose([](std::function<void()> done) {
+            Dialog* qryDlg = new Dialog;
+            qryDlg->setTitle("").setContent("Are you sure to close this dialog?");
+            QObject::connect(qryDlg, &Element::Dialog::accepted, [done]() {
+                done();
+            });
+            QObject::connect(qryDlg, &Element::Dialog::rejected, []() {});
+            QObject::connect(qryDlg, &Element::Dialog::closed, []() {});
+            qryDlg->show();
+        });
+
         dialog->show();
     });
     connect(ui->button_43, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message.", Message::Type::Info, " VNode");
+        Message* message = new Message("This is a message.", " VNode", this);
         message->setType(Message::Type::Info);
         message->show();
     });
     connect(ui->button_44, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message on top left.");
+        Message* message = new Message("This is a message on top left.", this);
         message->setPlacement(Message::Place::TopLeft);
         message->show();
     });
     connect(ui->button_45, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message on top right.");
+        Message* message = new Message("This is a message on top right.", this);
         message->setPlacement(Message::Place::TopRight);
         message->show();
     });
     connect(ui->button_46, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message on bottom.");
+        Message* message = new Message("This is a message on bottom.", this);
         message->setPlacement(Message::Place::Bottom);
         message->show();
     });
     connect(ui->button_47, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message on bottom left.");
+        Message* message = new Message("This is a message on bottom left.", this);
         message->setPlacement(Message::Place::BottomLeft);
         message->show();
     });
     connect(ui->button_48, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a message on bottom right.");
+        Message* message = new Message("This is a message on bottom right.", this);
         message->setPlacement(Message::Place::BottomRight);
         message->show();
     });
     connect(ui->button_49, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a primary message.", Message::Type::Primary);
+        Message* message = new Message("This is a primary message.", Message::Type::Primary, this);
         message->show();
     });
     connect(ui->button_50, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a success message.", Message::Type::Success);
+        Message* message = new Message("This is a success message.", Message::Type::Success, this);
         message->show();
     });
     connect(ui->button_51, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a warning message.", Message::Type::Warning);
+        Message* message = new Message("This is a warning message.", Message::Type::Warning, this);
         message->show();
     });
     connect(ui->button_52, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a info message.", Message::Type::Info);
+        Message* message = new Message("This is a info message.", Message::Type::Info, this);
         message->show();
     });
     connect(ui->button_53, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "This is a error message.", Message::Type::Error);
+        Message* message = new Message("This is a error message.", Message::Type::Error, this);
         message->show();
     });
 
     //带回调函数
     connect(ui->button_65, &Button::clicked, this, [&]() {
-        Message* message = new Message(this, "Terminal output a message.");
+        Message* message = new Message("Terminal output a message.", this);
         message->setAutoClose(false);
         message->setOnClose(true);
         message->setShowClose(true);

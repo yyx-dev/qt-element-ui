@@ -4,8 +4,6 @@
 #include <QBoxLayout>
 #include <QPaintEvent>
 
-#include "text.h"
-
 namespace Element
 {
     class HLine;
@@ -28,6 +26,10 @@ namespace Element
             DashDotLine,
             DashDotDotLine
         };
+
+    public:
+        virtual Divider& setLineColor(const QString& color) = 0;
+        virtual Divider& setLineStyle(LineStyle ls) = 0;
 
     public:
         virtual Direction getDirection() const = 0;
@@ -64,8 +66,8 @@ namespace Element
         HDivider& setContent(QWidget* content);
         HDivider& setContentPosition(HDivider::ContentPosition conPos);
         HDivider& setPixmap(const QPixmap& pm);
-        HDivider& setLineColor(const QString& color);
-        HDivider& setLineStyle(Divider::LineStyle ls);
+        HDivider& setLineColor(const QString& color) override;
+        HDivider& setLineStyle(Divider::LineStyle ls) override;
         HDivider& setSpacing(int spacing);
 
     private:
@@ -90,8 +92,8 @@ namespace Element
         Direction getDirection() const override;
 
     public:
-        VDivider& setLineColor(const QString& color);
-        VDivider& setLineStyle(Divider::LineStyle ls);
+        VDivider& setLineColor(const QString& color) override;
+        VDivider& setLineStyle(Divider::LineStyle ls) override;
 
     protected:
         void paintEvent(QPaintEvent* event) override;

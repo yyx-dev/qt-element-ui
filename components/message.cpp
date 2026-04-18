@@ -13,65 +13,73 @@ namespace Element
 {
     QHash<QWidget*, MessageManager*> Message::_managersHash;
 
-    Message::Message(QWidget* parent, const QString& message)
-        : Message(parent, message, Type::Info, "")
+    Message::Message(const QString& message, QWidget* parent)
+        : Message(message, "", Type::Info, parent)
     {}
 
-    Message::Message(QWidget* parent, const QString& message, Type type, const QString& paramater)
-        : QWidget(parent)
-        , _message(message)
-        , _paramater(paramater)
-        , _type(type)
-        , _icon(new QLabel(this))
-        , _text(new QLabel(this))
-        , _timer(new QTimer(this))
-    {
-        _manager = getManager(parent);
+    Message::Message(const QString& message, const QString& paramater, QWidget* parent)
+        : Message(message, paramater, Type::Info, parent)
+    {}
 
-        setWindowFlags(Qt::FramelessWindowHint);
-        //setAttribute(Qt::WA_DeleteOnClose);
+    Message::Message(const QString& message, Type type, QWidget* parent)
+        : Message(message, "", type, parent)
+    {}
 
-        _text->setFont(FontHelper(_text->font())
-                           .setPointSize(Comm::defaultFontSize)
-                           .getFont());
+    Message::Message(const QString& message, const QString& paramater, Type type, QWidget* parent)
+            : QWidget(parent)
+            , _message(message)
+            , _paramater(paramater)
+            , _type(type)
+            , _icon(new QLabel(this))
+            , _text(new QLabel(this))
+            , _timer(new QTimer(this))
+        {
+            _manager = getManager(parent);
 
-        QHBoxLayout *layout = new QHBoxLayout(this);
-        layout->setContentsMargins(10, 10, 10, 10);
-        layout->setSpacing(10);
-        layout->addWidget(_icon);
-        layout->addWidget(_text);
+            setWindowFlags(Qt::FramelessWindowHint);
 
-        _close = new QLabel(this);
-        _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
-        _close->setAttribute(Qt::WA_Hover);
-        _close->installEventFilter(this);
-        this->layout()->addWidget(_close);
-        _close->hide();
-        connect(_close, &QLabel::linkActivated, this, &Message::onTimeout);
+            _text->setFont(FontHelper(_text->font())
+                               .setPointSize(Comm::defaultFontSize)
+                               .getFont());
 
-        setLayout(layout);
+            QHBoxLayout *layout = new QHBoxLayout(this);
+            layout->setContentsMargins(10, 10, 10, 10);
+            layout->setSpacing(10);
+            layout->addWidget(_icon);
+            layout->addWidget(_text);
 
-        setType(_type);
-        connect(_timer, &QTimer::timeout, this, &Message::onTimeout);
+            _close = new QLabel(this);
+            _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
+            _close->setAttribute(Qt::WA_Hover);
+            _close->installEventFilter(this);
+            this->layout()->addWidget(_close);
+            _close->hide();
+            connect(_close, &QLabel::linkActivated, this, &Message::onTimeout);
 
-        _opaEff = new QGraphicsOpacityEffect(this);
-        _opaEff->setOpacity(1.0);
-        setGraphicsEffect(_opaEff);
+            setLayout(layout);
 
-        _moveAni = new QPropertyAnimation(this, "geometry");
-        _moveAni->setDuration(300);
-        _moveAni->setEasingCurve(QEasingCurve::InOutCubic);
+            setType(_type);
+            connect(_timer, &QTimer::timeout, this, &Message::onTimeout);
 
-        _opaAni = new QPropertyAnimation(_opaEff, "opacity");
-        _opaAni->setDuration(300);
-        _opaAni->setStartValue(0.0);
-        _opaAni->setEndValue(1.0);
+            _opaEff = new QGraphicsOpacityEffect(this);
+            _opaEff->setOpacity(0.0);
+            setGraphicsEffect(_opaEff);
 
-        _fadeIn = new QParallelAnimationGroup(this);
-        _fadeIn->addAnimation(_moveAni);
+            _moveAni = new QPropertyAnimation(this, "geometry");
+            _moveAni->setDuration(300);
+            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
 
-        _fadeOut = new QParallelAnimationGroup(this);
-    }
+            _opaAni = new QPropertyAnimation(_opaEff, "opacity");
+            _opaAni->setDuration(300);
+            _opaAni->setStartValue(0.0);
+            _opaAni->setEndValue(1.0);
+            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
+
+            _fadeIn = new QParallelAnimationGroup(this);
+            _fadeIn->addAnimation(_moveAni);
+
+            _fadeOut = new QParallelAnimationGroup(this);
+        }
 
     void Message::show()
     {

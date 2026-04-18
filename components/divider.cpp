@@ -1,4 +1,5 @@
 #include "divider.h"
+#include "text.h"
 
 namespace Element
 {
@@ -54,23 +55,6 @@ namespace Element
         l->setPixmap(pm);
         setContent(l);
         adjust(conPos);
-    }
-
-    void HDivider::init()
-    {
-        QHBoxLayout* layout= new QHBoxLayout(this);
-        layout->setContentsMargins(0, 0, 0, 0);
-        _leftLine = new HLine();
-        layout->addWidget(_leftLine);
-
-        _content = new QWidget(this);
-        QHBoxLayout* l = new QHBoxLayout(_content);
-        l->setContentsMargins(0, 0, 0, 0);
-        layout->addWidget(_content);
-
-        _rightLine = new HLine();
-        layout->addWidget(_rightLine);
-        layout->setSpacing(20);
     }
 
     HDivider& HDivider::setSpacing(int spacing)
@@ -145,6 +129,37 @@ namespace Element
         return *this;
     }
 
+    HDivider& HDivider::setLineColor(const QString& color)
+    {
+        _leftLine->setLineColor(color);
+        _rightLine->setLineColor(color);
+        return *this;
+    }
+
+    HDivider& HDivider::setLineStyle(Divider::LineStyle ls)
+    {
+        _leftLine->setLineStyle(ls);
+        _rightLine->setLineStyle(ls);
+        return *this;
+    }
+
+    void HDivider::init()
+    {
+        QHBoxLayout* layout= new QHBoxLayout(this);
+        layout->setContentsMargins(0, 0, 0, 0);
+        _leftLine = new HLine();
+        layout->addWidget(_leftLine);
+
+        _content = new QWidget(this);
+        QHBoxLayout* l = new QHBoxLayout(_content);
+        l->setContentsMargins(0, 0, 0, 0);
+        layout->addWidget(_content);
+
+        _rightLine = new HLine();
+        layout->addWidget(_rightLine);
+        layout->setSpacing(20);
+    }
+
     void HDivider::adjust(ContentPosition conPos)
     {
         if(_content->layout()->count()>0 && (conPos != ContentPosition::Empty))
@@ -182,20 +197,6 @@ namespace Element
             _content->setVisible(false);
             _rightLine->setVisible(false);
         }
-    }
-
-    HDivider& HDivider::setLineColor(const QString& color)
-    {
-        _leftLine->setLineColor(color);
-        _rightLine->setLineColor(color);
-        return *this;
-    }
-
-    HDivider& HDivider::setLineStyle(Divider::LineStyle ls)
-    {
-        _leftLine->setLineStyle(ls);
-        _rightLine->setLineStyle(ls);
-        return *this;
     }
 
     HDivider::ContentPosition HDivider::getContentPosition()

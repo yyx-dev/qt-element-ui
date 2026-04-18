@@ -1,5 +1,4 @@
-#ifndef MESSAGEMANAGER_H
-#define MESSAGEMANAGER_H
+#pragma once
 
 #include "message.h"
 
@@ -43,5 +42,3 @@ namespace Element
         virtual QRect calNewMsgGeometry(Message* msg) const;
     };
 }
-
-#endif // MESSAGEMANAGER_H

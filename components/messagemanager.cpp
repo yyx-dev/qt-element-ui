@@ -5,7 +5,6 @@ namespace Element
     MessageManager::MessageManager(QWidget* parent)
         : QObject(parent)
     {
-        Q_ASSERT(parent);
         Message::_managersHash[parent] = this;
     }
 
@@ -28,6 +27,8 @@ namespace Element
 
         QWidget* pw = qobject_cast<QWidget*>(parent());
 
+        if(!pw) return;
+
         if (msg->parentWidget() != pw)
             msg->setParent(pw);
 
@@ -40,6 +41,10 @@ namespace Element
     void MessageManager::removeMessage(Message* msg)
     {
         if (!msg) return;
+
+        QWidget* pw = qobject_cast<QWidget*>(parent());
+
+        if(!pw) return;
 
         Message::Place place = msg->getPlacement();
         QList<Message*>& list = _messagesList[place];
