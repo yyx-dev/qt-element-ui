@@ -1,6 +1,7 @@
 #pragma once
 
 #include "icon.h"
+#include "messagemanager.h"
 
 #include <QMainWindow>
 
@@ -37,4 +38,5 @@ private:
 
 private:
     Ui::Example *ui;
+
 };

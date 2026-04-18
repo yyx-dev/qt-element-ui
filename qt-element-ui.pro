@@ -13,13 +13,13 @@ HEADERS += \
     $$files($$EXM/*.h) \
     $$files($$SRC/*.h) \
     $$files($$PRI/*.h) \
-    $$files($$GAL/*.h)
+    $$files($$GAL/*.h) \
 
 SOURCES += \
     $$files($$EXM/*.cpp) \
     $$files($$SRC/*.cpp) \
     $$files($$PRI/*.cpp) \
-    $$files($$GAL/*.cpp)
+    $$files($$GAL/*.cpp) \
 
 FORMS += \
     $$files($$EXM/*.ui)

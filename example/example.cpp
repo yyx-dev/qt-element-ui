@@ -14,6 +14,7 @@
 #include "badge.h"
 #include "shadow.h"
 #include "tooltip.h"
+#include "divider.h"
 
 #include <QDebug>
 #include <QTimer>
@@ -131,6 +132,34 @@ void Example::setupTab0()
     ShadowEf::setShadow(ui->shadow_2, ShadowEf::Type::Light);
     ShadowEf::setShadow(ui->shadow_3, ShadowEf::Type::Lighter);
     ShadowEf::setShadow(ui->shadow_4, ShadowEf::Type::Dark);
+
+    QVBoxLayout* layout1 = new QVBoxLayout(ui->widget_1);
+    layout1->addWidget(ui->dividerText_1);
+    layout1->addWidget(new HDivider(ui->widget_1));
+    layout1->addWidget(ui->dividerText_2);
+
+    QHBoxLayout* layout2 = new QHBoxLayout(ui->widget_3);
+    layout2->addWidget(ui->dividerText_6);
+    VDivider* v = new VDivider(ui->widget_3);
+    v->setLineStyle(Divider::LineStyle::Solid).setLineColor("#dcdfe6");
+    layout2->addWidget(v);
+    layout2->addWidget(ui->dividerText_7);
+    layout2->addWidget(new VDivider(ui->widget_3));
+    layout2->addWidget(ui->dividerText_8);
+
+    QVBoxLayout* layout3 = new QVBoxLayout(ui->widget_2);
+    layout3->addWidget(ui->dividerText_3);
+    layout3->addWidget(new HDivider("少年包青天", HDivider::ContentPosition::Left));
+    layout3->addWidget(ui->dividerText_4);
+    layout3->addWidget(new HDivider(Icon::instance().getPixmap(Icon::Monitor, Color::basicBlack(), 18)));
+    layout3->addWidget(ui->dividerText_5);
+    HDivider* hd = new HDivider(ui->widget_2);
+    hd->setText("阿里云")
+        .setContentPosition(HDivider::ContentPosition::Right)
+        .setSpacing(20)
+        .setLineStyle(Divider::LineStyle::Solid)
+        .setLineColor("#dcdfe6");
+    layout3->addWidget(hd);
 }
 
 void Example::setupTab1()
@@ -277,8 +306,27 @@ void Example::setupTab4()
 
 void Example::setupTab5()
 {
+    /* If you need to set the offset for Message objects,
+     * you must either instantiate a MessageManager object in advance,
+        or call the getManager method on a Message object to obtain the MessageManager instance. */
+
+    // MessageManager* _msgManager = new MessageManager(this);
+    // _msgManager->setOffset(20);
+
     connect(ui->button_42, &Button::clicked, this, [&]() {
         Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
+
+        dialog->setBeforeClose([](std::function<void()> done) {
+            Dialog* qryDlg = new Dialog;
+            qryDlg->setTitle("").setContent("Are you sure to close this dialog?");
+            QObject::connect(qryDlg, &Element::Dialog::accepted, [done]() {
+                done();
+            });
+            QObject::connect(qryDlg, &Element::Dialog::rejected, []() {});
+            QObject::connect(qryDlg, &Element::Dialog::closed, []() {});
+            qryDlg->show();
+        });
+
         dialog->show();
     });
     connect(ui->button_43, &Button::clicked, this, [&]() {
@@ -331,6 +379,19 @@ void Example::setupTab5()
         Message* message = new Message("This is a error message.", Message::Type::Error, this);
         message->show();
     });
+
+    //带回调函数
+    connect(ui->button_65, &Button::clicked, this, [&]() {
+        Message* message = new Message("Terminal output a message.", this);
+        message->setAutoClose(false);
+        message->setOnClose(true);
+        message->setShowClose(true);
+        connect(message, &Message::close, this, [](){
+            qDebug()<<"The Message is closed;";
+        });
+        message->show();
+    });
+
     connect(ui->button_54, &Button::clicked, this, [&]() {
         Notification* noti = new Notification("Title", "This is a reminder.", this);
         noti->show();
@@ -573,7 +634,6 @@ void Example::setupTab11()
     ui->carousel->addImage(QPixmap(":/icons/other/hamburger.png"));
     ui->carousel->addImage(QPixmap(":/icons/other/square-default-avatar.png"));
     ui->carousel->addImage(QPixmap(":/icons/other/example-avatar.png"));
-
 }
 
 Example::~Example()

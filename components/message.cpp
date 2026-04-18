@@ -1,4 +1,5 @@
 #include "message.h"
+#include "messagemanager.h"
 #include "private/utils.h"
 #include "icon.h"
 
@@ -8,10 +9,10 @@
 #include <QHash>
 #include <QPainterPath>
 
-
-
 namespace Element
 {
+    QHash<QWidget*, MessageManager*> Message::_managersHash;
+
     Message::Message(const QString& message, QWidget* parent)
         : Message(message, "", Type::Info, parent)
     {}
@@ -20,43 +21,75 @@ namespace Element
         : Message(message, paramater, Type::Info, parent)
     {}
 
-    Message::Message(const QString& message, Message::Type type, QWidget* parent)
+    Message::Message(const QString& message, Type type, QWidget* parent)
         : Message(message, "", type, parent)
     {}
 
     Message::Message(const QString& message, const QString& paramater, Type type, QWidget* parent)
-        : QWidget(parent)
-        , _message(message)
-        , _paramater(paramater)
-        , _type(type)
-        , _icon(new QLabel(this))
-        , _text(new QLabel(this))
-        , _timer(new QTimer(this))
-    {
-        setWindowFlags(Qt::FramelessWindowHint);
-        setAttribute(Qt::WA_DeleteOnClose);
+            : QWidget(parent)
+            , _message(message)
+            , _paramater(paramater)
+            , _type(type)
+            , _icon(new QLabel(this))
+            , _text(new QLabel(this))
+            , _timer(new QTimer(this))
+        {
+            _manager = getManager(parent);
 
-        _text->setFont(FontHelper(_text->font())
-                .setPointSize(Comm::defaultFontSize)
-                .getFont());
+            setWindowFlags(Qt::FramelessWindowHint);
 
-        QHBoxLayout *layout = new QHBoxLayout(this);
-        layout->setContentsMargins(10, 10, 10, 10);
-        layout->setSpacing(10);
-        layout->addWidget(_icon);
-        layout->addWidget(_text);
+            _text->setFont(FontHelper(_text->font())
+                               .setPointSize(Comm::defaultFontSize)
+                               .getFont());
 
-        setLayout(layout);
+            QHBoxLayout *layout = new QHBoxLayout(this);
+            layout->setContentsMargins(10, 10, 10, 10);
+            layout->setSpacing(10);
+            layout->addWidget(_icon);
+            layout->addWidget(_text);
 
-        setType(_type);
-        connect(_timer, &QTimer::timeout, this, &Message::onTimeout);
-    }
+            _close = new QLabel(this);
+            _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
+            _close->setAttribute(Qt::WA_Hover);
+            _close->installEventFilter(this);
+            this->layout()->addWidget(_close);
+            _close->hide();
+            connect(_close, &QLabel::linkActivated, this, &Message::onTimeout);
+
+            setLayout(layout);
+
+            setType(_type);
+            connect(_timer, &QTimer::timeout, this, &Message::onTimeout);
+
+            _opaEff = new QGraphicsOpacityEffect(this);
+            _opaEff->setOpacity(0.0);
+            setGraphicsEffect(_opaEff);
+
+            _moveAni = new QPropertyAnimation(this, "geometry");
+            _moveAni->setDuration(300);
+            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
+
+            _opaAni = new QPropertyAnimation(_opaEff, "opacity");
+            _opaAni->setDuration(300);
+            _opaAni->setStartValue(0.0);
+            _opaAni->setEndValue(1.0);
+            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
+
+            _fadeIn = new QParallelAnimationGroup(this);
+            _fadeIn->addAnimation(_moveAni);
+
+            _fadeOut = new QParallelAnimationGroup(this);
+        }
 
     void Message::show()
     {
+        if(_manager)
+            _manager->addMessage(this);
+
         updatePosition();
-        QWidget::show();
-        _timer->start(_duration);
+
+        if(_duration>0&&_autoClose)
+            _timer->start(_duration);
     }
 
     Message& Message::setMessage(const QString& message)
@@ -90,11 +123,20 @@ namespace Element
         return *this;
     }
 
-    Message& Message::setShowClose(bool showClose, bool autoClose)
+    Message& Message::setShowClose(bool showClose)
     {
-        _showClose = showClose;
-        if (!autoClose)
-        {}
+        if(showClose)
+            _close->show();
+        else
+            _close->hide();
+
+        adjustSize();
+        return *this;
+    }
+
+    Message& Message::setAutoClose(bool autoClose)
+    {
+        _autoClose = autoClose;
         return *this;
     }
 
@@ -110,14 +152,20 @@ namespace Element
         return *this;
     }
 
+    Message& Message::setOnClose(bool onClose)
+    {
+        _onClose = onClose;
+        return *this;
+    }
+
     void Message::updateTextAndIcon()
     {
         QString coloredMessage = QString("<span style='color:%1'>%2</span>")
-            .arg(getColor())
+        .arg(getColor())
             .arg(_message);
 
         QString coloredParameter = QString("<span style='color:#008080'>%2</span>")
-            .arg(_paramater);
+                                       .arg(_paramater);
 
         _text->setText(coloredMessage + coloredParameter);
 
@@ -126,37 +174,30 @@ namespace Element
 
     void Message::updatePosition()
     {
-        QRect parentRect = parentWidget()->geometry();
-        QSize widgetSize = size();
+        QRect endRect = geometry();
+        QRect startRect = endRect;
 
-        int x = 0, y = 0;
+        switch (_placement)
+        {
+        case Place::Top:
+        case Place::TopLeft:
+        case Place::TopRight:
+            startRect.moveTop(endRect.y() - 20);
+            break;
 
-        if (_placement == Place::Top) {
-            x = (parentRect.width() - widgetSize.width()) / 2;
-            y = 10 + (10 + widgetSize.height()) * _count[Place::Top]++;
-        }
-        else if (_placement == Place::TopLeft) {
-            x = 10;
-            y = 10 + (10 + widgetSize.height()) * _count[Place::TopLeft]++;
-        }
-        else if (_placement == Place::TopRight) {
-            x = parentRect.width() - widgetSize.width() - 10;
-            y = 10 + (10 + widgetSize.height()) * _count[Place::TopRight]++;
-        }
-        else if (_placement == Place::Bottom) {
-            x = (parentRect.width() - widgetSize.width()) / 2;
-            y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::Bottom];
-        }
-        else if (_placement == Place::BottomLeft) {
-            x = 10;
-            y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::BottomLeft];
-        }
-        else if (_placement == Place::BottomRight) {
-            x = parentRect.width() - widgetSize.width() - 10;
-            y = parentRect.height() - (widgetSize.height() + 10) * ++_count[Place::BottomRight];
+        case Place::Bottom:
+        case Place::BottomLeft:
+        case Place::BottomRight:
+            startRect.moveTop(endRect.y() + 20);
+            break;
         }
 
-        move(x, y);
+        _fadeIn->addAnimation(_opaAni);
+        _moveAni->setStartValue(startRect);
+        _moveAni->setEndValue(endRect);
+
+        QWidget::show();
+        _fadeIn->start();
     }
 
     QString Message::getColor()
@@ -211,10 +252,52 @@ namespace Element
         return QPixmap();
     }
 
+    Message::Place Message::getPlacement()
+    {
+        return _placement;
+    }
+
     void Message::onTimeout()
     {
-        _count[_placement]--;
-        QWidget::close();
+        _opaAni->setStartValue(1.0);
+        _opaAni->setEndValue(0.0);
+        _fadeOut->addAnimation(_opaAni);
+
+        QRect gm = geometry();
+        QRect endRect;
+
+        switch(_placement)
+        {
+        case Place::Top:
+        case Place::TopLeft:
+        case Place::TopRight:
+            endRect = QRect(gm.x(), gm.y() - 20,
+                            gm.width(), gm.height());
+            break;
+
+        case Place::Bottom:
+        case Place::BottomLeft:
+        case Place::BottomRight:
+            endRect = QRect(gm.x(), gm.y() + 20,
+                            gm.width(), gm.height());
+            break;
+        }
+
+        _moveAni->setStartValue(gm);
+        _moveAni->setEndValue(endRect);
+        _fadeOut->addAnimation(_moveAni);
+
+        connect(_fadeOut, &QParallelAnimationGroup::finished, this, [this]() {
+            if(_onClose)
+                emit close();
+
+            this->deleteLater();
+        });
+
+        _fadeOut->start();
+
+        if (_manager)
+            _manager->removeMessage(this);
     }
 
     void Message::paintEvent(QPaintEvent *event)
@@ -235,5 +318,53 @@ namespace Element
         painter.drawRoundedRect(rect().adjusted(0, 0, 0, 0), 4, 4, Qt::AbsoluteSize);
 
         QWidget::paintEvent(event);
+    }
+
+    void Message::stopFadeIn()
+    {
+        if (_fadeIn->state() == QAbstractAnimation::Running)
+            _fadeIn->stop();
+
+        _opaEff->setOpacity(1.0);
+    }
+
+    bool Message::eventFilter(QObject* watched, QEvent* event)
+    {
+        if (watched == _close)
+        {
+            if (event->type() == QEvent::HoverEnter)
+            {
+                _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::regularText(), 16));
+                _close->setCursor(Qt::PointingHandCursor);
+                return true;
+            }
+            else if (event->type() == QEvent::HoverLeave)
+            {
+                _close->setPixmap(Icon::instance().getPixmap(Icon::Close, Color::secondaryText(), 16));
+                _close->setCursor(Qt::ArrowCursor);
+                return true;
+            }
+            else if (event->type() == QEvent::MouseButtonPress)
+            {
+                emit _close->linkActivated("");
+            }
+        }
+        return QWidget::eventFilter(watched, event);
+    }
+
+    MessageManager* Message::getManager(QWidget* parent)
+    {
+        auto it = _managersHash.find(parent);
+        if (it != _managersHash.end())
+            return it.value();
+
+        MessageManager* mgr = new MessageManager(parent);
+        _managersHash.insert(parent, mgr);
+
+        QObject::connect(parent, &QWidget::destroyed, [parent](){
+            _managersHash.remove(parent);
+        });
+
+        return mgr;
     }
 }

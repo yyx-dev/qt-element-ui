@@ -7,6 +7,7 @@
 #include <QString>
 #include <QLabel>
 #include <QHash>
+#include <QBoxLayout>
 
 namespace Element
 {
@@ -67,7 +68,6 @@ namespace Element
     private:
         Type _type = Type::Defualt;
         Position _positon = Position::TopRight;
-        bool _showClose = true;
         int _duration = 4500;
         int _offset = 10;
 
