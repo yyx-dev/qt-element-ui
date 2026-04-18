@@ -127,7 +127,7 @@ namespace Element
     }
 
     // Dialog::Accepted / Dialog::Rejected / Dialog::Closed
-    int Dialog::show()
+    void Dialog::show()
     {
         QDialog::show();
         activateWindow();
@@ -142,9 +142,8 @@ namespace Element
             connect(this, &QDialog::finished, &loop, &QEventLoop::quit);
             loop.exec();
 
-            return result();
+            return;
         }
-        return QDialog::Rejected;
     }
 
     void Dialog::closeDialog(int result, bool emitClosed)

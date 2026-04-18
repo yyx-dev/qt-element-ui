@@ -24,7 +24,7 @@ namespace Element
         Dialog& setModal(bool modal);
         Dialog& setBeforeClose(const std::function<void(std::function<void()>)>& callback);
 
-        int show();
+        void show();
         void closeDialog(int result, bool emitClosed);
 
     public:
