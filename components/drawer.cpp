@@ -127,7 +127,4 @@ namespace Element
         }
         return QWidget::eventFilter(watched, event);
     }
-
-
-
 }

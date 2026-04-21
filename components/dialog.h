@@ -2,10 +2,9 @@
 
 #include "text.h"
 #include "button.h"
+#include "mask.h"
 
 #include <QDialog>
-#include <QPropertyAnimation>
-#include <QParallelAnimationGroup>
 
 namespace Element
 {
@@ -26,6 +25,7 @@ namespace Element
 
         void show();
         void closeDialog(int result, bool emitClosed);
+        void getFocus();
 
     public:
         Dialog(QWidget* parent = nullptr);
@@ -38,20 +38,17 @@ namespace Element
 
     private:
         void doClose(int result, bool emitClosed);
+        void updatePosition();
 
     private:
         bool _modal = true;
+        bool isClosing = false;
+        Mask* _mask = nullptr;
         Text* _title;
         Text* _content;
         Button* _cancel;
         Button* _confirm;
         std::function<void(std::function<void()>)> _beforeCloseCallback;
-
-    private:
         QLabel* _close;
-        QPropertyAnimation* _opaAni;
-        QPropertyAnimation* _moveAni;
-        QParallelAnimationGroup* _inAni;
-        QParallelAnimationGroup* _outAni;
     };
 }

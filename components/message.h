@@ -1,12 +1,12 @@
 #pragma once
 
 #include "private/utils.h"
-#include "color.h"
 
 #include <QString>
 #include <QLabel>
 #include <QHash>
 #include <QPoint>
+#include <QPointer>
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 #include <QParallelAnimationGroup>
@@ -99,11 +99,7 @@ namespace Element
         QLabel* _text;
         QLabel* _close;
         QTimer* _timer;
-        QPropertyAnimation* _opaAni;
-        QPropertyAnimation* _moveAni;
-        QGraphicsOpacityEffect* _opaEff;
-        QParallelAnimationGroup* _fadeIn;
-        QParallelAnimationGroup* _fadeOut;
+        QPointer<QParallelAnimationGroup> _fadeInAnim;
 
         MessageManager* _manager; 
         static QHash<QWidget*, MessageManager*> _managersHash;

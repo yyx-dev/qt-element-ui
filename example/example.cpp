@@ -316,14 +316,17 @@ void Example::setupTab5()
     connect(ui->button_42, &Button::clicked, this, [&]() {
         Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
 
-        dialog->setBeforeClose([](std::function<void()> done) {
-            Dialog* qryDlg = new Dialog;
-            qryDlg->setTitle("").setContent("Are you sure to close this dialog?");
+        dialog->setBeforeClose([=](std::function<void()> done) {
+            Dialog* qryDlg = new Dialog("", "Are you sure to close this dialog?", this);
             QObject::connect(qryDlg, &Element::Dialog::accepted, [done]() {
                 done();
             });
-            QObject::connect(qryDlg, &Element::Dialog::rejected, []() {});
-            QObject::connect(qryDlg, &Element::Dialog::closed, []() {});
+            QObject::connect(qryDlg, &Element::Dialog::rejected, [&]() {
+                dialog->getFocus();
+            });
+            QObject::connect(qryDlg, &Element::Dialog::closed, [&]() {
+                dialog->getFocus();
+            });
             qryDlg->show();
         });
 

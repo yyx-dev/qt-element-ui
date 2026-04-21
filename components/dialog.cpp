@@ -1,6 +1,5 @@
 #include "dialog.h"
-#include "shadow.h"
-#include "mask.h"
+#include "private/animation.h"
 
 #include <QBoxLayout>
 #include <QTimer>
@@ -83,23 +82,8 @@ namespace Element
         connect(_cancel, &QPushButton::clicked, this, [this]() { closeDialog(QDialog::Rejected, false); });
         connect(_confirm, &QPushButton::clicked, this, [this]() { closeDialog(QDialog::Accepted, false); });
 
-        setWindowOpacity(0.0);
-
-        _moveAni = new QPropertyAnimation(this, "geometry");
-        _moveAni->setDuration(300);
-        _moveAni->setEasingCurve(QEasingCurve::OutCubic);
-
-        _opaAni = new QPropertyAnimation(this, "windowOpacity");
-        _opaAni->setDuration(300);
-        _opaAni->setStartValue(0.0);
-        _opaAni->setEndValue(1.0);
-        _opaAni->setEasingCurve(QEasingCurve::OutCubic);
-
-        _inAni = new QParallelAnimationGroup(this);
-        _inAni->addAnimation(_moveAni);
-        _inAni->addAnimation(_opaAni);
-
-        _outAni = new QParallelAnimationGroup(this);
+        if (parentWidget())
+            parentWidget()->installEventFilter(this);
     }
 
     Dialog& Dialog::setTitle(const QString &title)
@@ -130,13 +114,14 @@ namespace Element
     void Dialog::show()
     {
         QDialog::show();
-        activateWindow();
-        setFocus();
+        getFocus();
 
         QWidget* pw = qobject_cast<QWidget*>(parent());
-        if (pw && _modal) {
-            Mask* mask = MaskEf::setMask(this, pw);
-            connect(mask, &Mask::clicked, this, [this]() { closeDialog(QDialog::Rejected, true); });
+        if (pw && _modal)
+        {
+            _mask = MaskEf::setMask(this, pw);
+            connect(_mask, &Mask::clicked, this, [this]() { closeDialog(QDialog::Rejected, true); });
+            Animation::fadeIn(_mask, Animation::Type::GraphicsEffect, 300);
 
             QEventLoop loop;
             connect(this, &QDialog::finished, &loop, &QEventLoop::quit);
@@ -160,29 +145,20 @@ namespace Element
         }
     }
 
+    void Dialog::getFocus()
+    {
+        activateWindow();
+        setFocus();
+    }
+
     void Dialog::showEvent(QShowEvent *event)
     {
         QDialog::showEvent(event);
 
         if (parentWidget())
-        {
-            int parentHeight = parentWidget()->height();
-            int targetY = parentWidget()->pos().y() + parentHeight * 0.18;
+            updatePosition();
 
-            move(parentWidget()->pos().x() + (parentWidget()->width() - width()) / 2,
-                 targetY);
-        }
-
-        QRect endRect = geometry();
-        QRect startRect = endRect;
-        startRect.moveTop(endRect.y() - 20);
-        _moveAni->setStartValue(startRect);
-        _moveAni->setEndValue(endRect);
-
-        _opaAni->setStartValue(0.0);
-        _opaAni->setEndValue(1.0);
-
-        _inAni->start();
+        Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300);
     }
 
     void Dialog::keyPressEvent(QKeyEvent *event)
@@ -214,35 +190,34 @@ namespace Element
                 closeDialog(QDialog::Rejected, true);
             }
         }
+        else if (watched == parentWidget())
+        {
+            if(event->type() == QEvent::Resize || event->type() == QEvent::Move)
+                updatePosition();
+        }
         return QWidget::eventFilter(watched, event);
     }
 
     void Dialog::doClose(int result, bool emitClosed)
     {
-        if (_outAni->state() == QAbstractAnimation::Running)
+        // Prevents multiple simultaneous close attempts.
+        if(isClosing)
             return;
+
+        isClosing = true;
 
         setResult(result);
 
         _cancel->setDisabled(true);
         _confirm->setDisabled(true);
+        _close->setDisabled(true);
+        if(_mask && _modal)
+        {
+            _mask->setDisabled(true);
+            Animation::fadeOut(_mask, Animation::Type::GraphicsEffect, 300);
+        }
 
-        _opaAni->setStartValue(windowOpacity());
-        _opaAni->setEndValue(0.0);
-        _opaAni->setDuration(150);
-        _opaAni->setEasingCurve(QEasingCurve::OutCubic);
-        _outAni->clear();
-        _outAni->addAnimation(_opaAni);
-
-        QRect endRect = geometry();
-        endRect.moveTop(endRect.y() - 20);
-        _moveAni->setStartValue(geometry());
-        _moveAni->setEndValue(endRect);
-        _moveAni->setDuration(150);
-        _moveAni->setEasingCurve(QEasingCurve::OutCubic);
-        _outAni->addAnimation(_moveAni);
-
-        connect(_outAni, &QParallelAnimationGroup::finished, this, [this, result, emitClosed]() {
+        Animation::fadeOutMove(this, Animation::Type::WindowOpacity, -20, 300, [this, result, emitClosed]() {
             if (result == QDialog::Accepted)
                 emit accepted();
             else if (emitClosed)
@@ -251,6 +226,16 @@ namespace Element
                 emit rejected();
             QDialog::close();
         });
-        _outAni->start();
+    }
+
+    void Dialog::updatePosition()
+    {
+        if (!parentWidget()) return;
+
+        int parentHeight = parentWidget()->height();
+        int targetY = parentWidget()->pos().y() + parentHeight * 0.18;
+
+        move(parentWidget()->pos().x() + (parentWidget()->width() - width()) / 2,
+             targetY);
     }
 }

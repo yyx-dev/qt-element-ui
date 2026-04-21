@@ -19,6 +19,7 @@ namespace Element
         setGeometry(covered->rect());
         setVisible(partner->isVisible());
         partner->installEventFilter(this);
+        covered->installEventFilter(this);
     }
 
     bool Mask::eventFilter(QObject* watched, QEvent* event)
