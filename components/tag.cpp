@@ -106,7 +106,7 @@ namespace Element
         return *this;
     }
 
-    Tag& Tag::disableTransitions(bool distrans)
+    Tag& Tag::setDisableTransitions(bool distrans)
     {
         _disTrans = distrans;
         return *this;

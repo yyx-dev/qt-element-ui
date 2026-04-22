@@ -42,7 +42,7 @@ namespace Element
 
         Tag& setCloseable(bool closeable);
         Tag& setRound(bool round);
-        Tag& disableTransitions(bool distrans);
+        Tag& setDisableTransitions(bool distrans);
 
         Tag& setText(const QString& text);
 
