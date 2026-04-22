@@ -17,6 +17,9 @@ namespace Element
 
         enum class Type {   WindowOpacity, GraphicsEffect  };
 
+        static QParallelAnimationGroup* horShrinkFadeOut(QWidget* widget, Type type, int duration = 200,
+                                          std::function<void()> onFinished = nullptr);
+
         static QPropertyAnimation* fadeIn(QWidget* widget, Type type, int duration = 300,
                            std::function<void()> onFinished = nullptr);
 

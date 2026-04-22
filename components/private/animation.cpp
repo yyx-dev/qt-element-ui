@@ -1,6 +1,7 @@
 #include "animation.h"
 
 #include <QGraphicsOpacityEffect>
+#include <QLayout>
 
 namespace Element
 {
@@ -10,6 +11,47 @@ namespace Element
         curve.setType(QEasingCurve::BezierSpline);
         curve.addCubicBezierSegment(QPointF(0.55, 0.0), QPointF(0.1, 1.0), QPointF(1.0, 1.0));
         return curve;
+    }
+
+    QParallelAnimationGroup* Animation::horShrinkFadeOut(QWidget* widget, Type type,
+                                        int duration, std::function<void()> onFinished)
+    {
+        const auto allChildren = widget->findChildren<QWidget*>();
+
+        for (QWidget* child : allChildren)
+        {
+            child->setMinimumWidth(0);
+            QSizePolicy policy = child->sizePolicy();
+            policy.setHorizontalPolicy(QSizePolicy::Ignored);
+            child->setSizePolicy(policy);
+        }
+
+        widget->setMinimumWidth(0);
+        QSizePolicy policy = widget->sizePolicy();
+        policy.setHorizontalPolicy(QSizePolicy::Ignored);
+        widget->setSizePolicy(policy);
+
+        QParallelAnimationGroup* group = new QParallelAnimationGroup;
+        group->addAnimation(getOpaAnim(widget, type, 1.0, 0.0, duration));
+
+        QRect startRect = widget->geometry();
+        int centerX = startRect.x() + startRect.width() / 2;
+        QRect endRect(centerX, startRect.y(), 0, startRect.height());
+
+        QPropertyAnimation* shrAnim = new QPropertyAnimation(widget, "geometry");
+        shrAnim->setDuration(duration);
+        shrAnim->setStartValue(startRect);
+        shrAnim->setEndValue(endRect);
+        shrAnim->setEasingCurve(easingCurve());
+        group->addAnimation(shrAnim);
+
+        if (onFinished)
+        {
+            QObject::connect(group, &QPropertyAnimation::finished, onFinished);
+        }
+        QObject::connect(group, &QPropertyAnimation::finished, group, &QObject::deleteLater);
+        group->start();
+        return group;
     }
 
     QPropertyAnimation* Animation::fadeIn(QWidget* widget, Type type, int duration,

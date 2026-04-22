@@ -3,6 +3,7 @@
 #include "color.h"
 #include "icon.h"
 #include "private/utils.h"
+#include "private/animation.h"
 
 #include <QEvent>
 
@@ -23,6 +24,8 @@ namespace Element
         , _closeIcon(new QLabel(this))
         , _layout(new QHBoxLayout(this))
     {
+        _disTrans = false;
+
         _textLabel->setFont(FontHelper(_textLabel->font())
                 .setPointSize(9)
                 .getFont());
@@ -31,6 +34,7 @@ namespace Element
         _closeIcon->setFixedSize(16, 16);
         _closeIcon->setScaledContents(true);
         _closeIcon->setVisible(false);
+        _closeIcon->setCursor(Qt::PointingHandCursor);
         _closeIcon->installEventFilter(this);
 
         _layout->setContentsMargins(0, 0, 0, 0);
@@ -102,6 +106,12 @@ namespace Element
         return *this;
     }
 
+    Tag& Tag::disableTransitions(bool distrans)
+    {
+        _disTrans = distrans;
+        return *this;
+    }
+
     Tag& Tag::setText(const QString& text)
     {
         _textLabel->setText(text);
@@ -114,7 +124,16 @@ namespace Element
         {
             if (event->type() == QEvent::MouseButtonPress)
             {
-                deleteLater();
+                if(!_disTrans)
+                {
+                    Animation::horShrinkFadeOut(this, Animation::Type::GraphicsEffect, 300, [this](){
+                        this->deleteLater();
+                    });
+                }
+                else
+                {
+                    this->deleteLater();
+                }
                 return true;
             }
             else if (event->type() == QEvent::Enter)

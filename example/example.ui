@@ -36,7 +36,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>10</number>
+       <number>6</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -2425,7 +2425,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab1_tabs">
          <attribute name="title">

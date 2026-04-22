@@ -42,6 +42,7 @@ namespace Element
 
         Tag& setCloseable(bool closeable);
         Tag& setRound(bool round);
+        Tag& disableTransitions(bool distrans);
 
         Tag& setText(const QString& text);
 
@@ -64,6 +65,7 @@ namespace Element
 
         bool _closeable;
         bool _round;
+        bool _disTrans;
 
         QLabel* _textLabel = nullptr;
         QLabel* _closeIcon = nullptr;
