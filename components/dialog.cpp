@@ -104,6 +104,12 @@ namespace Element
         return *this;
     }
 
+    Dialog& Dialog::setDestroyOnClose(bool destroy)
+    {
+        setAttribute(Qt::WA_DeleteOnClose, destroy);
+        return *this;
+    }
+
     Dialog& Dialog::setBeforeOpen(const std::function<void(std::function<void()>)>& callback)
     {
         _beforeOpenCallback = callback;

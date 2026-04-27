@@ -22,6 +22,7 @@ namespace Element
         Dialog& setTitle(const QString& title);
         Dialog& setContent(const QString& content);
         Dialog& setModal(bool modal);
+        Dialog& setDestroyOnClose(bool destroy);
         Dialog& setBeforeOpen(const std::function<void(std::function<void()>)>& callback);
         Dialog& setBeforeClose(const std::function<void(std::function<void()>)>& callback);
 

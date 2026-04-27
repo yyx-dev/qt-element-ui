@@ -37,6 +37,7 @@ namespace Element
         Drawer& setWithHeader(bool withHeader);
         Drawer& setWithFooter(bool withFooter);
         Drawer& setBody(QWidget* body);
+        Drawer& setDestroyOnClose(bool destroy);
         Drawer& setBeforeOpen(const std::function<void(std::function<void()>)>& callback);
         Drawer& setBeforeClose(const std::function<void(std::function<void()>)>& callback);
 

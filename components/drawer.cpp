@@ -16,6 +16,7 @@ namespace Element
         : QWidget(topWidget)
         , _layout(new QVBoxLayout(this))
     {
+        setAttribute(Qt::WA_DeleteOnClose);
         setupHeader();
         setupBody();
         setupFooter();
@@ -40,6 +41,12 @@ namespace Element
     {
         _bodyLayout->replaceWidget(_body, body);
         _body = body;
+        return *this;
+    }
+
+    Drawer& Drawer::setDestroyOnClose(bool destroy)
+    {
+        setAttribute(Qt::WA_DeleteOnClose, destroy);
         return *this;
     }
 
