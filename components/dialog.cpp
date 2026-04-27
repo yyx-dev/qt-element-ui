@@ -79,8 +79,8 @@ namespace Element
         _title->setSize(Text::Size::Large);
         _confirm->setType(Button::Type::Primary);
 
-        connect(_cancel, &QPushButton::clicked, this, [this]() { closeDialog(QDialog::Rejected, false); });
-        connect(_confirm, &QPushButton::clicked, this, [this]() { closeDialog(QDialog::Accepted, false); });
+        connect(_cancel, &QPushButton::clicked, this, [this]() { emit rejected(); });
+        connect(_confirm, &QPushButton::clicked, this, [this]() { emit accepted(); });
 
         if (parentWidget())
             parentWidget()->installEventFilter(this);
@@ -104,6 +104,12 @@ namespace Element
         return *this;
     }
 
+    Dialog& Dialog::setBeforeOpen(const std::function<void(std::function<void()>)>& callback)
+    {
+        _beforeOpenCallback = callback;
+        return *this;
+    }
+
     Dialog& Dialog::setBeforeClose(const std::function<void(std::function<void()>)>& callback)
     {
         _beforeCloseCallback = callback;
@@ -114,13 +120,17 @@ namespace Element
     void Dialog::show()
     {
         QDialog::show();
-        getFocus();
+        Dialog::setFocus();
 
         QWidget* pw = qobject_cast<QWidget*>(parent());
         if (pw && _modal)
         {
-            _mask = MaskEf::setMask(this, pw);
-            connect(_mask, &Mask::clicked, this, [this]() { closeDialog(QDialog::Rejected, true); });
+            if(!_mask)
+            {
+                _mask = MaskEf::setMask(this, pw);
+                connect(_mask, &Mask::clicked, this, [this]() { closeDialog(false); });
+            }
+
             Animation::fadeIn(_mask, Animation::Type::GraphicsEffect, 300);
 
             QEventLoop loop;
@@ -131,40 +141,47 @@ namespace Element
         }
     }
 
-    void Dialog::closeDialog(int result, bool emitClosed)
+    void Dialog::closeDialog(bool expectedClose)
     {
-        if (_beforeCloseCallback && emitClosed)
-        {
-            _beforeCloseCallback([this, result, emitClosed]() {
-                doClose(result, emitClosed);
-            });
-        }
+        if (_beforeCloseCallback && !expectedClose)
+            _beforeCloseCallback([this](){ startClose(); });
         else
-        {
-            doClose(result, emitClosed);
-        }
+            startClose();
     }
 
-    void Dialog::getFocus()
+    void Dialog::setFocus()
     {
         activateWindow();
-        setFocus();
+        QDialog::setFocus();
     }
 
     void Dialog::showEvent(QShowEvent *event)
     {
-        QDialog::showEvent(event);
+        QDialog::showEvent(event);  
 
         if (parentWidget())
             updatePosition();
 
-        Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300);
+        if (_beforeOpenCallback)
+        {
+            _beforeOpenCallback([this]() {
+                Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300, [this](){
+                    emit opened();
+                });
+            });
+        }
+        else
+        {
+            Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300, [this](){
+                emit opened();
+            });
+        }
     }
 
     void Dialog::keyPressEvent(QKeyEvent *event)
     {
         if (event->key() == Qt::Key_Escape)
-            closeDialog(QDialog::Rejected, true);
+            closeDialog(false);
         else
             QDialog::keyPressEvent(event);
     }
@@ -187,26 +204,27 @@ namespace Element
             }
             else if (event->type() == QEvent::MouseButtonPress)
             {
-                closeDialog(QDialog::Rejected, true);
+                closeDialog(false);
             }
         }
         else if (watched == parentWidget())
         {
             if(event->type() == QEvent::Resize || event->type() == QEvent::Move)
+            {
                 updatePosition();
+                return false;
+            }
         }
         return QWidget::eventFilter(watched, event);
     }
 
-    void Dialog::doClose(int result, bool emitClosed)
+    void Dialog::startClose()
     {
         // Prevents multiple simultaneous close attempts.
         if(isClosing)
             return;
 
         isClosing = true;
-
-        setResult(result);
 
         _cancel->setDisabled(true);
         _confirm->setDisabled(true);
@@ -217,13 +235,8 @@ namespace Element
             Animation::fadeOut(_mask, Animation::Type::GraphicsEffect, 300);
         }
 
-        Animation::fadeOutMove(this, Animation::Type::WindowOpacity, -20, 300, [this, result, emitClosed]() {
-            if (result == QDialog::Accepted)
-                emit accepted();
-            else if (emitClosed)
-                emit closed();
-            else
-                emit rejected();
+        Animation::fadeOutMove(this, Animation::Type::WindowOpacity, -20, 300, [this]() {
+            emit closed();
             QDialog::close();
         });
     }

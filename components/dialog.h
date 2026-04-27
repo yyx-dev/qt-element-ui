@@ -13,19 +13,21 @@ namespace Element
     Q_OBJECT
 
     signals:
+        void opened();
         void accepted();
         void rejected();
-        void closed();  // Click ESC, mask or close button.
+        void closed();
 
     public:
         Dialog& setTitle(const QString& title);
         Dialog& setContent(const QString& content);
         Dialog& setModal(bool modal);
+        Dialog& setBeforeOpen(const std::function<void(std::function<void()>)>& callback);
         Dialog& setBeforeClose(const std::function<void(std::function<void()>)>& callback);
 
         void show();
-        void closeDialog(int result, bool emitClosed);
-        void getFocus();
+        void closeDialog(bool expectedClose = true);
+        void setFocus();
 
     public:
         Dialog(QWidget* parent = nullptr);
@@ -37,7 +39,7 @@ namespace Element
         bool eventFilter(QObject* watched, QEvent* event) override;
 
     private:
-        void doClose(int result, bool emitClosed);
+        void startClose();
         void updatePosition();
 
     private:
@@ -48,7 +50,8 @@ namespace Element
         Text* _content;
         Button* _cancel;
         Button* _confirm;
-        std::function<void(std::function<void()>)> _beforeCloseCallback;
         QLabel* _close;
+        std::function<void(std::function<void()>)> _beforeOpenCallback;
+        std::function<void(std::function<void()>)> _beforeCloseCallback;
     };
 }

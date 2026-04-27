@@ -36,7 +36,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>10</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -2415,134 +2415,222 @@
        <attribute name="title">
         <string>页面</string>
        </attribute>
-       <widget class="Element::Tabs" name="tabs">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>461</width>
-          <height>381</height>
-         </rect>
-        </property>
-        <property name="currentIndex">
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <property name="spacing">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="tab1_tabs">
-         <attribute name="title">
-          <string>User</string>
-         </attribute>
-         <widget class="QLabel" name="label_user">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>40</y>
-            <width>121</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>User</string>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="tab2_tabs">
-         <attribute name="title">
-          <string>Config</string>
-         </attribute>
-         <widget class="QLabel" name="label_config">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>40</y>
-            <width>121</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Config</string>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="tab3_tabs">
-         <attribute name="title">
-          <string>Role</string>
-         </attribute>
-         <widget class="QLabel" name="label_role">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>40</y>
-            <width>121</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Role</string>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="tab4_tabs">
-         <attribute name="title">
-          <string>Task</string>
-         </attribute>
-         <widget class="QLabel" name="label_task">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>40</y>
-            <width>121</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Task</string>
-          </property>
-         </widget>
-        </widget>
-       </widget>
-       <widget class="Element::Button" name="button_64">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>490</y>
-          <width>121</width>
-          <height>31</height>
-         </rect>
+        <property name="leftMargin">
+         <number>30</number>
         </property>
-        <property name="text">
-         <string>open drawer</string>
+        <property name="topMargin">
+         <number>30</number>
         </property>
-       </widget>
-       <widget class="Element::Progress" name="progress_1" native="true">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>30</y>
-          <width>500</width>
-          <height>30</height>
-         </rect>
+        <property name="rightMargin">
+         <number>30</number>
         </property>
-       </widget>
-       <widget class="Element::Progress" name="progress_2" native="true">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>90</y>
-          <width>200</width>
-          <height>150</height>
-         </rect>
+        <property name="bottomMargin">
+         <number>30</number>
         </property>
-       </widget>
-       <widget class="Element::Progress" name="progress_3" native="true">
-        <property name="geometry">
-         <rect>
-          <x>730</x>
-          <y>90</y>
-          <width>200</width>
-          <height>150</height>
-         </rect>
-        </property>
-       </widget>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <property name="spacing">
+           <number>40</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="6,4,6">
+            <property name="spacing">
+             <number>50</number>
+            </property>
+            <item>
+             <widget class="Element::Tabs" name="tabs">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="tab1_tabs">
+               <attribute name="title">
+                <string>User</string>
+               </attribute>
+               <widget class="QLabel" name="label_user">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>40</y>
+                  <width>121</width>
+                  <height>51</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>User</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="tab2_tabs">
+               <attribute name="title">
+                <string>Config</string>
+               </attribute>
+               <widget class="QLabel" name="label_config">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>40</y>
+                  <width>121</width>
+                  <height>51</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Config</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="tab3_tabs">
+               <attribute name="title">
+                <string>Role</string>
+               </attribute>
+               <widget class="QLabel" name="label_role">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>40</y>
+                  <width>121</width>
+                  <height>51</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Role</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="tab4_tabs">
+               <attribute name="title">
+                <string>Task</string>
+               </attribute>
+               <widget class="QLabel" name="label_task">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>40</y>
+                  <width>121</width>
+                  <height>51</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Task</string>
+                </property>
+               </widget>
+              </widget>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_18">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>60</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_7" stretch="1,6,0">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="Element::Progress" name="progress_1" native="true"/>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <property name="spacing">
+                 <number>30</number>
+                </property>
+                <item>
+                 <widget class="Element::Progress" name="progress_2" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>150</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Progress" name="progress_3" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>150</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <item>
+             <widget class="Element::Button" name="button_64">
+              <property name="text">
+               <string>open drawer</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_17">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_11">
        <attribute name="title">
