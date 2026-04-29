@@ -1,4 +1,5 @@
 #include "messagemanager.h"
+#include "private/animation.h"
 
 namespace Element
 {
@@ -96,12 +97,12 @@ namespace Element
             if (topAligned)
             {
                 y = curY;
-                curY += h + 10;
+                curY += h + 16;
             }
             else
             {
                 y = curY - h;
-                curY -= (h + 10);
+                curY -= (h + 16);
             }
 
             QRect newRect(x, y, w, h);
@@ -109,12 +110,7 @@ namespace Element
             if (oldRect != newRect)
             {
                 msg->stopFadeIn();
-                QPropertyAnimation* anim = new QPropertyAnimation(msg, "geometry");
-                anim->setDuration(300);
-                anim->setEasingCurve(QEasingCurve::OutCubic);
-                anim->setStartValue(oldRect);
-                anim->setEndValue(newRect);
-                anim->start(QAbstractAnimation::DeleteWhenStopped);
+                Animation::move(msg, newRect);
             }
         }
     }
@@ -157,7 +153,7 @@ namespace Element
         if (topAligned)
         {
             for (int i = 0; i < index; ++i)
-                yOffset += list[i]->height() + 10;
+                yOffset += list[i]->height() + 16;
 
             y = yOffset;
         }
@@ -165,9 +161,9 @@ namespace Element
         {
             int totalHeight = 0;
             for (int i = 0; i <= index; ++i)
-                totalHeight += list[i]->height() + 10;
+                totalHeight += list[i]->height() + 16;
 
-            totalHeight -= 10;
+            totalHeight -= 16;
             y = pw->height() - _offset - totalHeight;
         }
 

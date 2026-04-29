@@ -1,7 +1,9 @@
 #include "message.h"
 #include "messagemanager.h"
 #include "private/utils.h"
+#include "private/animation.h"
 #include "icon.h"
+#include "color.h"
 
 #include <QBoxLayout>
 #include <QPainter>
@@ -60,25 +62,6 @@ namespace Element
 
             setType(_type);
             connect(_timer, &QTimer::timeout, this, &Message::onTimeout);
-
-            _opaEff = new QGraphicsOpacityEffect(this);
-            _opaEff->setOpacity(0.0);
-            setGraphicsEffect(_opaEff);
-
-            _moveAni = new QPropertyAnimation(this, "geometry");
-            _moveAni->setDuration(300);
-            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
-
-            _opaAni = new QPropertyAnimation(_opaEff, "opacity");
-            _opaAni->setDuration(300);
-            _opaAni->setStartValue(0.0);
-            _opaAni->setEndValue(1.0);
-            _moveAni->setEasingCurve(QEasingCurve::OutCubic);
-
-            _fadeIn = new QParallelAnimationGroup(this);
-            _fadeIn->addAnimation(_moveAni);
-
-            _fadeOut = new QParallelAnimationGroup(this);
         }
 
     void Message::show()
@@ -174,30 +157,26 @@ namespace Element
 
     void Message::updatePosition()
     {
-        QRect endRect = geometry();
-        QRect startRect = endRect;
+        int offset = 0;
 
         switch (_placement)
         {
         case Place::Top:
         case Place::TopLeft:
         case Place::TopRight:
-            startRect.moveTop(endRect.y() - 20);
+            offset = -(this->geometry().height());
             break;
 
         case Place::Bottom:
         case Place::BottomLeft:
         case Place::BottomRight:
-            startRect.moveTop(endRect.y() + 20);
+            offset = this->geometry().height();
             break;
         }
 
-        _fadeIn->addAnimation(_opaAni);
-        _moveAni->setStartValue(startRect);
-        _moveAni->setEndValue(endRect);
-
         QWidget::show();
-        _fadeIn->start();
+
+        _fadeInAnim = Animation::fadeInMove(this, Animation::Type::GraphicsEffect, offset, 300);
     }
 
     QString Message::getColor()
@@ -259,42 +238,29 @@ namespace Element
 
     void Message::onTimeout()
     {
-        _opaAni->setStartValue(1.0);
-        _opaAni->setEndValue(0.0);
-        _fadeOut->addAnimation(_opaAni);
-
-        QRect gm = geometry();
-        QRect endRect;
+        int offset = 0;
 
         switch(_placement)
         {
         case Place::Top:
         case Place::TopLeft:
         case Place::TopRight:
-            endRect = QRect(gm.x(), gm.y() - 20,
-                            gm.width(), gm.height());
+            offset = -(this->geometry().height());
             break;
 
         case Place::Bottom:
         case Place::BottomLeft:
         case Place::BottomRight:
-            endRect = QRect(gm.x(), gm.y() + 20,
-                            gm.width(), gm.height());
+            offset = this->geometry().height();
             break;
         }
 
-        _moveAni->setStartValue(gm);
-        _moveAni->setEndValue(endRect);
-        _fadeOut->addAnimation(_moveAni);
-
-        connect(_fadeOut, &QParallelAnimationGroup::finished, this, [this]() {
+        Animation::fadeOutMove(this, Animation::Type::GraphicsEffect, offset, 300, [this]() {
             if(_onClose)
                 emit close();
 
             this->deleteLater();
         });
-
-        _fadeOut->start();
 
         if (_manager)
             _manager->removeMessage(this);
@@ -322,10 +288,16 @@ namespace Element
 
     void Message::stopFadeIn()
     {
-        if (_fadeIn->state() == QAbstractAnimation::Running)
-            _fadeIn->stop();
+        if (_fadeInAnim)
+        {
+            _fadeInAnim->stop();
 
-        _opaEff->setOpacity(1.0);
+            if (auto effect = qobject_cast<QGraphicsOpacityEffect*>(graphicsEffect()))
+                effect->setOpacity(1.0);
+
+            _fadeInAnim->deleteLater();
+            _fadeInAnim = nullptr;
+        }
     }
 
     bool Message::eventFilter(QObject* watched, QEvent* event)

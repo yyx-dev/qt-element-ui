@@ -316,19 +316,48 @@ void Example::setupTab5()
     connect(ui->button_42, &Button::clicked, this, [&]() {
         Dialog* dialog = new Dialog("Tips", "this is a message dialog", this);
 
-        dialog->setBeforeClose([](std::function<void()> done) {
-            Dialog* qryDlg = new Dialog;
-            qryDlg->setTitle("").setContent("Are you sure to close this dialog?");
-            QObject::connect(qryDlg, &Element::Dialog::accepted, [done]() {
-                done();
+        connect(dialog, &Dialog::opened, [](){
+            qDebug()<<"Dialog emitted an opened signal.";
+        });
+
+        connect(dialog, &Dialog::accepted, [dialog](){
+            qDebug()<<"Dialog emitted an accepted signal.";
+            dialog->closeDialog();
+        });
+
+        connect(dialog, &Dialog::rejected, [dialog](){
+            qDebug()<<"Dialog emitted an rejected signal.";
+            dialog->closeDialog();
+        });
+
+        connect(dialog, &Dialog::closed, [](){
+            qDebug()<<"Dialog emitted an closed signal.";
+        });
+
+        dialog->setBeforeClose([=](std::function<void()> done)
+        {
+            Dialog* qryDlg = new Dialog("", "Are you sure to close this dialog?", this);
+
+            connect(qryDlg, &Element::Dialog::accepted, [qryDlg, done]() {
+                qryDlg->closeDialog();
+                connect(qryDlg, &Dialog::closed, [done](){done();});
             });
-            QObject::connect(qryDlg, &Element::Dialog::rejected, []() {});
-            QObject::connect(qryDlg, &Element::Dialog::closed, []() {});
+
+            connect(qryDlg, &Element::Dialog::rejected, [qryDlg, dialog]() {
+                qryDlg->closeDialog();
+                connect(qryDlg, &Dialog::closed, [dialog](){dialog->setFocus();});
+            });
+
+            connect(qryDlg, &Element::Dialog::closed, [dialog]() {
+                dialog->setFocus();
+            });
+
             qryDlg->show();
         });
 
         dialog->show();
     });
+
     connect(ui->button_43, &Button::clicked, this, [&]() {
         Message* message = new Message("This is a message.", " VNode", this);
         message->setType(Message::Type::Info);
@@ -380,7 +409,6 @@ void Example::setupTab5()
         message->show();
     });
 
-    //带回调函数
     connect(ui->button_65, &Button::clicked, this, [&]() {
         Message* message = new Message("Terminal output a message.", this);
         message->setAutoClose(false);
@@ -600,12 +628,42 @@ void Example::setupTab10()
     setLabel(ui->label_task);
 
     Drawer* drawer = new Drawer(this);
-    connect(drawer, &Drawer::confirm, []() {
-        qDebug() << "Confirm Button Clicked";
+
+    connect(drawer, &Drawer::opened, []() {
+        qDebug()<<"Drawer emitted an opened signal.";
+    });
+
+    connect(drawer, &Drawer::accepted, [drawer]() {
+        qDebug()<<"Drawer emitted an accepted signal.";
+        drawer->closeDrawer();
+    });
+
+    connect(drawer, &Drawer::rejected, [drawer]() {
+        qDebug()<<"Drawer emitted an rejected signal.";
+        drawer->closeDrawer();
+    });
+
+    connect(drawer, &Drawer::closed, []() {
+        qDebug()<<"Drawer emitted an closed signal.";
+    });
+
+    drawer->setBeforeClose([=](std::function<void()> done) {
+        Dialog* qryDlg = new Dialog("", "Are you sure to close this Drawer?", this);
+
+        connect(qryDlg, &Element::Dialog::accepted, [qryDlg, done]() {
+            qryDlg->closeDialog();
+            connect(qryDlg, &Dialog::closed, [done](){done();});
+        });
+
+        connect(qryDlg, &Element::Dialog::rejected, [qryDlg]() {
+            qryDlg->closeDialog();
+        });
+
+        qryDlg->show();
     });
 
     connect(ui->button_64, &Button::clicked, [drawer]() {
-        drawer->setVisible(!drawer->isVisible());
+        drawer->show();
     });
 
     ui->progress_1->setPercentage(50)
