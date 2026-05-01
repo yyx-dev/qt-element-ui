@@ -474,35 +474,35 @@ void Example::setupTab6()
     Badge* badge = new Badge(ui->avatar);
     badge->setValue(1);
 
-    ui->tag_01->setType(Tag::Type::Primary);
-    ui->tag_02->setType(Tag::Type::Success);
-    ui->tag_03->setType(Tag::Type::Info);
-    ui->tag_04->setType(Tag::Type::Warning);
-    ui->tag_05->setType(Tag::Type::Danger);
+    ui->tag_01->setType(Tag::Type::Primary).setText("Tag 1");
+    ui->tag_02->setType(Tag::Type::Success).setText("Tag 2");
+    ui->tag_03->setType(Tag::Type::Info).setText("Tag 3");
+    ui->tag_04->setType(Tag::Type::Warning).setText("Tag 4");
+    ui->tag_05->setType(Tag::Type::Danger).setText("Tag 5");
 
-    ui->tag_06->setType(Tag::Type::Primary).setEffect(Tag::Effect::Dark);
-    ui->tag_07->setType(Tag::Type::Success).setEffect(Tag::Effect::Dark);
-    ui->tag_08->setType(Tag::Type::Info).setEffect(Tag::Effect::Dark);
-    ui->tag_09->setType(Tag::Type::Warning).setEffect(Tag::Effect::Dark);
-    ui->tag_10->setType(Tag::Type::Danger).setEffect(Tag::Effect::Dark);
+    ui->tag_06->setType(Tag::Type::Primary).setEffect(Tag::Effect::Dark).setText("Tag 1");
+    ui->tag_07->setType(Tag::Type::Success).setEffect(Tag::Effect::Dark).setText("Tag 2");
+    ui->tag_08->setType(Tag::Type::Info).setEffect(Tag::Effect::Dark).setText("Tag 3");
+    ui->tag_09->setType(Tag::Type::Warning).setEffect(Tag::Effect::Dark).setText("Tag 4");
+    ui->tag_10->setType(Tag::Type::Danger).setEffect(Tag::Effect::Dark).setText("Tag 5");
 
-    ui->tag_11->setType(Tag::Type::Primary).setEffect(Tag::Effect::Plain);
-    ui->tag_12->setType(Tag::Type::Success).setEffect(Tag::Effect::Plain);
-    ui->tag_13->setType(Tag::Type::Info).setEffect(Tag::Effect::Plain);
-    ui->tag_14->setType(Tag::Type::Warning).setEffect(Tag::Effect::Plain);
-    ui->tag_15->setType(Tag::Type::Danger).setEffect(Tag::Effect::Plain);
+    ui->tag_11->setType(Tag::Type::Primary).setEffect(Tag::Effect::Plain).setText("Tag 1");
+    ui->tag_12->setType(Tag::Type::Success).setEffect(Tag::Effect::Plain).setText("Tag 2");
+    ui->tag_13->setType(Tag::Type::Info).setEffect(Tag::Effect::Plain).setText("Tag 3");
+    ui->tag_14->setType(Tag::Type::Warning).setEffect(Tag::Effect::Plain).setText("Tag 4");
+    ui->tag_15->setType(Tag::Type::Danger).setEffect(Tag::Effect::Plain).setText("Tag 5");
 
-    ui->tag_16->setType(Tag::Type::Primary).setRound(true);
-    ui->tag_17->setType(Tag::Type::Success).setRound(true);
-    ui->tag_18->setType(Tag::Type::Info).setRound(true);
-    ui->tag_19->setType(Tag::Type::Warning).setRound(true);
-    ui->tag_20->setType(Tag::Type::Danger).setRound(true);
+    ui->tag_16->setType(Tag::Type::Primary).setRound(true).setText("Tag 1");
+    ui->tag_17->setType(Tag::Type::Success).setRound(true).setText("Tag 2");
+    ui->tag_18->setType(Tag::Type::Info).setRound(true).setText("Tag 3");
+    ui->tag_19->setType(Tag::Type::Warning).setRound(true).setText("Tag 4");
+    ui->tag_20->setType(Tag::Type::Danger).setRound(true).setText("Tag 5");
 
-    ui->tag_21->setType(Tag::Type::Primary);
-    ui->tag_22->setType(Tag::Type::Success);
-    ui->tag_23->setType(Tag::Type::Info);
-    ui->tag_24->setType(Tag::Type::Warning);
-    ui->tag_25->setType(Tag::Type::Danger);
+    ui->tag_21->setType(Tag::Type::Primary).setText("Tag 1");
+    ui->tag_22->setType(Tag::Type::Success).setText("Tag 2");
+    ui->tag_23->setType(Tag::Type::Info).setText("Tag 3");
+    ui->tag_24->setType(Tag::Type::Warning).setText("Tag 4");
+    ui->tag_25->setType(Tag::Type::Danger).setText("Tag 5");
 
     ui->tag_21->setCloseable(true);
     ui->tag_22->setCloseable(true);

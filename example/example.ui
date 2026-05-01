@@ -36,7 +36,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>10</number>
+       <number>6</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -1591,436 +1591,841 @@
        <attribute name="title">
         <string>数据</string>
        </attribute>
-       <widget class="Element::Avatar" name="avatar">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>30</y>
-          <width>80</width>
-          <height>80</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>avatar</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_01">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 1</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_02">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 2</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_03">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 3</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_04">
-        <property name="geometry">
-         <rect>
-          <x>370</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 4</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_05">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 5</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_21">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>130</y>
-          <width>81</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 1</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_22">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>130</y>
-          <width>81</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 2</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_23">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>130</y>
-          <width>81</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 3</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_24">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>130</y>
-          <width>81</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 4</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_25">
-        <property name="geometry">
-         <rect>
-          <x>520</x>
-          <y>130</y>
-          <width>81</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 5</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_06">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 1</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_07">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 2</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_08">
-        <property name="geometry">
-         <rect>
-          <x>670</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 3</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_09">
-        <property name="geometry">
-         <rect>
-          <x>740</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 4</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_10">
-        <property name="geometry">
-         <rect>
-          <x>810</x>
-          <y>30</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 5</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_11">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 1</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_12">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 2</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_13">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 3</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_14">
-        <property name="geometry">
-         <rect>
-          <x>370</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 4</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_15">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 5</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_16">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 1</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_17">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 2</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_18">
-        <property name="geometry">
-         <rect>
-          <x>670</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 3</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_19">
-        <property name="geometry">
-         <rect>
-          <x>740</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 4</string>
-        </property>
-       </widget>
-       <widget class="Element::Tag" name="tag_20">
-        <property name="geometry">
-         <rect>
-          <x>810</x>
-          <y>80</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tag 5</string>
-        </property>
-       </widget>
-       <widget class="Element::Table" name="table">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>190</y>
-          <width>851</width>
-          <height>251</height>
-         </rect>
-        </property>
-        <property name="rowCount">
-         <number>4</number>
-        </property>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <column>
-         <property name="text">
-          <string>Date</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Name</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Address</string>
-         </property>
-        </column>
-        <item row="0" column="0">
-         <property name="text">
-          <string>2016-05-03</string>
-         </property>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <property name="spacing">
+           <number>50</number>
+          </property>
+          <property name="leftMargin">
+           <number>20</number>
+          </property>
+          <property name="topMargin">
+           <number>20</number>
+          </property>
+          <property name="rightMargin">
+           <number>20</number>
+          </property>
+          <property name="bottomMargin">
+           <number>20</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_22">
+            <property name="spacing">
+             <number>50</number>
+            </property>
+            <property name="leftMargin">
+             <number>20</number>
+            </property>
+            <property name="rightMargin">
+             <number>20</number>
+            </property>
+            <item>
+             <widget class="Element::Avatar" name="avatar">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>avatar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <property name="horizontalSpacing">
+               <number>40</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>20</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="Element::Tag" name="tag_01" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_02" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_03" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_04" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_05" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="Element::Tag" name="tag_06" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_07" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_08" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_09" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_10" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="Element::Tag" name="tag_11" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_12" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_13" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_14" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_15" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_20">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="Element::Tag" name="tag_16" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_17" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_18" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_19" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_20" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <layout class="QHBoxLayout" name="horizontalLayout_21">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="Element::Tag" name="tag_21" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_22" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_23" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_24" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Element::Tag" name="tag_25" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(170, 170, 170);</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_21">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_19">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Element::Table" name="table">
+            <property name="rowCount">
+             <number>4</number>
+            </property>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column>
+             <property name="text">
+              <string>Date</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Address</string>
+             </property>
+            </column>
+            <item row="0" column="0">
+             <property name="text">
+              <string>2016-05-03</string>
+             </property>
+            </item>
+            <item row="0" column="1">
+             <property name="text">
+              <string>Tom</string>
+             </property>
+            </item>
+            <item row="0" column="2">
+             <property name="text">
+              <string>No. 189, Grove St, Los Angeles</string>
+             </property>
+            </item>
+            <item row="1" column="0">
+             <property name="text">
+              <string>2016-05-02</string>
+             </property>
+            </item>
+            <item row="1" column="1">
+             <property name="text">
+              <string>Tom</string>
+             </property>
+            </item>
+            <item row="1" column="2">
+             <property name="text">
+              <string>No. 189, Grove St, Los Angeles</string>
+             </property>
+            </item>
+            <item row="2" column="0">
+             <property name="text">
+              <string>2016-05-04</string>
+             </property>
+            </item>
+            <item row="2" column="1">
+             <property name="text">
+              <string>Tom</string>
+             </property>
+            </item>
+            <item row="2" column="2">
+             <property name="text">
+              <string>No. 189, Grove St, Los Angeles</string>
+             </property>
+            </item>
+            <item row="3" column="0">
+             <property name="text">
+              <string>2016-05-01</string>
+             </property>
+            </item>
+            <item row="3" column="1">
+             <property name="text">
+              <string>Tom</string>
+             </property>
+            </item>
+            <item row="3" column="2">
+             <property name="text">
+              <string>No. 189, Grove St, Los Angeles</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string>Tom</string>
-         </property>
-        </item>
-        <item row="0" column="2">
-         <property name="text">
-          <string>No. 189, Grove St, Los Angeles</string>
-         </property>
-        </item>
-        <item row="1" column="0">
-         <property name="text">
-          <string>2016-05-02</string>
-         </property>
-        </item>
-        <item row="1" column="1">
-         <property name="text">
-          <string>Tom</string>
-         </property>
-        </item>
-        <item row="1" column="2">
-         <property name="text">
-          <string>No. 189, Grove St, Los Angeles</string>
-         </property>
-        </item>
-        <item row="2" column="0">
-         <property name="text">
-          <string>2016-05-04</string>
-         </property>
-        </item>
-        <item row="2" column="1">
-         <property name="text">
-          <string>Tom</string>
-         </property>
-        </item>
-        <item row="2" column="2">
-         <property name="text">
-          <string>No. 189, Grove St, Los Angeles</string>
-         </property>
-        </item>
-        <item row="3" column="0">
-         <property name="text">
-          <string>2016-05-01</string>
-         </property>
-        </item>
-        <item row="3" column="1">
-         <property name="text">
-          <string>Tom</string>
-         </property>
-        </item>
-        <item row="3" column="2">
-         <property name="text">
-          <string>No. 189, Grove St, Los Angeles</string>
-         </property>
-        </item>
-       </widget>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
@@ -3056,11 +3461,6 @@
    <header>avatar.h</header>
   </customwidget>
   <customwidget>
-   <class>Element::Tag</class>
-   <extends>QLabel</extends>
-   <header>tag.h</header>
-  </customwidget>
-  <customwidget>
    <class>Element::Table</class>
    <extends>QTableWidget</extends>
    <header>table.h</header>
@@ -3176,6 +3576,12 @@
    <class>Element::Progress</class>
    <extends>QWidget</extends>
    <header>progress.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Element::Tag</class>
+   <extends>QWidget</extends>
+   <header>tag.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

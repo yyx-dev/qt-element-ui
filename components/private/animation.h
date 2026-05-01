@@ -14,50 +14,54 @@ namespace Element
         // pair<Start_Value, End_Value>
         using RectRange = std::pair<QRect, QRect>;
         using OpacityRange = std::pair<double, double>;
+        using ScaleRange = std::pair<double, double>;
 
-        enum class Type {   WindowOpacity, GraphicsEffect  };
+        enum OpacityType {   WindowOpacity, GraphicsEffect  };
 
-        static QParallelAnimationGroup* horShrinkFadeOut(QWidget* widget, Type type, int duration = 200,
-                                          std::function<void()> onFinished = nullptr);
+        enum ScaleType {    X, Y    };
 
-        static QPropertyAnimation* fadeIn(QWidget* widget, Type type, int duration = 300,
+        static QParallelAnimationGroup* XShrinkFadeOut(QWidget* widget, int duration = 300,
+                                  std::function<void()> onFinished = nullptr);
+
+        static QPropertyAnimation* fadeIn(QWidget* widget, OpacityType type, int duration = 300,
                            std::function<void()> onFinished = nullptr);
 
-        static QPropertyAnimation* fadeOut(QWidget* widget, Type type, int duration = 300,
+        static QPropertyAnimation* fadeOut(QWidget* widget, OpacityType type, int duration = 300,
                             std::function<void()> onFinished = nullptr);
 
         // The default transition direction is top‑down.
-        static QParallelAnimationGroup* fadeInMove(QWidget* widget, Type type,
+        static QParallelAnimationGroup* fadeInMove(QWidget* widget, OpacityType type,
                                   int offset = 20, int duration = 300,
                                   std::function<void()> onFinished = nullptr);
 
-        static QParallelAnimationGroup* fadeInMove(QWidget* widget, Type type,
+        static QParallelAnimationGroup* fadeInMove(QWidget* widget, OpacityType type,
                                   QRect startRect, int duration = 300,
                                   std::function<void()> onFinished = nullptr);
 
         // The default transition direction is down-top.
-        static QParallelAnimationGroup* fadeOutMove(QWidget* widget, Type type,
+        static QParallelAnimationGroup* fadeOutMove(QWidget* widget, OpacityType type,
                                    int offset = 20, int duration = 300,
                                    std::function<void()> onFinished = nullptr);
 
-        static QParallelAnimationGroup* fadeOutMove(QWidget* widget, Type type,
+        static QParallelAnimationGroup* fadeOutMove(QWidget* widget, OpacityType type,
                                    QRect endRect, int duration = 300,
                                    std::function<void()> onFinished = nullptr);
 
         static QPropertyAnimation* fade(QWidget* widget, OpacityRange opacity,
-                         Type type, int duration,
+                         OpacityType type, int duration,
                          std::function<void()> onFinished = nullptr);
 
         static QPropertyAnimation* move(QWidget* widget, const QRect& targetRect, int duration = 300,
                          std::function<void()> onFinished = nullptr);
 
         static QParallelAnimationGroup* fadeMove(QWidget* widget, RectRange geometry,
-                             OpacityRange opacity, Type type,
+                             OpacityRange opacity, OpacityType type,
                              int duration, std::function<void()> onFinished = nullptr);
 
-    private:
-        static const QEasingCurve& easingCurve();
+        static QPropertyAnimation* getOpaAnim(QWidget* widget, Element::Animation::OpacityType type, OpacityRange opacity, int duration);
 
-        static QPropertyAnimation* getOpaAnim(QWidget* widget, Element::Animation::Type type, double startVal, double endVal, int duration);
+        static QPropertyAnimation* getScaleAnim(QWidget* widget, Element::Animation::ScaleType type, ScaleRange scale, int duration);
+
+        static const QEasingCurve& easingCurve();
     };
 }

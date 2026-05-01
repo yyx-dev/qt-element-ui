@@ -176,7 +176,7 @@ namespace Element
 
         QWidget::show();
 
-        _fadeInAnim = Animation::fadeInMove(this, Animation::Type::GraphicsEffect, offset, 300);
+        _fadeInAnim = Animation::fadeInMove(this, Animation::OpacityType::GraphicsEffect, offset, 300);
     }
 
     QString Message::getColor()
@@ -255,7 +255,7 @@ namespace Element
             break;
         }
 
-        Animation::fadeOutMove(this, Animation::Type::GraphicsEffect, offset, 300, [this]() {
+        Animation::fadeOutMove(this, Animation::OpacityType::GraphicsEffect, offset, 300, [this]() {
             if(_onClose)
                 emit close();
 
