@@ -102,7 +102,7 @@ namespace Element
             return;
         }
 
-        Animation::XShrinkFadeOut(this, 300, [this](){
+        Animation::shrinkFadeOut(this, Animation::Direction::Horizontal, 300, [this](){
             emit closed();
             this->deleteLater();
         });

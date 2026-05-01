@@ -18,9 +18,9 @@ namespace Element
 
         enum OpacityType {   WindowOpacity, GraphicsEffect  };
 
-        enum ScaleType {    X, Y    };
+        enum Direction {    Horizontal, Vertical    };
 
-        static QParallelAnimationGroup* XShrinkFadeOut(QWidget* widget, int duration = 300,
+        static QParallelAnimationGroup* shrinkFadeOut(QWidget* widget, Direction dir, int duration = 300,
                                   std::function<void()> onFinished = nullptr);
 
         static QPropertyAnimation* fadeIn(QWidget* widget, OpacityType type, int duration = 300,
@@ -58,9 +58,9 @@ namespace Element
                              OpacityRange opacity, OpacityType type,
                              int duration, std::function<void()> onFinished = nullptr);
 
-        static QPropertyAnimation* getOpaAnim(QWidget* widget, Element::Animation::OpacityType type, OpacityRange opacity, int duration);
+        static QPropertyAnimation* getOpaAnim(QWidget* widget, OpacityType type, OpacityRange opacity, int duration);
 
-        static QPropertyAnimation* getScaleAnim(QWidget* widget, Element::Animation::ScaleType type, ScaleRange scale, int duration);
+        static QPropertyAnimation* getScaleAnim(QWidget* widget, Direction dir, ScaleRange scale, int duration);
 
         static const QEasingCurve& easingCurve();
     };

@@ -18,10 +18,10 @@ namespace Element
         return curve;
     }
 
-    QParallelAnimationGroup* Animation::XShrinkFadeOut(QWidget* widget, int duration,
+    QParallelAnimationGroup* Animation::shrinkFadeOut(QWidget* widget, Direction dir, int duration,
                                   std::function<void()> onFinished)
     {
-        QPropertyAnimation* scaleAnim = getScaleAnim(widget, X, {1.0, 0.0}, duration);
+        QPropertyAnimation* scaleAnim = getScaleAnim(widget, dir, {1.0, 0.0}, duration);
         QPropertyAnimation* opacityAnim = getOpaAnim(widget, OpacityType::GraphicsEffect, {1.0, 0.0}, duration);
 
         QParallelAnimationGroup* group = new QParallelAnimationGroup;
@@ -142,7 +142,7 @@ namespace Element
         return curve;
     }
 
-    QPropertyAnimation* Animation::getOpaAnim(QWidget* widget, Element::Animation::OpacityType type,
+    QPropertyAnimation* Animation::getOpaAnim(QWidget* widget, OpacityType type,
                                               OpacityRange opacity, int duration)
     {
         QPropertyAnimation* anim = nullptr;
@@ -172,10 +172,10 @@ namespace Element
         return anim;
     }
 
-    QPropertyAnimation* Animation::getScaleAnim(QWidget* widget, Element::Animation::ScaleType type, ScaleRange scale, int duration)
+    QPropertyAnimation* Animation::getScaleAnim(QWidget* widget, Direction dir, ScaleRange scale, int duration)
     {
         QPropertyAnimation* scaleAnim = nullptr;
-        if(type == ScaleType::X)
+        if(dir == Direction::Horizontal)
             scaleAnim = new QPropertyAnimation(widget, "xScale");
         else
             scaleAnim = new QPropertyAnimation(widget, "yScale");
