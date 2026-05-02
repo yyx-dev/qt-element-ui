@@ -170,7 +170,7 @@ namespace Element
         if(_modal)
         {
             _mask->setDisabled(true);
-            Animation::fadeIn(_mask, Animation::Type::GraphicsEffect, 300, [this](){
+            Animation::fadeIn(_mask, Animation::OpacityType::GraphicsEffect, 300, [this](){
                 _mask->setDisabled(false);
             });
         }
@@ -191,7 +191,7 @@ namespace Element
         if(_modal)
         {
             _mask->setDisabled(true);
-            Animation::fadeOut(_mask, Animation::Type::GraphicsEffect, 300, [this](){
+            Animation::fadeOut(_mask, Animation::OpacityType::GraphicsEffect, 300, [this](){
                 _mask->setDisabled(false);
             });
         }

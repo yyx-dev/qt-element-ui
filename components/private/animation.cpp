@@ -2,6 +2,11 @@
 
 #include <QGraphicsOpacityEffect>
 #include <QLayout>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsRotation>
+#include <QLayout>
 
 namespace Element
 {
@@ -13,60 +18,39 @@ namespace Element
         return curve;
     }
 
-    QParallelAnimationGroup* Animation::horShrinkFadeOut(QWidget* widget, Type type,
-                                        int duration, std::function<void()> onFinished)
+    QParallelAnimationGroup* Animation::shrinkFadeOut(QWidget* widget, Direction dir, int duration,
+                                  std::function<void()> onFinished)
     {
-        const auto allChildren = widget->findChildren<QWidget*>();
-
-        for (QWidget* child : allChildren)
-        {
-            child->setMinimumWidth(0);
-            QSizePolicy policy = child->sizePolicy();
-            policy.setHorizontalPolicy(QSizePolicy::Ignored);
-            child->setSizePolicy(policy);
-        }
-
-        widget->setMinimumWidth(0);
-        QSizePolicy policy = widget->sizePolicy();
-        policy.setHorizontalPolicy(QSizePolicy::Ignored);
-        widget->setSizePolicy(policy);
+        QPropertyAnimation* scaleAnim = getScaleAnim(widget, dir, {1.0, 0.0}, duration);
+        QPropertyAnimation* opacityAnim = getOpaAnim(widget, OpacityType::GraphicsEffect, {1.0, 0.0}, duration);
 
         QParallelAnimationGroup* group = new QParallelAnimationGroup;
-        group->addAnimation(getOpaAnim(widget, type, 1.0, 0.0, duration));
-
-        QRect startRect = widget->geometry();
-        int centerX = startRect.x() + startRect.width() / 2;
-        QRect endRect(centerX, startRect.y(), 0, startRect.height());
-
-        QPropertyAnimation* shrAnim = new QPropertyAnimation(widget, "geometry");
-        shrAnim->setDuration(duration);
-        shrAnim->setStartValue(startRect);
-        shrAnim->setEndValue(endRect);
-        shrAnim->setEasingCurve(easingCurve());
-        group->addAnimation(shrAnim);
+        group->addAnimation(scaleAnim);
+        group->addAnimation(opacityAnim);
 
         if (onFinished)
         {
-            QObject::connect(group, &QPropertyAnimation::finished, onFinished);
+            QObject::connect(group, &QParallelAnimationGroup::finished, onFinished);
         }
-        QObject::connect(group, &QPropertyAnimation::finished, group, &QObject::deleteLater);
+        QObject::connect(group, &QParallelAnimationGroup::finished,
+                         group, &QObject::deleteLater);
         group->start();
         return group;
     }
 
-    QPropertyAnimation* Animation::fadeIn(QWidget* widget, Type type, int duration,
+    QPropertyAnimation* Animation::fadeIn(QWidget* widget, OpacityType type, int duration,
                            std::function<void()> onFinished)
     {
         return fade(widget, {0.0, 1.0}, type, duration, onFinished);
     }
 
-    QPropertyAnimation* Animation::fadeOut(QWidget* widget, Type type, int duration,
+    QPropertyAnimation* Animation::fadeOut(QWidget* widget, OpacityType type, int duration,
                             std::function<void()> onFinished)
     {
         return fade(widget, {1.0, 0.0}, type, duration, onFinished);
     }
 
-    QParallelAnimationGroup* Animation::fadeInMove(QWidget* widget, Type type,
+    QParallelAnimationGroup* Animation::fadeInMove(QWidget* widget, OpacityType type,
                                   int offset, int duration, std::function<void()> onFinished)
     {
         QRect curRect = widget->geometry();
@@ -75,13 +59,13 @@ namespace Element
         return fadeMove(widget, {startRect, widget->geometry()}, {0.0, 1.0}, type, duration, onFinished);
     }
 
-    QParallelAnimationGroup* Animation::fadeInMove(QWidget* widget, Type type,
+    QParallelAnimationGroup* Animation::fadeInMove(QWidget* widget, OpacityType type,
                               QRect startRect, int duration, std::function<void()> onFinished)
     {
         return fadeMove(widget, {startRect, widget->geometry()}, {0.0, 1.0}, type, duration, onFinished);
     }
 
-    QParallelAnimationGroup* Animation::fadeOutMove(QWidget* widget, Type type,
+    QParallelAnimationGroup* Animation::fadeOutMove(QWidget* widget, OpacityType type,
                                    int offset, int duration, std::function<void()> onFinished)
     {
         QRect curRect = widget->geometry();
@@ -90,16 +74,16 @@ namespace Element
         return fadeMove(widget, {widget->geometry(), endRect}, {1.0, 0.0}, type, duration, onFinished);
     }
 
-    QParallelAnimationGroup* Animation::fadeOutMove(QWidget* widget, Type type,
+    QParallelAnimationGroup* Animation::fadeOutMove(QWidget* widget, OpacityType type,
                         QRect endRect, int duration, std::function<void()> onFinished)
     {
         return fadeMove(widget, {widget->geometry(), endRect}, {1.0, 0.0}, type, duration, onFinished);
     }
 
-    QPropertyAnimation* Animation::fade(QWidget* widget, OpacityRange opacity,Type type,
+    QPropertyAnimation* Animation::fade(QWidget* widget, OpacityRange opacity,OpacityType type,
                          int duration, std::function<void()> onFinished)
     {
-        QPropertyAnimation* opaAnim = getOpaAnim(widget, type, opacity.first, opacity.second, duration);
+        QPropertyAnimation* opaAnim = getOpaAnim(widget, type, {opacity.first, opacity.second}, duration);
 
         if (onFinished)
         {
@@ -130,7 +114,7 @@ namespace Element
     }
 
     QParallelAnimationGroup* Animation::fadeMove(QWidget* widget, RectRange geometry, OpacityRange opacity,
-                         Type type, int duration, std::function<void()> onFinished)
+                         OpacityType type, int duration, std::function<void()> onFinished)
     {
         QParallelAnimationGroup* group = new QParallelAnimationGroup;
         QPropertyAnimation* moveAnim = new QPropertyAnimation(widget, "geometry");
@@ -140,7 +124,7 @@ namespace Element
         moveAnim->setEndValue(geometry.second);
         group->addAnimation(moveAnim);
 
-        QPropertyAnimation* opaAnim = getOpaAnim(widget, type, opacity.first, opacity.second, duration);
+        QPropertyAnimation* opaAnim = getOpaAnim(widget, type, {opacity.first, opacity.second}, duration);
         group->addAnimation(opaAnim);
 
         if (onFinished)
@@ -158,13 +142,13 @@ namespace Element
         return curve;
     }
 
-    QPropertyAnimation* Animation::getOpaAnim(QWidget* widget, Element::Animation::Type type,
-                                              double startVal, double endVal, int duration)
+    QPropertyAnimation* Animation::getOpaAnim(QWidget* widget, OpacityType type,
+                                              OpacityRange opacity, int duration)
     {
         QPropertyAnimation* anim = nullptr;
-        if (type == Element::Animation::Type::WindowOpacity)
+        if (type == Element::Animation::OpacityType::WindowOpacity)
         {
-            widget->setWindowOpacity(startVal);
+            widget->setWindowOpacity(opacity.first);
             anim = new QPropertyAnimation(widget, "windowOpacity");
         }
         else
@@ -175,16 +159,31 @@ namespace Element
                 effect = new QGraphicsOpacityEffect(widget);
                 widget->setGraphicsEffect(effect);
             }
-            effect->setOpacity(startVal);
+            effect->setOpacity(opacity.first);
             anim = new QPropertyAnimation(effect, "opacity");
         }
         if(anim)
         {
-            anim->setStartValue(startVal);
-            anim->setEndValue(endVal);
+            anim->setStartValue(opacity.first);
+            anim->setEndValue(opacity.second);
             anim->setDuration(duration);
             anim->setEasingCurve(easingCurve());
         }
         return anim;
+    }
+
+    QPropertyAnimation* Animation::getScaleAnim(QWidget* widget, Direction dir, ScaleRange scale, int duration)
+    {
+        QPropertyAnimation* scaleAnim = nullptr;
+        if(dir == Direction::Horizontal)
+            scaleAnim = new QPropertyAnimation(widget, "xScale");
+        else
+            scaleAnim = new QPropertyAnimation(widget, "yScale");
+
+        scaleAnim->setDuration(duration);
+        scaleAnim->setStartValue(scale.first);
+        scaleAnim->setEndValue(scale.second);
+        scaleAnim->setEasingCurve(easingCurve());
+        return scaleAnim;
     }
 }

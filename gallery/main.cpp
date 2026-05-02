@@ -9,6 +9,7 @@ void configurator(Element::Menu* menu, Element::Stack* stack);
 
 int main(int argc, char* argv[])
 {
+    qputenv("QT_QPA_PLATFORM", "windows:fontengine=freetype");
     Element::App app(argc, argv);
 
 #ifdef EXAMPLE

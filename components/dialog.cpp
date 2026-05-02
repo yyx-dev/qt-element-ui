@@ -137,7 +137,7 @@ namespace Element
                 connect(_mask, &Mask::clicked, this, [this]() { closeDialog(false); });
             }
 
-            Animation::fadeIn(_mask, Animation::Type::GraphicsEffect, 300);
+            Animation::fadeIn(_mask, Animation::OpacityType::GraphicsEffect, 300);
 
             QEventLoop loop;
             connect(this, &QDialog::finished, &loop, &QEventLoop::quit);
@@ -171,14 +171,14 @@ namespace Element
         if (_beforeOpenCallback)
         {
             _beforeOpenCallback([this]() {
-                Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300, [this](){
+                Animation::fadeInMove(this, Animation::OpacityType::WindowOpacity, -20, 300, [this](){
                     emit opened();
                 });
             });
         }
         else
         {
-            Animation::fadeInMove(this, Animation::Type::WindowOpacity, -20, 300, [this](){
+            Animation::fadeInMove(this, Animation::OpacityType::WindowOpacity, -20, 300, [this](){
                 emit opened();
             });
         }
@@ -238,10 +238,10 @@ namespace Element
         if(_mask && _modal)
         {
             _mask->setDisabled(true);
-            Animation::fadeOut(_mask, Animation::Type::GraphicsEffect, 300);
+            Animation::fadeOut(_mask, Animation::OpacityType::GraphicsEffect, 300);
         }
 
-        Animation::fadeOutMove(this, Animation::Type::WindowOpacity, -20, 300, [this]() {
+        Animation::fadeOutMove(this, Animation::OpacityType::WindowOpacity, -20, 300, [this]() {
             emit closed();
             QDialog::close();
         });
